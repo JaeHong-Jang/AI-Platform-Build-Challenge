@@ -1,0 +1,4027 @@
+{
+  "conditions": {
+    "ollama": "http://172.20.32.1:11434",
+    "reader": "ax4-light:q4_K_M",
+    "agent": "qwen3:4b-instruct-2507-q4_K_M",
+    "quotes": 20,
+    "replies": 20,
+    "repeats": 1,
+    "temperature": 0,
+    "num_ctx": 8192,
+    "date": "2026-10-24T09:51:05.552Z"
+  },
+  "rule": {
+    "agg": {
+      "cases": 20,
+      "misReflect": 4,
+      "needTotal": 59,
+      "needAsked": 54,
+      "recall": 0.915,
+      "overAsk": 9,
+      "explicitTotal": 88,
+      "valueFill": 0,
+      "valueMiss": 0,
+      "fakeQuotes": 0,
+      "avgMs": 0
+    },
+    "rows": [
+      {
+        "id": "H01",
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 7
+        }
+      },
+      {
+        "id": "H02",
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H03",
+        "s": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H04",
+        "s": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [],
+          "missedAsk": [
+            "item-안마의자"
+          ],
+          "overAsk": [],
+          "explicit": 3
+        }
+      },
+      {
+        "id": "H05",
+        "s": {
+          "need": 1,
+          "needHit": 1,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "item-박스"
+          ],
+          "explicit": 5
+        }
+      },
+      {
+        "id": "H06",
+        "s": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H07",
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-from",
+            "fee"
+          ],
+          "explicit": 8
+        }
+      },
+      {
+        "id": "H08",
+        "s": {
+          "need": 8,
+          "needHit": 8,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 1
+        }
+      },
+      {
+        "id": "H09",
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        }
+      },
+      {
+        "id": "H10",
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 11
+        }
+      },
+      {
+        "id": "H11",
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 5
+        }
+      },
+      {
+        "id": "H12",
+        "s": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        }
+      },
+      {
+        "id": "H13",
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H14",
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 6
+        }
+      },
+      {
+        "id": "H15",
+        "s": {
+          "need": 5,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "item-식탁",
+              "evidence": [
+                "식탁 1개"
+              ],
+              "why": "견적서에 '식탁 1개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-의자",
+              "evidence": [
+                "의자 4개"
+              ],
+              "why": "견적서에 '의자 4개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-모니터",
+              "evidence": [
+                "모니터 1대"
+              ],
+              "why": "견적서에 '모니터 1대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 2
+        }
+      },
+      {
+        "id": "H16",
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 7
+        }
+      },
+      {
+        "id": "H17",
+        "s": {
+          "need": 6,
+          "needHit": 6,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 0
+        }
+      },
+      {
+        "id": "H18",
+        "s": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "1톤 2대"
+              ],
+              "why": "견적서에 '1톤 2대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H19",
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        }
+      },
+      {
+        "id": "H20",
+        "s": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        }
+      }
+    ]
+  },
+  "verifyOnGold": {
+    "agg": {
+      "cases": 20,
+      "misReflect": 4,
+      "needTotal": 59,
+      "needAsked": 54,
+      "recall": 0.915,
+      "overAsk": 9,
+      "explicitTotal": 88,
+      "valueFill": 0,
+      "valueMiss": 7,
+      "fakeQuotes": 0,
+      "avgMs": 0
+    },
+    "rows": [
+      {
+        "id": "H01",
+        "dropped": [],
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H02",
+        "dropped": [
+          "총액: 380,000원 (원문의 총액 자리에 없는 숫자)",
+          "계약금: 100,000원 (원문의 계약금 자리에 없는 숫자)"
+        ],
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 380000)",
+            "deposit (정답 100000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H03",
+        "dropped": [],
+        "s": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H04",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [],
+          "missedAsk": [
+            "item-안마의자"
+          ],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H05",
+        "dropped": [],
+        "s": {
+          "need": 1,
+          "needHit": 1,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "item-박스"
+          ],
+          "explicit": 5
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H06",
+        "dropped": [],
+        "s": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H07",
+        "dropped": [
+          "총액: 380,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-from",
+            "fee"
+          ],
+          "explicit": 8
+        },
+        "v": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 380000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H08",
+        "dropped": [],
+        "s": {
+          "need": 8,
+          "needHit": 8,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 1
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H09",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H10",
+        "dropped": [],
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 11
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H11",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 5
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H12",
+        "dropped": [
+          "계약금: 0원 (원문의 계약금 자리에 없는 숫자)"
+        ],
+        "s": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "v": {
+          "fill": [],
+          "miss": [
+            "deposit (정답 0)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H13",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H14",
+        "dropped": [
+          "총액: 800,000원 (원문의 총액 자리에 없는 숫자)",
+          "계약금: 240,000원 (원문의 계약금 자리에 없는 숫자)"
+        ],
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 6
+        },
+        "v": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 800000)",
+            "deposit (정답 240000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H15",
+        "dropped": [],
+        "s": {
+          "need": 5,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "item-식탁",
+              "evidence": [
+                "식탁 1개"
+              ],
+              "why": "견적서에 '식탁 1개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-의자",
+              "evidence": [
+                "의자 4개"
+              ],
+              "why": "견적서에 '의자 4개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-모니터",
+              "evidence": [
+                "모니터 1대"
+              ],
+              "why": "견적서에 '모니터 1대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 2
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H16",
+        "dropped": [
+          "총액: 690,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "s": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "v": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 690000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H17",
+        "dropped": [],
+        "s": {
+          "need": 6,
+          "needHit": 6,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 0
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H18",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "1톤 2대"
+              ],
+              "why": "견적서에 '1톤 2대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H19",
+        "dropped": [],
+        "s": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H20",
+        "dropped": [],
+        "s": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "v": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      }
+    ]
+  },
+  "quote": {
+    "baseAgg": {
+      "cases": 20,
+      "misReflect": 7,
+      "needTotal": 59,
+      "needAsked": 51,
+      "recall": 0.864,
+      "overAsk": 11,
+      "explicitTotal": 88,
+      "valueFill": 4,
+      "valueMiss": 1,
+      "fakeQuotes": 0,
+      "avgMs": 3273
+    },
+    "fullAgg": {
+      "cases": 20,
+      "misReflect": 4,
+      "needTotal": 59,
+      "needAsked": 54,
+      "recall": 0.915,
+      "overAsk": 12,
+      "explicitTotal": 88,
+      "valueFill": 0,
+      "valueMiss": 9,
+      "fakeQuotes": 0,
+      "avgMs": 3273
+    },
+    "droppedTotal": 37,
+    "runs": [
+      {
+        "id": "H01",
+        "ms": 3518,
+        "wall": 3530,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "계단 문구: \"별도\""
+        ],
+        "raw": {
+          "company": "가상별조각익스프레스",
+          "totalAmount": 380000,
+          "deposit": 38000,
+          "moveDate": "11월 6일 오전 8시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "1개"
+            },
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "식탁",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "12개"
+            }
+          ],
+          "blanketPhrases": [
+            "침대 1개, 양문형 냉장고 1대, 식탁 1개, 박스 12개 운송 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상별조각익스프레스",
+          "totalAmount": 380000,
+          "deposit": 38000,
+          "moveDate": "11월 6일 오전 8시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "1개"
+            },
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "식탁",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "12개"
+            }
+          ],
+          "blanketPhrases": [
+            "침대 1개, 양문형 냉장고 1대, 식탁 1개, 박스 12개 운송 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "base": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H02",
+        "ms": 3379,
+        "wall": 3382,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "총액: 380,000원 (원문의 총액 자리에 없는 숫자)",
+          "계약금: 100,000원 (원문의 계약금 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상달구슬용달",
+          "totalAmount": 380000,
+          "deposit": 100000,
+          "moveDate": "11월 7일 오후 1시",
+          "truck": "1톤 2대",
+          "workers": 2,
+          "ladder": "별도",
+          "stairsNote": "출발 2층 계단 작업비는 당일 확인",
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "8개"
+            },
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "침대 1개랑 박스 8개 포함",
+            "양문형 냉장고 1대는 문짝 탈거 필요하면 별도"
+          ],
+          "extraFeeClauses": [
+            "출발 2층 계단 작업비는 당일 확인"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상달구슬용달",
+          "totalAmount": null,
+          "deposit": null,
+          "moveDate": "11월 7일 오후 1시",
+          "truck": "1톤 2대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "출발 2층 계단 작업비는 당일 확인",
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "8개"
+            },
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "침대 1개랑 박스 8개 포함",
+            "양문형 냉장고 1대는 문짝 탈거 필요하면 별도"
+          ],
+          "extraFeeClauses": [
+            "출발 2층 계단 작업비는 당일 확인"
+          ],
+          "unreadable": [
+            "총액",
+            "계약금"
+          ]
+        },
+        "base": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "item-냉장고",
+              "evidence": [
+                "1대"
+              ],
+              "why": "견적서에 '1대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 380000)",
+            "deposit (정답 100000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H03",
+        "ms": 3034,
+        "wall": 3036,
+        "dropped": [],
+        "raw": {
+          "company": "가상초록자갈이사",
+          "totalAmount": 880000,
+          "deposit": 220000,
+          "moveDate": "11/08 오전 9시",
+          "truck": "5톤 1대",
+          "workers": 4,
+          "ladder": "별도",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "소파",
+              "quote": "1개"
+            },
+            {
+              "name": "옷장",
+              "quote": "2개"
+            }
+          ],
+          "blanketPhrases": [
+            "소파 1개, 옷장 2개 운송·포장 포함.",
+            "벽걸이 에어컨 1대 이전설치는 기사님과 협의"
+          ],
+          "extraFeeClauses": [
+            "사다리차 별도 12만원"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상초록자갈이사",
+          "totalAmount": 880000,
+          "deposit": 220000,
+          "moveDate": "11/08 오전 9시",
+          "truck": "5톤 1대",
+          "workers": 4,
+          "ladder": "별도",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "소파",
+              "quote": "1개"
+            },
+            {
+              "name": "옷장",
+              "quote": "2개"
+            }
+          ],
+          "blanketPhrases": [
+            "소파 1개, 옷장 2개 운송·포장 포함.",
+            "벽걸이 에어컨 1대 이전설치는 기사님과 협의"
+          ],
+          "extraFeeClauses": [
+            "사다리차 별도 12만원"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H04",
+        "ms": 3619,
+        "wall": 3620,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상노을단추익스프레스",
+          "totalAmount": 640000,
+          "deposit": 0,
+          "moveDate": "11월 9일 10시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "2.5톤",
+              "quote": "1대"
+            },
+            {
+              "name": "작업 인원",
+              "quote": "3명"
+            },
+            {
+              "name": "업라이트 피아노",
+              "quote": "1대"
+            },
+            {
+              "name": "안마의자",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "업라이트 피아노 1대 운송 포함",
+            "안마의자 1대는 중량 확인 후 운임 별도"
+          ],
+          "extraFeeClauses": [
+            "특수품 추가 작업비는 현장에서 안내드려요."
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상노을단추익스프레스",
+          "totalAmount": 640000,
+          "deposit": 0,
+          "moveDate": "11월 9일 10시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "미기재",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "2.5톤",
+              "quote": "1대"
+            },
+            {
+              "name": "작업 인원",
+              "quote": "3명"
+            },
+            {
+              "name": "업라이트 피아노",
+              "quote": "1대"
+            },
+            {
+              "name": "안마의자",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "업라이트 피아노 1대 운송 포함",
+            "안마의자 1대는 중량 확인 후 운임 별도"
+          ],
+          "extraFeeClauses": [
+            "특수품 추가 작업비는 현장에서 안내드려요."
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [],
+          "missedAsk": [
+            "item-안마의자"
+          ],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [],
+          "missedAsk": [
+            "item-안마의자"
+          ],
+          "overAsk": [
+            "item-업라이트피아노"
+          ],
+          "explicit": 3
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H05",
+        "ms": 3676,
+        "wall": 3677,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "총액: 57,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상구름바늘이사",
+          "totalAmount": 57000,
+          "deposit": 57000,
+          "moveDate": "11월 10일 입고, 11월 13일 출고",
+          "truck": "2.5톤 1대",
+          "workers": 2,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            },
+            {
+              "name": "건조기",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "6개"
+            },
+            {
+              "name": "잡화 바구니",
+              "quote": "2개"
+            }
+          ],
+          "blanketPhrases": [
+            "운송 총액 57만",
+            "계약금 5만7천원",
+            "보관료는 하루 2만원 별도입니다."
+          ],
+          "extraFeeClauses": [
+            "보관료는 하루 2만원 별도입니다."
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상구름바늘이사",
+          "totalAmount": null,
+          "deposit": 57000,
+          "moveDate": "11월 10일 입고, 11월 13일 출고",
+          "truck": "2.5톤 1대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            },
+            {
+              "name": "건조기",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "6개"
+            },
+            {
+              "name": "잡화 바구니",
+              "quote": "2개"
+            }
+          ],
+          "blanketPhrases": [
+            "운송 총액 57만",
+            "계약금 5만7천원",
+            "보관료는 하루 2만원 별도입니다."
+          ],
+          "extraFeeClauses": [
+            "보관료는 하루 2만원 별도입니다."
+          ],
+          "unreadable": [
+            "총액"
+          ]
+        },
+        "base": {
+          "need": 1,
+          "needHit": 1,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "item-박스"
+          ],
+          "explicit": 5
+        },
+        "baseV": {
+          "fill": [
+            "totalAmount=57000 (정답 570000)"
+          ],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 1,
+          "needHit": 1,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "item-박스"
+          ],
+          "explicit": 5
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 570000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H06",
+        "ms": 3652,
+        "wall": 3654,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "차량: \"별도\"",
+          "계단 문구: \"별도\"",
+          "추가비 문구: \"엘베 사용료: 관리실에 직접 납부\"",
+          "추가비 문구: \"주차장부터 집까지 운반비: 거리 보고 협의\""
+        ],
+        "raw": {
+          "company": "가상파도연필용달",
+          "totalAmount": 290000,
+          "deposit": 30000,
+          "moveDate": "11월 11일 낮 12시",
+          "truck": "별도",
+          "workers": 2,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "책상",
+              "quote": "2개"
+            },
+            {
+              "name": "의자",
+              "quote": "2개"
+            },
+            {
+              "name": "모니터",
+              "quote": "2대"
+            }
+          ],
+          "blanketPhrases": [
+            "작업 인원은 2명입니다",
+            "엘베 사용료는 관리실에 직접 납부해주세요.",
+            "주차장부터 집까지 운반비는 거리 보고 협의요"
+          ],
+          "extraFeeClauses": [
+            "엘베 사용료: 관리실에 직접 납부",
+            "주차장부터 집까지 운반비: 거리 보고 협의"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상파도연필용달",
+          "totalAmount": 290000,
+          "deposit": 30000,
+          "moveDate": "11월 11일 낮 12시",
+          "truck": null,
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "책상",
+              "quote": "2개"
+            },
+            {
+              "name": "의자",
+              "quote": "2개"
+            },
+            {
+              "name": "모니터",
+              "quote": "2대"
+            }
+          ],
+          "blanketPhrases": [
+            "작업 인원은 2명입니다",
+            "엘베 사용료는 관리실에 직접 납부해주세요.",
+            "주차장부터 집까지 운반비는 거리 보고 협의요"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "base": {
+          "need": 4,
+          "needHit": 3,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "별도"
+              ],
+              "why": "견적서에 '별도'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [
+            "truck=\"별도\" (정답 null)"
+          ],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 4,
+          "needHit": 4,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H07",
+        "ms": 3306,
+        "wall": 3308,
+        "dropped": [
+          "사다리차: '포함' (원문에 사다리 언급 없음)",
+          "뭉뚱그린 문구: \"짐 일체\"",
+          "총액: 380,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상햇살종이이사",
+          "totalAmount": 380000,
+          "deposit": 190000,
+          "moveDate": "11월 12일 오후 4시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "포함",
+          "stairsNote": "포함",
+          "listedItems": [
+            {
+              "name": "행거",
+              "quote": "2개"
+            },
+            {
+              "name": "전자레인지",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "9개"
+            }
+          ],
+          "blanketPhrases": [
+            "짐 일체",
+            "도착 2층 계단 작업 포함",
+            "출발 주차장부터 현관까지 70m 운반 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상햇살종이이사",
+          "totalAmount": null,
+          "deposit": 190000,
+          "moveDate": "11월 12일 오후 4시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "포함",
+          "listedItems": [
+            {
+              "name": "행거",
+              "quote": "2개"
+            },
+            {
+              "name": "전자레인지",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "9개"
+            }
+          ],
+          "blanketPhrases": [
+            "도착 2층 계단 작업 포함",
+            "출발 주차장부터 현관까지 70m 운반 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": [
+            "총액"
+          ]
+        },
+        "base": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "stairs-to",
+            "carry-from",
+            "fee"
+          ],
+          "explicit": 8
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "stairs-to",
+            "carry-from",
+            "fee"
+          ],
+          "explicit": 8
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 380000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H08",
+        "ms": 2404,
+        "wall": 2405,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "계단 문구: \"별도\""
+        ],
+        "raw": {
+          "company": "가상보라우체통익스프레스",
+          "totalAmount": 460000,
+          "deposit": 46000,
+          "moveDate": "11월 14일 오전",
+          "truck": "2.5톤 1대",
+          "workers": null,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [],
+          "blanketPhrases": [
+            "투룸 짐 전체 반포장"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상보라우체통익스프레스",
+          "totalAmount": 460000,
+          "deposit": 46000,
+          "moveDate": "11월 14일 오전",
+          "truck": "2.5톤 1대",
+          "workers": null,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [],
+          "blanketPhrases": [
+            "투룸 짐 전체 반포장"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "base": {
+          "need": 8,
+          "needHit": 8,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 1
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 8,
+          "needHit": 8,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 1
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H09",
+        "ms": 3242,
+        "wall": 3243,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상모래시계용달",
+          "totalAmount": 310000,
+          "deposit": 62000,
+          "moveDate": "11/15 09:30",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "책장",
+              "quote": "1개"
+            },
+            {
+              "name": "책상",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "5개"
+            }
+          ],
+          "blanketPhrases": [
+            "책장 1개, 책상 1개, 박스 5개 포함"
+          ],
+          "extraFeeClauses": [
+            "견적 외 물품 추가 시 별도"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상모래시계용달",
+          "totalAmount": 310000,
+          "deposit": 62000,
+          "moveDate": "11/15 09:30",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "책장",
+              "quote": "1개"
+            },
+            {
+              "name": "책상",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "5개"
+            }
+          ],
+          "blanketPhrases": [
+            "책장 1개, 책상 1개, 박스 5개 포함"
+          ],
+          "extraFeeClauses": [
+            "견적 외 물품 추가 시 별도"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H10",
+        "ms": 3783,
+        "wall": 3786,
+        "dropped": [
+          "뭉뚱그린 문구: \"짐 일체\"",
+          "총액: 72,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상은빛도토리이사",
+          "totalAmount": 72000,
+          "deposit": 72000,
+          "moveDate": "11월 16일 오전 8시 30분",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "포함",
+          "stairsNote": "출발 3층과 도착 4층 계단 작업 모두 포함",
+          "listedItems": [
+            {
+              "name": "매트리스",
+              "quote": "1개"
+            },
+            {
+              "name": "TV",
+              "quote": "1대"
+            },
+            {
+              "name": "티비선반",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "10개"
+            }
+          ],
+          "blanketPhrases": [
+            "짐 일체",
+            "출발 3층과 도착 4층 계단 작업 모두 포함",
+            "사다리차 비용 포함",
+            "도착지 골목 입구부터 90m 운반 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상은빛도토리이사",
+          "totalAmount": null,
+          "deposit": 72000,
+          "moveDate": "11월 16일 오전 8시 30분",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "포함",
+          "stairsNote": "출발 3층과 도착 4층 계단 작업 모두 포함",
+          "listedItems": [
+            {
+              "name": "매트리스",
+              "quote": "1개"
+            },
+            {
+              "name": "TV",
+              "quote": "1대"
+            },
+            {
+              "name": "티비선반",
+              "quote": "1개"
+            },
+            {
+              "name": "박스",
+              "quote": "10개"
+            }
+          ],
+          "blanketPhrases": [
+            "출발 3층과 도착 4층 계단 작업 모두 포함",
+            "사다리차 비용 포함",
+            "도착지 골목 입구부터 90m 운반 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": [
+            "총액"
+          ]
+        },
+        "base": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 11
+        },
+        "baseV": {
+          "fill": [
+            "totalAmount=72000 (정답 720000)"
+          ],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 11
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 720000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H11",
+        "ms": 3093,
+        "wall": 3094,
+        "dropped": [
+          "사다리차: '포함' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상물결단풍용달",
+          "totalAmount": 340000,
+          "deposit": 50000,
+          "moveDate": "11월 17일 오전 10시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "포함",
+          "stairsNote": "포함",
+          "listedItems": [
+            {
+              "name": "소파",
+              "quote": "1개"
+            },
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "출발 지하 1층 계단 작업 포함",
+            "골목 주차가 안되면 운반비 별도입니다"
+          ],
+          "extraFeeClauses": [
+            "골목 주차가 안되면 운반비 별도"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상물결단풍용달",
+          "totalAmount": 340000,
+          "deposit": 50000,
+          "moveDate": "11월 17일 오전 10시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "포함",
+          "listedItems": [
+            {
+              "name": "소파",
+              "quote": "1개"
+            },
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "출발 지하 1층 계단 작업 포함",
+            "골목 주차가 안되면 운반비 별도입니다"
+          ],
+          "extraFeeClauses": [
+            "골목 주차가 안되면 운반비 별도"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "stairs-from"
+          ],
+          "explicit": 5
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "stairs-from"
+          ],
+          "explicit": 5
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H12",
+        "ms": 3618,
+        "wall": 3619,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상자주나침반이사",
+          "totalAmount": 260000,
+          "deposit": null,
+          "moveDate": "11월 18일 오후 2시",
+          "truck": "1톤 1대",
+          "workers": null,
+          "ladder": "별도",
+          "stairsNote": "계단 작업은 현장 보고 결정해요.",
+          "listedItems": [
+            {
+              "name": "냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "전자레인지",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "냉장고 1대, 전자레인지 1대 운송 포함",
+            "차량 1톤 1대",
+            "총액 26만 / 계약금 없이 예약"
+          ],
+          "extraFeeClauses": [
+            "상하차 인력은 별도 섭외",
+            "인원수 미정",
+            "계단 작업은 현장 보고 결정"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상자주나침반이사",
+          "totalAmount": 260000,
+          "deposit": null,
+          "moveDate": "11월 18일 오후 2시",
+          "truck": "1톤 1대",
+          "workers": null,
+          "ladder": "미기재",
+          "stairsNote": "계단 작업은 현장 보고 결정해요.",
+          "listedItems": [
+            {
+              "name": "냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "전자레인지",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "냉장고 1대, 전자레인지 1대 운송 포함",
+            "차량 1톤 1대",
+            "총액 26만 / 계약금 없이 예약"
+          ],
+          "extraFeeClauses": [
+            "상하차 인력은 별도 섭외",
+            "인원수 미정",
+            "계단 작업은 현장 보고 결정"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [
+            "deposit (정답 0)"
+          ],
+          "fake": []
+        },
+        "full": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "deposit (정답 0)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H13",
+        "ms": 2837,
+        "wall": 2838,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "계단 문구: \"별도\""
+        ],
+        "raw": {
+          "company": "가상새벽구슬익스프레스",
+          "totalAmount": null,
+          "deposit": 50000,
+          "moveDate": "11월 19일 09시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "침대 프레임",
+              "quote": "1개"
+            },
+            {
+              "name": "책장",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "매트리스는 이번 견적에서 제외했어요."
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상새벽구슬익스프레스",
+          "totalAmount": null,
+          "deposit": 50000,
+          "moveDate": "11월 19일 09시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "침대 프레임",
+              "quote": "1개"
+            },
+            {
+              "name": "책장",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "매트리스는 이번 견적에서 제외했어요."
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H14",
+        "ms": 3629,
+        "wall": 3630,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "계단 문구: \"별도\"",
+          "총액: 800,000원 (원문의 총액 자리에 없는 숫자)",
+          "계약금: 240,000원 (원문의 계약금 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상하늘실타래이사",
+          "totalAmount": 800000,
+          "deposit": 240000,
+          "moveDate": "11월 20일 입고, 11월 22일 출고",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "옷장",
+              "quote": "1개"
+            },
+            {
+              "name": "벽걸이 에어컨",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "14개"
+            }
+          ],
+          "blanketPhrases": [
+            "에어컨 철거·운송·재설치와 배관 5m 비용 모두 포함",
+            "2일 보관료와 입출고 운송료 포함한 총액 팔십만원",
+            "계약금 이십사만원",
+            "추가 비용 없음"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상하늘실타래이사",
+          "totalAmount": null,
+          "deposit": null,
+          "moveDate": "11월 20일 입고, 11월 22일 출고",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "옷장",
+              "quote": "1개"
+            },
+            {
+              "name": "벽걸이 에어컨",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "14개"
+            }
+          ],
+          "blanketPhrases": [
+            "에어컨 철거·운송·재설치와 배관 5m 비용 모두 포함",
+            "2일 보관료와 입출고 운송료 포함한 총액 팔십만원",
+            "계약금 이십사만원",
+            "추가 비용 없음"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": [
+            "총액",
+            "계약금"
+          ]
+        },
+        "base": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 6
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "fee"
+          ],
+          "explicit": 6
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 800000)",
+            "deposit (정답 240000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H15",
+        "ms": 3249,
+        "wall": 3251,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상주황돛단배용달",
+          "totalAmount": 240000,
+          "deposit": 24000,
+          "moveDate": "11/21 오후 3시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "별도",
+          "stairsNote": "계단 운반 요청 시 추가요금 협의",
+          "listedItems": [
+            {
+              "name": "식탁",
+              "quote": "1개"
+            },
+            {
+              "name": "의자",
+              "quote": "4개"
+            },
+            {
+              "name": "모니터",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "위 물품 전부 고객님이 1층에 내려놓는 조건임니다."
+          ],
+          "extraFeeClauses": [
+            "계단 운반 요청 시 추가요금 협의"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상주황돛단배용달",
+          "totalAmount": 240000,
+          "deposit": 24000,
+          "moveDate": "11/21 오후 3시",
+          "truck": "1톤 1대",
+          "workers": 2,
+          "ladder": "미기재",
+          "stairsNote": "계단 운반 요청 시 추가요금 협의",
+          "listedItems": [
+            {
+              "name": "식탁",
+              "quote": "1개"
+            },
+            {
+              "name": "의자",
+              "quote": "4개"
+            },
+            {
+              "name": "모니터",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "위 물품 전부 고객님이 1층에 내려놓는 조건임니다."
+          ],
+          "extraFeeClauses": [
+            "계단 운반 요청 시 추가요금 협의"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 5,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "item-식탁",
+              "evidence": [
+                "1개"
+              ],
+              "why": "견적서에 '1개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-의자",
+              "evidence": [
+                "4개"
+              ],
+              "why": "견적서에 '4개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-모니터",
+              "evidence": [
+                "1대"
+              ],
+              "why": "견적서에 '1대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 2
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 5,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "item-식탁",
+              "evidence": [
+                "1개"
+              ],
+              "why": "견적서에 '1개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-의자",
+              "evidence": [
+                "4개"
+              ],
+              "why": "견적서에 '4개'로 적혀 있습니다."
+            },
+            {
+              "card": "item-모니터",
+              "evidence": [
+                "1대"
+              ],
+              "why": "견적서에 '1대'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 2
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H16",
+        "ms": 3493,
+        "wall": 3493,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)",
+          "계단 문구: \"별도\"",
+          "총액: 690,000원 (원문의 총액 자리에 없는 숫자)"
+        ],
+        "raw": {
+          "company": "가상민트조약돌익스프레스",
+          "totalAmount": 690000,
+          "deposit": 345000,
+          "moveDate": "11월 22일 오전 9시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "안마의자",
+              "quote": "1대"
+            },
+            {
+              "name": "디지털 피아노",
+              "quote": "1대"
+            },
+            {
+              "name": "소파",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "안마의자 1대, 디지털 피아노 1대, 소파 1개 모두 운송 포함",
+            "도착 주차 위치부터 건물까지 120m 운반 포함",
+            "주말 할증 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상민트조약돌익스프레스",
+          "totalAmount": null,
+          "deposit": 345000,
+          "moveDate": "11월 22일 오전 9시",
+          "truck": "2.5톤 1대",
+          "workers": 3,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "안마의자",
+              "quote": "1대"
+            },
+            {
+              "name": "디지털 피아노",
+              "quote": "1대"
+            },
+            {
+              "name": "소파",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "안마의자 1대, 디지털 피아노 1대, 소파 1개 모두 운송 포함",
+            "도착 주차 위치부터 건물까지 120m 운반 포함",
+            "주말 할증 포함"
+          ],
+          "extraFeeClauses": [],
+          "unreadable": [
+            "총액"
+          ]
+        },
+        "base": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 0,
+          "needHit": 0,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [
+            "carry-to",
+            "fee"
+          ],
+          "explicit": 7
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [
+            "totalAmount (정답 690000)"
+          ],
+          "fake": []
+        }
+      },
+      {
+        "id": "H17",
+        "ms": 2188,
+        "wall": 2189,
+        "dropped": [
+          "사다리차: '포함' (원문에 사다리 언급 없음)",
+          "차량: \"포함\""
+        ],
+        "raw": {
+          "company": "가상밤하늘종이용달",
+          "totalAmount": 380000,
+          "deposit": null,
+          "moveDate": null,
+          "truck": "포함",
+          "workers": null,
+          "ladder": "포함",
+          "stairsNote": null,
+          "listedItems": [],
+          "blanketPhrases": [
+            "이사는 총 38만이에요."
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상밤하늘종이용달",
+          "totalAmount": 380000,
+          "deposit": null,
+          "moveDate": null,
+          "truck": null,
+          "workers": null,
+          "ladder": "미기재",
+          "stairsNote": null,
+          "listedItems": [],
+          "blanketPhrases": [
+            "이사는 총 38만이에요."
+          ],
+          "extraFeeClauses": [],
+          "unreadable": []
+        },
+        "base": {
+          "need": 6,
+          "needHit": 5,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "포함"
+              ],
+              "why": "견적서에 '포함'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 0
+        },
+        "baseV": {
+          "fill": [
+            "truck=\"포함\" (정답 null)"
+          ],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 6,
+          "needHit": 6,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 0
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H18",
+        "ms": 3264,
+        "wall": 3265,
+        "dropped": [],
+        "raw": {
+          "company": "가상분홍나뭇잎이사",
+          "totalAmount": 530000,
+          "deposit": 159000,
+          "moveDate": "11월 24일 오전 10시",
+          "truck": "1톤 2대 예정, 배차 사정에 따라 변경",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "건조기",
+              "quote": "1대"
+            },
+            {
+              "name": "옷장",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "양문형 냉장고 1대, 건조기 1대, 옷장 1개 포함"
+          ],
+          "extraFeeClauses": [
+            "사다리차 필요 시 비용 별도"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상분홍나뭇잎이사",
+          "totalAmount": 530000,
+          "deposit": 159000,
+          "moveDate": "11월 24일 오전 10시",
+          "truck": "1톤 2대 예정, 배차 사정에 따라 변경",
+          "workers": 3,
+          "ladder": "별도",
+          "stairsNote": null,
+          "listedItems": [
+            {
+              "name": "양문형 냉장고",
+              "quote": "1대"
+            },
+            {
+              "name": "건조기",
+              "quote": "1대"
+            },
+            {
+              "name": "옷장",
+              "quote": "1개"
+            }
+          ],
+          "blanketPhrases": [
+            "양문형 냉장고 1대, 건조기 1대, 옷장 1개 포함"
+          ],
+          "extraFeeClauses": [
+            "사다리차 필요 시 비용 별도"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "1톤 2대 예정, 배차 사정에 따라 변경"
+              ],
+              "why": "견적서에 '1톤 2대 예정, 배차 사정에 따라 변경'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 2,
+          "misReflect": [
+            {
+              "card": "truck",
+              "evidence": [
+                "1톤 2대 예정, 배차 사정에 따라 변경"
+              ],
+              "why": "견적서에 '1톤 2대 예정, 배차 사정에 따라 변경'로 적혀 있습니다."
+            }
+          ],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H19",
+        "ms": 3239,
+        "wall": 3239,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상푸른책갈피익스프레스",
+          "totalAmount": 920000,
+          "deposit": 92000,
+          "moveDate": "11월 25일 오후 5시",
+          "truck": "5톤 1대",
+          "workers": 4,
+          "ladder": "별도",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "2개"
+            },
+            {
+              "name": "텔레비전",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "쓰리룸 가재도구 일체",
+            "침대 2개, 텔레비전 1대 포함"
+          ],
+          "extraFeeClauses": [
+            "오후 작업 할증 8만원은 별도 청구됩니다."
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상푸른책갈피익스프레스",
+          "totalAmount": 920000,
+          "deposit": 92000,
+          "moveDate": "11월 25일 오후 5시",
+          "truck": "5톤 1대",
+          "workers": 4,
+          "ladder": "미기재",
+          "stairsNote": "별도",
+          "listedItems": [
+            {
+              "name": "침대",
+              "quote": "2개"
+            },
+            {
+              "name": "텔레비전",
+              "quote": "1대"
+            }
+          ],
+          "blanketPhrases": [
+            "쓰리룸 가재도구 일체",
+            "침대 2개, 텔레비전 1대 포함"
+          ],
+          "extraFeeClauses": [
+            "오후 작업 할증 8만원은 별도 청구됩니다."
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 3,
+          "needHit": 3,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 4
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      },
+      {
+        "id": "H20",
+        "ms": 3238,
+        "wall": 3239,
+        "dropped": [
+          "사다리차: '별도' (원문에 사다리 언급 없음)"
+        ],
+        "raw": {
+          "company": "가상연두풍경용달",
+          "totalAmount": 210000,
+          "deposit": 70000,
+          "moveDate": "11월 26일 오전 11시",
+          "truck": "1톤 1대",
+          "workers": 1,
+          "ladder": "별도",
+          "stairsNote": "도착 지하 1층 계단 작업은 제외입니다.",
+          "listedItems": [
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "3개"
+            }
+          ],
+          "blanketPhrases": [
+            "세탁기 1대와 박스 3개 운송 포함"
+          ],
+          "extraFeeClauses": [
+            "출발지 주차가 멀어 장거리 운반비 3만원 별도"
+          ],
+          "unreadable": []
+        },
+        "draft": {
+          "company": "가상연두풍경용달",
+          "totalAmount": 210000,
+          "deposit": 70000,
+          "moveDate": "11월 26일 오전 11시",
+          "truck": "1톤 1대",
+          "workers": 1,
+          "ladder": "미기재",
+          "stairsNote": "도착 지하 1층 계단 작업은 제외입니다.",
+          "listedItems": [
+            {
+              "name": "세탁기",
+              "quote": "1대"
+            },
+            {
+              "name": "박스",
+              "quote": "3개"
+            }
+          ],
+          "blanketPhrases": [
+            "세탁기 1대와 박스 3개 운송 포함"
+          ],
+          "extraFeeClauses": [
+            "출발지 주차가 멀어 장거리 운반비 3만원 별도"
+          ],
+          "unreadable": []
+        },
+        "base": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "baseV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        },
+        "full": {
+          "need": 5,
+          "needHit": 5,
+          "misReflect": [],
+          "missedAsk": [],
+          "overAsk": [],
+          "explicit": 3
+        },
+        "fullV": {
+          "fill": [],
+          "miss": [],
+          "fake": []
+        }
+      }
+    ]
+  },
+  "reply": {
+    "agg": {
+      "cases": 20,
+      "errors": 0,
+      "stoppedNotFinished": 2,
+      "modelOnly": {
+        "misReflect": 11,
+        "recall": 0.737
+      },
+      "verified": {
+        "misReflect": 4,
+        "recall": 0.684
+      },
+      "rejectedBad": 7,
+      "lostGood": 1,
+      "allowedTotal": 19,
+      "avgMs": 3047
+    },
+    "runs": [
+      {
+        "id": "HR01",
+        "quoteId": "H01",
+        "type": "무관",
+        "text": "예약하시면 전날 기사님 연락처 보내드릴게요 🙂",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 1548,
+        "stopped": "finished",
+        "steps": 3,
+        "offers": [
+          {
+            "card": "fee-0",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR02",
+        "quoteId": "H02",
+        "type": "명시적 포함",
+        "text": "양문형 냉장고 1대는 문짝 탈거가 필요해도 총액에 포함입니다. 출발 2층 계단 작업도 총액에 포함이에요.",
+        "allowed": [
+          "item-냉장고",
+          "stairs-from"
+        ],
+        "notOpen": [],
+        "wall": 2482,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "item-냉장고",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "stairs-from",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [
+          "item-냉장고",
+          "stairs-from"
+        ],
+        "afterHit": [
+          "item-냉장고",
+          "stairs-from"
+        ],
+        "proposals": [
+          {
+            "cardId": "item-냉장고",
+            "title": "양문형 냉장고",
+            "relation": "explicit_answer",
+            "quote": "양문형 냉장고 1대는 문짝 탈거가 필요해도 총액에 포함입니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "stairs-from",
+            "title": "출발지 계단 작업",
+            "relation": "explicit_answer",
+            "quote": "출발 2층 계단 작업도 총액에 포함이에요.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR03",
+        "quoteId": "H03",
+        "type": "조건부",
+        "text": "에어컨 1대는 기존 배관 그대로 쓸 수 있을 때만 철거랑 재설치까지 포함됩니다.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 3900,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "item-에어컨",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "stairs-from",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "ladder",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": false,
+            "reason": "quote가 업체 답변에 그대로 있는 문장이 아닙니다"
+          },
+          {
+            "card": "item-에어컨",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "stairs-from",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "ladder",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "fee-0",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "quote가 업체 답변에 그대로 있는 문장이 아닙니다"
+          }
+        ],
+        "modelBad": [
+          "item-에어컨",
+          "fee-0"
+        ],
+        "afterBad": [
+          "item-에어컨"
+        ],
+        "rejectedBad": [
+          "fee-0"
+        ],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "item-에어컨",
+            "title": "벽걸이 에어컨",
+            "relation": "explicit_answer",
+            "quote": "에어컨 1대는 기존 배관 그대로 쓸 수 있을 때만 철거랑 재설치까지 포함됩니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR04",
+        "quoteId": "H04",
+        "type": "금액 제시",
+        "text": "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 4245,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "item-의자",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'7만' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          },
+          {
+            "card": "item-책장",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'7만' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-1",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-의자",
+            "relation": "conflicting",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-책장",
+            "relation": "conflicting",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 조건 모호 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [
+          "item-의자",
+          "item-책장"
+        ],
+        "afterBad": [],
+        "rejectedBad": [
+          "item-의자",
+          "item-책장"
+        ],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "fee-0",
+            "title": "추가 비용 문구",
+            "relation": "conditional_answer",
+            "quote": "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "fee-1",
+            "title": "추가 비용 문구",
+            "relation": "conditional_answer",
+            "quote": "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "item-의자",
+            "title": "안마의자",
+            "relation": "conflicting",
+            "quote": "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "item-책장",
+            "title": "책장",
+            "relation": "conflicting",
+            "quote": "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+            "from": "포함 여부 미확인",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR05",
+        "quoteId": "H05",
+        "type": "제외·별도",
+        "text": "57만원에 보관료는 안 들어가요. 입고일부터 출고일까지 보관료 따로 받습니다.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 1619,
+        "stopped": "finished",
+        "steps": 3,
+        "offers": [
+          {
+            "card": "fee-0",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [
+          "fee-0"
+        ],
+        "afterBad": [
+          "fee-0"
+        ],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "fee-0",
+            "title": "추가 비용 문구",
+            "relation": "explicit_answer",
+            "quote": "57만원에 보관료는 안 들어가요. 입고일부터 출고일까지 보관료 따로 받습니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR06",
+        "quoteId": "H06",
+        "type": "명시적 포함",
+        "text": "차량은 1톤 2대로 확정이고 총액에 포함입니다. 출발 주차장에서 집까지 운반, 도착 주차장에서 집까지 운반도 거리와 관계없이 둘 다 총액에 포함합니다. 엘베 사용료는 안내드린 대로 별도예요.",
+        "allowed": [
+          "truck",
+          "carry-from",
+          "carry-to"
+        ],
+        "notOpen": [],
+        "wall": 3951,
+        "stopped": "limit",
+        "steps": 6,
+        "offers": [
+          {
+            "card": "truck",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "carry-from",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "carry-to",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": false,
+            "reason": "quote가 업체 답변에 그대로 있는 문장이 아닙니다"
+          },
+          {
+            "card": "fee-0",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'별도' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          }
+        ],
+        "modelBad": [
+          "fee-0"
+        ],
+        "afterBad": [],
+        "rejectedBad": [
+          "fee-0"
+        ],
+        "lostGood": [],
+        "modelHit": [
+          "truck",
+          "carry-from",
+          "carry-to"
+        ],
+        "afterHit": [
+          "truck",
+          "carry-from",
+          "carry-to"
+        ],
+        "proposals": [
+          {
+            "cardId": "truck",
+            "title": "차량",
+            "relation": "explicit_answer",
+            "quote": "차량은 1톤 2대로 확정이고 총액에 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "carry-from",
+            "title": "출발지 운반 거리",
+            "relation": "explicit_answer",
+            "quote": "출발 주차장에서 집까지 운반, 도착 주차장에서 집까지 운반도 거리와 관계없이 둘 다 총액에 포함합니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "carry-to",
+            "title": "도착지 운반 거리",
+            "relation": "explicit_answer",
+            "quote": "출발 주차장에서 집까지 운반, 도착 주차장에서 집까지 운반도 거리와 관계없이 둘 다 총액에 포함합니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR07",
+        "quoteId": "H07",
+        "type": "무관",
+        "text": "계약금 보내신 뒤 입금자 성함만 알려주세용.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 2272,
+        "stopped": "limit",
+        "steps": 6,
+        "offers": [],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR08",
+        "quoteId": "H08",
+        "type": "얼버무림",
+        "text": "저희 투룸 많이 해봐서 다 알아서 해드려요 ㅎㅎ 걱정마세요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 5744,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "item-침대",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "item-냉장고",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "item-옷장",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "item-박스",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "workers",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "stairs-to",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "ladder",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "fee-0",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR09",
+        "quoteId": "H09",
+        "type": "명시적 포함",
+        "text": "확인했습니다. 책장 2개와 박스 7개 모두 기존 총액 31만원에 포함으로 정정합니다. 그 밖의 물품을 추가하면 별도인 조건은 그대로예요.",
+        "allowed": [
+          "item-책장",
+          "item-박스"
+        ],
+        "notOpen": [],
+        "wall": 3046,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "item-책장",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-박스",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [
+          "item-책장",
+          "item-박스"
+        ],
+        "afterHit": [
+          "item-책장",
+          "item-박스"
+        ],
+        "proposals": [
+          {
+            "cardId": "item-책장",
+            "title": "책장",
+            "relation": "explicit_answer",
+            "quote": "책장 2개와 박스 7개 모두 기존 총액 31만원에 포함으로 정정합니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "item-박스",
+            "title": "박스·잡화",
+            "relation": "explicit_answer",
+            "quote": "책장 2개와 박스 7개 모두 기존 총액 31만원에 포함으로 정정합니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "fee-0",
+            "title": "추가 비용 문구",
+            "relation": "conditional_answer",
+            "quote": "그 밖의 물품을 추가하면 별도인 조건은 그대로예요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR10",
+        "quoteId": "H10",
+        "type": "무관",
+        "text": "도착 아파트 동 번호가 몇 동인가요?",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 2501,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "carry-to",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "fee-0",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "quote가 업체 답변에 그대로 있는 문장이 아닙니다"
+          }
+        ],
+        "modelBad": [
+          "fee-0"
+        ],
+        "afterBad": [],
+        "rejectedBad": [
+          "fee-0"
+        ],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR11",
+        "quoteId": "H11",
+        "type": "조건부",
+        "text": "박스 4개는 가로세로높이 합 120cm 이하일 때만 포함이고, 출발지 운반은 차를 골목 안에 댈 수 있으면 포함입니다.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 3948,
+        "stopped": "finished",
+        "steps": 6,
+        "offers": [
+          {
+            "card": "item-박스",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 조건 모호 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "carry-from",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 조건 모호 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conflicting",
+            "accepted": false,
+            "reason": "답변 문구에 '추가 비용 문구'에 대한 말이 없습니다. 뭉뚱그린 답이면 unanswered"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "item-박스",
+            "title": "박스·잡화",
+            "relation": "conditional_answer",
+            "quote": "박스 4개는 가로세로높이 합 120cm 이하일 때만 포함이고, 출발지 운반은 차를 골목 안에 댈 수 있으면 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "carry-from",
+            "title": "출발지 운반 거리",
+            "relation": "conditional_answer",
+            "quote": "박스 4개는 가로세로높이 합 120cm 이하일 때만 포함이고, 출발지 운반은 차를 골목 안에 댈 수 있으면 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR12",
+        "quoteId": "H12",
+        "type": "얼버무림",
+        "text": "출발 4층에 엘베가 있다는 말씀이실까요? 도착 2층은 계단 몇 칸인지 먼저 알려주세요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 1990,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "stairs-to",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "stairs-from",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "stairs-to",
+            "title": "도착지 계단 작업",
+            "relation": "conditional_answer",
+            "quote": "도착 2층은 계단 몇 칸인지 먼저 알려주세요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "stairs-from",
+            "title": "출발지 계단 작업",
+            "relation": "conditional_answer",
+            "quote": "출발 4층에 엘베가 있다는 말씀이실까요?",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR13",
+        "quoteId": "H13",
+        "type": "명시적 포함",
+        "text": "제외라고 쓴 건 제가 잘못 적었습니다. 매트리스 1개도 운송 총액에 포함합니다. 최종 총액은 방문 후 안내드릴게요.",
+        "allowed": [
+          "item-매트리스"
+        ],
+        "notOpen": [],
+        "wall": 3178,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "item-매트리스",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'제외' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          },
+          {
+            "card": "unread-총액",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "판독 불가 → 조건 모호 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-매트리스",
+            "relation": "conflicting",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "unread-총액",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "판독 불가 → 조건 모호 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [
+          "item-매트리스"
+        ],
+        "modelHit": [
+          "item-매트리스"
+        ],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "unread-총액",
+            "title": "총액",
+            "relation": "conditional_answer",
+            "quote": "최종 총액은 방문 후 안내드릴게요.",
+            "from": "판독 불가",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "item-매트리스",
+            "title": "매트리스",
+            "relation": "conflicting",
+            "quote": "제외라고 쓴 건 제가 잘못 적었습니다. 매트리스 1개도 운송 총액에 포함합니다.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR14",
+        "quoteId": "H14",
+        "type": "무관",
+        "text": "보관 창고 입고 사진은 입고 완료되면 보내드려요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 2149,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": false,
+            "reason": "답변 문구에 '추가 비용 문구'에 대한 말이 없습니다. 뭉뚱그린 답이면 unanswered"
+          },
+          {
+            "card": "fee-0",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR15",
+        "quoteId": "H15",
+        "type": "명시적 포함",
+        "text": "고객님이 1층에 내려놓는 조건은 삭제하겠습니다. 식탁 1개, 의자 4개, 모니터 1대 운송과 출발 2층 계단 작업 모두 기존 총액에 포함합니다. 추가 비용 없음으로 확정합니다.",
+        "allowed": [
+          "item-식탁",
+          "item-의자",
+          "item-모니터",
+          "stairs-from",
+          "fee"
+        ],
+        "notOpen": [
+          "item-식탁",
+          "item-의자",
+          "item-모니터",
+          "fee"
+        ],
+        "wall": 2026,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "stairs-from",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-0",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "조건 모호 → 명시됨 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [
+          "fee-0"
+        ],
+        "afterBad": [
+          "fee-0"
+        ],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [
+          "stairs-from"
+        ],
+        "afterHit": [
+          "stairs-from"
+        ],
+        "proposals": [
+          {
+            "cardId": "stairs-from",
+            "title": "출발지 계단 작업",
+            "relation": "explicit_answer",
+            "quote": "식탁 1개, 의자 4개, 모니터 1대 운송과 출발 2층 계단 작업 모두 기존 총액에 포함합니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "fee-0",
+            "title": "추가 비용 문구",
+            "relation": "explicit_answer",
+            "quote": "추가 비용 없음으로 확정합니다.",
+            "from": "조건 모호",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR16",
+        "quoteId": "H16",
+        "type": "무관",
+        "text": "안마의자 리모컨은 분실되지 않게 따로 챙겨주세요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 2298,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "carry-to",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          },
+          {
+            "card": "fee-0",
+            "relation": "conditional_answer",
+            "accepted": false,
+            "reason": "quote가 업체 답변에 그대로 있는 문장이 아닙니다"
+          },
+          {
+            "card": "carry-to",
+            "relation": "unanswered",
+            "accepted": true,
+            "reason": "답이 없어 확인이 남은 항목으로 유지"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": []
+      },
+      {
+        "id": "HR17",
+        "quoteId": "H17",
+        "type": "명시적 포함",
+        "text": "책상 1개, 행거 1개, 박스 5개 운송 포함입니다. 차량 1톤 1대와 작업 인원 2명도 총액 38만원에 포함이에요. 추가 비용 없음입니다.",
+        "allowed": [
+          "item-책상",
+          "item-행거",
+          "item-박스",
+          "truck",
+          "workers",
+          "fee"
+        ],
+        "notOpen": [
+          "fee"
+        ],
+        "wall": 6748,
+        "stopped": "finished",
+        "steps": 3,
+        "offers": [
+          {
+            "card": "item-책상",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-행거",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-박스",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "truck",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "workers",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "fee-none",
+            "relation": "explicit_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 명시됨 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [
+          "fee-none"
+        ],
+        "afterBad": [
+          "fee-none"
+        ],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [
+          "item-책상",
+          "item-행거",
+          "item-박스",
+          "truck",
+          "workers"
+        ],
+        "afterHit": [
+          "item-책상",
+          "item-행거",
+          "item-박스",
+          "truck",
+          "workers"
+        ],
+        "proposals": [
+          {
+            "cardId": "item-책상",
+            "title": "책상",
+            "relation": "explicit_answer",
+            "quote": "책상 1개, 행거 1개, 박스 5개 운송 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "item-행거",
+            "title": "행거",
+            "relation": "explicit_answer",
+            "quote": "책상 1개, 행거 1개, 박스 5개 운송 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "item-박스",
+            "title": "박스·잡화",
+            "relation": "explicit_answer",
+            "quote": "책상 1개, 행거 1개, 박스 5개 운송 포함입니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "truck",
+            "title": "차량",
+            "relation": "explicit_answer",
+            "quote": "차량 1톤 1대와 작업 인원 2명도 총액 38만원에 포함이에요.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "workers",
+            "title": "작업 인원",
+            "relation": "explicit_answer",
+            "quote": "차량 1톤 1대와 작업 인원 2명도 총액 38만원에 포함이에요.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          },
+          {
+            "cardId": "fee-none",
+            "title": "당일 추가 비용 조건",
+            "relation": "explicit_answer",
+            "quote": "추가 비용 없음입니다.",
+            "from": "포함 여부 미확인",
+            "to": "명시됨"
+          }
+        ]
+      },
+      {
+        "id": "HR18",
+        "quoteId": "H18",
+        "type": "제외·별도",
+        "text": "사다리차는 53만원에 포함 안 됩니다. 필요하시면 장비 업체 비용 따로 내셔야 해요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 1728,
+        "stopped": "finished",
+        "steps": 3,
+        "offers": [
+          {
+            "card": "ladder",
+            "relation": "conflicting",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "ladder",
+            "title": "사다리차",
+            "relation": "conflicting",
+            "quote": "사다리차는 53만원에 포함 안 됩니다. 필요하시면 장비 업체 비용 따로 내셔야 해요.",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR19",
+        "quoteId": "H19",
+        "type": "얼버무림",
+        "text": "식탁 크기가 어떻게 되죠? 박스는 직접 포장하시는 건가요? 확인하고 말씀드릴게요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 2021,
+        "stopped": "finished",
+        "steps": 5,
+        "offers": [
+          {
+            "card": "item-식탁",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "item-박스",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [],
+        "afterBad": [],
+        "rejectedBad": [],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "item-식탁",
+            "title": "식탁",
+            "relation": "conditional_answer",
+            "quote": "식탁 크기가 어떻게 되죠?",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "item-박스",
+            "title": "박스·잡화",
+            "relation": "conditional_answer",
+            "quote": "박스는 직접 포장하시는 건가요?",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          }
+        ]
+      },
+      {
+        "id": "HR20",
+        "quoteId": "H20",
+        "type": "금액 제시",
+        "text": "박스 3개 더는 2만원, 전자레인지는 1만원, 지하 계단은 4만원입니다. 출발지 장거리 운반비는 말씀드린 3만원이에요.",
+        "allowed": [],
+        "notOpen": [],
+        "wall": 3542,
+        "stopped": "finished",
+        "steps": 4,
+        "offers": [
+          {
+            "card": "item-전자레인지",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'1만' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          },
+          {
+            "card": "item-박스",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "stairs-to",
+            "relation": "conflicting",
+            "accepted": true,
+            "reason": "조건 모호 유지, 조건부 답변을 기록 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "carry-from",
+            "relation": "explicit_answer",
+            "accepted": false,
+            "reason": "'3만' 같은 금액·제외·별도·조건 표현이 있어 '명시됨'으로 볼 수 없습니다. conditional_answer 또는 conflicting"
+          },
+          {
+            "card": "item-전자레인지",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 조건 모호 (사용자 승인 후 반영)"
+          },
+          {
+            "card": "carry-from",
+            "relation": "conditional_answer",
+            "accepted": true,
+            "reason": "포함 여부 미확인 → 조건 모호 (사용자 승인 후 반영)"
+          }
+        ],
+        "modelBad": [
+          "item-전자레인지",
+          "carry-from"
+        ],
+        "afterBad": [],
+        "rejectedBad": [
+          "item-전자레인지",
+          "carry-from"
+        ],
+        "lostGood": [],
+        "modelHit": [],
+        "afterHit": [],
+        "proposals": [
+          {
+            "cardId": "item-박스",
+            "title": "박스·잡화",
+            "relation": "conditional_answer",
+            "quote": "박스 3개 더는 2만원",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "stairs-to",
+            "title": "도착지 계단 작업",
+            "relation": "conflicting",
+            "quote": "지하 계단은 4만원입니다",
+            "from": "조건 모호",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "item-전자레인지",
+            "title": "전자레인지",
+            "relation": "conditional_answer",
+            "quote": "전자레인지는 1만원",
+            "from": "포함 여부 미확인",
+            "to": "조건 모호"
+          },
+          {
+            "cardId": "carry-from",
+            "title": "출발지 운반 거리",
+            "relation": "conditional_answer",
+            "quote": "출발지 장거리 운반비는 말씀드린 3만원이에요",
+            "from": "포함 여부 미확인",
+            "to": "조건 모호"
+          }
+        ]
+      }
+    ]
+  }
+}

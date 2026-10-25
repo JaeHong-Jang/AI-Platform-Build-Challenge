@@ -1,0 +1,877 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16ea0-15ed-74a1-99e5-3ac9c4471249
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-25이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+## 과제 B012-문제 정의 정확도 검증 (실무팀)
+
+오늘은 2026-10-25다. 파일은 `cat`·`sed -n`·`grep` 같은 읽기 명령으로 읽어도 된다(쓰기·삭제·설치 금지). 웹 검색 가능.
+
+### 배경
+우리 서비스 '이사 지킴이'는 소규모 이사(청년·1인가구)에서 계약금을 보내기 전에 견적의 빈칸을 확인 질문으로 바꾸는 AI 서비스다. 팀장이 "문제는 정말 정확한 거야?"라고 물었다.
+
+### 읽을 것
+- 기획서 본문: `보고서/build/proposal-hwp.md` 의 `## 2`(요약)와 `## 3`(문제 정의) — 특히 문제 서술
+- 출처 요약: `wiki/sources/kca2026-소규모이사-피해.md` (한국소비자원 2026-04-21 피해예방주의보, 원문 수치 대조본)
+- 원문 게시글: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1 (첨부 PDF 가능하면 직접 확인)
+- 그 밖에 `보고서/build/proposal-hwp.md` 출처 목록 [1]~[13]
+
+### 할 일
+1. `## 2`·`## 3`의 문제 관련 **주장을 한 줄씩 뽑아** 표로: 주장 | 근거 출처(쪽·문장) | 판정(원문과 일치 / 과장 / 출처 없음 / 틀림) | 고칠 문장.
+   - 특히 확인: ① 원인을 무엇으로 서술했나(견적 문구 모호 vs 비대면 계약에서 짐·건물 조건 미확인) ② "원룸 짐 일체", "현장 상황에 따라 추가 비용", "1톤 1대 예정", "현장 협의"가 실제 출처에 있는 문구인지(없으면 '예시' 표시 필요) ③ "질문 자체를 떠올리지 못할 수 있다" 같은 사용자 행동 주장의 근거 ④ 피해 1위가 파손·분실(47.7%)인데 추가비용을 고른 이유가 서술되는지 ⑤ 계약불이행(13.9%)이 추가비용 거부에서 이어진다는 원문 서술
+2. 원문에 충실한 **문제 정의 문단(4~6문장)**을 새로 써라. 어조는 기획서답게 자신 있게, 그러나 출처에 없는 말은 넣지 않는다. 핵심 인과: 비대면 계약 → 짐 양·건물 구조·작업 조건이 문서에 안 적힘 → 당일 화물차·인력·사다리차 추가 요구 → 거부 시 이사 거부.
+3. 이 문제에서 **AI 에이전트가 맡아야 하는 판단**이 무엇인지 원문 근거로 3개 이내 제시(예: 소비자원 권고 "작업조건(사다리 비용 등) 및 이사화물 내역에 따라 추가 요금", "계약서에 이사화물 내역·작업인원·추가서비스 내역 및 비용 상세 기재"를 사용자의 실제 조건에 적용하는 일). 각 판단이 왜 고정 규칙만으로 어려운지 한 줄씩. 추정은 "추정:"으로 표시.
+4. 추가로 찾은 공신력 있는 출처(공공기관·통계)가 있으면 URL과 함께. 못 찾으면 unknown.
+
+출력: 한국어 마크다운. 앞뒤 인사 없이 결과만.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-24T15:55:49.237238Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+기획서의 문제 관련 문장을 원문과 대조해 과장·예시·근거 없는 추정을 구분하겠습니다. 파일은 읽기만 하며, 확인하지 못한 근거는 `unknown`으로 표시하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g '*proposal-hwp.md' -g '*kca2026*' -g '*B012*' -g '*context*'" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 1853ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+AGENTS.md
+briefs/B012-에이전트-중심-재설계.md
+team/prompts/_context.md
+보고서/build/proposal-hwp.md
+wiki/sources/kca2026-소규모이사-피해.md
+web/node_modules/preact/src/create-context.js
+web/node_modules/next/AGENTS.md
+web/node_modules/next/dist/client/components/hooks-server-context.d.ts
+web/node_modules/next/dist/client/components/render-from-template-context.js.map
+web/node_modules/next/dist/client/components/render-from-template-context.js
+web/node_modules/next/dist/client/components/render-from-template-context.d.ts
+web/node_modules/next/dist/client/components/hooks-server-context.js.map
+web/node_modules/next/dist/client/components/hooks-server-context.js
+web/node_modules/next/dist/shared/lib/router-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/router-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/router-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/image-config-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/html-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/html-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/html-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/hooks-client-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/hooks-client-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/hooks-client-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/image-config-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/image-config-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/app-router-context.shared-runtime.d.ts
+web/node_modules/next/dist/shared/lib/loadable-context.shared-runtime.js.map
+web/node_modules/next/dist/shared/lib/loadable-context.shared-runtime.js
+web/node_modules/next/dist/shared/lib/loadable-context.shared-runtime.d.ts
+web/node_modules/next/dist/server/web/sandbox/context.js.map
+web/node_modules/next/dist/server/web/sandbox/context.js
+web/node_modules/next/dist/server/web/sandbox/context.d.ts
+web/node_modules/next/dist/build/build-context.js.map
+web/node_modules/next/dist/build/build-context.js
+web/node_modules/next/dist/build/build-context.d.ts
+web/node_modules/next/dist/build/webpack/plugins/telemetry-plugin/update-telemetry-loader-context-from-swc.js.map
+web/node_modules/next/dist/build/webpack/plugins/telemetry-plugin/update-telemetry-loader-context-from-swc.js
+web/node_modules/next/dist/build/webpack/plugins/telemetry-plugin/update-telemetry-loader-context-from-swc.d.ts
+web/node_modules/next/dist/server/lib/router-utils/router-server-context.js.map
+web/node_modules/next/dist/server/lib/router-utils/router-server-context.js
+web/node_modules/next/dist/server/lib/router-utils/router-server-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/router-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/router-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/router-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/loadable-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/loadable-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/loadable-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/image-config-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/image-config-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/image-config-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/html-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/html-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/html-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/hooks-client-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/hooks-client-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/hooks-client-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/head-manager-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/head-manager-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/head-manager-context.d.ts
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/app-router-context.js.map
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/app-router-context.js
+web/node_modules/next/dist/server/route-modules/pages/vendored/contexts/app-router-context.d.ts
+web/node_modules/next/dist/experimental/testmode/context.d.ts
+web/node_modules/next/dist/server/after/builtin-request-context.js.map
+web/node_modules/next/dist/server/after/builtin-request-context.js
+web/node_modules/next/dist/server/after/builtin-request-context.d.ts
+web/node_modules/next/dist/server/after/after-context.js.map
+web/node_modules/next/dist/server/after/after-context.js
+web/node_modules/next/dist/server/after/after-context.d.ts
+web/node_modules/next/dist/experimental/testmode/context.js.map
+web/node_modules/next/dist/experimental/testmode/context.js
+web/node_modules/next/dist/lib/metadata/metadata-context.js.map
+web/node_modules/next/dist/lib/metadata/metadata-context.js
+web/node_modules/next/dist/lib/metadata/metadata-context.d.ts
+web/node_modules/next/dist/esm/shared/lib/router-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/router-context.shared-runtime.js
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/hooks-client-context.d.ts
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/head-manager-context.js.map
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/head-manager-context.js
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/head-manager-context.d.ts
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/app-router-context.js.map
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/app-router-context.js
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/app-router-context.d.ts
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/router-context.js.map
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/router-context.js
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/router-context.d.ts
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/image-config-context.js.map
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/image-config-context.js
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/image-config-context.d.ts
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/hooks-client-context.js.map
+web/node_modules/next/dist/server/route-modules/app-page/vendored/contexts/hooks-client-context.js
+web/node_modules/next/dist/next-devtools/dev-overlay/menu/context.d.ts
+web/node_modules/next/dist/esm/shared/lib/head-manager-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/head-manager-context.shared-runtime.js
+web/node_modules/next/dist/esm/shared/lib/app-router-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/app-router-context.shared-runtime.js
+web/node_modules/next/dist/esm/shared/lib/loadable-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/loadable-context.shared-runtime.js
+web/node_modules/next/dist/esm/shared/lib/image-config-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/image-config-context.shared-runtime.js
+web/node_modules/next/dist/esm/server/after/builtin-request-context.js.map
+web/node_modules/next/dist/esm/server/after/builtin-request-context.js
+web/node_modules/next/dist/esm/server/after/after-context.js.map
+web/node_modules/next/dist/esm/server/after/after-context.js
+web/node_modules/next/dist/esm/shared/lib/html-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/html-context.shared-runtime.js
+web/node_modules/next/dist/esm/shared/lib/hooks-client-context.shared-runtime.js.map
+web/node_modules/next/dist/esm/shared/lib/hooks-client-context.shared-runtime.js
+web/node_modules/next/dist/esm/server/web/sandbox/context.js.map
+web/node_modules/next/dist/esm/server/web/sandbox/context.js
+web/node_modules/next/dist/esm/server/lib/router-utils/router-server-context.js.map
+web/node_modules/next/dist/esm/server/lib/router-utils/router-server-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/router-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/router-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/loadable-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/loadable-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/image-config-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/image-config-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/html-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/html-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/hooks-client-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/hooks-client-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/head-manager-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/head-manager-context.js
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/app-router-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/pages/vendored/contexts/app-router-context.js
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/router-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/router-context.js
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/image-config-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/image-config-context.js
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/hooks-client-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/hooks-client-context.js
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/head-manager-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/head-manager-context.js
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/app-router-context.js.map
+web/node_modules/next/dist/esm/server/route-modules/app-page/vendored/contexts/app-router-context.js
+web/node_modules/next/dist/next-devtools/dev-overlay/components/errors/dev-tools-indicator/drag-context.d.ts
+web/node_modules/next/dist/esm/lib/metadata/metadata-context.js.map
+web/node_modules/next/dist/esm/lib/metadata/metadata-context.js
+web/node_modules/next/dist/esm/build/build-context.js
+web/node_modules/next/dist/esm/build/build-context.js.map
+web/node_modules/next/dist/esm/build/webpack/plugins/telemetry-plugin/update-telemetry-loader-context-from-swc.js
+web/node_modules/next/dist/esm/build/webpack/plugins/telemetry-plugin/update-telemetry-loader-context-from-swc.js.map
+web/node_modules/next/dist/esm/client/components/render-from-template-context.js.map
+web/node_modules/next/dist/esm/client/components/render-from-template-context.js
+web/node_modules/next/dist/esm/client/components/hooks-server-context.js
+web/node_modules/next/dist/esm/client/components/hooks-server-context.js.map
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+exec
+/bin/bash -lc "cat AGENTS.md; sed -n '1,230p' 보고서/build/proposal-hwp.md; cat wiki/sources/kca2026-소규모이사-피해.md" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# AGENTS.md — 오케스트라 팀 운영 매뉴얼
+
+이 저장소에서 일하는 모든 에이전트(Claude Code, Codex, Antigravity)는 이 파일을 단일 운영 매뉴얼로 따른다.
+
+## 1. 팀 구성 — 지휘와 실무를 나눈다
+
+| 구분 | 멤버 | 모델 / 호출 | 하는 일 | 하지 않는 일 |
+|---|---|---|---|---|
+| ◆ 지휘 (의장) | **Opus** | Claude Opus 5.5 — 메인 Claude Code 세션 | brief 작성, 배정, 토론 진행, 최종 판정, 위키·저장소 반영 | 조사·분석 본작업 |
+| ◆ 지휘 | **Astra** | GPT 6 Astra — `team/bin/ask.sh astra` | 지휘부 검증(전략·사업성·심사 관점), 토론 | 조사·분석 본작업 |
+| ◆ 지휘 | **Argon** | Gemini 4 Argon — `team/bin/ask.sh argon` | 지휘부 검증(기술·구현 관점), 토론 | 조사·분석 본작업 |
+| ○ 실무 | **Sol** | GPT 6.1 Sol — `team/bin/ask.sh sol` | **조사 · 분석 · 상호 검증** | 최종 판정 |
+| ○ 실무 | **Sonnet** | Claude Sonnet 5.5 — Agent 도구 `model: sonnet` | **조사 · 분석 · 상호 검증**, 위키 ingest | 최종 판정 |
+
+실무팀(Sol·Sonnet)이 일을 하고, 지휘부(Opus·Astra·Argon)는 방향을 정하고 검증하고 판정한다.
+
+## 2. 파이프라인 (stage)
+
+```
+brief ─▶ 조사 ─▶ 분석 ─▶ 상호 검증 ─▶ 지휘부 검증 ─▶ 토론 ─▶ 판정 ─▶ 위키 반영 ─▶ 저장소 반영 ─┐
+  ▲                                                                                       │
+  └──────────────────────────── 결과가 다음 brief로 되돌아간다 ──────────────────────────┘
+```
+
+| stage | 누가 | 규칙 |
+|---|---|---|
+| `brief` | Opus | `briefs/Bxxx-*.md` 작성: 질문, 범위, 성공 기준, 마감. status: active / waiting / done |
+| `research` 조사 | Sol ∥ Sonnet | 서로 결과를 보지 않고 병렬. 사실마다 출처 URL, 못 찾으면 `unknown` |
+| `analysis` 분석 | Sol ∥ Sonnet | 두 조사 결과를 모두 입력으로 받아 **각자 독립적으로** 분석 |
+| `peer` 상호 검증 | Sol ↔ Sonnet | Sol의 분석은 Sonnet이, Sonnet의 분석은 Sol이 검증(출처·수치·논리). 자기 산출물 승인 금지 |
+| `review` 지휘부 검증 | Astra ∥ Argon | 블라인드 독립 리뷰. Astra=전략·사업성·심사, Argon=기술·구현성. 각 주장에 찬성/반대/보류 |
+| `debate` 토론 | Astra · Argon (+Opus 의장) | **판정이 갈리는 주장만**. 각자 상대 의견을 받아 1회 반박 → Opus가 정리 |
+| `decision` 판정 | Opus | `decisions/Dxxx-*.md`: 결론, 근거 run, 반대 의견, 남은 unknown |
+| `wiki` 위키 반영 | Sonnet · Opus | 노트·링크 갱신, `wiki/log.md` 기록 |
+| `repo` 저장소 반영 | Sonnet · Opus | 코드·문서·제출물 반영 |
+
+작은 과업은 stage를 건너뛸 수 있으나 **peer 또는 review 중 하나는 반드시** 거친다.
+
+## 3. 실행 기록 — 관측소에 실시간으로 보인다
+
+- 외부 모델: `team/bin/ask.sh <astra|argon|sol> <task-id> <prompt-file> <stage>` → 시작·종료가 `runs/events.jsonl`, 완료가 `runs/runs.jsonl`에 기록. 결과 `runs/out/<task-id>.<member>.md`, 진행 로그 `.log`.
+- **Claude Code 세션은 훅이 자동 기록한다** (`.claude/settings.json` → `team/bin/hook.py`):
+  - 사용자가 지시하면 Opus(과제 지시) 실행이 시작되고 지시 문장이 관측소에 뜬다. 응답이 끝나면(Stop) 종료.
+  - Opus·서브에이전트가 쓰는 도구(명령·검색·파일 작성·팀원 호출)가 한 줄씩 진행 로그에 쌓인다.
+  - `Agent` 도구를 `model: sonnet`으로 부르면 Sonnet 실행이 자동 시작되고, 끝나면(SubagentStop) 자동 종료된다.
+    단계는 description의 낱말로 정한다: 조사·벤치→조사, 분석→분석, 검증·상호→상호 검증, 리뷰→지휘부 검증, 토론→토론, 위키→위키 반영.
+    그래서 description은 `Sonnet: <단계 낱말이 들어간 짧은 제목>` 으로 쓴다.
+- 훅이 꺼져 있을 때만 수동으로: `rid=$(team/bin/event.py start <member> <task> <stage> <out>)` → `team/bin/event.py end $rid ok|fail`.
+- 프롬프트는 `team/prompts/`에 남기고 `_context.md`를 앞에 붙인다.
+
+## 4. LLM 위키 규칙 (`wiki/`)
+
+```
+wiki/papers/<stem>.pdf          원문 (가능할 때)
+wiki/sources/<stem>.md          논문 초록·요약 (원문에 충실)
+wiki/notes/<type>/<이름>.md      연결된 지식 노트
+wiki/overviews/<주제>.md         종합 문서
+wiki/index.md, wiki/log.md      목차, 변경 기록
+```
+- stem: `<첫저자성><연도>-<키워드>` (예: `lewis2020-rag`)
+- frontmatter: `type: hub|concept|idea|paper|system|experiment|verdict`, `tags`, `status: draft|verified|confirmed|rejected`, `source`
+- 링크는 `[[노트이름]]`. 관측소 그래프가 이 링크로 그려진다.
+- **4대 규칙**: ① 위키 우선, 웹검색은 조사 stage에서만 ② 불확실하면 원문 확인 ③ 확인 못한 값은 `unknown` ④ 근거가 없으면 자료 추가 요청
+- 논문은 arXiv ID·DOI로 실재를 확인한 경우에만 `status: verified` (`team/bin/ingest_papers.py`)
+
+## 5. AI Platform Build Challenge 관측소 (`observatory/`)
+
+- **실시간**: `python3 observatory/server.py` → http://localhost:8777 (홈 · 시스템 동작 · 지식 그래프 · 실험 기록). 실행 중인 팀원, 진행 시간, 검색어·명령 로그, D-day가 1초 단위로 갱신된다.
+- **정적 스냅샷**: `python3 observatory/build.py` → `observatory/index.html`
+
+## 6. 금지
+
+- 확인하지 않은 통계·논문·데이터셋·경쟁 부재 주장 생성 금지 (경쟁 주장은 실무팀 검증 필수)
+- 개인정보·권한 없는 자료를 저장소에 넣지 않는다
+- 다른 멤버의 산출물(`runs/out/`)을 덮어쓰지 않는다
+## 1
+이사 지킴이
+계약금을 보내기 전, 견적의 빈칸을 확인 질문으로 바꾸는 AI 계약 전 점검 플랫폼
+
+## 2
+- **문제:** “원룸 짐 일체”, “현장 상황에 따라 추가 비용”처럼 범위가 모호한 견적을 받은 청년은 계단 운반·사다리차·가구 분해 작업이 총액에 포함되는지 확인하기 어렵다.
+- **사용자:** 소규모 이사를 준비하며 견적을 받았거나 업체에 문의하려는 대학생·청년 1인가구를 대상으로, 계약금 송금 전 확인을 돕는다.
+- **해결:** 내 이사 조건과 견적을 대조해 빈칸을 찾고, 업체에 보낼 질문을 만들며, 돌아온 답변과 계약서까지 같은 항목으로 연결한다.
+- **AI:** 배포 모델은 **Claude Sonnet 5.5**다. 조건 해석·견적 판독·답변 점검을 AI가 맡고, 원문 검증과 항목 대조 등 7개 역할은 코드가 수행한다.
+- **신뢰:** AI가 제안한 값은 원문 검증기를 거친다. 업체 답변에 따른 갱신은 사람이 승인하며, 점검 결과에서 근거 문장을 바로 확인한다.
+- **화면:** 집에서 트럭까지 짐이 이동하는 2D 장면으로 점검 과정을 보여 준다. 견적에 명시된 짐과 질문이 필요한 짐을 구분하고, 원문에서 확인한 총액·계약금을 표시한다.
+- **준비도:** 조건 입력부터 견적 대조·질문 작성·답변 점검까지 웹 시제품을 구현했다. 합성 견적 20건 홀드아웃(소형 공개 모델)에서 원문 검증기를 적용하자 원문에 없는 주요 값 채움이 4건에서 0건이 됐다.
+- **확장:** 청년 이용자는 무료로 지원하고 기관 이용권·운영 기능을 유료화하는 방안을 검증한다. 이후 송금·간편결제 앱의 **‘계약금 보내기 전 확인’** 기능과 다른 계약금 거래로 확장한다.
+
+## 3
+### 견적의 총액보다 먼저 확인해야 할 작업 범위
+이사 견적에서 “35만원”이라는 숫자는 쉽게 찾을 수 있다. 그러나 그 금액으로 어떤 짐을 어디서부터 어디까지 옮기는지, 계단 운반이나 사다리차 비용이 포함되는지는 별도로 확인해야 한다. 사용자는 자신의 집과 짐을 알고 있지만 견적서의 짧은 표현이 그 조건을 모두 반영하는지 판단하기 어렵다.
+예를 들어 “원룸 짐 일체”는 사용자에게는 침대·냉장고·책상까지 포함한 말이지만, 실제 문의에서는 개별 품목과 운반 조건을 확인해야 한다. “기본 작업 포함”에 침대 분해·조립이 들어가는지, “현장 상황에 따라 추가 비용”이 어떤 상황과 금액을 뜻하는지 물어볼 필요가 있다. 계단·사다리차 항목이 아예 적혀 있지 않은 경우에는 질문 자체를 떠올리지 못할 수 있다.
+이사 지킴이는 이 빈칸을 **사용자가 계약 전에 질문하고 기록할 수 있는 항목**으로 바꾼다. 가격의 적정성을 판정하거나 업체를 대신 선택하기보다, 사용자가 자신의 조건에 대한 구체적인 답을 받은 뒤 계약금을 보낼 수 있도록 돕는다.
+
+### 공공 피해 자료가 보여 주는 확인의 필요성
+한국소비자원에 따르면 전체 이사서비스 피해구제 신청은 2023년 603건, 2024년 785건, 2025년 961건이었다. 소규모 이사 피해구제 신청 241건 중 20~30대는 157건으로 65.1%를 차지했다. 피해 유형을 중복 집계한 281건 중 추가비용 요구는 70건, 24.9%였다. 이 수치는 피해구제 신청 분석이며 전체 이사 이용자의 피해율을 뜻하지 않는다.[1]
+한국소비자원은 비대면 소규모 이사 계약에서 짐의 양이나 건물 구조 등을 이유로 추가비용을 요구하는 문제를 설명하고, 방문 견적과 허가·보험 확인, 계약사항 상세 기재를 권고한다.[1][5] 이사 지킴이는 이러한 권고를 사용자의 견적에 적용해 “확인하세요”라는 안내를 **“내 견적에서는 이것을 물어보세요”**라는 행동으로 연결한다.
+서비스의 첫 범위는 포함 품목·운반 조건·추가비용 조건·계약서 기재 사항이다. 파손·분실에 대해서는 보험 가입 확인 안내를 연결하고, 위법 여부나 배상액에 관한 판단은 전문 상담으로 연결할 영역으로 둔다.
+
+### 주요 사용자와 초기 도입 지역
+주요 사용자는 소규모 이사를 준비하는 대학생과 청년 1인가구다. 카카오톡·문자 등으로 받은 견적을 가지고 있고, 계약금 송금 전에 무엇을 더 물어봐야 할지 정리하려는 순간에 이용한다. 업체를 정하기 전에는 이사 조건을 정리하고 견적 요청 문장을 만드는 데에도 활용할 수 있다.
+초기 검증 지역은 관악구로 정한다. 국무조정실 발표에서 관악구의 2024년 청년인구 비율은 41.4%로 전국 1위였다.[2] 서울시의 2026년 상반기 청년 중개보수·이사비 지원 신청자는 89.4%가 1인가구, 72%가 원룸 거주자였다. 이는 해당 지원사업 신청자의 특성이다.[3]
+청년의 이사비 지원과 주거 상담에 계약 전 점검을 연결하면, 이사 지출을 지원하는 바로 그 접점에서 작업 범위 확인까지 함께 도울 수 있다. 관악구 청년 지원 기관을 첫 도입 후보로 삼고, 담당자 인터뷰에서 상담 수요와 제공 방식을 구체화한다.
+
+### 가상 사례: 계약금을 보내기 전에 달라지는 질문
+다음은 서비스 이용 흐름을 설명하기 위한 가상 사례다. 관악구에서 자취방을 옮기는 대학생이 “출발지는 3층이고 엘리베이터가 없어요. 침대도 옮겨야 해요”라고 입력한다. 받은 견적에는 “1톤 1대, 인원 2명, 총액 35만원, 계약금 5만원, 현장 상황에 따라 추가 비용”이라고 적혀 있다.
+이사 지킴이는 총액과 계약금을 원문에서 확인하고, 출발지 계단 작업과 침대 분해·조립의 포함 여부를 별도 항목으로 제시한다. 사용자는 “출발지 3층 계단 운반과 침대 분해·조립이 총액에 포함되나요? 별도라면 발생 조건과 금액을 견적서에 적어 주세요”라는 질문을 복사해 업체에 보낸다.
+업체가 “당일 짐을 보고 말씀드릴게요”라고 답하면 추가 확인 항목으로 남긴다. 구체적인 작업 범위와 비용을 답하면 근거 문장을 보여 주고 사용자의 승인을 받는다. 계약금 비율도 원문에서 확인된 총액과 계약금으로 계산해 참고 기준과 함께 제시한다. 사용자는 금액뿐 아니라 **확인한 내용과 남은 질문**을 보고 계약 여부를 결정한다.
+
+## 4
+### 한 페이지에서 입력·점검·문의까지
+이사 지킴이의 컨셉은 **‘내 짐이 견적에 제대로 담겼는지 눈으로 확인하는 계약 전 점검’**이다. 사용자가 이사 조건과 받은 견적을 입력하면, 에이전트가 처리하는 순서와 점검 결과를 같은 페이지에서 보여 준다. 결과를 이해한 뒤에는 질문 복사, 업체 답변 입력, 승인으로 자연스럽게 이어진다.
+화면의 중심에는 집→현관→검수대→멈춤선→트럭으로 이어지는 2D 운반 장면을 둔다. 짐 확인 항목을 상자로 표현하고, 원문에서 포함 여부를 확인한 짐은 트럭에 싣는다. 추가 확인이 필요한 짐은 멈춤선에 두고 해당 질문을 연결한다. 계단 운반·사다리차·추가비용 같은 작업 조건은 별도 표지로 보여 준다.
+이 장면은 견적의 확인 상태를 한눈에 보여 준다. 트럭에 실린 짐은 견적서나 승인한 답변에 명시된 항목이고, 멈춤선의 짐은 계약 전에 업체에 확인할 항목이다.
+[그림: scene | 집→현관→검수대→멈춤선→트럭으로 이어지는 2D 점검 장면. 명시된 짐과 확인이 필요한 짐을 구분한다.]
+
+[표] 사용자가 진행하는 계약 전 점검
+| 단계 | 사용자 행동 | 서비스의 도움 | 남는 기록 |
+|---|---|---|---|
+| 조건 정리 | 집·짐·운반 조건 입력 | 조건과 짐 목록 정리 | 확인한 내 조건 |
+| 견적 입력 | 받은 견적 붙여넣기 | 금액·품목·조건 판독 | 견적 원문 |
+| 빈칸 확인 | 항목별 결과 확인 | 미기재·모호한 조건 표시 | 확인 카드 |
+| 문의·답변 | 질문 발송·답변 입력 | 질문 작성·답변 근거 제안 | 질문과 답변 |
+| 승인·계약 점검 | 원문 확인 후 승인 | 비교·계약서 기재 점검 | 승인·미확인 목록 |
+
+### 기재 상태와 비용을 나눠 읽는 결과
+결과 화면은 ‘명시됨’, ‘포함 여부 미확인’, ‘조건 모호’, ‘판독 불가’를 구분한다. 비용은 별도로 ‘총액 포함’, ‘별도’, ‘미확인’으로 표시한다. 작업에 대한 언급이 있는 것과 비용까지 확정된 것을 구별하기 위해서다.
+예를 들어 “사다리차 필요 시 별도 7만원”은 비용이 별도라는 점과 금액은 읽을 수 있지만, 사다리차가 필요한 조건은 더 물어봐야 한다. 따라서 ‘조건 모호’와 ‘별도 7만원’을 함께 보여 준다. “현장 협의”라는 말이 있다는 이유만으로 총액에 포함됐다고 처리하지 않는다.
+결과 상단에는 원문에서 확인한 총액과 계약금을 보여 주고, 아래에는 실린 짐·멈춘 짐·남은 질문을 배치한다. 사용자가 자신의 입력과 근거를 확인할 수 있도록 각 카드에서 해당 원문으로 이동하게 한다. 새로운 이사 가격을 계산하지 않고 받은 견적의 내용을 정리한다.
+[그림: result | 원문 확인 총액·계약금, 실린 짐과 멈춘 짐, 업체에 보낼 질문을 함께 보여 주는 견적 점검 결과.]
+
+### 차별성은 질문 이후까지 이어지는 확인 기록
+이사 지킴이는 받은 한국어 견적과 내 조건을 연결하고, 확인 질문과 업체 답변을 같은 항목에 축적한다. 사용자가 견적을 다시 읽거나 업체와 나눈 대화를 찾아다니지 않고 “어떤 조건 때문에 물었고, 무엇이라고 답했으며, 내가 무엇을 승인했는지”를 이어서 볼 수 있다.
+견적은 최대 5건을 같은 항목으로 나란히 비교한다. 총액뿐 아니라 계단 작업·가구 운반·추가비용 조건의 명시 여부를 같은 위치에서 확인한다. 업체 추천이나 순위를 제공하지 않고, 업체의 결제가 점검 결과나 비교 순서에 영향을 주지 않는 원칙을 적용한다.
+유사 서비스의 공개 자료에서는 짐싸의 견적·계약·결제 지원, 미소의 방문 조사 기반 견적 비교, Yembo의 이사업체용 AI 조사, DetectHiddenFees의 수수료 분석과 질문 생성(판매자 소개 기준), Agoyu의 촬영 기반 견적 기능 등을 확인할 수 있다.[7][8][9][10][11] 이사 지킴이는 이와 맞닿은 과업 중 **사용자가 이미 받은 견적의 조건 대조와 후속 답변 확인**에 집중한다.
+본선에서는 같은 사례에 일반 안내문, 검증기 없는 LLM, 이사 지킴이를 적용해 질문 누락·잘못된 확정·불필요한 질문·문의 준비 시간·원문 추적 성공률을 비교한다. 차별성을 화면 설명과 실제 과업 결과로 함께 제시한다.
+
+## 5
+> AI가 읽고·판단하고·묻고, 코드가 지어내지 못하게 막고, 사람이 승인한다.
+### 왜 AI가 필요한가
+이사 견적은 카카오톡·문자·사진으로 제각각 도착한다. “원룸 짐 일체”, “1톤 1대 예정”, “현장 협의”처럼 짧게 줄인 표현이 많고, 업체 답변에도 조건과 예외가 섞인다. 정해진 단어만 찾는 규칙으로는 이런 자유 문장을 작업 항목으로 바꾸거나 답변이 확답인지 조건부인지 구분하기 어렵다.
+AI는 문장을 읽어 조건·견적 항목·답변의 의미를 구조화한다. 코드는 원문 일치, 금액의 위치, 정해진 상태 전환 기준을 검사한다. 마지막으로 사람은 근거 문장을 보고 답변의 반영을 승인한다. 문장 해석과 일관된 검증을 나눠 맡겨, 사용자가 판단에 필요한 정보를 확인할 수 있도록 한다.
+배포 모델은 **Claude Sonnet 5.5**다. 조건 해석·견적 판독·답변 점검의 세 역할에 적용하고, 원문 검증기와 사람 승인 절차는 모델을 바꿔도 유지한다. 본선에서는 같은 평가셋으로 배포 모델을 다시 측정해 정확도·처리 시간·호출 비용을 함께 확인한다.
+
+### 여러 단계의 일을 이어서 처리하는 에이전트
+에이전트는 한 번의 요약으로 일을 끝내지 않는다. 견적 받기→빈칸 찾기→질문→답변 확인→계약서 대조로 이어지는 과정에서 같은 사례의 조건과 확인 기록을 이어 사용한다. 답변 점검관은 확인 카드 조회 → 근거 문장 찾기 → 원문 대조 도구를 순서대로 호출해 갱신 후보를 만들고, 근거가 부족하면 재문의 항목으로 돌린다.
+실행 화면은 역할별 에이전트가 정해진 순서로 일하는 실행 흐름(팀의 이전 프로젝트 TRITON에서 검증한 구조)으로 01~07 단계와 마지막 사람 승인을 표시한다. 단계마다 ‘AI’, ‘코드’, ‘사람’을 밝혀 어떤 처리를 누가 맡는지 알 수 있게 한다. 보조 역할인 08 견적 비교관, 09 계약 점검관, 10 서류 안내관은 비교와 송금 전 점검을 지원한다.
+원문 검증관은 항상 작동하는 잠금 역할이다. 답변 점검관이 갱신을 제안해도 검증과 사용자 승인을 거쳐야 카드에 반영된다. 사용자는 처리 결과뿐 아니라 원문과 판단 이유를 함께 확인한다.
+[그림: flow | 01 조건 해석(AI)→02 짐 목록(코드)→03 견적 판독(AI)→04 원문 검증(코드·잠금)→05 견적 대조(코드)→06 문의 작성(코드)→07 답변 점검(AI)→사람 승인. 보조 08~10 연결.]
+
+[표] AI 3역할과 코드 7역할의 분담
+| 순서·역할 | 담당 | 수행하는 일 | 확인 장치 |
+|---|---|---|---|
+| 01 조건 해석관 | AI | 집·층·엘리베이터·짐 추출 | 사용자 조건 확인 |
+| 02 짐 목록관 | 코드 | 옮길 짐 목록 구성 | 수량·부피 추정 제외 |
+| 03 견적 판독관 | AI | 금액·차량·인원·문구 추출 | 항목별 원문 연결 |
+| 04 원문 검증관 | 코드·잠금 | 추출값과 원문 대조 | 없는 값 제거 |
+| 05 견적 대조관 | 코드 | 내 조건과 견적 비교 | 기재·비용 상태 분리 |
+| 06 문의 작성관 | 코드 | 미확인 항목을 질문으로 | 조건별 질문 틀 |
+| 07 답변 점검관 | AI | 답변 근거·갱신 후보 제안 | 검증 후 사람 승인 |
+| 08 견적 비교관 | 코드 | 공통 항목·허가 상호 대조 | 순위 없는 비교 |
+| 09 계약 점검관 | 코드 | 기재 항목·계약금 비율 점검 | 확인된 금액 사용 |
+| 10 서류 안내관 | 코드 | 견적서·계약서 항목 안내 | 참고 조항 연결 |
+
+### 원문 검증과 근거 기록
+견적 판독 결과는 정해진 출력 형식으로 받는다. 총액·계약금·차량·작업 인원 등 주요 값은 원문에 실제로 있는지 확인하고, 숫자가 어느 항목에 속하는지도 점검한다. 예를 들어 ‘1인 가구’의 숫자를 작업 인원으로 옮기거나, 계약금을 총액으로 읽는 일을 구분하는 규칙을 둔다.
+조건부 문구는 별도로 점검한다. “당일 보고”, “필요 시”, “협의” 같은 표현이 있으면 해당 조건을 질문으로 남긴다. 답변 점검에서도 발췌한 문장이 업체 답변에 실제로 있는지 확인하고, 충분한 근거를 갖춘 갱신 후보를 사용자에게 제시한다.
+근거 장부에는 모델이 제안한 값, 검증 후 값, 걸러낸 이유를 기록한다. 근거 그래프에서는 입력→항목→근거→참고 조항의 관계를 따라갈 수 있다. 사용자는 “왜 멈춘 짐인가”를 확인하고, 개발팀은 어떤 문장과 규칙을 개선할지 같은 기록으로 점검한다.
+[그림: ledger | 근거 장부 — AI가 읽은 값과 원문 대조 후 값을 나란히 남긴다. 원문에 없던 ‘사다리차 별도’·‘계단 별도’는 원문 검증관이 걸러 냈다.]
+
+### 활용 데이터와 접근·이용 조건
+핵심 입력은 사용자가 제공할 권한이 있는 이사 조건·견적·업체 답변이다. 외부 공개 자료는 확인 기준과 업체 정보 안내에 사용한다. AI가 약관 조항을 만들어 내게 하지 않고, 확인한 자료의 항목과 출처를 연결한다.
+
+[표] 활용 데이터와 관리 방법
+| 데이터 | 활용 목적 | 접근 방법 | 이용·관리 기준 |
+|---|---|---|---|
+| 사용자 조건·견적·답변 | 해석·대조·문의 | 직접 입력·붙여넣기 | 권한 있는 자료만 사용 |
+| 이사화물 표준약관 | 기재 항목·계약금 참고 | 생활법령정보 [6] | 최신 원본 대조 계획 |
+| 관악구 허가업체 현황 | 후보 탐색·상호 대조 | 공공데이터포털 [13] | 무료·이용허락 제한 없음 |
+| 소비자원 공개 자료 | 점검 항목·주의사항 | 공개 게시물 [1][5] | 출처 표시 |
+| 합성 견적·답변 | 기능·정확도 평가 | 팀 제작 평가셋 | 실존 업체·개인정보 제외 |
+
+관악구 허가업체 현황은 기준일 2026년 4월 24일 자료를 사용하며, 시제품은 이사 구분·영업 상태에 따라 정리한 27곳을 제공한다. 전화번호·좌표는 제외하고 순위와 추천 없이 상호를 확인하는 데 사용한다.[13] 다른 지역으로 확대할 때에도 자료 기준일과 이용 조건을 함께 표시한다.
+배포 계획에서는 AI 처리 대상과 외부 전송 범위를 입력 전에 안내한다. 주민등록번호는 수집 대상에서 제외하고, 견적·답변에 들어 있는 불필요한 개인정보를 줄이는 절차를 마련한다. 기관에는 개인 식별을 최소화한 이용 집계를 제공하는 방향으로 설계한다. 외부 모델의 데이터 처리 조건과 보관 정책은 배포 전에 확인해 이용 안내에 반영한다.
+
+### 시제품 실측으로 확인한 원문 검증기의 효과
+시제품 단계에서는 **A.X 4.0 Light·Qwen3-4B**라는 소형 공개 모델을 사용했다. 작은 공개 모델로도 원문 검증기를 거치면 홀드아웃 평가의 총액·계약금·인원·차량에서 원문에 없는 값 채움이 0건이었다. 배포 모델 Claude Sonnet 5.5로 본선 전에 같은 평가셋을 다시 측정한다.
+홀드아웃은 판정 코드를 보지 않고 별도로 작성한 합성 견적 20건과 답변 20건이다. 평가셋 확인 후 코드를 수정하지 않은 상태에서 2026년 10월 24일 한 차례 측정했다. 아래 수치는 사람 검수 전 합성 정답 기준이며, 같은 모델 출력에 원문 검증을 적용하기 전후를 비교한 결과다.
+
+[표] 홀드아웃 실측 — 원문 검증기 적용 전후
+| 평가 지표 | 검증 전 | 검증 후 | 본선 확인 내용 |
+|---|---|---|---|
+| 원문에 없는 주요 값 채움 | 4건 | **0건** | 배포 모델 재측정 |
+| 질문 재현율 | 86% | **92%** | 질문 누락 점검 |
+| 견적의 잘못된 명시 판정 | 7건 | **4건** | 조건·지시어 보강 |
+| 답변의 잘못된 갱신 후보 | 11건 | **4건** | 조건부 답변 구분 |
+
+원문 검증은 없는 값을 채우는 일을 막고, 확인이 필요한 항목을 질문으로 찾아내는 비율을 높였다. 검증기는 확신 없는 값을 채우지 않고 질문으로 돌려, 잘못된 확정 대신 확인 질문을 남긴다(같은 측정에서 비워 둔 값은 1건→9건). 본선에서는 금액 표기 읽기를 보강해 이 값을 줄이고, 여러 짐에 걸린 조건(“위 물품 전부 고객님이 1층에 내려놓는 조건”)과 확정 전 조건(“차량 1톤 2대 예정, 배차 사정에 따라 변경”)까지 평가한다.
+
+### 본선에서 넓힐 생성형 AI 활용
+**견적서 사진·캡처 읽기.** 이미지 입력을 지원하는 Claude Sonnet 5.5로 카톡 캡처·종이 견적 사진을 바로 읽는다. 이미지에서 추출한 문장을 사용자에게 보여 주고, 주요 숫자와 작업 조건은 원본 이미지와 대조하도록 연결한다. 문자 입력과 이미지 입력을 구분해 평가하고, 같은 원문 검증 원칙을 적용한다.
+**질문 문장 다듬기.** 문의 작성관이 항목별 질문의 뼈대를 만들고, Sonnet 5.5가 이를 업체에 보내기 자연스러운 문장으로 다듬도록 한다. 표현을 다듬은 뒤에도 작업 조건·포함 여부·추가비용 질문이 유지되는지 검사하고, 사용자가 확인해 직접 발송한다.
+웹 구성에는 Next.js·React, 출력 형식 검증에는 zod, 근거 그래프에는 force-graph를 활용한다. 해당 구성요소의 라이선스는 MIT이며, 아이콘은 lucide의 ISC, 글꼴은 Pretendard의 SIL OFL 1.1을 따른다. 배포 산출물에 필요한 고지를 포함하고, 사용 모델·데이터·AI 도구의 출처를 함께 공개한다.
+
+## 6
+### 사용자의 다음 행동을 구체적으로 만든다
+기대 효과의 중심은 계약 전에 필요한 질문을 더 잘 찾고, 업체의 답을 원문과 함께 확인하는 것이다. 사용자는 견적의 빈칸을 직접 찾아 문장을 만드는 대신 자신의 조건에 맞는 질문을 검토해 보낼 수 있다. 답변을 받은 뒤에도 무엇이 확인됐고 무엇을 더 물어야 하는지 같은 목록에서 확인한다.
+첫 사용자 평가에서는 일반 안내문만 제공한 경우와 서비스를 이용한 경우를 비교한다. 확인할 항목을 질문한 비율, 쓸 수 있는 문의 문구를 완성하는 시간, 불필요한 질문 수, 결과 카드에서 근거 원문을 찾은 비율을 측정한다. 모의 계약 과업에서는 미확인 항목이 남은 상태에서 송금을 선택하는 비율도 살펴본다.
+평가 기준과 목표는 실험 전에 정하고 결과를 기록한다. 실제 추가요금과 피해 감소 효과는 이용자 동의를 바탕으로 이사 이후 경험을 추적해 확인한다. 이를 통해 기능의 정확도와 사용자의 확인 행동을 구분해 개선한다.
+
+### 청년 지원 기관을 통한 도입
+청년은 무료로 쓰고, 지자체·청년지원기관·대학에는 이용권과 운영 기능을 유료로 제공한다. 기관의 기존 이사·주거 안내에 개인별 견적 점검을 붙이면, 안내 자료가 실제 계약 전 행동으로 이어진다.
+첫 도입 후보는 관악구 청년 지원 기관으로 정한다. 본선 전 담당자 인터뷰에서 이사·계약 상담 빈도, 구매 주체와 절차, 서비스 제공 방식을 확인한다. 첫 도입 기관과는 문의 준비 시간, 질문 발견률, 원문 추적 성공률을 함께 측정하고 도입·갱신 의사를 확인한다.
+서울시가 청년에게 민간 AI 전세사기 위험분석 보고서를 무료 쿠폰으로 지원한 사례는 공공기관을 통한 이용 지원 방식의 참고가 된다.[4] 이사 지킴이는 자체 시범 결과를 바탕으로 기관이 필요로 하는 이용 범위와 운영 기능을 구체화한다.
+기관형 매출은 계약기관 수와 기관당 계약금액을 기준으로 설계하고, 연동형은 기본료와 처리 건수에 따른 요금을 검토한다. 가격은 배포 모델의 호출량, 운영·고객지원 비용, 기관의 이용 수요를 측정한 뒤 정한다. 업체 광고와 결제로 점검 결과나 비교 순서를 바꾸지 않는 원칙을 유지한다.
+
+### ‘계약금 보내기 전 확인’으로 금융 접점 확장
+이 서비스가 개입하는 마지막 순간은 계약금 송금 직전이다. 견적과 답변을 확인한 뒤 총액·계약금·작업 범위·추가비용 조건을 한 번 더 정리하는 과정은 송금·간편결제 앱의 **‘계약금 보내기 전 확인’** 기능으로 연결할 수 있다.
+사용자가 계약금 송금 전에 점검을 선택하면, 확인된 금액과 남은 질문을 보여 주고 원문 근거로 이동하도록 한다. 송금의 실행과 계약 결정은 사용자에게 두고, 서비스는 결정에 필요한 확인 자료를 제공한다. 결제 연동은 핵심 점검 기능과 첫 기관 도입을 검증한 뒤 추진한다.
+확장 대상은 용달·인테리어·전세 등 계약금을 주고받는 거래다. 각 영역에서 계약 대상, 포함 범위, 추가비용 조건, 계약금의 근거를 정리하는 흐름을 활용하되, 분야별 참고 기준과 데이터·평가 사례를 별도로 마련한다. 특히 전세처럼 확인 항목과 법적 맥락이 다른 거래는 관련 기준과 전문 검토를 거쳐 적용 범위를 정한다.
+지역 확장은 관악구에서의 이용 평가를 시작으로 출처와 이용 조건이 확인된 다른 자치구 허가 목록을 연결하는 순서로 진행한다. 이후 대학·생활협동조합·주거 플랫폼 등으로 접점을 넓힌다. 확장 과정에서도 원문 근거, 질문·답변 기록, 사람 승인이라는 공통 구조를 유지한다.
+
+## 7 본선 해커톤 구현 계획
+### 실제로 동작하는 계약 전 점검을 완성한다
+본선의 핵심 산출물은 **견적 1건 입력→미확인 항목 표시→질문 작성→업체 답변 점검→사람 승인→근거 확인**이 연결되는 웹 서비스다. 현재 구현한 조건 해석, 견적 대조, 질문 작성, 답변 점검, 계약서 규칙 점검을 기반으로 배포 모델 연동과 통합 평가를 준비한다.
+시제품은 자동 시험 74개로 구현 동작을 확인하고 있으며, 모델 정확도는 별도의 평가셋으로 관리한다. 본선에서는 기능 시험과 모델 평가 결과를 나눠 제시한다.
+사진·캡처 입력, 질문 문장 다듬기, 계약서 AI 읽기와 견적·계약 불일치 대조를 확장 범위로 둔다. 핵심 흐름의 완성 기준을 먼저 충족한 뒤 추가 기능을 통합한다. 계약서에서는 특약과 추가비용 조항을 확인 항목에 연결하고, 주민등록번호는 처리 대상에서 제외한다.
+
+### 예선 이후부터 본선 전까지의 일정
+본선 당일에는 견적 1건의 입력부터 질문·답변·승인·원문 추적까지 전 과정을 시연한다. 사전 구현물 활용 범위는 운영진 안내에 맞춰 확정하고, 교육 기간의 준비물과 당일 구현 범위를 그에 맞춘다.[12]
+
+[표] 본선 준비 일정과 산출물
+| 기간 | 핵심 작업 | 산출물 |
+|---|---|---|
+| 10/25까지 | 기획서 제출·시제품 정리 | PDF·시연 흐름 |
+| 예선 제출 직후 | 사전 구현 범위 확인 | 당일 작업 범위 |
+| 11/02~11/10 | 배포 모델 연동·규칙 보강 | Sonnet 평가 결과 |
+| 11/11~11/20 | 계약서 읽기·이미지 입력 시험 | 입력별 점검 흐름 |
+| 11/18~11/25 | 사용자 과업 평가·통합 점검 | 새 평가셋·시연 자료 |
+| 11/26 | 멘토링·범위 최종 조정 | 본선 구현 목록 |
+| 11/27 | 실제 서비스 구현·시연 | 실행 서비스·평가 기록 |
+
+교육 기간에는 사람 검수 라벨을 마련하고, 지시어·예정·변경·별도 비용이 섞인 사례를 추가한다. 같은 평가셋으로 배포 모델을 재측정한 결과와 새로운 평가셋 결과를 나눠 기록한다. 원문에 없는 값 채움, 잘못된 명시 판정, 질문 재현율, 값 누락, 불필요한 질문을 함께 보고한다.
+화면에서는 원문과 결과의 연결, 짐의 위치와 확인 카드 상태의 일치, 승인 전후 표시를 점검한다. 기관 담당자 인터뷰와 사용자 과업 결과를 반영해 질문 표현과 결과 배치를 다듬고, 데이터 출처와 이용 조건·오픈소스 고지까지 정리한다.
+
+### 본선 당일 시간표
+본선은 11월 27일 09:00~18:00에 실제 서비스를 구현·시연하는 일정에 맞춘다.[12] 당일 작업은 환경과 모델 연결, 핵심 흐름 통합, 평가, 리허설 순으로 진행한다.
+
+[표] 해커톤 당일 실행 계획
+| 시간 | 작업 | 완료 확인 |
+|---|---|---|
+| 09:00~11:00 | 환경 설정·모델 연결·입력 점검 | 견적 1건 실제 처리 |
+| 11:00~13:00 | 원문 검증·대조·질문 연결 | 카드와 질문 일치 |
+| 13:00~15:30 | 답변 승인·계약 점검·재측정 | 전체 흐름 실행 |
+| 15:30~17:00 | 화면 점검·시연 리허설 | 원문 추적·복구 확인 |
+| 17:00~18:00 | 최종 시연·발표 자료 정리 | 실행본·평가 제출 |
+
+### 완성 기준과 시연 장면
+- **입력:** 사용자가 집·층·엘리베이터·짐 조건을 확인하고, 견적 1건을 입력해 실제 모델 응답을 받을 수 있다.
+- **검증:** 원문에 없는 주요 값은 결과에서 제외하고, 검증 이유를 근거 장부에서 확인할 수 있다.
+- **결과:** 총액·계약금은 확인된 원문에 연결되며, 짐의 화면 위치와 확인 카드의 상태가 일치한다.
+- **문의:** 누락·조건부 항목에서 질문을 만들고, 사용자가 복사해 업체에 보낼 수 있다.
+- **답변:** 모호한 답변은 재문의로 이어지고, 명확한 답변은 근거를 확인한 사람의 승인 후 반영된다.
+- **계약:** 계약서 기재 항목과 계약금 비율을 참고 기준과 함께 확인하고, 남은 미확인 항목을 볼 수 있다.
+- **평가:** 배포 모델과 검증기를 적용한 결과를 정해진 평가셋으로 측정하고, 기능 시험과 구분해 제시한다.
+- **운영:** 모델 응답이 지연되면 상태를 안내하고, 직접 입력한 항목도 같은 검증 절차로 이어지게 한다.
+
+최종 시연은 가상 견적의 “현장 상황에 따라 추가 비용”에서 시작한다. 계단 운반이 멈춤선에 표시되고, 질문을 보낸 뒤 “당일 보고 결정”이라는 답변은 추가 확인으로 남는 과정을 보여 준다. 이어 작업 범위와 비용이 분명한 답변을 입력하고, 사람이 원문을 확인해 승인하면 결과와 장면이 함께 바뀐다.
+이 한 흐름에서 AI의 문장 이해, 코드의 원문 검증, 사람의 최종 승인이 어떻게 계약 전 확인을 돕는지 보여 준다. 실제 호출과 사전 실행 자료를 사용할 경우에는 화면에서 구분하고, 발표 자료에는 모델·데이터·오픈소스·AI 도구 사용 내역을 함께 기재한다.
+
+## 출처
+- [1] 한국소비자원, 「소규모 이사 피해예방주의보」, 2026-04-21. https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+- [2] 국무조정실, 청년친화도시 보도자료. https://www.opm.go.kr/opm/news/press1.do?articleNo=158513&attachNo=146406&mode=download
+- [3] 서울시, 2026년 청년 중개보수·이사비 지원. https://www.seoul.go.kr/news/news_report.do?nttNo=464088&srchCtgry=465
+- [4] 서울시, AI 전세사기 위험분석 서비스 지원. https://www.seoul.go.kr/news/news_report.do?nttNo=454825
+- [5] 한국소비자원, 이사 계약 주의사항 카드뉴스. https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+- [6] 찾기쉬운 생활법령정보, 「이사업체 정하기」, 이사화물 표준약관 관련 안내. https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+- [7] 짐싸 이용약관. https://www.zimssa.com/policy/terms
+- [8] 한경 JOB&JOY, 미소 이사 서비스 소개. https://magazine.hankyung.com/job-joy/article/202511132159d
+- [9] Yembo Moving. https://yembo.ai/moving
+- [10] DetectHiddenFees, SaaSHub 등록 소개·판매자 설명. https://www.saashub.com/detecthiddenfees
+- [11] HousingWire, Agoyu 관련 보도. https://www.housingwire.com/articles/realtorcom-agoyu-moving-quotes/
+- [12] 데이콘 DAKER, 2026 AI Platform Build Challenge 예선 안내. https://daker.ai/public/hackathons/ai-platform-build-challenge-prelims?postId=5d568379-2efc-4f2a-b3ba-b553684c7766&section=board
+- [13] 공공데이터포털, 서울특별시 관악구_화물자동차운송주선사업허가업체현황, 기준일 2026-04-24. https://www.data.go.kr/data/15080952/fileData.do
+- 시제품 평가 모델: SKT A.X 4.0 Light, Apache-2.0. https://huggingface.co/skt/A.X-4.0-Light / Qwen3-4B-Instruct-2507, Apache-2.0. https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507
+- 웹·검증·시각화 오픈소스: Next.js https://github.com/vercel/next.js / React https://github.com/facebook/react / zod https://github.com/colinhacks/zod / force-graph https://github.com/vasturiano/force-graph — MIT.
+- 아이콘·글꼴: lucide https://github.com/lucide-icons/lucide — ISC / Pretendard https://github.com/orioncactus/pretendard — SIL OFL 1.1.
+- 구현·평가 수치: 팀의 시제품 구현 및 합성 평가셋 측정 기록, 2026-10-24. 조사·초안 작성·검토에 Claude, GPT, Gemini 계열 AI 도구 사용.---
+type: paper
+tags: [근거, 이사, 통계]
+status: verified
+source: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+---
+# 한국소비자원 피해예방주의보 — 방문 견적 없는 소규모 이사 계약, 추가 비용 요구 등 피해 많아
+
+- 발행: 한국소비자원, 보도 2026-04-21(화) 12:00 · 배포 2026-04-20
+- 게시글: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+- 첨부 PDF(10쪽): https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+- 확인: 2026-10-23 Opus가 첨부 PDF를 내려받아 텍스트를 추출해 아래 수치를 원문과 대조함 (D003 쟁점 D2)
+
+## 원문 수치 (쪽 번호는 첨부 PDF 기준)
+- p1 이사(포장·반포장·일반) 피해구제 신청: 2023년 603건 → 2024년 785건 → 2025년 961건
+- p1 2025년 961건 중 소규모 이사(총계약대금 10만 원 이상 100만 원 이하) **241건** 분석
+- p1 20~30대 **65.1%(157건)**, 그중 20대 **22.8%(55건)** — 전체 이사서비스 이용자의 20대 비율 **11.6%** 대비 2배 가까이
+- p2·p5 소규모 이사 피해 유형(’25년) — **계 281건\***
+
+| 물품 파손·분실 | 추가 비용 요구 | 이사거부/계약불이행 | 과도한 위약금 요구 | 기타 | 계 |
+|---|---|---|---|---|---|
+| 134건 (47.7%) | **70건 (24.9%)** | 39건 (13.9%) | 27건 (9.6%) | 11건 (3.9%) | 281건\* (100.0%) |
+
+\* p2: "피해구제 241건의 유형 분석으로 1개 사건이 2가지 이상 유형 해당 시 각각의 건수로 산정" · p5: "1개 피해구제 사례에 여러 가지 유형이 포함된 경우 중복 건수로 산정"
+
+## 원문 서술 (요지)
+- p5 추가 비용 요구: 이삿짐의 양이나 건물 구조 등을 이유로 화물차·인력·사다리차를 추가로 써야 한다는 사유가 대부분
+- p5 이사 거부: 소비자가 추가 비용 지급을 거부하거나 감액을 요구하면 업체가 계약 이행을 거부하는 '계약불이행' 피해로 이어지는 사례가 많음
+- p5 소규모 이사는 방문 견적 없이 구두 설명이나 온라인 입력을 토대로 비대면 계약을 맺는 경우가 많아 추가비용 요구 등 피해에 더욱 취약
+
+## 소비자원 권고 (p8 붙임3 소비자 주의사항 — 원문 인용)
+- 계약 체결 시: "전화나 홈페이지를 통해 견적을 받을 경우 작업조건(사다리 비용 등) 및 이사화물 내역에 따라 추가 요금이 발생할 수 있으므로, 가급적 방문견적을 통해 화물의 양과 주요 물품을 쌍방이 확인한다."
+- "계약서 작성 시 이사일시, 이사화물 내역, 작업인원 수, 추가서비스 내역 및 비용 등 계약사항을 상세히 기재하여 추가요금 요구 등 향후 분쟁에 대비한다."
+- 계약 체결 전: 허가업체(www.허가이사.org)·이사화물배상책임보험 가입 여부 확인
+- 분쟁 시: 1372소비자상담센터(국번없이 1372, www.ccn.go.kr)
+
+## 쓸 때 주의
+- 24.9%의 분모는 281건(유형별 중복 집계)이다. 241건을 분모로 읽히게 쓰지 않는다.
+- 피해 유형 1위는 추가 비용이 아니라 **물품 파손·분실(47.7%)** 이다.
+- 피해구제 **신청** 통계다. 전체 이사 이용자의 피해 발생률이 아니다.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+exec
+/bin/bash -lc "nl -ba 보고서/build/proposal-hwp.md | sed -n '1,65p'; rg --files wiki/papers | rg 'kca|이사|2026'; rg -n '소규모|41.4|89.4|72%' wiki/sources" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 55ms:
+     1	## 1
+     2	이사 지킴이
+     3	계약금을 보내기 전, 견적의 빈칸을 확인 질문으로 바꾸는 AI 계약 전 점검 플랫폼
+     4	
+     5	## 2
+     6	- **문제:** “원룸 짐 일체”, “현장 상황에 따라 추가 비용”처럼 범위가 모호한 견적을 받은 청년은 계단 운반·사다리차·가구 분해 작업이 총액에 포함되는지 확인하기 어렵다.
+     7	- **사용자:** 소규모 이사를 준비하며 견적을 받았거나 업체에 문의하려는 대학생·청년 1인가구를 대상으로, 계약금 송금 전 확인을 돕는다.
+     8	- **해결:** 내 이사 조건과 견적을 대조해 빈칸을 찾고, 업체에 보낼 질문을 만들며, 돌아온 답변과 계약서까지 같은 항목으로 연결한다.
+     9	- **AI:** 배포 모델은 **Claude Sonnet 5.5**다. 조건 해석·견적 판독·답변 점검을 AI가 맡고, 원문 검증과 항목 대조 등 7개 역할은 코드가 수행한다.
+    10	- **신뢰:** AI가 제안한 값은 원문 검증기를 거친다. 업체 답변에 따른 갱신은 사람이 승인하며, 점검 결과에서 근거 문장을 바로 확인한다.
+    11	- **화면:** 집에서 트럭까지 짐이 이동하는 2D 장면으로 점검 과정을 보여 준다. 견적에 명시된 짐과 질문이 필요한 짐을 구분하고, 원문에서 확인한 총액·계약금을 표시한다.
+    12	- **준비도:** 조건 입력부터 견적 대조·질문 작성·답변 점검까지 웹 시제품을 구현했다. 합성 견적 20건 홀드아웃(소형 공개 모델)에서 원문 검증기를 적용하자 원문에 없는 주요 값 채움이 4건에서 0건이 됐다.
+    13	- **확장:** 청년 이용자는 무료로 지원하고 기관 이용권·운영 기능을 유료화하는 방안을 검증한다. 이후 송금·간편결제 앱의 **‘계약금 보내기 전 확인’** 기능과 다른 계약금 거래로 확장한다.
+    14	
+    15	## 3
+    16	### 견적의 총액보다 먼저 확인해야 할 작업 범위
+    17	이사 견적에서 “35만원”이라는 숫자는 쉽게 찾을 수 있다. 그러나 그 금액으로 어떤 짐을 어디서부터 어디까지 옮기는지, 계단 운반이나 사다리차 비용이 포함되는지는 별도로 확인해야 한다. 사용자는 자신의 집과 짐을 알고 있지만 견적서의 짧은 표현이 그 조건을 모두 반영하는지 판단하기 어렵다.
+    18	예를 들어 “원룸 짐 일체”는 사용자에게는 침대·냉장고·책상까지 포함한 말이지만, 실제 문의에서는 개별 품목과 운반 조건을 확인해야 한다. “기본 작업 포함”에 침대 분해·조립이 들어가는지, “현장 상황에 따라 추가 비용”이 어떤 상황과 금액을 뜻하는지 물어볼 필요가 있다. 계단·사다리차 항목이 아예 적혀 있지 않은 경우에는 질문 자체를 떠올리지 못할 수 있다.
+    19	이사 지킴이는 이 빈칸을 **사용자가 계약 전에 질문하고 기록할 수 있는 항목**으로 바꾼다. 가격의 적정성을 판정하거나 업체를 대신 선택하기보다, 사용자가 자신의 조건에 대한 구체적인 답을 받은 뒤 계약금을 보낼 수 있도록 돕는다.
+    20	
+    21	### 공공 피해 자료가 보여 주는 확인의 필요성
+    22	한국소비자원에 따르면 전체 이사서비스 피해구제 신청은 2023년 603건, 2024년 785건, 2025년 961건이었다. 소규모 이사 피해구제 신청 241건 중 20~30대는 157건으로 65.1%를 차지했다. 피해 유형을 중복 집계한 281건 중 추가비용 요구는 70건, 24.9%였다. 이 수치는 피해구제 신청 분석이며 전체 이사 이용자의 피해율을 뜻하지 않는다.[1]
+    23	한국소비자원은 비대면 소규모 이사 계약에서 짐의 양이나 건물 구조 등을 이유로 추가비용을 요구하는 문제를 설명하고, 방문 견적과 허가·보험 확인, 계약사항 상세 기재를 권고한다.[1][5] 이사 지킴이는 이러한 권고를 사용자의 견적에 적용해 “확인하세요”라는 안내를 **“내 견적에서는 이것을 물어보세요”**라는 행동으로 연결한다.
+    24	서비스의 첫 범위는 포함 품목·운반 조건·추가비용 조건·계약서 기재 사항이다. 파손·분실에 대해서는 보험 가입 확인 안내를 연결하고, 위법 여부나 배상액에 관한 판단은 전문 상담으로 연결할 영역으로 둔다.
+    25	
+    26	### 주요 사용자와 초기 도입 지역
+    27	주요 사용자는 소규모 이사를 준비하는 대학생과 청년 1인가구다. 카카오톡·문자 등으로 받은 견적을 가지고 있고, 계약금 송금 전에 무엇을 더 물어봐야 할지 정리하려는 순간에 이용한다. 업체를 정하기 전에는 이사 조건을 정리하고 견적 요청 문장을 만드는 데에도 활용할 수 있다.
+    28	초기 검증 지역은 관악구로 정한다. 국무조정실 발표에서 관악구의 2024년 청년인구 비율은 41.4%로 전국 1위였다.[2] 서울시의 2026년 상반기 청년 중개보수·이사비 지원 신청자는 89.4%가 1인가구, 72%가 원룸 거주자였다. 이는 해당 지원사업 신청자의 특성이다.[3]
+    29	청년의 이사비 지원과 주거 상담에 계약 전 점검을 연결하면, 이사 지출을 지원하는 바로 그 접점에서 작업 범위 확인까지 함께 도울 수 있다. 관악구 청년 지원 기관을 첫 도입 후보로 삼고, 담당자 인터뷰에서 상담 수요와 제공 방식을 구체화한다.
+    30	
+    31	### 가상 사례: 계약금을 보내기 전에 달라지는 질문
+    32	다음은 서비스 이용 흐름을 설명하기 위한 가상 사례다. 관악구에서 자취방을 옮기는 대학생이 “출발지는 3층이고 엘리베이터가 없어요. 침대도 옮겨야 해요”라고 입력한다. 받은 견적에는 “1톤 1대, 인원 2명, 총액 35만원, 계약금 5만원, 현장 상황에 따라 추가 비용”이라고 적혀 있다.
+    33	이사 지킴이는 총액과 계약금을 원문에서 확인하고, 출발지 계단 작업과 침대 분해·조립의 포함 여부를 별도 항목으로 제시한다. 사용자는 “출발지 3층 계단 운반과 침대 분해·조립이 총액에 포함되나요? 별도라면 발생 조건과 금액을 견적서에 적어 주세요”라는 질문을 복사해 업체에 보낸다.
+    34	업체가 “당일 짐을 보고 말씀드릴게요”라고 답하면 추가 확인 항목으로 남긴다. 구체적인 작업 범위와 비용을 답하면 근거 문장을 보여 주고 사용자의 승인을 받는다. 계약금 비율도 원문에서 확인된 총액과 계약금으로 계산해 참고 기준과 함께 제시한다. 사용자는 금액뿐 아니라 **확인한 내용과 남은 질문**을 보고 계약 여부를 결정한다.
+    35	
+    36	## 4
+    37	### 한 페이지에서 입력·점검·문의까지
+    38	이사 지킴이의 컨셉은 **‘내 짐이 견적에 제대로 담겼는지 눈으로 확인하는 계약 전 점검’**이다. 사용자가 이사 조건과 받은 견적을 입력하면, 에이전트가 처리하는 순서와 점검 결과를 같은 페이지에서 보여 준다. 결과를 이해한 뒤에는 질문 복사, 업체 답변 입력, 승인으로 자연스럽게 이어진다.
+    39	화면의 중심에는 집→현관→검수대→멈춤선→트럭으로 이어지는 2D 운반 장면을 둔다. 짐 확인 항목을 상자로 표현하고, 원문에서 포함 여부를 확인한 짐은 트럭에 싣는다. 추가 확인이 필요한 짐은 멈춤선에 두고 해당 질문을 연결한다. 계단 운반·사다리차·추가비용 같은 작업 조건은 별도 표지로 보여 준다.
+    40	이 장면은 견적의 확인 상태를 한눈에 보여 준다. 트럭에 실린 짐은 견적서나 승인한 답변에 명시된 항목이고, 멈춤선의 짐은 계약 전에 업체에 확인할 항목이다.
+    41	[그림: scene | 집→현관→검수대→멈춤선→트럭으로 이어지는 2D 점검 장면. 명시된 짐과 확인이 필요한 짐을 구분한다.]
+    42	
+    43	[표] 사용자가 진행하는 계약 전 점검
+    44	| 단계 | 사용자 행동 | 서비스의 도움 | 남는 기록 |
+    45	|---|---|---|---|
+    46	| 조건 정리 | 집·짐·운반 조건 입력 | 조건과 짐 목록 정리 | 확인한 내 조건 |
+    47	| 견적 입력 | 받은 견적 붙여넣기 | 금액·품목·조건 판독 | 견적 원문 |
+    48	| 빈칸 확인 | 항목별 결과 확인 | 미기재·모호한 조건 표시 | 확인 카드 |
+    49	| 문의·답변 | 질문 발송·답변 입력 | 질문 작성·답변 근거 제안 | 질문과 답변 |
+    50	| 승인·계약 점검 | 원문 확인 후 승인 | 비교·계약서 기재 점검 | 승인·미확인 목록 |
+    51	
+    52	### 기재 상태와 비용을 나눠 읽는 결과
+    53	결과 화면은 ‘명시됨’, ‘포함 여부 미확인’, ‘조건 모호’, ‘판독 불가’를 구분한다. 비용은 별도로 ‘총액 포함’, ‘별도’, ‘미확인’으로 표시한다. 작업에 대한 언급이 있는 것과 비용까지 확정된 것을 구별하기 위해서다.
+    54	예를 들어 “사다리차 필요 시 별도 7만원”은 비용이 별도라는 점과 금액은 읽을 수 있지만, 사다리차가 필요한 조건은 더 물어봐야 한다. 따라서 ‘조건 모호’와 ‘별도 7만원’을 함께 보여 준다. “현장 협의”라는 말이 있다는 이유만으로 총액에 포함됐다고 처리하지 않는다.
+    55	결과 상단에는 원문에서 확인한 총액과 계약금을 보여 주고, 아래에는 실린 짐·멈춘 짐·남은 질문을 배치한다. 사용자가 자신의 입력과 근거를 확인할 수 있도록 각 카드에서 해당 원문으로 이동하게 한다. 새로운 이사 가격을 계산하지 않고 받은 견적의 내용을 정리한다.
+    56	[그림: result | 원문 확인 총액·계약금, 실린 짐과 멈춘 짐, 업체에 보낼 질문을 함께 보여 주는 견적 점검 결과.]
+    57	
+    58	### 차별성은 질문 이후까지 이어지는 확인 기록
+    59	이사 지킴이는 받은 한국어 견적과 내 조건을 연결하고, 확인 질문과 업체 답변을 같은 항목에 축적한다. 사용자가 견적을 다시 읽거나 업체와 나눈 대화를 찾아다니지 않고 “어떤 조건 때문에 물었고, 무엇이라고 답했으며, 내가 무엇을 승인했는지”를 이어서 볼 수 있다.
+    60	견적은 최대 5건을 같은 항목으로 나란히 비교한다. 총액뿐 아니라 계단 작업·가구 운반·추가비용 조건의 명시 여부를 같은 위치에서 확인한다. 업체 추천이나 순위를 제공하지 않고, 업체의 결제가 점검 결과나 비교 순서에 영향을 주지 않는 원칙을 적용한다.
+    61	유사 서비스의 공개 자료에서는 짐싸의 견적·계약·결제 지원, 미소의 방문 조사 기반 견적 비교, Yembo의 이사업체용 AI 조사, DetectHiddenFees의 수수료 분석과 질문 생성(판매자 소개 기준), Agoyu의 촬영 기반 견적 기능 등을 확인할 수 있다.[7][8][9][10][11] 이사 지킴이는 이와 맞닿은 과업 중 **사용자가 이미 받은 견적의 조건 대조와 후속 답변 확인**에 집중한다.
+    62	본선에서는 같은 사례에 일반 안내문, 검증기 없는 LLM, 이사 지킴이를 적용해 질문 누락·잘못된 확정·불필요한 질문·문의 준비 시간·원문 추적 성공률을 비교한다. 차별성을 화면 설명과 실제 과업 결과로 함께 제시한다.
+    63	
+    64	## 5
+    65	> AI가 읽고·판단하고·묻고, 코드가 지어내지 못하게 막고, 사람이 승인한다.
+wiki/sources/kca2026-소규모이사-피해.md:7:# 한국소비자원 피해예방주의보 — 방문 견적 없는 소규모 이사 계약, 추가 비용 요구 등 피해 많아
+wiki/sources/kca2026-소규모이사-피해.md:16:- p1 2025년 961건 중 소규모 이사(총계약대금 10만 원 이상 100만 원 이하) **241건** 분석
+wiki/sources/kca2026-소규모이사-피해.md:18:- p2·p5 소규모 이사 피해 유형(’25년) — **계 281건\***
+wiki/sources/kca2026-소규모이사-피해.md:29:- p5 소규모 이사는 방문 견적 없이 구두 설명이나 온라인 입력을 토대로 비대면 계약을 맺는 경우가 많아 추가비용 요구 등 피해에 더욱 취약
+
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "python3 - <<'PY'
+import urllib.request,io
+u='https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005'
+try:
+ b=urllib.request.urlopen(u,timeout=35).read()
+ print('HEADER', b[:12], 'BYTES',len(b))
+ try:
+  import fitz
+  d=fitz.open(stream=b,filetype='pdf')
+  for i in [0,1,4,5,7]:
+   print('\\nPAGE',i+1,'\\n',d[i].get_text())
+ except ImportError:
+  from pypdf import PdfReader
+  d=PdfReader(io.BytesIO(b))
+  for i in [0,1,4,5,7]: print('\\nPAGE',i+1,'\\n',d.pages[i].extract_text())
+except Exception as e: print(type(e).__name__,str(e))
+PY" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "2026" "소규모" "화물차" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+현재 문안은 피해 통계의 분모를 정확히 구분하고 있습니다. 다만 ‘모호한 견적 문구’에 설명이 치우쳐 비대면 계약의 조건 확인 부족과 추가비용 거부 후 이사 거부로 이어지는 맥락이 빠져 있습니다. 첨부 PDF는 직접 열리지 않아 위키 대조본과 소비자원 공식 카드뉴스로 확인 범위를 구분하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kca.go.kr/home/board/download.do?menukey=4005&bid=00000012&did=1004458186&fno=10054204&filename=report.pdf
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "방문 견적 없는 소규모" "화물차" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+## 1. 검증 결과
+
+**추가비용 문제는 공공자료로 확인된다. 다만 현재 문안은 원인을 ‘견적 문구의 모호함’으로 좁히고, 비대면 계약에서 조건 확인이 부족한 상황과 당일 추가비용 요구·이사 거부의 연결을 충분히 설명하지 못한다.** 통계의 분모는 정확하게 구분했다.
+
+검증 범위는 다음과 같다.
+
+- 한국소비자원 **원문 게시글 본문과 공식 카드뉴스는 직접 확인**했다. 첨부 PDF는 파일 형식 문제로 직접 열지 못했다.
+- 아래 PDF 쪽수는 제공된 `wiki/sources/kca2026-소규모이사-피해.md`의 대조 기록을 따른다. 직접 확인한 게시글의 소제목·문장도 함께 표시했다.
+- 서비스 범위·가상 사례·설계 제안은 피해 실태에 관한 사실과 구분했다. 표의 ‘출처 없음’은 곧 오류라는 뜻이 아니라, **사실 대신 가설·예시·설계 선택으로 표시해야 한다는 뜻**이다.
+
+근거 약칭:
+
+- **K**: [한국소비자원 피해예방주의보 원문](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+- **C**: [한국소비자원 공식 카드뉴스](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170)
+- **G**: [국무조정실 청년친화도시 보도자료](https://www.opm.go.kr/opm/news/press1.do?articleNo=158513&attachNo=146406&mode=download)
+- **S**: [서울시 청년 중개보수·이사비 지원 보도자료](https://www.seoul.go.kr/news/news_report.do?nttNo=464088&srchCtgry=465)
+
+### 주장별 대조표
+
+| 주장 | 근거 출처(쪽·문장) | 판정 | 고칠 문장 |
+|---|---|---|---|
+| §2: 모호한 견적을 받은 청년은 작업의 총액 포함 여부를 확인하기 어렵다. | K의 ‘방문 견적 없는 비대면 계약…’은 계약 방식과 조건 확인 문제를 설명한다. 문구 모호성이 원인이라는 직접 조사 결과는 없음. | **과장** — 근거보다 원인을 좁힘 | “방문 견적 없이 계약하는 소규모 이사에서는 짐과 작업 조건을 충분히 확인하지 못해 당일 추가비용 분쟁이 발생할 수 있다.” |
+| §2: “원룸 짐 일체”, “현장 상황에 따라 추가 비용” | K·C에서 해당 문구 확인 못함. | **출처 없음** | 문구 앞에 **“서비스 설명용 가상 견적 예시”**를 붙인다. |
+| §2: 대학생·청년 1인가구를 주요 사용자로 정한다. | K의 청년층 분석 문단, PDF p1 대조 기록. 청년층 피해 비중은 근거가 있으나 대학생·1인가구별 피해 비중은 unknown. | **출처 없음** — 세부 타깃은 설계 선택 | “20~30대 피해 비중을 참고해 대학생·청년 1인가구를 초기 검증 대상으로 정한다.” |
+| §3: “35만원”이라는 숫자는 쉽게 찾을 수 있다. | 금액 탐색의 용이성을 측정한 자료 없음. | **출처 없음** | “가상 견적에 총액 35만원이 적혀 있어도 작업 범위는 별도로 확인해야 한다.” |
+| §3: 어떤 짐을 옮기는지, 사다리차 비용이 포함되는지 확인해야 한다. | C의 ‘계약 체결 시’ 카드. PDF p8 대조 기록의 화물 내역·작업조건 확인 권고. | **원문과 일치** — 계단 운반은 적용 예시 | “이사화물 내역과 작업조건, 추가서비스 비용을 계약 전에 확인해야 한다.” |
+| §3: 사용자는 자기 집과 짐을 알지만 견적의 짧은 표현이 조건을 반영하는지 판단하기 어렵다. | 사용자 이해도·판단 곤란에 관한 직접 조사 없음. | **출처 없음** | “추정: 사용자가 입력한 집·짐 조건과 견적의 기재 내용을 대조하면 확인할 항목을 구체화할 수 있다.” |
+| §3: “원룸 짐 일체”는 사용자에게 침대·냉장고·책상까지 포함한 말이다. | 소비자가 이 문구를 어떻게 해석하는지 확인한 근거 없음. | **출처 없음** | “가상 예시: 침대·냉장고·책상을 옮길 사용자는 ‘원룸 짐 일체’라는 표현만으로 개별 품목의 포함 여부를 확정하지 않고 확인한다.” |
+| §3: “기본 작업 포함”에 침대 분해·조립이 들어가는지 물어야 한다. | 해당 문구와 침대 작업은 K·C에서 확인 못함. 추가서비스 상세 기재 권고는 있음. | **출처 없음** — 적용 예시 | “가상 예시: 침대 분해·조립이 필요한 경우, 해당 작업과 비용의 포함 여부를 질문한다.” |
+| §3: “현장 상황에 따라 추가 비용”의 발생 조건과 금액을 물어야 한다. | C의 추가서비스 내역·비용 기재 권고와 부합. 해당 견적 문구 자체의 출처는 없음. | **원문과 일치** — 권고의 적용이며 문구는 예시 | “가상 견적의 추가비용 표현을 작업 내용·발생 조건·비용에 관한 확인 질문으로 바꾼다.” |
+| §3: 항목이 없으면 질문 자체를 떠올리지 못할 수 있다. | 질문 누락이나 소비자의 인지 과정을 측정한 근거 없음. | **출처 없음** | 삭제하거나 “추정: 항목이 누락되면 확인 질문도 빠질 수 있으며, 사용자 과업 평가로 검증한다.” |
+| §3: 빈칸을 질문·기록 항목으로 바꾸고 계약금 송금 전에 돕는다. | 소비자원 권고를 적용한 서비스 설계. ‘송금 직전’의 효과를 입증한 자료는 없음. | **출처 없음** — 설계 선택 | “계약조건 확인 권고를 적용해, 계약 체결 전과 계약금 송금 전에 미확인 항목을 질문·기록하도록 설계한다.” |
+| §3: 이사서비스 피해구제 신청은 2023년 603건, 2024년 785건, 2025년 961건이다. | K 도입부의 연도별 신청 건수, PDF p1 대조 기록. | **원문과 일치** | 유지. **소규모 이사만의 연도별 통계로 표현하지 않는다.** |
+| §3: 소규모 이사 241건 중 20~30대 157건, 65.1%. | K ‘소규모 이사 피해구제 신청…’ 문단, PDF p1 대조 기록. | **원문과 일치** | “2025년 소규모 이사 피해구제 신청 241건 중…”으로 연도를 보완한다. |
+| §3: 중복 집계한 피해 유형 281건 중 추가비용 70건, 24.9%. | PDF p2·p5 대조 기록. K 본문에서도 70건·24.9% 확인. | **원문과 일치** | 유지. 241건과 281건의 차이를 설명한 현재 표현이 적절하다. |
+| §3: 이 수치는 전체 이용자의 피해율이 아니다. | K의 분석 대상은 피해구제 신청 사건. | **원문과 일치** | 유지. |
+| §3: 비대면 계약에서 짐의 양·건물 구조를 이유로 추가비용을 요구한다. | K ‘방문 견적 없는 비대면 계약…’ 문단, PDF p5 대조 기록. | **원문과 일치** | 화물차·인력·사다리차 추가 요구와 이사 당일이라는 시점을 보완한다. |
+| §3: 방문 견적, 허가·보험 확인, 계약사항 상세 기재를 권고한다. | C의 ‘계약 체결 전’·‘계약 체결 시’ 카드, PDF p8 대조 기록. | **원문과 일치** | 유지. 방문 견적 권고도 서비스 안내에 포함한다. |
+| §3: 첫 범위는 포함 품목·운반 조건·추가비용·계약서이며 파손·분실은 보험 안내로 연결한다. | 범위 설정은 팀의 선택. K에서 피해 유형 1위는 파손·분실 47.7%. | **출처 없음** — 선정 이유 설명 부족 | “파손·분실이 가장 많지만, 본 서비스는 계약 전 화물·작업조건 확인과 상세 기재를 지원하는 범위로 시작한다.” |
+| §3: 카카오톡·문자로 견적을 받은 청년이 송금 전에 이용한다. | K는 구두 설명·홈페이지 입력 기반 비대면 계약을 설명. 카카오톡·문자 이용 비중과 이용 순간의 수요는 unknown. | **출처 없음** — 사용자 시나리오 | “초기 사용자 시나리오는 문자·메신저 등으로 견적을 받은 청년이 계약 전에 조건을 점검하는 상황으로 정한다.” |
+| §3: 관악구의 2024년 청년인구 비율 41.4%, 전국 1위. | G **p2**, 관악구 설명 첫 문장. | **원문과 일치** | 유지. 이 비율로 관악구의 이사 피해율까지 추론하지 않는다. |
+| §3: 서울시 지원사업 신청자의 89.4%가 1인가구, 72%가 원룸 거주자. | S ‘상반기 4,036명 지원…’ 아래 신청자 분석 문단. | **원문과 일치** | 유지. 현재처럼 **해당 사업 신청자 특성**이라는 한정을 남긴다. |
+| §3: 청년 지원 접점에 붙이면 작업 범위 확인을 함께 도울 수 있다. | 기관 도입 효과·수요를 확인한 자료 없음. | **출처 없음** — 사업 가설 | “추정: 청년 이사비·주거 상담 접점에서 제공할 수 있으며, 기관 인터뷰로 수요와 운영 방식을 검증한다.” |
+| §3: 3층·엘리베이터 없음·침대·35만원 견적 및 업체 답변 사례. | 해당 절 첫 문장에 이미 ‘가상 사례’라고 명시. | **출처 없음** — 예시로 적절히 구분 | 유지. 실제 피해 사례나 실제 업체 발언으로 소개하지 않는다. |
+| §3: 구체적인 답변을 받고 확인 기록을 보며 계약 여부를 결정한다. | 서비스 이용 흐름이며 효과 검증 자료는 아님. | **출처 없음** — 설계 제안 | “사용자가 확인 내용과 남은 질문을 검토하도록 지원한다.” |
+
+### 반드시 보완할 세 가지
+
+**① 원인 서술**
+
+원문은 방문 견적 없이 구두 설명·온라인 입력을 바탕으로 계약하는 상황을 지적한다. 이를 **‘모호한 단어 때문에 생기는 피해’로만 설명하면 원인이 축소된다.** 또한 원문이 모든 사건에서 계약서 미기재를 확인한 것은 아니므로, “비대면 계약이면 조건이 문서에 없다”는 단정도 피해야 한다. 조건 확인과 상세 기재가 필요한 이유로 연결하는 것이 정확하다. [K](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+**② 네 가지 견적 문구**
+
+“원룸 짐 일체”, “현장 상황에 따라 추가 비용”, **§5의** “1톤 1대 예정”, “현장 협의”는 **직접 확인한 K·C에서 실제 인용문으로 확인되지 않았다.** PDF 전체의 해당 문구 존재 여부는 직접 확인하지 못했으므로 `unknown`이다. 모두 **팀이 만든 설명용 예시**로 표시해야 한다. 특히 §5의 “이런 표현이 많다”는 빈도 주장도 근거가 없어 “합성 예시에는 이런 표현을 포함했다”로 바꾸는 편이 정확하다.
+
+**③ 피해 순위와 계약불이행의 연결**
+
+파손·분실이 47.7%로 가장 많다는 사실을 먼저 밝힌 뒤, 추가비용을 선택한 이유를 **팀의 제품 범위 결정**으로 설명해야 한다. 원문은 추가비용 지급 거부·감액 요구 이후 이사 이행을 거부하는 사례가 많다고 설명한다. 다만 **계약불이행 39건 전부가 추가비용 거부 때문이라는 뜻은 아니며**, 두 유형은 중복 집계이므로 24.9%와 13.9%를 합쳐 피해 비중으로 제시하면 안 된다. [K](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+## 2. 교체용 문제 정의 문단 — 6문장
+
+소규모 이사는 방문 견적 없이 구두 설명이나 온라인에 입력한 이삿짐 현황을 바탕으로 비대면 계약을 맺는 경우가 많아 추가비용 분쟁에 취약하다. 한국소비자원은 이사 당일 짐의 양이나 건물 구조를 이유로 화물차·인력·사다리차를 추가로 사용해야 한다며 비용을 요구하는 사례를 확인했다. 소비자가 추가비용 지급을 거부하거나 감액을 요구하면 업체가 이사를 거부하는 계약불이행으로 이어지는 사례도 많았다. 따라서 계약 전에는 짐의 양·주요 물품·작업조건을 쌍방이 확인하고, 이사화물 내역·작업인원·추가서비스와 비용을 계약서에 상세히 남겨야 한다. [한국소비자원 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186), [계약 체결 시 주의사항](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170) 피해 유형 중 파손·분실이 가장 많지만, 이사 지킴이는 계약 전에 화물·작업조건과 추가비용 조건을 확인하고 기록하는 과업을 첫 서비스 범위로 정한다. 사용자가 입력한 실제 이사 조건과 견적·업체 답변·계약서를 대조해, 확인되지 않은 항목을 업체에 보낼 질문으로 바꾸고 확인 기록을 남기도록 돕는다.
+
+## 3. AI 에이전트가 맡을 판단
+
+소비자원 자료는 **확인해야 할 항목의 근거**이며, AI가 고정 규칙보다 우수하다는 실증 근거는 아니다. 아래 역할과 규칙의 한계는 **추정: 구현 가설**로 구분한다. 공통 근거는 [소비자원 계약 체결 시 주의사항](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170)이다.
+
+| 맡을 판단 | 원문 근거와 적용 | 고정 규칙만으로 어려운 이유 |
+|---|---|---|
+| **실제 조건 중 견적에서 확인되지 않은 항목 찾기** | 화물의 양·주요 물품을 쌍방이 확인하라는 권고를 적용해, 사용자 설명과 견적의 대응 관계를 제안한다. | **추정:** 같은 물품·조건을 다른 말로 쓰거나 여러 문장에 나눠 설명하면 단어 일치만으로 대응하기 어렵다. 필수 항목 목록과 누락 검사는 코드로 처리할 수 있다. |
+| **추가서비스·비용의 적용 범위를 읽고 질문 정하기** | 작업조건·화물 내역에 따른 추가요금 가능성과 추가서비스·비용 상세 기재 권고를 적용한다. 실제 장비 필요성은 업체 확인으로 남긴다. | **추정:** 포함·별도·예외 조건이 섞인 자유 문장에서 어떤 작업에 어떤 조건이 걸리는지 해석하려면 문맥 처리가 필요하다. |
+| **업체 답변과 계약서가 질문을 해소했는지 대조하기** | 상세 기재 권고를 적용해 답변·계약서에서 작업 내용과 비용이 확인됐는지, 미확인 사항이 남았는지 제안한다. | **추정:** “그 비용에 포함됩니다” 같은 답변은 앞선 질문을 참조해야 한다. 필수 항목 검사·금액 계산·최종 승인 절차는 규칙과 사람이 맡을 수 있다. |
+
+**방문 견적이나 현장 확인을 대신해 화물차·인력·사다리차 필요성을 확정하는 역할까지 맡겨서는 안 된다.** 원문이 권고하는 쌍방 확인을 지원하는 방향으로 설계해야 한다.
+
+## 4. 추가 공신력 출처와 기존 출처의 적용 범위
+
+| 추가 출처 | 확인 내용 | 활용 한계 |
+|---|---|---|
+| [서울시 공정경제과 — 동일 피해예방주의보 게시](https://news.seoul.go.kr/economy/archives/572154) | 소비자원 자료를 공공기관이 재게시했고, 연도별 피해구제 신청 건수와 부실한 계약체결 문제를 확인할 수 있다. | **동일 자료 재게시**이므로 독립된 추가 조사로 세지 않는다. |
+| [경기도 소비자정보센터 — 동일 카드뉴스 게시](https://www.gg.go.kr/gg_info_center/bbs/boardView.do?bIdx=110895837&bsIdx=710&menuId=3022) | 피해 순위, 추가비용 거부 후 철수 사례, 계약사항 상세 기재 권고를 확인할 수 있다. | 역시 동일 자료 재게시다. |
+
+기획서 출처 [1]~[13] 중 **문제 실태의 직접 근거는 [1]·[5]**, 지역·사용자 맥락의 근거는 [2]·[3]이다. [4]는 공공 지원 방식, [6]은 계약 안내, [7]~[11]은 유사 서비스, [12]는 대회 조건, [13]은 허가업체 데이터에 해당한다. 이 자료들로 **“사용자가 질문을 떠올리지 못한다”, “모호한 견적 표현이 많다”, “이 서비스가 피해를 줄인다”**는 주장을 입증할 수는 없다. 해당 주장에 대한 직접 조사·효과 검증 근거는 **unknown**이다.
+hook: Stop
+hook: Stop Completed
+tokens used
+73,889
+## 1. 검증 결과
+
+**추가비용 문제는 공공자료로 확인된다. 다만 현재 문안은 원인을 ‘견적 문구의 모호함’으로 좁히고, 비대면 계약에서 조건 확인이 부족한 상황과 당일 추가비용 요구·이사 거부의 연결을 충분히 설명하지 못한다.** 통계의 분모는 정확하게 구분했다.
+
+검증 범위는 다음과 같다.
+
+- 한국소비자원 **원문 게시글 본문과 공식 카드뉴스는 직접 확인**했다. 첨부 PDF는 파일 형식 문제로 직접 열지 못했다.
+- 아래 PDF 쪽수는 제공된 `wiki/sources/kca2026-소규모이사-피해.md`의 대조 기록을 따른다. 직접 확인한 게시글의 소제목·문장도 함께 표시했다.
+- 서비스 범위·가상 사례·설계 제안은 피해 실태에 관한 사실과 구분했다. 표의 ‘출처 없음’은 곧 오류라는 뜻이 아니라, **사실 대신 가설·예시·설계 선택으로 표시해야 한다는 뜻**이다.
+
+근거 약칭:
+
+- **K**: [한국소비자원 피해예방주의보 원문](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+- **C**: [한국소비자원 공식 카드뉴스](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170)
+- **G**: [국무조정실 청년친화도시 보도자료](https://www.opm.go.kr/opm/news/press1.do?articleNo=158513&attachNo=146406&mode=download)
+- **S**: [서울시 청년 중개보수·이사비 지원 보도자료](https://www.seoul.go.kr/news/news_report.do?nttNo=464088&srchCtgry=465)
+
+### 주장별 대조표
+
+| 주장 | 근거 출처(쪽·문장) | 판정 | 고칠 문장 |
+|---|---|---|---|
+| §2: 모호한 견적을 받은 청년은 작업의 총액 포함 여부를 확인하기 어렵다. | K의 ‘방문 견적 없는 비대면 계약…’은 계약 방식과 조건 확인 문제를 설명한다. 문구 모호성이 원인이라는 직접 조사 결과는 없음. | **과장** — 근거보다 원인을 좁힘 | “방문 견적 없이 계약하는 소규모 이사에서는 짐과 작업 조건을 충분히 확인하지 못해 당일 추가비용 분쟁이 발생할 수 있다.” |
+| §2: “원룸 짐 일체”, “현장 상황에 따라 추가 비용” | K·C에서 해당 문구 확인 못함. | **출처 없음** | 문구 앞에 **“서비스 설명용 가상 견적 예시”**를 붙인다. |
+| §2: 대학생·청년 1인가구를 주요 사용자로 정한다. | K의 청년층 분석 문단, PDF p1 대조 기록. 청년층 피해 비중은 근거가 있으나 대학생·1인가구별 피해 비중은 unknown. | **출처 없음** — 세부 타깃은 설계 선택 | “20~30대 피해 비중을 참고해 대학생·청년 1인가구를 초기 검증 대상으로 정한다.” |
+| §3: “35만원”이라는 숫자는 쉽게 찾을 수 있다. | 금액 탐색의 용이성을 측정한 자료 없음. | **출처 없음** | “가상 견적에 총액 35만원이 적혀 있어도 작업 범위는 별도로 확인해야 한다.” |
+| §3: 어떤 짐을 옮기는지, 사다리차 비용이 포함되는지 확인해야 한다. | C의 ‘계약 체결 시’ 카드. PDF p8 대조 기록의 화물 내역·작업조건 확인 권고. | **원문과 일치** — 계단 운반은 적용 예시 | “이사화물 내역과 작업조건, 추가서비스 비용을 계약 전에 확인해야 한다.” |
+| §3: 사용자는 자기 집과 짐을 알지만 견적의 짧은 표현이 조건을 반영하는지 판단하기 어렵다. | 사용자 이해도·판단 곤란에 관한 직접 조사 없음. | **출처 없음** | “추정: 사용자가 입력한 집·짐 조건과 견적의 기재 내용을 대조하면 확인할 항목을 구체화할 수 있다.” |
+| §3: “원룸 짐 일체”는 사용자에게 침대·냉장고·책상까지 포함한 말이다. | 소비자가 이 문구를 어떻게 해석하는지 확인한 근거 없음. | **출처 없음** | “가상 예시: 침대·냉장고·책상을 옮길 사용자는 ‘원룸 짐 일체’라는 표현만으로 개별 품목의 포함 여부를 확정하지 않고 확인한다.” |
+| §3: “기본 작업 포함”에 침대 분해·조립이 들어가는지 물어야 한다. | 해당 문구와 침대 작업은 K·C에서 확인 못함. 추가서비스 상세 기재 권고는 있음. | **출처 없음** — 적용 예시 | “가상 예시: 침대 분해·조립이 필요한 경우, 해당 작업과 비용의 포함 여부를 질문한다.” |
+| §3: “현장 상황에 따라 추가 비용”의 발생 조건과 금액을 물어야 한다. | C의 추가서비스 내역·비용 기재 권고와 부합. 해당 견적 문구 자체의 출처는 없음. | **원문과 일치** — 권고의 적용이며 문구는 예시 | “가상 견적의 추가비용 표현을 작업 내용·발생 조건·비용에 관한 확인 질문으로 바꾼다.” |
+| §3: 항목이 없으면 질문 자체를 떠올리지 못할 수 있다. | 질문 누락이나 소비자의 인지 과정을 측정한 근거 없음. | **출처 없음** | 삭제하거나 “추정: 항목이 누락되면 확인 질문도 빠질 수 있으며, 사용자 과업 평가로 검증한다.” |
+| §3: 빈칸을 질문·기록 항목으로 바꾸고 계약금 송금 전에 돕는다. | 소비자원 권고를 적용한 서비스 설계. ‘송금 직전’의 효과를 입증한 자료는 없음. | **출처 없음** — 설계 선택 | “계약조건 확인 권고를 적용해, 계약 체결 전과 계약금 송금 전에 미확인 항목을 질문·기록하도록 설계한다.” |
+| §3: 이사서비스 피해구제 신청은 2023년 603건, 2024년 785건, 2025년 961건이다. | K 도입부의 연도별 신청 건수, PDF p1 대조 기록. | **원문과 일치** | 유지. **소규모 이사만의 연도별 통계로 표현하지 않는다.** |
+| §3: 소규모 이사 241건 중 20~30대 157건, 65.1%. | K ‘소규모 이사 피해구제 신청…’ 문단, PDF p1 대조 기록. | **원문과 일치** | “2025년 소규모 이사 피해구제 신청 241건 중…”으로 연도를 보완한다. |
+| §3: 중복 집계한 피해 유형 281건 중 추가비용 70건, 24.9%. | PDF p2·p5 대조 기록. K 본문에서도 70건·24.9% 확인. | **원문과 일치** | 유지. 241건과 281건의 차이를 설명한 현재 표현이 적절하다. |
+| §3: 이 수치는 전체 이용자의 피해율이 아니다. | K의 분석 대상은 피해구제 신청 사건. | **원문과 일치** | 유지. |
+| §3: 비대면 계약에서 짐의 양·건물 구조를 이유로 추가비용을 요구한다. | K ‘방문 견적 없는 비대면 계약…’ 문단, PDF p5 대조 기록. | **원문과 일치** | 화물차·인력·사다리차 추가 요구와 이사 당일이라는 시점을 보완한다. |
+| §3: 방문 견적, 허가·보험 확인, 계약사항 상세 기재를 권고한다. | C의 ‘계약 체결 전’·‘계약 체결 시’ 카드, PDF p8 대조 기록. | **원문과 일치** | 유지. 방문 견적 권고도 서비스 안내에 포함한다. |
+| §3: 첫 범위는 포함 품목·운반 조건·추가비용·계약서이며 파손·분실은 보험 안내로 연결한다. | 범위 설정은 팀의 선택. K에서 피해 유형 1위는 파손·분실 47.7%. | **출처 없음** — 선정 이유 설명 부족 | “파손·분실이 가장 많지만, 본 서비스는 계약 전 화물·작업조건 확인과 상세 기재를 지원하는 범위로 시작한다.” |
+| §3: 카카오톡·문자로 견적을 받은 청년이 송금 전에 이용한다. | K는 구두 설명·홈페이지 입력 기반 비대면 계약을 설명. 카카오톡·문자 이용 비중과 이용 순간의 수요는 unknown. | **출처 없음** — 사용자 시나리오 | “초기 사용자 시나리오는 문자·메신저 등으로 견적을 받은 청년이 계약 전에 조건을 점검하는 상황으로 정한다.” |
+| §3: 관악구의 2024년 청년인구 비율 41.4%, 전국 1위. | G **p2**, 관악구 설명 첫 문장. | **원문과 일치** | 유지. 이 비율로 관악구의 이사 피해율까지 추론하지 않는다. |
+| §3: 서울시 지원사업 신청자의 89.4%가 1인가구, 72%가 원룸 거주자. | S ‘상반기 4,036명 지원…’ 아래 신청자 분석 문단. | **원문과 일치** | 유지. 현재처럼 **해당 사업 신청자 특성**이라는 한정을 남긴다. |
+| §3: 청년 지원 접점에 붙이면 작업 범위 확인을 함께 도울 수 있다. | 기관 도입 효과·수요를 확인한 자료 없음. | **출처 없음** — 사업 가설 | “추정: 청년 이사비·주거 상담 접점에서 제공할 수 있으며, 기관 인터뷰로 수요와 운영 방식을 검증한다.” |
+| §3: 3층·엘리베이터 없음·침대·35만원 견적 및 업체 답변 사례. | 해당 절 첫 문장에 이미 ‘가상 사례’라고 명시. | **출처 없음** — 예시로 적절히 구분 | 유지. 실제 피해 사례나 실제 업체 발언으로 소개하지 않는다. |
+| §3: 구체적인 답변을 받고 확인 기록을 보며 계약 여부를 결정한다. | 서비스 이용 흐름이며 효과 검증 자료는 아님. | **출처 없음** — 설계 제안 | “사용자가 확인 내용과 남은 질문을 검토하도록 지원한다.” |
+
+### 반드시 보완할 세 가지
+
+**① 원인 서술**
+
+원문은 방문 견적 없이 구두 설명·온라인 입력을 바탕으로 계약하는 상황을 지적한다. 이를 **‘모호한 단어 때문에 생기는 피해’로만 설명하면 원인이 축소된다.** 또한 원문이 모든 사건에서 계약서 미기재를 확인한 것은 아니므로, “비대면 계약이면 조건이 문서에 없다”는 단정도 피해야 한다. 조건 확인과 상세 기재가 필요한 이유로 연결하는 것이 정확하다. [K](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+**② 네 가지 견적 문구**
+
+“원룸 짐 일체”, “현장 상황에 따라 추가 비용”, **§5의** “1톤 1대 예정”, “현장 협의”는 **직접 확인한 K·C에서 실제 인용문으로 확인되지 않았다.** PDF 전체의 해당 문구 존재 여부는 직접 확인하지 못했으므로 `unknown`이다. 모두 **팀이 만든 설명용 예시**로 표시해야 한다. 특히 §5의 “이런 표현이 많다”는 빈도 주장도 근거가 없어 “합성 예시에는 이런 표현을 포함했다”로 바꾸는 편이 정확하다.
+
+**③ 피해 순위와 계약불이행의 연결**
+
+파손·분실이 47.7%로 가장 많다는 사실을 먼저 밝힌 뒤, 추가비용을 선택한 이유를 **팀의 제품 범위 결정**으로 설명해야 한다. 원문은 추가비용 지급 거부·감액 요구 이후 이사 이행을 거부하는 사례가 많다고 설명한다. 다만 **계약불이행 39건 전부가 추가비용 거부 때문이라는 뜻은 아니며**, 두 유형은 중복 집계이므로 24.9%와 13.9%를 합쳐 피해 비중으로 제시하면 안 된다. [K](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+## 2. 교체용 문제 정의 문단 — 6문장
+
+소규모 이사는 방문 견적 없이 구두 설명이나 온라인에 입력한 이삿짐 현황을 바탕으로 비대면 계약을 맺는 경우가 많아 추가비용 분쟁에 취약하다. 한국소비자원은 이사 당일 짐의 양이나 건물 구조를 이유로 화물차·인력·사다리차를 추가로 사용해야 한다며 비용을 요구하는 사례를 확인했다. 소비자가 추가비용 지급을 거부하거나 감액을 요구하면 업체가 이사를 거부하는 계약불이행으로 이어지는 사례도 많았다. 따라서 계약 전에는 짐의 양·주요 물품·작업조건을 쌍방이 확인하고, 이사화물 내역·작업인원·추가서비스와 비용을 계약서에 상세히 남겨야 한다. [한국소비자원 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186), [계약 체결 시 주의사항](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170) 피해 유형 중 파손·분실이 가장 많지만, 이사 지킴이는 계약 전에 화물·작업조건과 추가비용 조건을 확인하고 기록하는 과업을 첫 서비스 범위로 정한다. 사용자가 입력한 실제 이사 조건과 견적·업체 답변·계약서를 대조해, 확인되지 않은 항목을 업체에 보낼 질문으로 바꾸고 확인 기록을 남기도록 돕는다.
+
+## 3. AI 에이전트가 맡을 판단
+
+소비자원 자료는 **확인해야 할 항목의 근거**이며, AI가 고정 규칙보다 우수하다는 실증 근거는 아니다. 아래 역할과 규칙의 한계는 **추정: 구현 가설**로 구분한다. 공통 근거는 [소비자원 계약 체결 시 주의사항](https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170)이다.
+
+| 맡을 판단 | 원문 근거와 적용 | 고정 규칙만으로 어려운 이유 |
+|---|---|---|
+| **실제 조건 중 견적에서 확인되지 않은 항목 찾기** | 화물의 양·주요 물품을 쌍방이 확인하라는 권고를 적용해, 사용자 설명과 견적의 대응 관계를 제안한다. | **추정:** 같은 물품·조건을 다른 말로 쓰거나 여러 문장에 나눠 설명하면 단어 일치만으로 대응하기 어렵다. 필수 항목 목록과 누락 검사는 코드로 처리할 수 있다. |
+| **추가서비스·비용의 적용 범위를 읽고 질문 정하기** | 작업조건·화물 내역에 따른 추가요금 가능성과 추가서비스·비용 상세 기재 권고를 적용한다. 실제 장비 필요성은 업체 확인으로 남긴다. | **추정:** 포함·별도·예외 조건이 섞인 자유 문장에서 어떤 작업에 어떤 조건이 걸리는지 해석하려면 문맥 처리가 필요하다. |
+| **업체 답변과 계약서가 질문을 해소했는지 대조하기** | 상세 기재 권고를 적용해 답변·계약서에서 작업 내용과 비용이 확인됐는지, 미확인 사항이 남았는지 제안한다. | **추정:** “그 비용에 포함됩니다” 같은 답변은 앞선 질문을 참조해야 한다. 필수 항목 검사·금액 계산·최종 승인 절차는 규칙과 사람이 맡을 수 있다. |
+
+**방문 견적이나 현장 확인을 대신해 화물차·인력·사다리차 필요성을 확정하는 역할까지 맡겨서는 안 된다.** 원문이 권고하는 쌍방 확인을 지원하는 방향으로 설계해야 한다.
+
+## 4. 추가 공신력 출처와 기존 출처의 적용 범위
+
+| 추가 출처 | 확인 내용 | 활용 한계 |
+|---|---|---|
+| [서울시 공정경제과 — 동일 피해예방주의보 게시](https://news.seoul.go.kr/economy/archives/572154) | 소비자원 자료를 공공기관이 재게시했고, 연도별 피해구제 신청 건수와 부실한 계약체결 문제를 확인할 수 있다. | **동일 자료 재게시**이므로 독립된 추가 조사로 세지 않는다. |
+| [경기도 소비자정보센터 — 동일 카드뉴스 게시](https://www.gg.go.kr/gg_info_center/bbs/boardView.do?bIdx=110895837&bsIdx=710&menuId=3022) | 피해 순위, 추가비용 거부 후 철수 사례, 계약사항 상세 기재 권고를 확인할 수 있다. | 역시 동일 자료 재게시다. |
+
+기획서 출처 [1]~[13] 중 **문제 실태의 직접 근거는 [1]·[5]**, 지역·사용자 맥락의 근거는 [2]·[3]이다. [4]는 공공 지원 방식, [6]은 계약 안내, [7]~[11]은 유사 서비스, [12]는 대회 조건, [13]은 허가업체 데이터에 해당한다. 이 자료들로 **“사용자가 질문을 떠올리지 못한다”, “모호한 견적 표현이 많다”, “이 서비스가 피해를 줄인다”**는 주장을 입증할 수는 없다. 해당 주장에 대한 직접 조사·효과 검증 근거는 **unknown**이다.

@@ -1,0 +1,7 @@
+# ContraVis: Evidence-Grounded Visual Analytics for Contradiction Review in Legal Contracts
+
+- 저자: Luis Sante, Paula Lima, Mariana Rocha, Jorge Poco
+- 게시: 2026-09-22 · arXiv:2609.27014 · https://arxiv.org/abs/2609.27014
+
+## 초록 (원문)
+Legal contracts are structurally complex documents in which contradictions may emerge across distant and interconnected provisions. Although large language models (LLMs) improve legal language understanding, contradiction analysis remains a human-centered and evidence-grounded review task. We present ContraVis, a visual analytics system for human-in-the-loop contradiction analysis in legal contracts. The system models contracts as typed paragraph graphs that combine explicit contractual references with semantic relationships between paragraphs. This graph plays a dual role: it conditions LLM reasoning and serves as the interactive representation the analyst explores, keeping model context and human inspection aligned across coordinated views. In a controlled comparison, graph-conditioned reasoning recovered more injected contradictions than standalone LLM analysis as contract length grew, while surfacing additional candidates for analyst validation. A formative study with contract-domain lawyers indicated that in-context evidence comparison supported contradiction validation, and we distill design implications for evidence-grounded, LLM-assisted document review.

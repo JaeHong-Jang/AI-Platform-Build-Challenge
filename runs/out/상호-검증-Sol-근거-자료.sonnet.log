@@ -1,0 +1,26 @@
+💬 Sonnet: 상호 검증 Sol 근거 자료
+📄 읽기 b008-data.sol.md
+⚙ ToolSearch
+🔎 열람 https://ydnara.com/yakgwan.html
+🔎 열람 https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+🔎 열람 https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+🔎 열람 https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+🔎 열람 https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+🔎 열람 https://www.data.go.kr/data/15080667/fileData.do
+🔎 열람 https://www.data.go.kr/data/15128627/fileData.do
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -n "281\|241" wiki/sources/kca2026-소규모이사-피해.md | head -20
+🔎 열람 https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+🔎 이사화물 표준약관 공정거래위원회 개정 표준약관 제10035호 이후 개정 이사화물운송 표준약관
+🔎 서울 열린데이터광장 화물자동차운송주선사업 이사화물 업체 현황 관악구 공공데이터
+🔎 열람 https://www.xn--o39a150b12ef3p.org/
+🔎 열람 https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000011234
+🔎 열람 https://허가이사.org
+🔎 열람 https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EA%B4%80%EC%95%85%EA%B5%AC+%ED%99%94%EB%AC%BC%EC%9E%90%EB%8F%99%EC%B0%A8%EC%9A%B4%EC%86%A1%EC%A3%BC%EC%84%A0
+🔎 LOCALDATA 지방행정 인허가 화물자동차운송주선사업 서울특별시 관악구 localdata.go.kr
+🔎 서울특별시 이사화물운송 주선업체 현황 공공데이터포털 서울 자치구 이사업체 목록 파일데이터
+🔎 열람 https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all
+🔎 열람 https://www.data.go.kr/data/15080952/fileData.do
+🔎 열람 https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&searchCnd=all&searchCtgry=&searchKrwd=%EC%9D%B4%EC%82%AC%ED%99%94%EB%AC%BC
+🔎 "이사화물 표준약관" 공정위 개정 2020 OR 2021 OR 2022 OR 2023 OR 2024 OR 2025 이사화물운송 표준약관 개정안
+📝 작성 b008-data-peer.sonnet.md
+⚙ SubagentHandback

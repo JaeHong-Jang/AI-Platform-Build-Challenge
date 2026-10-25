@@ -1,0 +1,7 @@
+# ACCESS: Prompt Engineering for Automated Web Accessibility Violation Corrections
+
+- 저자: Calista Huang, Alyssa Ma, Suchir Vyasamudri, Eugenie Puype 외
+- 게시: 2024-01-28 · arXiv:2401.16450 · https://arxiv.org/abs/2401.16450
+
+## 초록 (원문)
+With the increasing need for inclusive and user-friendly technology, web accessibility is crucial to ensuring equal access to online content for individuals with disabilities, including visual, auditory, cognitive, or motor impairments. Despite the existence of accessibility guidelines and standards such as Web Content Accessibility Guidelines (WCAG) and the Web Accessibility Initiative (W3C), over 90% of websites still fail to meet the necessary accessibility requirements. For web users with disabilities, there exists a need for a tool to automatically fix web page accessibility errors. While research has demonstrated methods to find and target accessibility errors, no research has focused on effectively correcting such violations. This paper presents a novel approach to correcting accessibility violations on the web by modifying the document object model (DOM) in real time with foundation models. Leveraging accessibility error information, large language models (LLMs), and prompt engineering techniques, we achieved greater than a 51% reduction in accessibility violation errors after corrections on our novel benchmark: ACCESS. Our work demonstrates a valuable approach toward the direction of inclusive web content, and provides directions for future research to explore advanced methods to automate web accessibility.

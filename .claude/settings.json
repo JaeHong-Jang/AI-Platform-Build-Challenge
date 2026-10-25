@@ -1,0 +1,61 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/team/bin/hook.py\"; [ -f \"$f\" ] && python3 \"$f\"; exit 0",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/team/bin/hook.py\"; [ -f \"$f\" ] && python3 \"$f\"; exit 0",
+            "timeout": 10
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/team/bin/hook.py\"; [ -f \"$f\" ] && python3 \"$f\"; exit 0",
+            "timeout": 10
+          }
+        ],
+        "matcher": "Agent"
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/team/bin/hook.py\"; [ -f \"$f\" ] && python3 \"$f\"; exit 0",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/team/bin/hook.py\"; [ -f \"$f\" ] && python3 \"$f\"; exit 0",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+💬 Sonnet: 기획서 개정 사실 검증
+📄 읽기 _context.md
+📄 읽기 proposal-hwp.md
+📄 읽기 kca2026-소규모이사-피해.md
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; wc -l web/src/lib/inspect.ts web/src/lib/inspector.ts web/src/lib/agents.ts web/src/components/HomeView.tsx web/src/lib/agent.ts w
+📄 읽기 inspector.ts
+📄 읽기 inspect.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src"; cat lib/agents.ts lib/agent.ts lib/proposals.ts; grep -n -E "notPlain" -A12 lib/plain.ts | head -40
+📄 읽기 HomeView.tsx
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; sed -n 1,13p web/src/lib/plain.ts; ls runs/out | grep -i -E "b012|b011|holdout|eval" | head -30; grep -rn -E "검수대|멈춤선|게시판|antenna|
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -n -E "사례 ?3|사례 ?4|붙임2" runs/out/b012-problem.sol.md runs/out/b012-problem.sonnet.md | head -12; find . -name "*.pdf" -path "
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -rn -h -E "41\.4|89\.4|72%|72\.0" wiki runs/out/b009-market-peer.sonnet.md runs/out/b009-judge.sonnet.md 2>/dev/null | head -
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; python3 - <<'E' import json d=json.load(open('web/eval/results-inspect-holdout.json')) print(json.dumps(d['agg'],ensure_ascii=Fals
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; python3 - <<'E' import json d=json.load(open('web/src/data/gwanak-permits.json')) print(type(d), list(d)[:8] if isinstance(d,dict)
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; python3 -c " import json;d=json.load(open('web/src/data/gwanak-permits.json'));print(d['source'])"; grep -rn "gwanak-permits" web/
+⚙ mkdir -p /tmp/claude-1000/pdfx && cd /tmp/claude-1000/pdfx && curl -sL -m 60 -o k.pdf "https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005" ; ls -la k.
+⚙ cd /tmp/claude-1000/pdfx && python3 -I -c " import sys try:     import fitz     d=fitz.open('k.pdf'); print(d[6].get_text()) except Exception as e:     try:         from pypdf import PdfReader      
+⚙ cd /tmp/claude-1000/pdfx && for m in pdfplumber PyPDF2 pdfminer; do python3 -I -c "import $m" 2>/dev/null && echo has $m; done; which mutool qpdf gs 2>/dev/null
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -n -E "25만|3명" runs/out/b012-problem.sol.md | head -8; grep -n -E "25만|3명|35만|50만" runs/out/b012-problem.sonnet.md.log 2>/dev
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web"; grep -rn -E "배상책임|보험" src --include=*.ts* | grep -v test | head -5; grep -rn -E "1372|전문 상담" src --include=*.ts* | head -3; gr
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src"; grep -n -E "kind: \"|type: \"|group" lib/kgraph.ts | head -20; grep -n -E "raw|dropped" components/Records.tsx | head -6; 
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src"; grep -n -E "ai-|새 위험|rule === \"작업조건\"|작업조건" components/scene/MoveScene.tsx lib/scene.ts | head -12; grep -rn "TRITON" lib
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src"; sed -n 195,238p components/scene/MoveScene.tsx; grep -n -E "marks|Mark\b" lib/scene.ts | head -15
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -n -h -E "짐싸|미소|Yembo|DetectHiddenFees|Agoyu" runs/out/b009-market-peer.sonnet.md | cut -c1-420 | head -14; grep -n -E "easyl
+📝 작성 b012-proposal-review.sonnet.md
+⚙ SubagentHandback

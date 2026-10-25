@@ -1,0 +1,13 @@
+당신은 실무팀 Sonnet이다. 과제 B008 조사. 한국어로 쓴다. 파일은 결과 문서 하나만 쓴다.
+
+배경: 우리 서비스 '이사 지킴이'(`/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web`, Next 16 + React 19, 현재 대시보드)를 다시 설계한다. 사용자는 자기 예전 공모전 작품 TRITON(`/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/apps/frontend`, Vite+React, SVG 2D 법정, 운영 콘솔)의 웹사이트를 참고해 디자인하라고 했다. 새 요구: (1) 조건을 입력하면 그 조건으로 홈 화면이 만들어짐 (2) 실제 사람이 이사하는 장면 UI — 에이전트가 이삿짐을 출발 집→트럭→도착 집으로 옮기는 모습을 보여 주면서 견적·서류 산정 결과가 쌓임 (3) 에이전트 팀 = 오케스트레이터 1 + 3팀×3명, 왼쪽 레일에서 에이전트 활성화/비활성화 (4) 온톨로지 기반 근거 그래프 (5) 선택 부담을 크게 줄임.
+
+할 일 — TRITON 프론트엔드를 실제로 보고 "이사 지킴이로 옮길 수 있는 것"을 파일:줄 근거와 함께 정리하라.
+1. 실제 화면 관찰: `apps/frontend/dist`를 정적 서버(예: `python3 -m http.server 8811 -d <dist>` 백그라운드)로 띄우고, playwright-core로 주요 경로(대시보드 `/`, 법정 `/court/...` 또는 사건 목록에서 들어가는 화면, 작업실 `/agents`, 규칙·온톨로지 `/rules`, 감사 장부 `/records`)를 1440×900으로 캡처해 Read로 직접 보라. 백엔드가 없으면 `src/api/mock`이 어떻게 쓰이는지 확인(빌드에 mock 모드가 있는지). SPA라 http.server에서 하위 경로 새로고침이 404면 루트에서 클릭으로 이동하라. playwright-core는 `/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/pw/node_modules`에 있고, 크롬은 `~/.cache/ms-playwright/chromium_headless_shell-1248/` 아래 `chrome-headless-shell` 실행 파일을 executablePath로 쓴다. 캡처 파일은 같은 scratchpad의 `b008-triton/` 폴더에 저장. 끝나면 서버를 꺼라.
+2. 코드 구조: `src/scene2d/*`(CourtStage·Person·layout·palette — 캐릭터를 어떻게 그리고 움직이는지, 애니메이션 방식 CSS/SVG/requestAnimationFrame, 좌표 체계), `src/pages/AgentsPage.tsx`(작업실 — 사무실 그림 위 에이전트가 방마다 일하는 모습, 상태 표시), `src/features/ontology/*`(OntologyGraph·EvidenceGraph·graphModel·evidenceLayout — 그래프 라이브러리 썼는지 직접 SVG인지, 레이아웃 알고리즘), `src/features/control/*`(ControlPipeline·GraphCanvas·ControlLog), `src/console/ConsoleShell.tsx`·`parts.tsx`·`console.css`(레일·상단바·KPI), `src/features/court/useAutoReveal.ts`·`narrate.ts`(자동 진행·서술). 그리고 `/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/agents/ontology.yaml`과 `agents/README.md`(에이전트 역할·온톨로지 정의 방식).
+3. 이사 지킴이로 옮길 설계 제안: 각 TRITON 요소 → 이사 버전(예: 법정 장면 → 출발 집·트럭·도착 집 장면, 천칭에 쌓이는 주장 → 트럭 적재율·산정표, 작업실 방 → 3팀 작업실, 온톨로지 → 짐·작업조건·견적문구·약관조항·업체답변 관계). 재사용 가능한 코드 단위(라이브러리 의존 없이 옮길 수 있는지), 크기(줄 수), 위험(성능·모바일).
+4. 라이선스/의존성: TRITON `package.json`의 의존성 중 그래프·애니메이션 관련 패키지와 버전.
+
+LLM 호출 코드는 보지 않아도 된다. 색상 팔레트는 다른 팀원이 하므로 구조·모양(라운드·간격·글꼴 크기·그림자)만 기록. 비밀 파일(.env*)은 읽지 마라.
+
+결과 문서: `/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/runs/out/b008-triton.sonnet.md` — 캡처 파일 경로 목록, 관찰 내용, 파일:줄 근거, 옮길 설계 제안 표. 최종 응답에는 핵심 요약 15줄 이내.

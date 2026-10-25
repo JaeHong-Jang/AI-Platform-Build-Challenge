@@ -1,0 +1,62 @@
+{
+ "brief": "D006 이사 지킴이 v0.3 구현",
+ "created": "2026-10-24T05:15:16.519193+00:00",
+ "goals": [
+  {
+   "id": "G001",
+   "title": "G0 검증기 수리",
+   "objective": "필드별 금액·인원 귀속, 포함 의미 검증, 수량 미확인 카드 유지, 수동 입력 우회 차단 — 재현 시험 먼저",
+   "status": "complete",
+   "evidence": "validators.test.ts 6건(Argon#1·#5, Astra#1·#2·#3) 먼저 실패 확인 후 수정: verify.ts 항목 자리 대조·단위 없는 숫자 제외·'1인 가구' 차단, plain.ts 공용 명시 판정, rules.ts 수량 모름 카드·직접 입력 값은 명시됨 불가"
+  },
+  {
+   "id": "G002",
+   "title": "G1 상태 v3",
+   "objective": "견적별 격리(QuoteEntry), sigOf에 quoteId·조건·짐, v2→v3 이전",
+   "status": "complete",
+   "evidence": "store.ts v3: QuoteEntry별 overrides·inquiry·runs, sigOf에 quoteId·조건·짐 서명, migrate(v2→v3), 시험 3건(Argon#3 교차 오염·조건 변경 무효화·v2 이전) + B007#2 시험 v3로 이전"
+  },
+  {
+   "id": "G003",
+   "title": "G2 시작·조건 해석",
+   "objective": "한 문장→조건(ax4, 층 패턴·부정어 검증) → 맞춤 홈",
+   "status": "complete",
+   "evidence": "intake.ts(층 'N층' 패턴·출발/도착 자리·빌트인 부정어·같은 구절 엘베 보완) + /api/intake + StartView(한 문장/칩/가상 사례, 필수 입력 0) → 맞춤 홈. intake.test 6건. 실제 Ollama 브라우저 전 흐름(scratchpad/pw/v3.js): 조건 해석 6~9초·견적 2건 7~9초·답변 점검 10~12초, 콘솔 오류 0, 390px 넘침 0"
+  },
+  {
+   "id": "G004",
+   "title": "G3 다중 견적·비교",
+   "objective": "후보별 문의·답변·공통 행 비교표 + 관악구 정적 JSON",
+   "status": "complete",
+   "evidence": "QuotesView: 견적 최대 3건 탭, 견적별 읽기·문의·답변(InquiryPanel q 단위), 공통 행 비교표(입력 순·순위 없음·계약금 제6조 비율), '이 견적으로 진행'은 사용자 선택. permits.ts+gwanak-permits.json(39행, 전화·좌표 제외, 구분 이사 26/일반 12/일반·이사 1, 전부 영업중), 동일 상호 기록≠동일 업체 문구. e2e: 비교표 10행, 계약금 14% △ 표시"
+  },
+  {
+   "id": "G005",
+   "title": "G4 원문 추적",
+   "objective": "카드→원문 위치 하이라이트",
+   "status": "complete",
+   "evidence": "CheckTable Source: 붙여넣은 원문 전체에 근거 발췌를 <mark>로 표시, 근거 없는 항목은 '해당하는 글이 없습니다'. e2e 06-quotes 캡처로 확인"
+  },
+  {
+   "id": "G006",
+   "title": "G5 셸·토글",
+   "objective": "TRITON 셸·팔레트 A·레일 에이전트 토글·GPU 대기열·취소",
+   "status": "complete",
+   "evidence": "globals.css 팔레트 A 토큰(보고서 hex 그대로, 보조 토큰은 보고 값에 묶음)+TRITON 어두운 레일 216px·3px 활성 막대·KPI 3px 막대. 레일 에이전트 10명 토글(지휘관 잠금), 장면 캐릭터 눌러 토글(모바일), ollama.ts onGpu 직렬 대기열·req.signal 취소·lastModel 송신 시점 갱신, reviewReply 턴마다 취소 확인, 답변 점검관 꺼짐 시 같은 검증기(proposals.ts) 통과해야 반영"
+  },
+  {
+   "id": "G007",
+   "title": "G6 장면",
+   "objective": "이삿짐 SVG ≤600줄, revealedCount 커서, AgentStrip",
+   "status": "complete",
+   "evidence": "Sonnet 구현 scene.ts(sceneOf 순수)·Stage·AgentStrip·scene.css 559줄, scene.test 8건. 의장 수정: 공개 전 상자 판정 숨김, 안심팀 다크 옷 #5CC184(팔레트 A 값), 띠 줄바꿈, 건너뛰기 타이머 정지, 대조관 꺼짐 시 상자 대기·KPI '—'. 캡처 b008-e2e2 확인"
+  },
+  {
+   "id": "G008",
+   "title": "G7 그래프·검증",
+   "objective": "근거 그래프·계약 점검·작업실 + 지휘부 검증",
+   "status": "complete",
+   "evidence": "ontology.ts(클래스 7·관계, chainOf 4열 사슬)+GraphView, ContractView(서류 안내관·계약 점검관 규칙), 실행 기록 화면 유지. Argon 2차 리뷰 결함 5건 재현 시험 후 수정, abort.js로 토글 취소 확인"
+  }
+ ]
+}

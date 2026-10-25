@@ -1,0 +1,803 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16753-bd65-7af1-9128-3ae168517087
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-23이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+
+# 과제: 사실·경쟁 검증 (교차검증 ④, 당신: Sol)
+다른 팀원들이 제시한 주장 중 기획서에 쓰일 핵심 주장을 검증하라. 각 항목마다 **판정(확인/부분확인/반박/unknown) + 정확한 수치·조건 + 출처 URL**을 표로 쓴다.
+
+## A. 사실 주장
+1. "관악구가 2025년 서울시 전세사기 피해 1위, 801건" — 자치구별 전세사기 피해 최신 통계
+2. 건축물대장 Open API(국토부 건축HUB 또는 data.go.kr) 존재, 접근 방법, 이용 조건
+3. 등기부등본: 인터넷등기소 열람 API가 공개되어 있는가? (없다면 해커톤에서 가상 샘플만 가능)
+4. 국립중앙의료원 응급의료기관 실시간 가용병상 조회 API(getEmrrmRltmUsefulSckbdInfoInqire 등) 존재·조건
+5. 식약처 DUR 품목정보 API, e약은요 API 존재·조건
+6. 서울시 침수흔적도 데이터 공개 여부, 형식(shp 등), 이용 조건
+7. 2025년 국가정보자원관리원 화재 이후 공공데이터포털 API 장애가 2026-10 현재 복구되었는가
+8. 금천구 외국인 주민 비율(최신), 관악구 반지하 비중 5.3%(2024 인구주택총조사)
+9. 임금체불 2024년 2조 448억 원·피해자 28.3만 명, 2025년 최신 수치
+10. 고용노동부 임금계산기·온라인 임금체불 진정 기능 현황
+
+## B. 이미 같은 일을 하는 국내 서비스가 있는가 (서비스명, 기능, URL, 차별 여지)
+- L01 계약서·등기부 AI 분석(예: 프롭테크·리걸테크 앱), 관악구 '우리동네 주거정보 플랫폼'·안심계약 도움서비스 기능
+- L03 임금체불 증거 정리·급여 계산 AI
+- L05 고령자 대상 화면 인식 디지털 도우미(AI)
+- L08 국내 AI 웹 접근성 검사 도구
+- L10 약봉투 촬영 AI 복약 관리 앱
+- L12 이주민 의료 AI 통역
+- L13 KOSHA 위험성평가 지원시스템(KRAS) 등 소규모 사업장 AI 위험성평가
+- L09 대학 강의 AI 자막 지원
+- L21 합성 페르소나 시장검증 서비스
+마지막에 "기획서에 써도 되는 수치 목록"(검증 완료분만)을 정리한다.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-23T05:55:04.461768Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+공식 통계·API 문서와 각 서비스의 공개 자료를 대조하겠습니다. 수치의 기준 시점과 API 문서 공개 여부·실제 작동 여부를 구분하고, 확인할 수 없는 항목은 `unknown`으로 남기겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "pwd && rg --files -g AGENTS.md -g '*통계*' -g '*검증*' -g '*L01*' -g '*L21*' -g '*L03*' -g '*L12*' -g '*L13*' -g '*L05*' -g '*L08*' -g '*L10*' -g '*L09*' -g '*context*'" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+AGENTS.md
+team/prompts/_context.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat AGENTS.md && rg --files wiki runs/out | head -70' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# AGENTS.md — 오케스트라 팀 운영 매뉴얼
+
+이 저장소에서 일하는 모든 에이전트(Claude Code, Codex, Antigravity)는 이 파일을 단일 운영 매뉴얼로 따른다.
+
+## 1. 팀 구성
+
+| 계층 | 멤버 | 모델 / 호출 방법 | 주 역할 |
+|---|---|---|---|
+| 지휘부 (Orchestra) | **Opus** | Claude Opus 5.5 — 메인 Claude Code 세션 | 총괄 지휘: 과제 분해, 배정, 통합, 최종 판정, 위키 편집장 |
+| 지휘부 | **Astra** | GPT 6 Astra — `team/bin/ask.sh astra …` (codex) | 전략·시장·사업성 관점, 발산·비판 |
+| 지휘부 | **Argon** | Gemini 4 Argon — `team/bin/ask.sh argon …` (agy) | 기술 프런티어·대안 설계 관점, 교차 리뷰 |
+| 조사·분석·검증팀 | **Sol** | GPT 6.1 Sol — `team/bin/ask.sh sol …` (codex) | 웹·논문 조사, 사실·출처 검증 |
+| 조사·분석·검증팀 | **Sonnet** | Claude Sonnet 5.5 — Claude Code 서브에이전트 (`model: sonnet`) | 분석, 인용 실재 확인, 위키 ingest |
+
+## 2. 작업 파이프라인
+
+```
+질문 ─▶ ① 분해(Opus) ─▶ ② 조사(Sol ∥ Sonnet) ─▶ ③ 분석·발산(Astra ∥ Argon ∥ Sonnet)
+     ─▶ ④ 교차검증(작성자와 다른 모델) ─▶ ⑤ 판정(Opus 통합 + 지휘부 1인 이상 리뷰)
+     ─▶ ⑥ 위키 반영(wiki/) ─▶ ⑦ 관측소 갱신(observatory/)
+```
+
+- **독립성**: ③은 서로의 결과를 보지 않고 병렬로 수행한다(앵커링 방지).
+- **교차검증 규칙**: 어떤 산출물도 작성한 모델이 스스로 승인하지 않는다. GPT 산출물은 Claude/Gemini가, Claude 산출물은 GPT/Gemini가 검증한다.
+- **판정**: 최종 결론은 `wiki/notes/verdicts/`에 남기고, 근거가 된 run과 노트를 링크한다.
+
+## 3. 실행 기록 (관측소 데이터)
+
+- 외부 모델 호출은 반드시 `team/bin/ask.sh <member> <task-id> <prompt-file> [phase]` 로 한다. 결과는 `runs/out/<task-id>.<member>.md`, 기록은 `runs/runs.jsonl`.
+- Claude 서브에이전트(Sonnet) 실행은 끝난 뒤 `team/bin/log_run.py sonnet <task> <phase> <ok|fail> <secs> <out>` 로 기록한다.
+- phase 값: `research` `ideation` `analysis` `verify` `verdict` `ingest`.
+- 프롬프트 파일은 `team/prompts/`에 남긴다 (`_context.md` 를 앞에 붙여 공통 맥락을 공유).
+
+## 4. LLM 위키 규칙 (`wiki/`)
+
+구조 (논문 하나 = 같은 stem 으로 세 형태 저장):
+```
+wiki/papers/<stem>.pdf          원문 (가능할 때)
+wiki/sources/<stem>.md          논문 요약 (원문에 충실)
+wiki/notes/<type>/<이름>.md      연결된 지식 노트
+wiki/overviews/<주제>.md         종합 문서
+wiki/index.md, wiki/log.md      목차, 변경 기록
+```
+- stem 규칙: `<첫저자성><연도>-<키워드>` (예: `lewis2020-rag`).
+- 노트 frontmatter:
+  ```yaml
+  ---
+  type: hub | concept | idea | paper | system | experiment | verdict
+  tags: [..]
+  status: draft | verified | confirmed | rejected
+  source: <URL/DOI/arXiv 또는 run 경로>
+  ---
+  ```
+- 링크는 `[[노트이름]]` (파일명, 확장자 제외). 관측소 그래프는 이 링크로 그려진다.
+- **4대 규칙**: ① 위키 우선, 웹검색은 조사 단계에서만 ② 불확실하면 원문/출처 확인 ③ 확인 못한 값은 `unknown` — 지어내지 않는다 ④ 근거가 없으면 자료 추가를 요청한다.
+- 논문은 arXiv ID·DOI·URL 중 하나로 실재를 확인한 경우에만 `status: verified`.
+
+## 5. 관측소 (`observatory/`)
+
+`python3 observatory/build.py` → `observatory/index.html` 생성 (브라우저로 열기).
+- **지식 그래프**: 위키 노트와 `[[링크]]` 를 별자리 그래프로
+- **시스템 동작**: 지휘부 ↔ 조사·분석·검증팀 흐름과 멤버별 실행량
+- **실험 기록**: `runs/runs.jsonl` 타임라인
+
+위키를 수정하거나 run을 마친 뒤에는 build.py 를 다시 실행한다.
+
+## 6. 금지
+
+- 확인하지 않은 통계·논문·데이터셋 생성 금지.
+- 개인정보·권한 없는 자료를 저장소에 넣지 않는다.
+- 다른 멤버의 산출물(`runs/out/`)을 덮어쓰지 않는다.
+wiki/index.md
+wiki/log.md
+runs/out/p1-ideas.astra.md.log
+runs/out/p1-ideas.astra.md
+runs/out/p1-ideas.argon.md.log
+runs/out/p1-ideas.argon.md
+runs/out/p1-grounding.sol.md.log
+runs/out/p1-grounding.sol.md
+runs/out/p3-score.argon.md
+runs/out/p3-factcheck.sol.md.log
+runs/out/p1-ideas.sonnet.md
+runs/out/p3-score.astra.md
+runs/out/p3-score.argon.md.log
+runs/out/p3-score.astra.md.log
+wiki/overviews/아이디어-롱리스트.md
+wiki/notes/concepts/아이디어-평가-루브릭.md
+wiki/notes/hubs/아이디어-허브.md
+wiki/notes/hubs/팀-구조.md
+wiki/notes/systems/Sol.md
+wiki/notes/systems/Opus.md
+wiki/notes/systems/Astra.md
+wiki/notes/systems/Argon.md
+wiki/notes/systems/관측소.md
+wiki/notes/systems/Sonnet.md
+wiki/notes/systems/작업-파이프라인.md
+wiki/notes/competition/대회-개요.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 관악구 2025 전세사기 801건 1위 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat wiki/overviews/아이디어-롱리스트.md && cat runs/out/p1-grounding.sol.md' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+---
+type: hub
+tags: [ideas, longlist]
+status: draft
+source: runs/out/p1-ideas.astra.md, runs/out/p1-ideas.argon.md, runs/out/p1-ideas.sonnet.md, runs/out/p1-grounding.sol.md
+---
+# 아이디어 롱리스트 (Phase 2 통합본, 제안자 비공개)
+
+Phase 1에서 세 팀원이 독립적으로 낸 45개와 Sol의 근거 자료집을 Opus가 중복 통합해 24개로 정리했다. 교차검증 단계의 블라인드 채점을 위해 제안자는 표시하지 않는다(매핑은 [[아이디어-허브]]).
+
+| ID | 가칭 | 주요 사용자 | 문제 | AI 핵심 | 하루 MVP |
+|---|---|---|---|---|---|
+| L01 | 전월세 서류 교차검증 | 관악·금천 첫 계약 청년 | 전세사기 피해자 결정 누적 41,559건(국토부 2026-10). 주소 기반 위험조회(HUG 안심전세)는 이미 있으나 계약서 특약·등기부 갑/을구·건축물대장 간 **불일치**는 사람이 읽어야 함 | 문서 VLM 필드 추출 → 서류 간 모순 탐지 → 실거래가 도구호출 → 규칙 점수 → 근거 인용 설명 | 가상 등기부·계약서 세트, 1개 법정동 실거래가, 위험 규칙 5개 |
+| L02 | 방 상태 증거기록 | 자취생·기숙사 운영자 | 퇴거 시 원상복구·보증금 분쟁, 누수·곰팡이 책임 다툼 | 같은 위치 사진 정렬 → 변화 영역 탐지 → 후보 분류 → 시점별 증거 묶음 | 벽·창틀·천장 사진쌍 15개 |
+| L03 | 임금 누락 증거 복원 | 아르바이트생·이주노동자·노동상담소 | 임금체불 2조 448억 원, 피해자 28.3만 명(2024) | 근무표 사진·대화 캡처·명세서 VLM 추출 → 근무 타임라인 복원 → 결정론적 급여 계산 → 원문 연결 차이표(다국어 해설 옵션) | 1명·1개월·문서 3종 |
+| L04 | 복지·청년정책 증빙 빈칸 찾기 | 사회복지사·주민센터·청년 | 정책 추천은 포화(온통청년·복지로), 그러나 **신청 단계의 증빙 누락·보완 요청** 문제가 남음. 한국 성인 31% 문해력 Level 1 이하(OECD 2024) | 상담 발화·서류 추출 → 출처 기반 요건 검색(RAG) → 요건-증거-미확인 매핑 → 최소 질문 선택 | 가상 제도 3개·가구 사례 5개 |
+| L05 | 화면 보고 알려주는 디지털 도우미 | 고령자·디지털 취약계층 | 고령층 디지털 역량 수준 56.2(일반=100, NIA 2026) | 화면 캡처 → GUI 파싱(요소 검출) → 음성 질문 의도 → 다음 클릭 위치 강조·음성 안내 | 공공웹 모의 사이트 2개·과업 3개 |
+| L06 | 쉬운 고지서 | 고령자·이주민·첫 행정 청년 | 공문·고지서의 기한·금액·행동이 법률 문체에 묻힘 | VLM OCR → 기한/금액/행동 추출 → 쉬운 말·다국어 → 할 일 체크리스트·음성 연습 | 가상 공문 4종 |
+| L07 | 출입구 단위 휠체어 접근 확인 | 휠체어 이용 학생·시설관리자 | 지도는 건물 단위, 실제 막히는 곳은 입구·임시 장애물 | 현장 사진 VLM 장애물 표시 + 실측값 → 조건별 대체 입구 | 캠퍼스 건물 3개·입구 10개 |
+| L08 | 과업 기반 웹 접근성 재현 | 지자체·대학 웹 운영자, 개발사 | 상위 100만 홈페이지 94.8% WCAG 자동검출 위반(WebAIM 2025) | 과업 입력 → 접근성 트리 기반 에이전트 실행 + axe-core → 실패 재현 → 수정 후 재검증 | 자체 예약 사이트 1개·과업 3개 |
+| L09 | 지시어 연결 강의 자막 | 청각장애·난청 대학생 | "여기 이 식"이 무엇을 가리키는지 자막으로는 모름 | STT + 슬라이드 OCR + 포인터 시간 동기화 → 지시 대상 영역 강조 | 3분 강의·슬라이드 5장 |
+| L10 | 다제약물 복약 대조 | 다제약물 고령자·보호자·약사 | 여러 병원 약봉투의 중복·지시 불일치 | 약봉투 VLM → 품목 매칭(e약은요/DUR) → 중복·불일치 → 약사 확인 카드 | 품목 10개·가상 환자 3명 |
+| L11 | 송금 전 사기 흐름 탐지 | 사기 위험 소비자·보호자 | 보이스피싱 2025년 23,360건·1조 2,578억 원 | 여러 대화 캡처 OCR → 사기 단계(신원주장→긴급→비밀→송금) 연결 → 근거 문장 | 시나리오 20개(정상 포함) |
+| L12 | 의료 통역 문답 카드 | 금천 이주민·병원 창구 | 통역 없는 진료 24.5% 설명 미이해, 의료통역은 3일 전 예약 | STT → 번역 → 증상 문답 구조화 → 되묻기 → 통역 예약 연결 | 2개 언어·증상 시나리오 1개 |
+| L13 | 소규모 사업장 작업 전 위험 점검 | G밸리 소규모 제조·물류·시설 | 재해조사 대상 사고사망 589명(2024) | 작업 설명+사진/짧은 영상 VLM → 위험 후보 위치 → 작업별 점검 항목 → 위험성평가서 초안 | 위험 3종·연출 사진 20장 |
+| L14 | 반지하 침수 개인 행동 에이전트 | 관악 반지하·저층 거주자 | 전국 반지하의 5.3%가 관악구(최다), 2022 신림동 참사 | 주소 → 침수흔적도 GIS → 강우 예보 → 개인 조건 → 맞춤 행동 카드 | 일부 동 침수흔적 GeoJSON·시나리오 |
+| L15 | 골목상권 점주 코파일럿 | 관악 골목상권 소상공인 | 소상공인 6대 업종 폐업률 11.08%(2025) | 상권 추정매출 시계열 + 코드실행 분석 에이전트 → 점주용 설명·행동 제안 | 3개 상권·2개 업종 |
+| L16 | 잔반 원가 분석 | 대학 식당·소형 식당 | 음식물 폐기 비용, 외식 부문 28%(UNEP) | 잔반 사진 메뉴 분할·분류 + 저울값 → 메뉴별 폐기 원가 | 음식 3종·사진 30장 |
+| L17 | 고립 청년 저부담 연결 | 고립·은둔 경계 청년 | 거의 집에만 있는 청년 5.2%(2024) | 가드레일 대화 + 위기 신호 분류 + 지역 프로그램 RAG 연결(온디바이스 옵션) | 시나리오 6개·지역 프로그램 20건 |
+| L18 | 첫 오개념 진단 | 기초학력 보충 교사·학생 | 고2 수학 기초학력 미달 12.6%(2024) | 손글씨 풀이 줄별 추출 → 검산 → 첫 오류 → 오개념 가설 → 구별 문제 | 일차방정식 1단원·오개념 5종 |
+| L19 | 복합 포장재 분리 안내 | 1인가구·기숙사 | 재질 혼합 포장재 혼입 | 사진 부위 분할 → 재질 OCR → 불확실 시 추가 촬영 요청 → 분리 순서 | 포장재 10종 |
+| L20 | 응급 사전분류·병상 매칭 | 야간 1인가구 | 응급실 찾기·중증도 판단 어려움 | 음성·영상 증상 문답 → 중증도 사전분류 보조 → 응급의료기관 가용병상 API 매칭 | 시나리오 3개·실시간 API |
+| L21 | 합성 페르소나 시장검증 | 예비창업 대학생·초기팀 | 초기 창업팀이 고객 인터뷰 없이 기획 | 인구통계 기반 합성 페르소나 다중 에이전트 FGI → UI 시안 반응 → 검증 질문 도출 | 페르소나 20개·시안 1개 |
+| L22 | 고장 증상 좁히기 | 기관 물품관리자·수리점 | 수리 접수 정보 부족, 전자폐기물 | 사진·소리·확인 동작으로 원인 후보 축소 → 수리 접수 카드 | 기기 2종·시나리오 5개 |
+| L23 | 사진 한 장 생활민원 | 주민·구청 민원 담당 | 담당부서 모름, 중복 민원 | VLM 유형 분류 → 중복 묶기 → 부서 추천·접수문 | 6개 유형·모의 지도 |
+| L24 | 논문 수식·도표 재현 | 이공계 대학생 | 논문 도표·수식 재현 어려움 | 구조 문서 파싱 → 수식·표 추출 → 재현 코드 생성 | 논문 3편 |
+2026-10-23 기준으로 확인한 근거 자료집이다. **통계의 기준시점과 발표시점을 구분**했다. `unknown`은 확인하지 못한 항목이며, 자료를 바탕으로 한 판단은 `추정:`으로 표시했다. API는 제공 문서를 확인했으며, 인증키 발급·실제 호출은 검증하지 않았다.
+
+**1. 문제 지형 통계**
+
+| 영역 | 확인한 핵심 수치 | 기준·해석상 주의점 | 출처 |
+|---|---|---|---|
+| 청년 고립·은둔 | 거의 집에만 있는 청년 **5.2%**. 해당 생활의 이유 중 취업 어려움 **32.8%**, 인간관계 어려움 **11.1%** | 2024년 조사, 2025년 발표. 19~34세. 임신·출산·장애에 따른 경우 제외. 서로 다른 조사에서 사용하는 ‘고립’과 ‘은둔’ 정의를 혼용하면 안 됨 | [국무조정실 조사 결과](https://www.opm.go.kr/opm/news/press1.do?articleNo=158583&attachNo=146521&mode=download), [결과 상세 보도](https://www.yna.co.kr/view/AKR20250311141351001) |
+| 청년 취업 | 청년 고용률 **43.8%**, 실업률 **7.2%**. 졸업·중퇴 후 첫 임금근로 일자리까지 평균 **11.2개월** | 2026년 5월 청년층 부가조사. 청년층은 15~29세로, 위 조사와 연령 범위가 다름 | [국가데이터처](https://mods.go.kr/board.es?act=view&bid=210&list_no=446080&mid=a10301030100) |
+| 청년 주거 | 청년가구 임차 거주 **82.6%**. 월소득 대비 월임대료 **20.3%**. 최저주거기준 미달 **8.2%** | 2024년 주거실태조사를 인용한 정부 기본계획. 일반가구 최저주거기준 미달은 **3.8%** | [제2차 청년정책 기본계획](https://www.opm.go.kr/opm/news/press-release.do?articleNo=160759&attachNo=151321&mode=download) |
+| 청년 정신건강 | 우울증상 유병률 **8.8%**, 번아웃 경험 **32.2%**, 자살생각 경험 **2.9%** | 2024년 청년의 삶 실태조사. 임상 진단을 받은 환자 비율과 구분해야 함 | [국무조정실](https://www.opm.go.kr/opm/news/press1.do?articleNo=158583&attachNo=146521&mode=download) |
+| 고령층 디지털 소외 | 고령층 디지털정보화 종합 수준 **71.8**, 역량 수준 **56.2** | 2025년 조사, 2026년 발표. 일반국민을 100으로 놓은 상대지수. 고령층은 **55세 이상**이며, ‘사용 가능한 사람의 비율’이 아님 | [NIA 원보고서](https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?bcIdx=29168&cbIdx=81623), [역량 수치 보도](https://m.ytn.co.kr/news_view.amp.php?param=0105_202609082256447974) |
+| 고독사 | 2024년 **3,924명**, 전년 대비 **7.2% 증가**. 50·60대 비중 합계 **62.9%** | 2025-11 발표. 고독사를 고령자에게만 발생하는 문제로 서술하면 실제 연령 분포를 놓침 | [보건복지부 발표 요약·KDI](https://eiec.kdi.re.kr/policy/materialView.do?num=273969&pg=1&pp=20&topic=O) |
+| 장애인·정보 접근성 | 장애인 디지털정보화 수준 **84.1**. 웹 접근성 평균 **70.4점**, 도매·소매업 **65.7점** | 2025년 조사. 웹 접근성은 8개 업종 1,000개 웹사이트의 평가 결과이며, 전체 웹사이트의 준수율이 아님 | [NIA 디지털정보격차 보고서](https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?bcIdx=29168&cbIdx=81623), [과기정통부 발표 요약·KDI](https://eiec.kdi.re.kr/policy/materialView.do?num=278528&pg=&pp=&topic=C) |
+| 이주민·외국인 | 2025년 말 체류외국인 약 **278만 명**, 주민등록인구 대비 약 **5.4%**. 2024년 외국인의 차별 경험 **17.4%** | 체류외국인 집계와 이민자 표본조사는 모집단·기준시점이 다름. 체류 규모 자체가 언어·행정 지원 수요의 크기를 뜻하지는 않음 | [법무부 2026 시행계획](https://www.moj.go.kr/bbs/immigration/226/493572/download.do), [재외동포청 보고서](https://www.oka.go.kr/upload/contents/files/a%20domestic%20compatriot%20living%20korea.pdf) |
+| 소상공인·폐업 | 2025년 폐업 사업자 **97.6만 개**, 전체 사업자 폐업률 **8.64%**, 소상공인 주요 6대 업종 폐업률 **11.08%** | 전체 사업자와 소상공인을 구분해야 함. **97.6만 개 전체를 ‘폐업 소상공인 수’라고 쓰면 부정확** | [중소벤처기업부](https://www.mss.go.kr/site/smba/ex/bbs/View.do?bcIdx=1069562&cbIdx=288) |
+| 소상공인 경영 부담 | 경쟁심화 **61.0%**, 원재료비 **49.6%**, 보증금·월세 **28.6%** | 2024년 기준 소상공인실태조사, 2026년 발표. 복수응답. 행정부담에 쓰는 시간·비용의 전국 대표 수치는 **unknown** | [중소벤처기업부 원문](https://www.mss.go.kr/site/smba/ex/bbs/View.do?bcIdx=1066231&cbIdx=86) |
+| 1인가구 | 2025년 **824만 가구**, 일반가구의 **36.6%**, 전년 대비 가구 수 **2.5% 증가** | 2026년 발표 등록센서스. 총가구 수를 분모로 직접 재계산하면 공식 비율과 달라질 수 있음 | [국가데이터처 원자료](https://www.mods.go.kr/board.es?act=view&bid=203&list_no=446219&mid=a10301020200), [결과 요약·KDI](https://eiec.kdi.re.kr/policy/materialView.do?num=284799) |
+| 전세사기 | 2026년 9월까지 피해자등 누적 결정 **41,559건**. 9월 추가 결정 **623건**. LH 피해주택 매입 완료 **11,148호** | 2026-10-12 발표. 행정적으로 인정된 피해자등 결정 건수이며, 전체 미신고 피해 규모가 아님 | [국토교통부](https://molit.go.kr/USR/NEWS/m_71/dtl.jsp?id=95092490) |
+| 보이스피싱 | 2025년 **23,360건**, 피해액 **1조 2,578억 원**. 기관사칭형 피해액 비중 **78.6%** | 경찰청 제출자료를 분석한 보도. 경찰청 원문 공개 페이지는 **unknown** | [경찰청 제출자료 분석 보도](https://www.inews24.com/view/mp/2008688) |
+| 재난 | 2024년 피해가 발생한 자연재난 **35건**, 최근 10년 평균 **29건**. 자연·사회재난 재산피해 합계 **1조 418억 원** | 2026년 발표. 자연재난과 사회재난의 합계·개별 수치를 구분해야 함 | [행정안전부 발표](https://mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=123082), [세부 수치 보도](https://www.yna.co.kr/view/AKR20260113076500530) |
+| 교육 격차 | 2025년 사교육 참여율 **75.7%**. 월평균 사교육비는 전체학생 **45.8만 원**, 참여학생 **60.4만 원** | 2026년 발표. 2024년 가구소득 800만 원 이상·300만 원 미만의 월평균 사교육비는 각각 **67.6만 원·20.5만 원**. 사교육비 차이를 학업성취 격차와 동일시하면 안 됨 | [2025년 조사](https://www.korea.kr/briefing/policyBriefingView.do?newsId=156748552), [2024년 소득별 비교](https://www.korea.kr/briefing/policyBriefingView.do?newsId=156678713) |
+| 의료 접근성 | 2024년 연간 미충족의료율 전국 **4.9%**, 대구 **3.8%**, 경북 **4.7%** | 2025년 동북지방통계청 발표, 원출처는 지역사회건강조사. 진료가 필요할 때 받지 못한 경험을 다루며, 원인을 모두 거리·정보 부족으로 설명할 수 없음 | [통계로 보는 대구·경북 의료 현황, 본문 32쪽](https://sri.kostat.go.kr/boardDownload.es?bid=5130&list_no=437260&seq=12) |
+
+**통계 사용 시 특히 주의할 점:** 청년의 연령 범위, 1인가구의 분모, 디지털정보화 상대지수, 행정상 피해 인정 건수는 서로 다른 개념이다. 위 수치만으로 특정 서비스의 효과나 사용 의사를 입증할 수는 없다.
+
+**2. 관악구·금천구 특화 근거**
+
+| 대상 | 확인 사실 | 근거와 한계 |
+|---|---|---|
+| 관악구 청년 | 구는 2025년 2월 자료에서 청년 인구 비율을 **41.4%**로 설명하고, 청년 일자리·주거·교육·문화 예산 **236억 원**을 언급 | [관악구 미디어센터](https://www.gwanak.go.kr/site/media/mediaVod6.do?Idx=CID20250227142834760). 이 페이지에 제시된 비율의 통계 기준월은 **unknown** |
+| 관악구 1인가구 | 2025년 9월 전체 **288,964가구**, 1인가구 **183,438가구**, 비율 **63.5%** | [스마트관악](https://smart.gwanak.go.kr/gwanakatglance.do). 인구총조사 일반가구 기준 비율과 직접 비교하지 말 것 |
+| 관악구 주거 정책 | 2026년 ‘우리동네 주거정보 플랫폼’ 운영. 실거래가·신축 및 무허가 건물 정보·현장상담소 위치 제공. 안심계약 도움서비스의 저녁·주말 운영 확대 계획 | [2026-03 보도](https://v.daum.net/v/20260306105425670). 이미 제공 중인 지역 기능이라는 점도 경쟁 검토에 필요 |
+| 금천구 1인가구 | 2026년 5월 구 발표에서 주민등록 기준 1인가구 비율 **53.8%**, 서울 자치구 중 세 번째라고 설명 | [금천구 보도자료](https://m.geumcheon.go.kr/portal/selectBbsNttView.do?bbsNo=8&key=297&nttNo=269312). 발표에서 인용한 정확한 통계 기준월은 **unknown** |
+| 금천구 청년 비율 | 연령 정의·기준월을 함께 확인할 수 있는 최신 비율은 **unknown** | [금천구 주민등록 인구현황 게시물](https://www.geumcheon.go.kr/portal/selectBbsNttView.do?bbsNo=94&key=321&nttNo=255326), [서울 연령별·동별 등록인구 통계](https://stat.eseoul.go.kr/statHtml/statHtml.do?orgId=201&tblId=DT_201003_A010006) |
+| 금천구 관계망 정책 | 2026년 청년·중장년 1인가구를 대상으로 식생활 개선과 사회적 관계망 형성을 위한 ‘행복한·건강한 밥상’ 운영 | [금천구 보도자료](https://m.geumcheon.go.kr/portal/selectBbsNttView.do?bbsNo=8&key=297&nttNo=269312) |
+| 금천청년꿈터 | 중앙대학교 산학협력단이 운영하는 청년 창업보육시설. 입주기업 모집·창업교육·지원사업 공고 운영 | [금천구 공식 공고 목록](https://www.geumcheon.go.kr/portal/selectBbsNttList.do?bbsNo=4&key=293&searchCnd=SJ&searchKrwd=%EA%B8%88%EC%B2%9C%EC%B2%AD%EB%85%84%EA%BF%88%ED%84%B0) |
+| 금천청년꿈터의 확인 가능한 활동 | 2026년 G밸리 테크 밋업은 G밸리·서울 소재 기업과 기술이전·산학협력 희망 기업 **50개사**를 모집 | [국토교통 기업지원허브 공고](https://hub.kaia.re.kr/organSupportHub.do/view?orgKind=ORG_KIND_2&rltdId=96006) |
+| 서울대 캠퍼스타운 | 2026년 ‘서남권 AI Full Stack’, 공공서비스 실증을 위한 ‘B2G Bridge’, 데모데이·투자자 매칭 프로그램 공고 | [프로그램 목록](https://campustown.snu.ac.kr/program-join/join-board/), [AI Full Stack 공고](https://campustown.snu.ac.kr/program-join/join-board/?mod=document&pageid=1&uid=865) |
+| 서울대의 AI 현장 과제 | ‘SNU AI Capstone Challenge’는 캠퍼스타운 입주기업의 실제 현장 과제를 AI로 해결하는 프로그램으로 안내 | [서울대학교 공식 안내](https://new.snu.ac.kr/snunow/events?bbsidx=176663&md=v) |
+
+추정: 공개 사업에서 읽히는 기관의 관심사는 청년 창업, 기업 현장 문제, 산학협력, 실증과 사업화다. **이것이 이번 대회의 숨은 심사 기준이라는 근거는 없다.**
+
+**3. 공개 데이터·API 카탈로그 — 25개**
+
+접근 조건의 `제한 없음`은 제공 페이지의 이용허락범위 표시다. 인증·호출량 제한까지 없다는 뜻은 아니다. 마지막 열은 기능과 제공 형식을 근거로 한 **추정: 해커톤 활용 적합성**이다.
+
+| # | 이름·공식 URL | 접근 방법·키 | 확인된 이용 조건 | 추정: 해커톤에서 쓸 만한 이유 |
+|---|---|---|---|---|
+| 1 | [한국사회보장정보원 중앙부처복지서비스](https://www.data.go.kr/data/15090532/openapi.do) | 공공데이터포털 활용신청·키 필요, REST/XML | 무료, 이용허락범위 제한 없음, 개발·운영 자동승인. 개발계정 트래픽 **100** | 지원대상·선정기준·신청방법이 있어 근거와 원문을 연결하기 좋음 |
+| 2 | [한국사회보장정보원 지자체복지서비스](https://www.data.go.kr/data/15108347/openapi.do) | 활용신청·키 필요, REST/XML | 무료, 제한 없음, 개발·운영 자동승인. 개발계정 **1,000** | 중앙·지역 사업을 구분하고 지역 단위 범위를 제한하기 좋음 |
+| 3 | [온통청년 청년정책·청년공간 API](https://www.youthcenter.go.kr/cmnFooter/openapiIntro/oaiGuide) | 회원가입→신청→**담당자 심사**→키 발급 | 공식 안내는 HTTPS/XML. 별도 재배포·상업 이용 조건과 승인 소요시간은 **unknown** | 정책·공간 정보를 정형 데이터로 확보 가능 |
+| 4 | [국가법령정보 공동활용—법령](https://open.law.go.kr/LSO/openApi/guideList.do) | 로그인·공동활용 신청, 인증정보 사용 | 신청 안내에 자동승인 명시. 과도한 호출 제한 가능, 서비스 변경 확인 의무 | 조문·시행일·법령명을 출처로 연결 가능 |
+| 5 | [국가법령정보 공동활용—판례](https://open.law.go.kr/LSO/openApi/guideList.do) | 판례 목록·본문 조회 API, 사용신청 필요 | 제공 범위·정확성 관련 안내 준수. 전체 판결문을 모두 제공한다는 보장은 없음 | 사건번호와 판례 원문을 기준으로 응답 근거 확인 가능 |
+| 6 | [국토교통부 아파트 전월세 실거래가](https://www.data.go.kr/data/15126474/openapi.do) | 키 필요. 법정동코드 앞 5자리·계약년월 조회 | 해당 페이지에서 최신 이용허락범위 재확인은 **unknown** | 지역·기간을 작게 한정해 조회 가능 |
+| 7 | [국토교통부 연립다세대 전월세 실거래가](https://www.data.go.kr/data/15126473/openapi.do) | 키 필요, REST/XML | 무료, 제한 없음, 자동승인. 개발계정 **10,000** | 아파트 외 주택의 임대차 거래 근거 확보 |
+| 8 | [국토교통부 연립다세대 매매 실거래가](https://www.data.go.kr/data/15126467/openapi.do) | 키 필요, REST/XML | 무료, 제한 없음, 자동승인. 개발계정 **10,000** | 같은 주택 유형의 매매·임대 거래를 구분해 비교 가능 |
+| 9 | [소상공인시장진흥공단 상가·상권정보](https://www.data.go.kr/data/15012005/openapi.do) | 키 필요, REST/JSON·XML | 무료, 제한 없음, 자동승인. 개발계정 **10,000** | 업종·주소·좌표가 있어 지도 표시와 지역 필터가 쉬움 |
+| 10 | [서울시 상권분석서비스—추정매출·행정동](https://www.data.go.kr/data/15147235/fileData.do) | 제공기관 연결을 통한 CSV 다운로드. 파일 이용은 API키 불필요 | 무료, **공공누리 1유형** | 지역·업종·성별·연령별 집계 비교에 사용 가능 |
+| 11 | [서울시 실시간 도시데이터](https://data.seoul.go.kr/dataList/OA-21285/F/1/datasetView.do) | 서울 열린데이터광장 키. 샘플키는 광화문·덕수궁만 조회 | **공공누리 1유형**, 한 번에 한 장소 조회. 현재 안내 **121장소** | 인구·교통·날씨 등을 한 응답에서 확보 가능 |
+| 12 | [서울시 1인가구—연령별 통계](https://stat.eseoul.go.kr/statHtml/statHtml.do?orgId=201&tblId=DT_201004_B010008) | 웹 통계표 열람은 키 불필요. 이 표의 별도 API 조건은 **unknown** | 개별 표의 재이용 조건 **unknown** | 자치구·연령별 대상 규모를 확인하는 근거 자료 |
+| 13 | [KOSIS 공유서비스](https://kosis.kr/openapi/index/index.jsp) | 인증키 신청 후 통계목록·통계자료 API 이용 | 통계정보활용약관 적용. 2026년 호출 제한 변경 공지 존재 | 국가승인통계의 표·출처를 함께 관리 가능 |
+| 14 | [SGIS 개발지원센터](https://sgis.mods.go.kr/developer/html/) | 로그인→서비스 키 발급→AccessToken 인증 | API 이용약관 동의 필요. 개별 데이터의 재배포 조건 **unknown** | 인구·가구 통계와 공간 단위를 결합 가능 |
+| 15 | [건강보험심사평가원 병원정보서비스](https://www.data.go.kr/data/15001698/openapi.do) | 키 필요, REST/XML | 무료. 개발 자동승인·운영 심의승인, 개발계정 **10,000**. 저작권 표시·공공누리 조건은 페이지 기준 확인 필요 | 병원 주소·좌표·진료과목 등 구조화된 시설정보 |
+| 16 | [건강보험심사평가원 전국 병의원·약국 현황](https://www.data.go.kr/data/15051059/fileData.do) | CSV 파일 다운로드, API키 불필요 | **공공누리 1유형**, 분기 자료 | 실시간 API 의존도를 낮출 수 있는 시설 목록 |
+| 17 | [국립중앙의료원 전국 약국 정보](https://www.data.go.kr/data/15000576/openapi.do) | 키 필요, REST/XML | 무료, 제한 없음, 자동승인. 개발계정 **1,000** | 주소·요일·시간 등 조회 조건이 명확함 |
+| 18 | [국립중앙의료원 전국 응급의료기관 정보](https://www.data.go.kr/data/15000563/openapi.do) | 키 필요, REST/XML | 무료, 제한 없음, 자동승인. 개발계정 트래픽 수치는 공란으로 **unknown** | 위치·전화·기관정보와 응급의료 관련 조회 기능 제공 |
+| 19 | [기상청 단기예보 조회서비스](https://www.data.go.kr/data/15084084/openapi.do) | 키 필요, REST/JSON·XML | 무료, **공공누리 1유형**, 자동승인. 개발계정 **10,000** | 격자·시각별 기상 조건을 정형 입력으로 사용 가능 |
+| 20 | [행정안전부 긴급재난문자](https://www.data.go.kr/data/15134001/openapi.do) | 외부 제공기관 연결형 API. 실제 키 발급 절차는 **unknown** | 무료, **공공누리 4유형: 출처표시·상업적 이용금지·변경금지** | 지역·시각·원문을 다루는 검증에는 유용하나 요약·번역 이용은 허용 여부 확인 필요 |
+| 21 | [AI-Hub 문서요약 텍스트](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&dataSetSn=97&topMenu=100) | 내국인만 신청 가능, 본인확인·이용목적 제출 후 다운로드 | AI-Hub 이용정책 적용. 학습용 제한·출처 명시·제3자 제공 제한 | 원문·요약문 쌍이 있는 학습 자료. 사용 승인·학습 시간을 별도로 고려해야 함 |
+| 22 | [AI-Hub 법률·규정 텍스트 분석](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&dataSetSn=580&topMenu=100) | 내국인 신청·다운로드 방식 | AI-Hub 이용정책 적용. 일반적인 공개 문서 저장소와 조건이 다름 | 판결문 분석·약관 유불리 라벨의 구조를 확인 가능 |
+| 23 | [Kakao Local API](https://developers.kakao.com/docs/latest/ko/local/dev-guide) | 앱 등록·REST API 키, 헤더 인증 | 카카오 약관·권한·[쿼터 정책](https://developers.kakao.com/docs/ko/getting-started/quota) 적용. 자유 재배포 데이터가 아님 | 주소↔좌표·장소 검색을 구현하는 문서가 상세함 |
+| 24 | [ODsay 대중교통 API](https://lab.odsay.com/contact/contact) | 애플리케이션 등록·키 발급 | Basic은 개인·학생·5인 이하 스타트업 대상 **30회/일 무료**. 분석·연구·대용량 이용은 사전 협의 안내 | 소수의 실제 경로 조회 시연 가능. 호출 한도가 작음 |
+| 25 | [범정부 공공데이터 창업경진대회 예선 수상작](https://data.seoul.go.kr/dataList/OA-22582/S/1/datasetView.do) | 2013~2024년 수상작 XLSX 다운로드, 키 불필요 | 개별 페이지 이용허락범위는 **unknown** | 수상연도·주최기관·팀·활용 데이터로 기존 작품 중복 조사 가능 |
+
+이용 조건에서 별도로 남겨둘 근거는 다음과 같다.
+
+- **AI-Hub:** 영리·비영리 연구개발 활용을 안내하지만, 동시에 학습용 사용·제3자 제공 제한·국외 반출 별도 합의를 명시한다. 이를 ‘아무 데이터나 외부 LLM에 넣어도 된다’는 허가로 해석하면 안 된다. [공식 이용정책](https://www.aihub.or.kr/intrcn/guid/usagepolicy.do?currMenu=151&topMenu=105)
+- **긴급재난문자:** 구 ‘재난문자방송 발령현황’ API를 대체한다고 명시한다. 오래된 API 주소를 기준으로 구현 가능성을 판단하지 말아야 한다. [신규 제공 페이지](https://www.data.go.kr/data/15134001/openapi.do)
+- **실시간 도시데이터:** 단기체류 외국인은 인구 추정에서 제외되며, 상권 데이터는 신한카드 내국인 매출 기반이라고 안내한다. 실제 전체 인구·전체 매출과 차이가 있다. [데이터 한계](https://data.seoul.go.kr/dataList/OA-21285/F/1/datasetView.do)
+- **ODsay:** 기본 용도 외 데이터 분석·대용량 호출은 별도 협의를 요구한다. [구매·이용 안내](https://lab.odsay.com/contact/contact)
+
+**4. 유사 대회 수상작과 확인 가능한 평가 패턴**
+
+수상작 **7개**를 확인했다. 수상 사실과 기능 설명은 공개 자료 기준이며, 심사위원 개별 점수는 `unknown`이다.
+
+| 연도·대회 | 수상작 | 수상 내역 | 공개된 내용·평가 근거 |
+|---|---|---|---|
+| 2025 서울 AI 해커톤 | 리틀브라더 **서울 메아리** | 대상·서울특별시장상 | VR·AI 도슨트와 시민 사진의 포트홀·쓰레기 감지 기능. 대학 발표는 공공플랫폼의 구현에 대한 호평을 설명. [한신대학교](https://www.hs.ac.kr/bbs/kor/277/151725/artclView.do) |
+| 같은 대회 | **물망초** | 최우수상·서울AI재단 이사장상 | 실종자 예상 반경을 지도에 구현해 시민 참여를 유도. [SLW 공식 게시물](https://www.slw.kr/kor/bbsPost/64/870/detail.do?mid=996) |
+| 같은 대회 | **k-aption** | 최우수상·서울AI재단 이사장상 | K콘텐츠 영상으로 한국어 단어의 의미·맥락 학습. [SLW 공식 게시물](https://www.slw.kr/kor/bbsPost/64/870/detail.do?mid=996) |
+| 2025 K Intelligence 해커톤·KT 주최, DACON 운영 | **RAG:History – AI가 답하는 역사 교육** | Track 2 대상 | RAG 기반 역사 학습. 대학 발표는 교육 격차 완화·개인 맞춤형 학습이 높은 평가를 받았다고 명시. [가톨릭대학교](https://www.catholic.ac.kr/ko/newsroom/photonews.do?articleNo=266039&mode=view), [KT 수상자 인터뷰](https://kode.kt.com/blog/article/10218) |
+| 2025 제13회 범정부 공공데이터 활용 창업경진대회 | 클라우디오 **국악 가상악기** | 제품·서비스 부문 대상·대통령상 | 국립국악원 음원 데이터와 AI·DSP 결합. [문체부 발표 보도](https://www.ajunews.com/view/20251204083416632) |
+| 같은 대회 | 플라트 **전통 문양 기반 미술 놀이 콘텐츠** | 아이디어 부문 우수상·행안부 장관상 | 전통 문양 이미지를 3~7세 아동 콘텐츠로 활용. AI 적용 세부 방식은 **unknown**. [문체부 발표 보도](https://www.ajunews.com/view/20251204083416632) |
+| 같은 대회 | 섬루션 **섬:부이·SUM:BUOY** | 최우수상 | 친환경 부표를 활용한 AI 해양쓰레기 수거·해상 안전 솔루션. [행정안전부 후속 발표](https://mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=129954) |
+
+**공개적으로 확인되는 평가 요소**
+
+- 서울 AI 해커톤 결과 소개는 **완성도·사회적 영향력** 등을 평가했다고 명시한다. [SLW](https://www.slw.kr/kor/bbsPost/64/870/detail.do?mid=996)
+- RAG:History 사례에서는 **교육 격차 완화·개인 맞춤형 학습 경험**이 높게 평가됐다고 명시한다. [가톨릭대학교](https://www.catholic.ac.kr/ko/newsroom/photonews.do?articleNo=266039&mode=view)
+- 2025년 범정부 대회는 **AI 혁신성 평가지표 신설**을 안내했다. 다만 이것을 이번 AI Platform Build Challenge의 평가표로 적용할 근거는 없다. [행정안전부 수정 통합공고](https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=118923)
+
+추정: 사례들에는 구체적 사용자·상황, 문제와 연결되는 AI 기능, 실제 이용 흐름 또는 제품, 데이터의 구체적 역할이 반복된다. 다만 **‘수상작에 공통으로 보인다’와 ‘그 요소 때문에 수상했다’는 구분해야 한다.**
+
+**5. 포화 여부를 조심해야 할 유형과 근거**
+
+시장점유율·진입 사업자 수·수요 대비 공급량을 종합해 ‘포화’를 입증한 자료는 확인하지 못했다. 따라서 아래는 **기존 서비스와 기능 중복이 확인된 유형**이며, 회피 판단은 추정이다.
+
+| 유형 | 이미 확인되는 기능 | 선정 판단에 쓰는 근거 |
+|---|---|---|
+| 범용 청년정책 검색·추천·챗봇 | 온통청년은 약 3,000개 정책 정보, AI 챗봇, 신청자격 자가진단, 조건별 맞춤 검색을 안내 | 추정: ‘내 조건을 넣으면 정책을 추천한다’만으로는 기능 차이를 설명하기 어려움. [정부 개통 발표](https://www.korea.kr/news/policyNewsView.do?newsId=148939880) |
+| 범용 복지혜택 안내 | 복지로 복지멤버십은 받을 가능성이 있는 급여·서비스의 맞춤형 안내 제공 | 추정: 혜택 발견 자체만을 신규 가치로 제시하면 기존 공공서비스와 중복될 가능성이 큼. [복지로 제도 안내](https://www.bokjiro.go.kr/ssis-tbu/twatza/wmAplyMng/selectWmGdnc.do) |
+| 전세 시세·집주인 조회·위험 진단 | HUG 안심전세는 시세·위험성 진단, 임대인 정보조회, 계약 셀프테스트 등을 제공 | 추정: ‘주소 입력→전세 위험 표시’ 수준은 기존 기능과 직접 겹침. [관악구 공식 안내](https://www.gwanak.go.kr/site/gwanak/08/10805150200002024071509.jsp), [모바일HUG](https://onestop.khug.or.kr/) |
+| 사진 기반 범용 문제풀이·AI 튜터 | QANDA는 문제 검색·AI 풀이·풀이 첨삭·퀴즈·튜터 기능을 안내 | 추정: 문제 사진에 해설을 생성하는 기능만으로는 차별화가 어려움. [QANDA](https://qanda.ai/ko), [AI 튜터 설명](https://membership-webview.qanda.ai/premium-membership/paywall) |
+| 범용 법률상담 챗봇 | 로앤굿은 자연어로 실시간 상담하는 AI 법률상담 챗봇을 회사 자료에서 소개 | 추정: 법령·판례를 검색해 답하는 형식 자체는 신규성이 약함. [로앤굿 2024 회사소개서](https://lawandgood-s3.s3.ap-northeast-2.amazonaws.com/static/files/%E1%84%85%E1%85%A9%E1%84%8B%E1%85%A2%E1%86%AB%E1%84%80%E1%85%AE%E1%86%BA_%E1%84%92%E1%85%AC%E1%84%89%E1%85%A1%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2%E1%84%89%E1%85%A5_2024.pdf) |
+| 지도에 병원·약국을 표시하는 정보 검색 | E-Gen 응급의료정보제공은 주변 의료기관·약국, 명절 진료기관 검색 등을 안내 | 추정: 시설 목록·지도 표시만으로는 기존 공공서비스와 구별하기 어려움. [정부 배포 앱 안내](https://www.mfds.go.kr/jsp/common/medical_info_app.pdf) |
+
+이번 조사에서 남은 `unknown`은 **금천구의 연령·기준월이 일치하는 최신 청년 비율, 소상공인 행정부담의 전국 대표 수치, 일부 데이터 재배포 조건, 이번 대회의 평가 가중치, 위 시장의 객관적 포화도**다. 이 항목들은 기획서에서 확인된 사실처럼 단정하면 안 된다.
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "관악구" "801" "전세" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "관악구" "801건" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.data.go.kr "DUR품목정보" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 관악구 전세사기 801 2025 피해 1위 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.data.go.kr/data/15134735/openapi.do
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "관악구" "전세사기" "2025" "801" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+현재까지 확인한 API 문서는 존재하지만, 인증키를 이용한 정상 호출은 별도 검증이 필요합니다. 공공데이터포털은 2025년 10월 23일 운영을 재개했다는 공식 발표가 있어, 화재 이후 계속 중단됐다고 쓰면 부정확합니다. 관악구 ‘801건’은 보도에서 확인되지만, 통계 원표와 집계 정의를 더 확인하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 전세 계약서 등기부 AI 분석 집지켜 세이프홈 공식 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 국내 AI 웹 접근성 검사 도구 서비스 WA AI ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 집지켜 AI 등기부 계약서
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 파프리카케어 약봉투 촬영
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: KRAS AI 위험성평가
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "집지켜" 공식 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "대학" "강의" "실시간 자막" 소보로 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "AI" "접근성 검사" 국내 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "의료" "AI 통역" "플리토" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+web search: 고용노동부 2025 임금체불 20679 262304 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: "건축물" "등기" "API" site.hyphen.im ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: "DUR" "품목정보" "15059486" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: https://www.data.go.kr/data/15133406/fileData.do
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: "2025" "임금체불" "2조" site.moel.go.kr ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: https://www.data.go.kr/data/15059486/openapi.do
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: "2025" "체불" "20,679" 고용 ...
+hook: PostToolUse
+web search: 집지켜 홈페이지 ...
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: AI 위험성평가 사진 서비스
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: 집지켜
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: 플리토 의료 통역 병원 챗트랜스
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: AI 웹접근성 검사 국내 솔루션
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://labor.moel.go.kr/arrstat/sttcStusList.do
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+web search: 
+web search: "관악구" "5.3%" "2025" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: "플리토" "병원" "챗트랜스" site.flitto.com ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: '2025'
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+경쟁 서비스 중에는 기획안과 직접 겹치는 사례가 있습니다. 파프리카케어는 약봉투 촬영·복약 관리를, 진정24는 증거 분석·진정서 작성을 안내하고 있으며, 오픈서베이는 합성 페르소나 그룹 인터뷰를 제공합니다. 관악구 반지하 ‘5.3%’도 공식 자료에서 확인했습니다. 다만 분모는 관악구 전체 주택이 아니라 **전국의 반지하가 있는 주택 수**입니다.
+
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: "2024 지방자치단체 외국인주민 현황" 행정안전부 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: site.data.go.kr/data/15000563 "트래픽" "심의" ...
+web search: https://jinjung24.com/
+hook: PostToolUse
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "관악구" "801건" 서울시 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "의료" "통역" "LXHUB" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.data.go.kr/data/15000563/openapi.do?x=1
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "python3 - <<'PY'
+import urllib.request,concurrent.futures,re
+urls=['https://www.data.go.kr/data/15000563/openapi.do','https://www.data.go.kr/data/15075057/openapi.do','https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3','https://mois.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_00139684aQyowqf&fileSn=3']
+def read(u):
+ try:
+  b=urllib.request.urlopen(u,timeout=20).read()
+  if b[:4]==b'%PDF':
+   import io,pymupdf
+   d=pymupdf.open(stream=b,filetype='pdf')
+   hits=[]
+   for i,p in enumerate(d):
+    t=p.get_text()
+    if ('금천구' in t or ('상위 시군구' in t and '13,806' in t)): hits.append((i,t))
+   return u,hits
+  s=re.sub('<["'^>]+>'"',' ',b.decode('utf-8'));s=re.sub(r'\\s+',' ',s)
+  hits=[]
+  for term in ['비용부과유무','심의유형','신청 가능 트래픽','이용허락범위']:
+   p=s.find(term);hits.append(s[p:p+250])
+  return u,hits
+ except Exception as e:return u,str(e)
+with concurrent.futures.ThreadPoolExecutor() as ex:
+ for out in ex.map(read,urls):print(out)
+PY" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 7ms:
+('https://www.data.go.kr/data/15000563/openapi.do', '<urlopen error [Errno -3] Temporary failure in name resolution>')
+('https://www.data.go.kr/data/15075057/openapi.do', '<urlopen error [Errno -3] Temporary failure in name resolution>')
+('https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3', '<urlopen error [Errno -3] Temporary failure in name resolution>')
+('https://mois.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_00139684aQyowqf&fileSn=3', '<urlopen error [Errno -3] Temporary failure in name resolution>')
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: 관악구 우리동네 주거정보 플랫폼 사이트 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: https://www.mois.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_00139684aQyowqf&fileSn=3
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: '개발계정'
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "세이프홈" AI 계약서 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+web search: 
+web search: 세이프홈 계약서 AI
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: 하이픈 부동산등기 API 스크래핑
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: 금천구 외국인주민 2024 13. 비율
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: 관악구 우리동네 주거정보 플랫폼 전세사기
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+web search: 
+web search: 서울 전세사기 피해 현황 자치구 2025 801 관악 강서 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: https://softflo.co.kr/
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "금천구" "2024" "외국인주민" "12.7" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "금천구" "31,444" "12.9" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 전세사기 AI 등기부 계약서 분석 리걸 서비스 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+2026-10-23 기준 검증 결과다. **API 공개 문서 확인과 실제 정상 호출 검증은 구분했다.** 인증키를 발급받아 호출하거나 경쟁 서비스를 직접 실행하지는 않았다. 경쟁 서비스 기능은 공개 설명에서 확인한 범위이며, 차별화 제안은 모두 `추정:`이다.
+
+**A. 사실 주장 검증**
+
+| 항목 | 판정 | 정확한 수치·조건 및 기획서에 쓸 표현 | 출처 URL |
+|---|---|---|---|
+| **1. 관악구 2025년 전세사기 피해 1위·801건** | **부분확인** | 서울시 자료를 인용한 보도에 **2024년 1,108건, 2025년 801건**이 나온다. 그러나 자치구 전체 원표와 집계 정의를 확보하지 못해 **서울 1위·최신 통계라는 표현은 unknown**. 발생·신고·피해자 결정 건수를 혼용하면 안 된다. 현재는 “서울시 자료를 인용한 보도에 따르면…”이라는 귀속 표현만 가능하다. | [아주경제, 2026-03-30](https://www.ajunews.com/view/20260330154837270) |
+| **2. 건축물대장 Open API** | **확인** | 국토부 **건축HUB 건축물대장정보 서비스** 존재. 포털 활용신청 후 인증키 사용. REST, JSON/XML이며 `_type` 생략 시 XML. 기본개요·표제부·층별개요·전유부 등을 제공한다. **무료, 이용허락범위 제한 없음, 개발·운영 자동승인, 개발계정 트래픽 10,000, 월간 갱신**으로 표시된다. 등기 권리관계 데이터와는 구분해야 한다. | [공식 API](https://www.data.go.kr/data/15134735/openapi.do) |
+| **3. 인터넷등기소 공개 열람 API** | **unknown / ‘가상 샘플만 가능’은 반박** | 일반 개발자가 신청하는 **법원 공식 공개 열람 API 문서는 확인하지 못했다**. 다만 HYPHEN에는 인터넷등기소를 자료출처로 하는 **스크래핑 방식 민간 API**가 존재한다. 따라서 공식 API 미확인이 곧 가상 샘플만 가능하다는 뜻은 아니다. 추정: 해커톤은 가상 문서 또는 사용 권한을 확보한 업로드 문서로 구현하고, 민간 API는 계약·비용·동작 확인 후 선택할 수 있다. | [HYPHEN 부동산등기 종합정보](https://hyphen.im/product/view?seq=22), [민원캐시 포함 상품 안내](https://www.hyphen.im/about/service-store) |
+| **4. 응급의료기관 실시간 가용병상 API** | **확인** | 국립중앙의료원 **전국 응급의료기관 정보 조회 서비스** 존재. 실시간 응급실 가용병상·중증질환 수용가능정보 등을 제공한다. **REST/XML, 무료, 이용허락범위 제한 없음, 개발·운영 자동승인**. 활용신청·인증키 필요. 현재 공개 화면의 개발계정 호출량은 공란이므로 **unknown**. 정상 응답·갱신 지연·실제 환자 수용 가능성은 별도 검증 대상이다. | [공식 API·활용가이드](https://www.data.go.kr/data/15000563/openapi.do?recommendDataYn=Y) |
+| **5-1. 식약처 DUR 품목정보 API** | **확인** | **의약품안전사용서비스(DUR)품목정보** 존재. 병용금기·특정연령금기·임부금기·용량주의·투여기간주의·노인주의·효능군중복·서방정분할주의 등을 제공한다. **REST, JSON/XML, 무료, 이용허락범위 제한 없음, 개발·운영 자동승인, 개발계정 10,000**. 활용신청·키 필요. | [공식 API](https://www.data.go.kr/data/15059486/openapi.do) |
+| **5-2. e약은요 API** | **확인** | **의약품개요정보(e약은요)** 존재. 대상은 **일반의약품 중 공급실적이 있는 제품**으로, 모든 처방약을 포괄한다고 쓰면 부정확하다. 효능·사용법·주의사항·상호작용 등을 제공. **REST, JSON/XML, 무료, 이용허락범위 제한 없음, 개발 자동승인·운영 심의승인, 개발계정 10,000**. `getDrbEasyDrugList` 사용. | [공식 API·요청 명세](https://www.data.go.kr/data/15075057/openapi.do?recommendDataYn=Y) |
+| **6. 서울시 침수흔적도 공개·형식·조건** | **부분확인** | 공개 확인. 서울 원천 페이지에서 **2010~2025년 연도별 ZIP 공간정보 파일** 제공을 확인했다. 최신 등록 파일은 **2025년 자료, 2026-04-27 갱신**. **무료·공공누리 제1유형, 출처표시 조건**. 포털 메타데이터에는 CSV로 표시되지만 원천 다운로드는 ZIP이다. 최신 ZIP 내부의 **SHP 포함 여부·좌표계는 unknown**. 과거 침수 이력이며 미래 침수 예측 결과가 아니다. | [서울 원천 다운로드](https://data.seoul.go.kr/dataList/OA-15636/F/1/datasetView.do), [포털 이용 조건](https://www.data.go.kr/data/15133406/fileData.do) |
+| **7. 화재 이후 공공데이터포털 복구** | **부분확인** | 행안부는 **2025-10-23 10시 운영 재개**, API 서비스·파일 다운로드 등 핵심 기능 이용 가능을 발표했다. 당시 일부 파일·관리자 기능은 추가 복구 중이었다. 따라서 **“2026년에도 화재 때문에 전체 API 이용 불가”는 반박**. 다만 **2026-10 현재 모든 개별 API가 정상이라는 주장은 unknown**이며, 사용할 API별 호출 검증이 필요하다. | [행안부 발표 수록, KDI](https://eiec.kdi.re.kr/policy/materialView.do?num=272504) |
+| **8-1. 금천구 외국인주민 최신 비율** | **부분확인** | 확인한 최신 연간 자료는 **2024-11-01 기준 행안부 외국인주민 현황**. 설명자료 재게시본 표에서 **총인구 243,662명, 외국인주민 31,444명, 12.9%**를 대조했다. 외국인주민은 외국국적자만이 아니라 **한국국적 취득자·외국인주민 자녀를 포함**한다. 공식 첨부 다운로드는 실패했으므로 **원본 표 재확인 전 최종 검증 완료 수치에서는 제외**한다. | [행안부 원문 게시물](https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000014&nttId=121226), [설명자료 재게시본](https://www.scribd.com/document/1026729823) |
+| **8-2. 관악구 반지하 비중 5.3%** | **확인—분모 수정 필수** | 2024 인구주택총조사 **표 60**: 관악구 **13,806호, 전국의 반지하가 있는 주택 중 5.3%, 시군구 1위**. **“관악구 주택의 5.3%가 반지하”가 아니다.** 주택 수와 반지하 거주 가구 수도 구분해야 한다. 기준일은 2024-11-01, 발표일은 2025-07-29다. | [통계청 공식 결과, 표 60](https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3) |
+| **9. 임금체불 2024·2025년 수치** | **확인** | 노동포털 연도별 공식 표: **2024년 20,448억 원·28.3만 명, 2025년 20,679억 원·26.2만 명**. 따라서 기획서는 2025년 수치로 갱신 가능하다. 신고사건 조사로 확인된 행정통계이며 미신고 피해 전체의 추정치가 아니다. **2026년부터 중복집계액 제외 등 기준이 변경되어 과거 연간 통계와 단순 비교하면 안 된다.** | [노동포털 공식 통계·정의](https://labor.moel.go.kr/arrstat/sttcStusList.do), [2026년 통계 개편 발표](https://moel.go.kr/news/enews/report/enewsView.do?news_seq=19017) |
+| **10. 노동부 계산기·온라인 체불 진정** | **확인** | **최저임금 모의계산기·퇴직금 계산기**가 제공되며, 노동포털에는 연차개수 계산기도 있다. **온라인 임금체불 진정 기능도 이미 존재**한다. 따라서 “계산·온라인 신고 수단이 없다”는 문제 정의는 반박된다. 여러 증빙의 자동 대조·근무 복원·계산 근거 연결까지 제공하는지는 별도 문제다. | [노동부 홈페이지](https://www.moel.go.kr/), [퇴직금 계산기](https://www.moel.go.kr/retirementpayCal.do), [온라인 진정 공식 안내](https://labor.moel.go.kr/minwonSysInfo/wagesolway.do) |
+
+**B. 국내 경쟁·대체 서비스 검증**
+
+‘확인’은 공개된 기능 설명을 확인했다는 의미다. 정확도·고객 수·서비스 효과를 독립 검증했다는 뜻은 아니다.
+
+| 기획안 | 판정 | 서비스명·확인 기능·조건 | 차별 여지 | 출처 URL |
+|---|---|---|---|---|
+| **L01 계약서·등기부 AI 분석** | **확인—영역별 경쟁 존재** | **SoftFlo EstateHub**는 AI 계약서 검증·위험 문구 분석을 안내한다. **집지켜**는 보증금 안전도·권리분석 서비스 제공 이력이 확인된다. 다만 집지켜의 현재 AI 분석 범위와 계약서·등기부·대장 **3종 동시 교차검증** 여부는 unknown. | **추정:** 문서마다 추출한 값과 원문 위치를 연결하고, 주소·소유자·용도·특약 간 불일치를 재현하는 데 집중. “기존 서비스는 교차검증을 못 한다”는 단정은 금물. | [SoftFlo](https://softflo.co.kr/), [집지켜 권리분석 서비스 보도, 2023](https://www.mt.co.kr/index.php/amp/future/2023/08/29/2023082915085085156) |
+| **L01 관악구 공공서비스** | **확인** | **우리동네 주거정보 플랫폼**: 실거래가·신축 및 무허가 건물 정보·현장상담소 위치·건물 기본정보 제공. **안심계약 도움서비스**: 계약상담·주거정책 안내·동행 지원. 단순 지역 위험정보 지도와 상담 연결은 이미 제공된다. | **추정:** 업로드 문서 간 모순을 설명한 후 기존 상담으로 연결하는 보완 도구. | [플랫폼 기능, 연합뉴스](https://www.yna.co.kr/view/AKR20260306057000004), [관악구 공식 상담서비스 안내](https://www.gwanak.go.kr/site/media/mediaVod6.do?Idx=CID20241106180027900) |
+| **L03 임금체불 증거 정리·급여 계산 AI** | **확인—직접 경쟁** | **진정24**는 근로계약서·급여명세서·통장내역·카톡 등의 증거 분석, 추가 질문, 사실 추출, 증거목록·진정서 PDF 생성을 안내한다. 결정론적 급여 계산 엔진과 근무시간 복원 정확도는 unknown. | **추정:** 근무표·대화·이체내역을 시간순으로 복원하고, **계산식·가정·미확인 시간·원문 증거**를 연결하는 부분을 검증해야 한다. | [진정24 공식](https://jinjung24.com/) |
+| **L05 고령자 화면 인식 디지털 도우미** | **부분확인** | 국내 **슈워요**는 시니어 대상 음성 질문, 큰 글씨 단계별 안내, 음성 읽기를 제공한다. 그러나 **현재 화면을 인식해 다음 클릭 위치를 표시하는 기능은 공개 설명에서 미확인**. 동일 기능 국내 상용 서비스의 존재는 unknown. | **추정:** 실제 화면 상태를 확인하고 한 단계씩 안내한 뒤 완료 여부를 검증하는 흐름. | [슈워요 개발자 등록 설명](https://play.google.com/store/apps/details?hl=ko&id=com.shuwoyo.app) |
+| **L08 국내 AI 웹 접근성 검사** | **부분확인** | **A11y Check**는 axe-core·자체 규칙 기반 자동 검사와 보고서를 제공한다. 이를 AI 검사라고 부를 근거는 미확인. 별도로 **WeBridge**는 GPT를 활용한 링크 검사·수정안 제공 개발 사례가 있다. **앨리(A11Y)**도 AI 접근성 콘텐츠 제작을 소개하지만 현재 상용 검사 범위는 unknown. | **추정:** 예약·신청 같은 과업을 실행해 실패 단계를 재현하고 수정 후 재검증. 자동 규칙 검사만으로는 차별성이 약하다. | [A11y Check](https://www.a11ychk.com/ko), [WeBridge 개발 발표자료](https://www.devcontest-digitalsolveup.kr/gallery/file/4/2024/8%20WayV4.20.pdf), [앨리 제작자 소개](https://disquiet.io/products/%EC%95%A8%EB%A6%AC) |
+| **L10 약봉투 촬영 AI 복약 관리** | **확인—직접 경쟁** | **파프리카케어**는 처방전·약봉투 촬영/사진 입력, 약품·질환 정보, 복약 관리, 가족 관리 등을 제공한다. AI 약품 인식 개선도 앱 설명에서 확인된다. | **추정:** 여러 의료기관 약봉투 사이의 **중복·복용 지시 불일치와 약사 확인용 근거 카드**에 집중. 촬영·알림만으로는 차별화하기 어렵다. | [공식 사이트](https://papricacare.com/), [개발자 앱 설명](https://apps.apple.com/kr/app/id1453787406) |
+| **L12 이주민 의료 AI 통역** | **부분확인** | **CLAION LXHUB**는 양방향 대면 AI 통역, RAG 기반 전문용어 교정, 상담원·민원인 분리 화면을 제공하며 의료 분야 적용을 안내한다. **케어해줘**는 병원 예약·전문 의료통역 연결을 제공한다. 후자의 통역 자체가 AI라는 근거는 미확인. | **추정:** 증상·기간·알레르기·복용약을 구조화하고, 번역 내용을 환자에게 되물어 확인한 뒤 사람 통역으로 넘기는 흐름. 실제 진료 통역 정확도는 별도 검증 필요. | [LXHUB 공식](https://www.claion.co.kr/solution/lxhub), [케어해줘 공식](https://carehaejo.com/) |
+| **L13 소규모 사업장 AI 위험성평가** | **확인—직접 경쟁 다수** | **KRAS**는 위험성평가 작성·출력·자료·컨설팅 등을 지원한다. KRAS 자체의 AI 사진 분석은 미확인. 그러나 **세이프로**는 사진 분석 기반 체크리스트·평가 자동작성을, **AIR**는 작업 내용 기반 AI 위험요인·대책·평가서 초안을 제공한다. | **추정:** 특정 소규모 업종으로 좁혀 위험 위치 표시, 추가 확인 질문, 개선 전후 확인을 검증. **사진→위험성평가서** 자체는 이미 경쟁 기능이다. | [KRAS 공식 포털](https://portal.kosha.or.kr/kras/evaluation/risk-data), [세이프로](https://safepro.kr/), [AIR](https://go.air.miso.gs/) |
+| **L09 대학 강의 AI 자막** | **확인** | **소보로**는 청각장애인 강의 문자통역 제공 이력이 있으며, **에어사운드 Tkita**는 대학 강의 실시간 자막·다국어 변환을 안내한다. | **추정:** “여기 이 식” 같은 지시어를 **슬라이드·수식 영역·포인터 시점**과 연결. 비교 서비스가 이 기능을 제공하는지는 unknown. | [소보로 정부 소개](https://gonggam.korea.kr/newsContentView.es?code_cd=0107050000&content=NC002&mid=a12700000000&news_id=EBC6D400EF074203E0540021F662AC5F&section_id=NCCD_PUBLISH), [Tkita 공식](https://airsound.co.kr/ko) |
+| **L21 합성 페르소나 시장검증** | **확인—직접 경쟁** | **오픈서베이 데이터스페이스**는 실제 소비자 응답 기반 합성 페르소나, 개별·그룹 인터뷰를 제공한다. 공식 도움말도 **가격 수용도·구매 의향 같은 통계적 수치를 확정할 수 없다고 명시**한다. | **추정:** 실제 고객 인터뷰 전에 반증 질문·검증 실험을 설계하는 학생팀 도구로 범위를 좁힐 수 있다. 합성 응답을 실제 시장검증 결과로 제시하면 안 된다. | [공식 설명](https://blog.opensurvey.co.kr/ai/synthetic-persona/), [그룹 인터뷰 출시 안내](https://updates.opensurvey.io/158635-26%EB%85%84-9%EC%9B%94-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%95%98%EB%82%98%EC%9D%98-%ED%99%94%EB%A9%B4%EC%97%90%EC%84%9C-%EC%99%84%EA%B2%B0%EB%90%98%EB%8A%94-%EB%A6%AC%EC%84%9C%EC%B9%98) |
+
+**기획서에 써도 되는 수치 목록 — 검증 완료분만**
+
+| 사용 가능한 문장 | 필수 조건·출처 |
+|---|---|
+| **“2025년 임금체불액은 2조 679억 원, 피해 노동자는 26.2만 명이다.”** | 노동포털 연도별 통계 기준. 미신고 피해 전체를 뜻하지 않는다. [공식 통계](https://labor.moel.go.kr/arrstat/sttcStusList.do) |
+| **“2024년 임금체불액은 2조 448억 원, 피해 노동자는 28.3만 명이다.”** | 연도 비교 시 2026년 집계기준 변경을 구분한다. [공식 통계](https://labor.moel.go.kr/arrstat/sttcStusList.do) |
+| **“2024년 관악구의 반지하가 있는 주택은 13,806호로 전국 해당 주택의 5.3%이며, 시군구 중 가장 많다.”** | **주택 수** 기준. 관악구 내부 반지하 비율·거주 가구 수로 바꾸지 않는다. [공식 표 60](https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3) |
+| **“건축물대장·DUR 품목정보·e약은요 API의 개발계정 신청 가능 트래픽은 각각 10,000이다.”** | 현재 공개 문서 기준. e약은요는 **운영단계 심의승인**. [건축물대장](https://www.data.go.kr/data/15134735/openapi.do), [DUR](https://www.data.go.kr/data/15059486/openapi.do), [e약은요](https://www.data.go.kr/data/15075057/openapi.do?recommendDataYn=Y) |
+
+**‘관악구 801건·서울 1위’는 원표·정의 확인 전 제외하고, 금천구 12.9%는 공식 첨부 원본 대조 후 확정하는 것이 적절하다.**
+hook: Stop
+hook: Stop Completed
+tokens used
+257,031
+2026-10-23 기준 검증 결과다. **API 공개 문서 확인과 실제 정상 호출 검증은 구분했다.** 인증키를 발급받아 호출하거나 경쟁 서비스를 직접 실행하지는 않았다. 경쟁 서비스 기능은 공개 설명에서 확인한 범위이며, 차별화 제안은 모두 `추정:`이다.
+
+**A. 사실 주장 검증**
+
+| 항목 | 판정 | 정확한 수치·조건 및 기획서에 쓸 표현 | 출처 URL |
+|---|---|---|---|
+| **1. 관악구 2025년 전세사기 피해 1위·801건** | **부분확인** | 서울시 자료를 인용한 보도에 **2024년 1,108건, 2025년 801건**이 나온다. 그러나 자치구 전체 원표와 집계 정의를 확보하지 못해 **서울 1위·최신 통계라는 표현은 unknown**. 발생·신고·피해자 결정 건수를 혼용하면 안 된다. 현재는 “서울시 자료를 인용한 보도에 따르면…”이라는 귀속 표현만 가능하다. | [아주경제, 2026-03-30](https://www.ajunews.com/view/20260330154837270) |
+| **2. 건축물대장 Open API** | **확인** | 국토부 **건축HUB 건축물대장정보 서비스** 존재. 포털 활용신청 후 인증키 사용. REST, JSON/XML이며 `_type` 생략 시 XML. 기본개요·표제부·층별개요·전유부 등을 제공한다. **무료, 이용허락범위 제한 없음, 개발·운영 자동승인, 개발계정 트래픽 10,000, 월간 갱신**으로 표시된다. 등기 권리관계 데이터와는 구분해야 한다. | [공식 API](https://www.data.go.kr/data/15134735/openapi.do) |
+| **3. 인터넷등기소 공개 열람 API** | **unknown / ‘가상 샘플만 가능’은 반박** | 일반 개발자가 신청하는 **법원 공식 공개 열람 API 문서는 확인하지 못했다**. 다만 HYPHEN에는 인터넷등기소를 자료출처로 하는 **스크래핑 방식 민간 API**가 존재한다. 따라서 공식 API 미확인이 곧 가상 샘플만 가능하다는 뜻은 아니다. 추정: 해커톤은 가상 문서 또는 사용 권한을 확보한 업로드 문서로 구현하고, 민간 API는 계약·비용·동작 확인 후 선택할 수 있다. | [HYPHEN 부동산등기 종합정보](https://hyphen.im/product/view?seq=22), [민원캐시 포함 상품 안내](https://www.hyphen.im/about/service-store) |
+| **4. 응급의료기관 실시간 가용병상 API** | **확인** | 국립중앙의료원 **전국 응급의료기관 정보 조회 서비스** 존재. 실시간 응급실 가용병상·중증질환 수용가능정보 등을 제공한다. **REST/XML, 무료, 이용허락범위 제한 없음, 개발·운영 자동승인**. 활용신청·인증키 필요. 현재 공개 화면의 개발계정 호출량은 공란이므로 **unknown**. 정상 응답·갱신 지연·실제 환자 수용 가능성은 별도 검증 대상이다. | [공식 API·활용가이드](https://www.data.go.kr/data/15000563/openapi.do?recommendDataYn=Y) |
+| **5-1. 식약처 DUR 품목정보 API** | **확인** | **의약품안전사용서비스(DUR)품목정보** 존재. 병용금기·특정연령금기·임부금기·용량주의·투여기간주의·노인주의·효능군중복·서방정분할주의 등을 제공한다. **REST, JSON/XML, 무료, 이용허락범위 제한 없음, 개발·운영 자동승인, 개발계정 10,000**. 활용신청·키 필요. | [공식 API](https://www.data.go.kr/data/15059486/openapi.do) |
+| **5-2. e약은요 API** | **확인** | **의약품개요정보(e약은요)** 존재. 대상은 **일반의약품 중 공급실적이 있는 제품**으로, 모든 처방약을 포괄한다고 쓰면 부정확하다. 효능·사용법·주의사항·상호작용 등을 제공. **REST, JSON/XML, 무료, 이용허락범위 제한 없음, 개발 자동승인·운영 심의승인, 개발계정 10,000**. `getDrbEasyDrugList` 사용. | [공식 API·요청 명세](https://www.data.go.kr/data/15075057/openapi.do?recommendDataYn=Y) |
+| **6. 서울시 침수흔적도 공개·형식·조건** | **부분확인** | 공개 확인. 서울 원천 페이지에서 **2010~2025년 연도별 ZIP 공간정보 파일** 제공을 확인했다. 최신 등록 파일은 **2025년 자료, 2026-04-27 갱신**. **무료·공공누리 제1유형, 출처표시 조건**. 포털 메타데이터에는 CSV로 표시되지만 원천 다운로드는 ZIP이다. 최신 ZIP 내부의 **SHP 포함 여부·좌표계는 unknown**. 과거 침수 이력이며 미래 침수 예측 결과가 아니다. | [서울 원천 다운로드](https://data.seoul.go.kr/dataList/OA-15636/F/1/datasetView.do), [포털 이용 조건](https://www.data.go.kr/data/15133406/fileData.do) |
+| **7. 화재 이후 공공데이터포털 복구** | **부분확인** | 행안부는 **2025-10-23 10시 운영 재개**, API 서비스·파일 다운로드 등 핵심 기능 이용 가능을 발표했다. 당시 일부 파일·관리자 기능은 추가 복구 중이었다. 따라서 **“2026년에도 화재 때문에 전체 API 이용 불가”는 반박**. 다만 **2026-10 현재 모든 개별 API가 정상이라는 주장은 unknown**이며, 사용할 API별 호출 검증이 필요하다. | [행안부 발표 수록, KDI](https://eiec.kdi.re.kr/policy/materialView.do?num=272504) |
+| **8-1. 금천구 외국인주민 최신 비율** | **부분확인** | 확인한 최신 연간 자료는 **2024-11-01 기준 행안부 외국인주민 현황**. 설명자료 재게시본 표에서 **총인구 243,662명, 외국인주민 31,444명, 12.9%**를 대조했다. 외국인주민은 외국국적자만이 아니라 **한국국적 취득자·외국인주민 자녀를 포함**한다. 공식 첨부 다운로드는 실패했으므로 **원본 표 재확인 전 최종 검증 완료 수치에서는 제외**한다. | [행안부 원문 게시물](https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000014&nttId=121226), [설명자료 재게시본](https://www.scribd.com/document/1026729823) |
+| **8-2. 관악구 반지하 비중 5.3%** | **확인—분모 수정 필수** | 2024 인구주택총조사 **표 60**: 관악구 **13,806호, 전국의 반지하가 있는 주택 중 5.3%, 시군구 1위**. **“관악구 주택의 5.3%가 반지하”가 아니다.** 주택 수와 반지하 거주 가구 수도 구분해야 한다. 기준일은 2024-11-01, 발표일은 2025-07-29다. | [통계청 공식 결과, 표 60](https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3) |
+| **9. 임금체불 2024·2025년 수치** | **확인** | 노동포털 연도별 공식 표: **2024년 20,448억 원·28.3만 명, 2025년 20,679억 원·26.2만 명**. 따라서 기획서는 2025년 수치로 갱신 가능하다. 신고사건 조사로 확인된 행정통계이며 미신고 피해 전체의 추정치가 아니다. **2026년부터 중복집계액 제외 등 기준이 변경되어 과거 연간 통계와 단순 비교하면 안 된다.** | [노동포털 공식 통계·정의](https://labor.moel.go.kr/arrstat/sttcStusList.do), [2026년 통계 개편 발표](https://moel.go.kr/news/enews/report/enewsView.do?news_seq=19017) |
+| **10. 노동부 계산기·온라인 체불 진정** | **확인** | **최저임금 모의계산기·퇴직금 계산기**가 제공되며, 노동포털에는 연차개수 계산기도 있다. **온라인 임금체불 진정 기능도 이미 존재**한다. 따라서 “계산·온라인 신고 수단이 없다”는 문제 정의는 반박된다. 여러 증빙의 자동 대조·근무 복원·계산 근거 연결까지 제공하는지는 별도 문제다. | [노동부 홈페이지](https://www.moel.go.kr/), [퇴직금 계산기](https://www.moel.go.kr/retirementpayCal.do), [온라인 진정 공식 안내](https://labor.moel.go.kr/minwonSysInfo/wagesolway.do) |
+
+**B. 국내 경쟁·대체 서비스 검증**
+
+‘확인’은 공개된 기능 설명을 확인했다는 의미다. 정확도·고객 수·서비스 효과를 독립 검증했다는 뜻은 아니다.
+
+| 기획안 | 판정 | 서비스명·확인 기능·조건 | 차별 여지 | 출처 URL |
+|---|---|---|---|---|
+| **L01 계약서·등기부 AI 분석** | **확인—영역별 경쟁 존재** | **SoftFlo EstateHub**는 AI 계약서 검증·위험 문구 분석을 안내한다. **집지켜**는 보증금 안전도·권리분석 서비스 제공 이력이 확인된다. 다만 집지켜의 현재 AI 분석 범위와 계약서·등기부·대장 **3종 동시 교차검증** 여부는 unknown. | **추정:** 문서마다 추출한 값과 원문 위치를 연결하고, 주소·소유자·용도·특약 간 불일치를 재현하는 데 집중. “기존 서비스는 교차검증을 못 한다”는 단정은 금물. | [SoftFlo](https://softflo.co.kr/), [집지켜 권리분석 서비스 보도, 2023](https://www.mt.co.kr/index.php/amp/future/2023/08/29/2023082915085085156) |
+| **L01 관악구 공공서비스** | **확인** | **우리동네 주거정보 플랫폼**: 실거래가·신축 및 무허가 건물 정보·현장상담소 위치·건물 기본정보 제공. **안심계약 도움서비스**: 계약상담·주거정책 안내·동행 지원. 단순 지역 위험정보 지도와 상담 연결은 이미 제공된다. | **추정:** 업로드 문서 간 모순을 설명한 후 기존 상담으로 연결하는 보완 도구. | [플랫폼 기능, 연합뉴스](https://www.yna.co.kr/view/AKR20260306057000004), [관악구 공식 상담서비스 안내](https://www.gwanak.go.kr/site/media/mediaVod6.do?Idx=CID20241106180027900) |
+| **L03 임금체불 증거 정리·급여 계산 AI** | **확인—직접 경쟁** | **진정24**는 근로계약서·급여명세서·통장내역·카톡 등의 증거 분석, 추가 질문, 사실 추출, 증거목록·진정서 PDF 생성을 안내한다. 결정론적 급여 계산 엔진과 근무시간 복원 정확도는 unknown. | **추정:** 근무표·대화·이체내역을 시간순으로 복원하고, **계산식·가정·미확인 시간·원문 증거**를 연결하는 부분을 검증해야 한다. | [진정24 공식](https://jinjung24.com/) |
+| **L05 고령자 화면 인식 디지털 도우미** | **부분확인** | 국내 **슈워요**는 시니어 대상 음성 질문, 큰 글씨 단계별 안내, 음성 읽기를 제공한다. 그러나 **현재 화면을 인식해 다음 클릭 위치를 표시하는 기능은 공개 설명에서 미확인**. 동일 기능 국내 상용 서비스의 존재는 unknown. | **추정:** 실제 화면 상태를 확인하고 한 단계씩 안내한 뒤 완료 여부를 검증하는 흐름. | [슈워요 개발자 등록 설명](https://play.google.com/store/apps/details?hl=ko&id=com.shuwoyo.app) |
+| **L08 국내 AI 웹 접근성 검사** | **부분확인** | **A11y Check**는 axe-core·자체 규칙 기반 자동 검사와 보고서를 제공한다. 이를 AI 검사라고 부를 근거는 미확인. 별도로 **WeBridge**는 GPT를 활용한 링크 검사·수정안 제공 개발 사례가 있다. **앨리(A11Y)**도 AI 접근성 콘텐츠 제작을 소개하지만 현재 상용 검사 범위는 unknown. | **추정:** 예약·신청 같은 과업을 실행해 실패 단계를 재현하고 수정 후 재검증. 자동 규칙 검사만으로는 차별성이 약하다. | [A11y Check](https://www.a11ychk.com/ko), [WeBridge 개발 발표자료](https://www.devcontest-digitalsolveup.kr/gallery/file/4/2024/8%20WayV4.20.pdf), [앨리 제작자 소개](https://disquiet.io/products/%EC%95%A8%EB%A6%AC) |
+| **L10 약봉투 촬영 AI 복약 관리** | **확인—직접 경쟁** | **파프리카케어**는 처방전·약봉투 촬영/사진 입력, 약품·질환 정보, 복약 관리, 가족 관리 등을 제공한다. AI 약품 인식 개선도 앱 설명에서 확인된다. | **추정:** 여러 의료기관 약봉투 사이의 **중복·복용 지시 불일치와 약사 확인용 근거 카드**에 집중. 촬영·알림만으로는 차별화하기 어렵다. | [공식 사이트](https://papricacare.com/), [개발자 앱 설명](https://apps.apple.com/kr/app/id1453787406) |
+| **L12 이주민 의료 AI 통역** | **부분확인** | **CLAION LXHUB**는 양방향 대면 AI 통역, RAG 기반 전문용어 교정, 상담원·민원인 분리 화면을 제공하며 의료 분야 적용을 안내한다. **케어해줘**는 병원 예약·전문 의료통역 연결을 제공한다. 후자의 통역 자체가 AI라는 근거는 미확인. | **추정:** 증상·기간·알레르기·복용약을 구조화하고, 번역 내용을 환자에게 되물어 확인한 뒤 사람 통역으로 넘기는 흐름. 실제 진료 통역 정확도는 별도 검증 필요. | [LXHUB 공식](https://www.claion.co.kr/solution/lxhub), [케어해줘 공식](https://carehaejo.com/) |
+| **L13 소규모 사업장 AI 위험성평가** | **확인—직접 경쟁 다수** | **KRAS**는 위험성평가 작성·출력·자료·컨설팅 등을 지원한다. KRAS 자체의 AI 사진 분석은 미확인. 그러나 **세이프로**는 사진 분석 기반 체크리스트·평가 자동작성을, **AIR**는 작업 내용 기반 AI 위험요인·대책·평가서 초안을 제공한다. | **추정:** 특정 소규모 업종으로 좁혀 위험 위치 표시, 추가 확인 질문, 개선 전후 확인을 검증. **사진→위험성평가서** 자체는 이미 경쟁 기능이다. | [KRAS 공식 포털](https://portal.kosha.or.kr/kras/evaluation/risk-data), [세이프로](https://safepro.kr/), [AIR](https://go.air.miso.gs/) |
+| **L09 대학 강의 AI 자막** | **확인** | **소보로**는 청각장애인 강의 문자통역 제공 이력이 있으며, **에어사운드 Tkita**는 대학 강의 실시간 자막·다국어 변환을 안내한다. | **추정:** “여기 이 식” 같은 지시어를 **슬라이드·수식 영역·포인터 시점**과 연결. 비교 서비스가 이 기능을 제공하는지는 unknown. | [소보로 정부 소개](https://gonggam.korea.kr/newsContentView.es?code_cd=0107050000&content=NC002&mid=a12700000000&news_id=EBC6D400EF074203E0540021F662AC5F&section_id=NCCD_PUBLISH), [Tkita 공식](https://airsound.co.kr/ko) |
+| **L21 합성 페르소나 시장검증** | **확인—직접 경쟁** | **오픈서베이 데이터스페이스**는 실제 소비자 응답 기반 합성 페르소나, 개별·그룹 인터뷰를 제공한다. 공식 도움말도 **가격 수용도·구매 의향 같은 통계적 수치를 확정할 수 없다고 명시**한다. | **추정:** 실제 고객 인터뷰 전에 반증 질문·검증 실험을 설계하는 학생팀 도구로 범위를 좁힐 수 있다. 합성 응답을 실제 시장검증 결과로 제시하면 안 된다. | [공식 설명](https://blog.opensurvey.co.kr/ai/synthetic-persona/), [그룹 인터뷰 출시 안내](https://updates.opensurvey.io/158635-26%EB%85%84-9%EC%9B%94-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%95%98%EB%82%98%EC%9D%98-%ED%99%94%EB%A9%B4%EC%97%90%EC%84%9C-%EC%99%84%EA%B2%B0%EB%90%98%EB%8A%94-%EB%A6%AC%EC%84%9C%EC%B9%98) |
+
+**기획서에 써도 되는 수치 목록 — 검증 완료분만**
+
+| 사용 가능한 문장 | 필수 조건·출처 |
+|---|---|
+| **“2025년 임금체불액은 2조 679억 원, 피해 노동자는 26.2만 명이다.”** | 노동포털 연도별 통계 기준. 미신고 피해 전체를 뜻하지 않는다. [공식 통계](https://labor.moel.go.kr/arrstat/sttcStusList.do) |
+| **“2024년 임금체불액은 2조 448억 원, 피해 노동자는 28.3만 명이다.”** | 연도 비교 시 2026년 집계기준 변경을 구분한다. [공식 통계](https://labor.moel.go.kr/arrstat/sttcStusList.do) |
+| **“2024년 관악구의 반지하가 있는 주택은 13,806호로 전국 해당 주택의 5.3%이며, 시군구 중 가장 많다.”** | **주택 수** 기준. 관악구 내부 반지하 비율·거주 가구 수로 바꾸지 않는다. [공식 표 60](https://www.kostat.go.kr/boardDownload.es?bid=203&list_no=437767&seq=3) |
+| **“건축물대장·DUR 품목정보·e약은요 API의 개발계정 신청 가능 트래픽은 각각 10,000이다.”** | 현재 공개 문서 기준. e약은요는 **운영단계 심의승인**. [건축물대장](https://www.data.go.kr/data/15134735/openapi.do), [DUR](https://www.data.go.kr/data/15059486/openapi.do), [e약은요](https://www.data.go.kr/data/15075057/openapi.do?recommendDataYn=Y) |
+
+**‘관악구 801건·서울 1위’는 원표·정의 확인 전 제외하고, 금천구 12.9%는 공식 첨부 원본 대조 후 확정하는 것이 적절하다.**

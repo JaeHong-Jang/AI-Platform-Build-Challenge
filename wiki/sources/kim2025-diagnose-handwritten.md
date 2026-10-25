@@ -1,0 +1,7 @@
+# Benchmarking Large Language Models for Diagnosing Students' Cognitive Skills from Handwritten Math Work
+
+- 저자: Yoonsu Kim, Hyoungwook Jin, Hayeon Doh, Eunhye Kim 외
+- 게시: 2025-04-01 · arXiv:2504.00843 · https://arxiv.org/abs/2504.00843
+
+## 초록 (원문)
+Students' handwritten math work provides a rich resource for diagnosing cognitive skills, as it captures intermediate reasoning beyond final answers. We investigate how current large language models (LLMs) perform in diagnosing cognitive skills from such work. However, student responses vary widely, often omitting steps or providing only vague, contextually implicit evidence. Despite recent advances in LLMs' multimodal and reasoning capabilities, their performance under such conditions remains underexplored. To address this gap, we constructed MathCog, a benchmark dataset containing 3,036 diagnostic verdicts across 639 student responses to 110 math problems, annotated by teachers using TIMSS-grounded cognitive skill checklists with evidential strength labels (Evident/Vague). Evaluating 18 LLMs, we find that (1) all models underperform (F1 < 0.5) regardless of capability, and (2) performance degrades sharply under vague evidence. Error analysis reveals systematic patterns: models frequently misattribute Vague evidence as Evident, overthink minimal cues, and hallucinate nonexistent evidence. We discuss implications for evidence-aware, teacher-in-the-loop designs for LLM-based cognitive diagnosis in educational settings.

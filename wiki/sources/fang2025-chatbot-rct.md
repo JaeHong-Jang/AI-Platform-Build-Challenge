@@ -1,0 +1,7 @@
+# How AI and Human Behaviors Shape Psychosocial Effects of Extended Chatbot Use: A Longitudinal Randomized Controlled Study
+
+- 저자: Cathy Mengying Fang, Auren R. Liu, Valdemar Danry, Eunhae Lee 외
+- 게시: 2025-03-21 · arXiv:2503.17473 · https://arxiv.org/abs/2503.17473
+
+## 초록 (원문)
+As people increasingly seek emotional support and companionship from AI chatbots, understanding how such interactions impact mental well-being becomes critical. We conducted a four-week randomized controlled experiment (n=981, >300k messages) to investigate how interaction modes (text, neutral voice, and engaging voice) and conversation types (open-ended, non-personal, and personal) influence four psychosocial outcomes: loneliness, social interaction with real people, emotional dependence on AI, and problematic AI usage. No significant effects were detected from experimental conditions, despite conversation analyses revealing differences in AI and human behavioral patterns across the conditions. Instead, participants who voluntarily used the chatbot more, regardless of assigned condition, showed consistently worse outcomes. Individuals' characteristics, such as higher trust and social attraction towards the AI chatbot, are associated with higher emotional dependence and problematic use. These findings raise deeper questions about how artificial companions may reshape the ways people seek, sustain, and substitute human connections.

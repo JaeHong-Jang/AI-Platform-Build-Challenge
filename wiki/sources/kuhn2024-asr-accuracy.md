@@ -1,0 +1,7 @@
+# Measuring the Accuracy of Automatic Speech Recognition Solutions
+
+- 저자: Korbinian Kuhn, Verena Kersken, Benedikt Reuter, Niklas Egger 외
+- 게시: 2024-08-29 · arXiv:2408.16287 · https://arxiv.org/abs/2408.16287
+
+## 초록 (원문)
+For d/Deaf and hard of hearing (DHH) people, captioning is an essential accessibility tool. Significant developments in artificial intelligence (AI) mean that Automatic Speech Recognition (ASR) is now a part of many popular applications. This makes creating captions easy and broadly available - but transcription needs high levels of accuracy to be accessible. Scientific publications and industry report very low error rates, claiming AI has reached human parity or even outperforms manual transcription. At the same time the DHH community reports serious issues with the accuracy and reliability of ASR. There seems to be a mismatch between technical innovations and the real-life experience for people who depend on transcription. Independent and comprehensive data is needed to capture the state of ASR. We measured the performance of eleven common ASR services with recordings of Higher Education lectures. We evaluated the influence of technical conditions like streaming, the use of vocabularies, and differences between languages. Our results show that accuracy ranges widely between vendors and for the individual audio samples. We also measured a significant lower quality for streaming ASR, which is used for live events. Our study shows that despite the recent improvements of ASR, common services lack reliability in accuracy.

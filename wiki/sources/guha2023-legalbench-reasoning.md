@@ -1,0 +1,7 @@
+# LegalBench: A Collaboratively Built Benchmark for Measuring Legal Reasoning in Large Language Models
+
+- 저자: Neel Guha, Julian Nyarko, Daniel E. Ho, Christopher Ré 외
+- 게시: 2023-08-20 · arXiv:2308.11462 · https://arxiv.org/abs/2308.11462
+
+## 초록 (원문)
+The advent of large language models (LLMs) and their adoption by the legal community has given rise to the question: what types of legal reasoning can LLMs perform? To enable greater study of this question, we present LegalBench: a collaboratively constructed legal reasoning benchmark consisting of 162 tasks covering six different types of legal reasoning. LegalBench was built through an interdisciplinary process, in which we collected tasks designed and hand-crafted by legal professionals. Because these subject matter experts took a leading role in construction, tasks either measure legal reasoning capabilities that are practically useful, or measure reasoning skills that lawyers find interesting. To enable cross-disciplinary conversations about LLMs in the law, we additionally show how popular legal frameworks for describing legal reasoning -- which distinguish between its many forms -- correspond to LegalBench tasks, thus giving lawyers and LLM developers a common vocabulary. This paper describes LegalBench, presents an empirical evaluation of 20 open-source and commercial LLMs, and illustrates the types of research explorations LegalBench enables.

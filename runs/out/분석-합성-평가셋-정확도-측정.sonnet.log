@@ -1,0 +1,16 @@
+💬 Sonnet: 분석 합성 평가셋 정확도 측정
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web" && ls && ls src/lib eval 2>&1 | head -50 && wc -l src/lib/*.ts && cat src/lib/fixtures.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && cat types.ts rules.ts verify.ts extract.ts proposals.ts agent.ts ollama.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && cat types.ts | sed -n 30,60p; cat rules.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && cat verify.ts extract.ts proposals.ts; cat ollama.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && cat agent.ts plain.ts; sed -n 1,60p rules.test.ts; cat ../../package.json | head -30; curl -s -m 5 http://172.20.32.
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && cat pipeline.ts; grep -n "baseCards" -A12 store.ts | head -40; ls ../../scripts
+⚙ mkdir -p "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval" && cat > "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval/dataset.ts" <<'EOF' // 합성 평가셋 — 견적서
+⚙ cat > "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval/run.mts" <<'EOF' // 이사 지킴이 정확도 측정. 실행: node --import tsx eval/run.mts   (src/lib 는 수정하지 않는다) import { writeFileSync } fr
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web" && timeout 590 node --import tsx eval/run.mts 2>&1 | tail -120
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web" && sed -i 's|^import { writeFileSync } from "node:fs";|import { writeFileSync } from "node:fs";\nimport { fileURLToPath } from 
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval" && sed -n '/## 2/,$p' REPORT.md | cut -c1-900
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval" && node -e ' const r=require("./results.json"); for(const x of r.quote.runs){ if(x.fullV.miss.length||x.full.overAsk.lengt
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web" && python3 - <<'EOF' p="eval/run.mts" s=open(p,encoding="utf-8").read() s=s.replace("return { id: q.id, dropped: v.dropped, s, 
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/eval" && cat > README.md <<'EOF' # eval — 합성 평가셋과 측정 스크립트  - `dataset.ts` 견적서 20건(Q01~Q20)과 업체 답변 20건(R01~R20). 상호는 모두 '가상○○이사',
+⚙ SubagentHandback

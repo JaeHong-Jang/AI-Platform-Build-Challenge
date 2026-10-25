@@ -1,0 +1,35 @@
+/* 근거 네트워크 — 관측소처럼 앱 테마와 무관한 어두운 남색 고정 */
+.kg { display: grid; grid-template-columns: minmax(0, 1fr) 300px; border: 1px solid #1d2a4d; border-radius: var(--radius); overflow: hidden; background: #070b1a; color: #dbe4ff; margin-bottom: 14px; }
+.kg-stage { position: relative; height: 560px; min-width: 0; background:
+  radial-gradient(ellipse at 20% 15%, rgba(43,74,154,.28), transparent 55%),
+  radial-gradient(ellipse at 85% 80%, rgba(90,60,154,.22), transparent 55%), #070b1a; }
+.kg-stars { position: absolute; inset: 0; pointer-events: none; opacity: .75;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 31% 68%, #bcd2ff, transparent),
+    radial-gradient(1.5px 1.5px at 47% 14%, #fff, transparent), radial-gradient(1px 1px at 63% 83%, #ffe9c7, transparent),
+    radial-gradient(1px 1px at 78% 36%, #fff, transparent), radial-gradient(1.5px 1.5px at 90% 62%, #cfc7ff, transparent),
+    radial-gradient(1px 1px at 22% 88%, #fff, transparent), radial-gradient(1px 1px at 55% 50%, #bcd2ff, transparent),
+    radial-gradient(1px 1px at 5% 55%, #fff, transparent), radial-gradient(1px 1px at 95% 10%, #fff, transparent); }
+.kg-canvas { position: absolute; inset: 0; }
+.kg-legend { position: absolute; left: 10px; bottom: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11.5px; color: #9fb0dd; pointer-events: none; }
+.kg-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.kg-legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px currentColor; background: currentColor; }
+.kg-hint { position: absolute; top: 8px; left: 12px; font-size: 11.5px; color: #7f90c0; pointer-events: none; }
+.kg-side { border-left: 1px solid #1d2a4d; background: #0b1226; padding: 14px; overflow-y: auto; max-height: 560px; font-size: 13px; line-height: 1.5; }
+.kg-side h3 { margin: 0 0 6px; font-size: 14px; color: #fff; word-break: keep-all; }
+.kg-side dl { margin: 8px 0; display: grid; grid-template-columns: 52px 1fr; gap: 4px 8px; }
+.kg-side dt { color: #7f90c0; font-size: 12px; } .kg-side dd { margin: 0; word-break: keep-all; }
+.kg-side blockquote { margin: 8px 0; padding: 8px 10px; border-left: 3px solid #3b5bdb; background: #111a38; color: #e6ecff; font-size: 12.5px; white-space: pre-wrap; }
+.kg-side ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.kg-side li button { all: unset; cursor: pointer; display: flex; gap: 6px; align-items: baseline; width: 100%; padding: 4px 6px; border-radius: 4px; color: #cfd9ff; font-size: 12.5px; }
+.kg-side li button:hover, .kg-side li button:focus-visible { background: #17224a; outline: 1px solid #3b5bdb; }
+.kg-side li i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.kg-side .kg-none { color: #8da0d4; }
+.kg-sum { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 10px 14px; margin-bottom: 10px; border: 1px solid #1d2a4d; border-radius: var(--radius); background: #0b1226; color: #dbe4ff; font-size: 13.5px; }
+.kg-sum b { color: #ffd166; font-size: 15px; }
+.kg-sum .lead { color: #9fb0dd; }
+@media (max-width: 760px) {
+  .kg { grid-template-columns: minmax(0, 1fr); }
+  .kg-stage { height: 420px; }
+  .kg-side { border-left: 0; border-top: 1px solid #1d2a4d; max-height: none; }
+}

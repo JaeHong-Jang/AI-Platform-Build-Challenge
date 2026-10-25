@@ -1,0 +1,43 @@
+💬 Sonnet: 사고 대응 근거 조사
+📄 읽기 _context.md
+⚙ ToolSearch
+📄 읽기 b013-incident.md
+🔎 이사화물 표준약관 제10035호 공정거래위원회 손해배상 인도일로부터 30일 통지
+🔎 소비자분쟁해결기준 이사화물 포장이사 파손 분실 해결기준 공정거래위원회 고시
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; ls wiki/sources | grep -i kca; ls wiki/papers | grep -i kca; python3 -c "import fitz" 2>&1; which pdftotext
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; head -40 wiki/sources/kca2026-소규모이사-피해.md; ls wiki/papers | head -30; ls wiki/sources | head -50
+🔎 이사화물운송약관 표준약관 공정거래위원회 ftc.go.kr 표준약관 이사화물
+🔎 열람 https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+🔎 열람 https://www.easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=629&ccfNo=3&cciNo=1&cnpClsNo=1
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; mkdir -p $S/dl; cd $S/dl; curl -sL -o t.hwp "https://www.ftc.go.kr/w
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cat > $S/hwp.py <<'E' import sys,olefile,zlib,struct o=olefile.OleFi
+🔎 열람 https://www.ftc.go.kr/www/previewBbsAtchmnfl.do?key=202&fileNo=14809
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cat > $S/hwp2.py <<'E' import sys,zlib,struct b=open(sys.argv[1],'rb
+🔎 소비자분쟁해결기준 공정거래위원회고시 이사화물 운송업 포장이사 해결기준 국가법령정보센터
+🔎 소비자분쟁해결기준 개정 2025 공정거래위원회고시 행정규칙
+🔎 열람 https://www.law.go.kr/admRulBylInfoPLinkR.do?bylCls=BE&admRulNm=%EC%86%8C%EB%B9%84%EC%9E%90%EB%B6%84%EC%9F%81%ED%95%B4%EA%B2%B0%EA%B8%B0%EC%A4%80&bylNo=0002&bylBrNo=00
+🔎 열람 https://www.consumer.go.kr/user/ftc/consumer/dmgerlifcase/115/selectDmgeRlifCaseView.do?dmgeRlifCaseSn=4024&page=3&row=25
+⚙ cd /tmp; curl -sL -m 30 "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000270136&chrClsCd=010201" -o /tmp/claude-1000/a.html -w "%{http_code} %{size_download}\n"; curl -sL -m 30 "https://ww
+🔎 열람 https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=46777
+⚙ cd /tmp/claude-1000; grep -o "flDownload[^'\"]*\|bylSeq[^'\"&]*\|admRulSeq=[0-9]*\|발령번호[^<]*\|공정거래위원회고시[^<]\{0,40\}" a.html | sort -u | head -20; sed 's/<[^>]*>//g' b.html | grep -v '^\s*$' | head -
+🔎 소비자분쟁해결기준 공정거래위원회고시 제2025-14호 고시 전문 별표 품목별 해결기준 첨부
+🔎 열람 https://www.consumer.go.kr/user/bbs/consumer/100/119/bbsDataView/3826.do
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; mkdir -p $S/dl2; cd $S/dl2; curl -sL -m 120 -o c2022.pdf "https://ww
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cat > $S/ex.py <<'E' import sys,fitz d=fitz.open(sys.argv[1]); open(
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/dl2; sed -n 7055,7175p c2022.txt; head -30 c2022.txt | tr '\n' ' '; 
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cd $S/dl2; curl -sL -m 120 -o kca.pdf "https://www.kca.go.kr/home/bo
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cd $S/dl2; curl -sL -m 120 -A "Mozilla/5.0" -e "https://www.kca.go.k
+⚙ cd /tmp; curl -sIL -m 30 -A "Mozilla/5.0" "https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005" 2>&1 | head -5; echo rc=$?; curl -s -m 20 -o /dev/null 
+🔎 열람 https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+⚙ S=/tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad; cp /home/data/.claude/projects/-mnt-c-Users-User-Desktop-----3---AI-
+🔎 열람 https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=666&ccfNo=3&cciNo=2&cnpClsNo=2
+🔎 한국소비자원 피해구제 신청 절차 합의권고 소비자분쟁조정위원회 조정 소비자기본법 제55조 제57조 30일
+🔎 화물자동차 운수사업법 제35조 적재물배상보험등 가입 이사화물 시행령 제9조의7 보험 가입 의무 운송주선사업자
+🔎 열람 https://www.molit.go.kr/USR/policyTarget/dtl.jsp?idx=707
+🔎 열람 https://law.go.kr/LSW/lsLawLinkInfo.do?lsJoLnkSeq=900785356&chrClsCd=010202
+🔎 열람 https://www.kca.go.kr/odr/pg/ma/pgProcssInfo.do
+⚙ cd /tmp/claude-1000; curl -sL -m 30 -A "Mozilla/5.0" "https://www.molit.go.kr/USR/policyTarget/dtl.jsp?idx=707" -o m.html -w "%{http_code} %{size_download}\n"; sed 's/<[^>]*>//g' m.html | grep -v '^
+🔎 열람 https://www.consumer.go.kr/consumer/subIndex/52.do
+🔎 열람 https://www.molit.go.kr/USR/policyTarget/dtl.jsp?idx=707
+📝 작성 b013-incident.sonnet.md
+⚙ SubagentHandback

@@ -1,0 +1,79 @@
+{
+ "agg": {
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "date": "2026-10-24T18:42:22.814Z",
+  "runs": 4,
+  "ok": 4,
+  "bySituation": {
+   "당일 추가요금": "1/1",
+   "이사 거부·계약금": "1/1",
+   "파손": "1/1",
+   "분실": "1/1"
+  },
+  "avgSec": 16.3,
+  "rejectedTotal": 2
+ },
+ "rows": [
+  {
+   "situation": "당일 추가요금",
+   "run": 1,
+   "ok": true,
+   "stopped": "finished",
+   "ms": 22332,
+   "tools": 5,
+   "rejected": 1,
+   "bases": [
+    "t8-2",
+    "t5-3",
+    "k-evidence",
+    "d-overcharge"
+   ]
+  },
+  {
+   "situation": "이사 거부·계약금",
+   "run": 1,
+   "ok": true,
+   "stopped": "finished",
+   "ms": 8949,
+   "tools": 4,
+   "rejected": 0,
+   "bases": [
+    "t9-2",
+    "k-evidence",
+    "t8-2"
+   ]
+  },
+  {
+   "situation": "파손",
+   "run": 1,
+   "ok": true,
+   "stopped": "finished",
+   "ms": 21961,
+   "tools": 5,
+   "rejected": 1,
+   "bases": [
+    "k-photo",
+    "t18",
+    "t14",
+    "t19",
+    "k-1372"
+   ]
+  },
+  {
+   "situation": "분실",
+   "run": 1,
+   "ok": true,
+   "stopped": "finished",
+   "ms": 12138,
+   "tools": 4,
+   "rejected": 0,
+   "bases": [
+    "k-photo",
+    "t18",
+    "k-evidence",
+    "t14",
+    "d-damage"
+   ]
+  }
+ ]
+}

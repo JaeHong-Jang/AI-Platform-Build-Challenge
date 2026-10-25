@@ -1,0 +1,32 @@
+💬 Sonnet: 분석 — 이사 서비스 제작 계획서
+📄 읽기 b005-plan-sonnet.md
+⚙ ToolSearch
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/runs/out"; ls; wc -c b005-evidence.sol.md b005-benchmark.sonnet.md; cat b005-evidence.sol.md
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/runs/out"; cat b005-benchmark.sonnet.md
+🔎 열람 https://caniuse.com/stream
+🔎 열람 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/capture
+🔎 열람 https://caniuse.com/mediarecorder
+🔎 열람 https://docs.anthropic.com/en/docs/build-with-claude/vision
+🔎 이사화물 표준약관 공정거래위원회 제4조 견적서 제5조 계약서 제8조 원문
+🔎 열람 https://platform.claude.com/docs/en/docs/build-with-claude/vision
+🔎 열람 https://www.easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+🔎 vision language models counting objects benchmark limitations household object inventory GPT-4V Gemini accuracy arXiv
+🔎 Gemini API video understanding docs file size limit inline 20MB Files API video frames per second tokens
+🔎 열람 https://www.easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+🔎 이사화물 표준약관 제10026호 전문 제12조 계약해제 제15조 손해배상 청구 30일 사고확인서 제13조 인수 거절
+🔎 이삿짐 부피 톤수 기준 1톤 트럭 적재 용량 이사 견적 산정 기준 공식 국토교통부 또는 소비자원
+🔎 Upstage Document Parse OCR Korean document benchmark accuracy invoice contract
+🔎 "이사화물 표준약관" "제9조" "제10조" "제12조" 인수 거절 귀중품 계약금 "제15조" 사고확인서 약관 전문 공정위 표준약관 제10026호
+🔎 Claude Vision 한국어 OCR 정확도 문서 견적서 추출 vs Naver CLOVA OCR 벤치마크 2026
+🔎 iOS Safari input type=file capture video record upload large file PWA getUserMedia issues standalone mode
+🔎 열람 https://www.yesform.com/wdata/doc-24229.php
+🔎 열람 http://www.xn--o39a150b12ef3p.org/download/%EC%9D%B4%EC%82%AC%ED%99%94%EB%AC%BC%ED%91%9C%EC%A4%80%EC%95%BD%EA%B4%80.pdf
+🔎 열람 https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+🔎 열람 https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170
+🔎 열람 https://ai.google.dev/gemini-api/docs/video-understanding
+🔎 열람 https://platform.claude.com/docs/en/build-with-claude/pdf-support
+🔎 열람 https://arxiv.org/abs/2402.03328
+🔎 열람 https://developer.apple.com/forums/thread/655193
+🔎 WebKit blog getUserMedia home screen web apps iOS 13.4 standalone PWA camera support MediaRecorder iOS 14.5
+📝 작성 b005-plan.sonnet.md
+⚙ SubagentHandback

@@ -1,0 +1,30 @@
+{
+  "decision": "D004",
+  "brief": "B006",
+  "items": [
+    {"id": "W1", "claim": "에이전트는 업체 답변 점검 한 곳에만 둔다 (다른 단계는 단순 호출·규칙)", "by": "sol", "where": "분석 b006-agent §2",
+     "peer": "—", "lead": "Argon: Sol 정의에 부합, D003 범위 변경 조건부 찬성",
+     "verdict": "확정", "evidence": ["runs/out/b006-agent.sol.md:270", "runs/out/b006-review.argon.md:125"]},
+    {"id": "W2", "claim": "업체 답변 문장에 항목 이름만 있으면 '명시됨'으로 바꿀 수 있다", "by": "opus", "where": "web/src/lib/agent.ts 초판",
+     "peer": "—", "lead": "Argon 높음: '책장은 제외입니다'도 명시됨 통과 → 제외·별도·조건 표현 거절, 단음절 키워드 제거, unanswered 정정 시 후보 삭제",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:11", "web/src/lib/rules.test.ts:116"]},
+    {"id": "W3", "claim": "동의어 사전으로 품목을 묶어 대조한다", "by": "opus", "where": "web/src/lib/rules.ts 초판",
+     "peer": "—", "lead": "Argon 높음: 책상·식탁이 같은 카드로 합쳐져 허위 명시됨 → 다른 물건 분리, 같은 물건은 수량 합산, 빈 이름 제외",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:12", "web/src/lib/rules.test.ts:80"]},
+    {"id": "W4", "claim": "첫 화면 '계약 전에 막을 수 있어요'", "by": "opus", "where": "web/src/components/App.tsx 초판",
+     "peer": "—", "lead": "Argon 높음: D003 과장 금지 위반 → '미리 확인하세요'",
+     "verdict": "기각", "evidence": ["runs/out/b006-review.argon.md:13", "decisions/D003-이사-지킴이-제작계획.md:11"]},
+    {"id": "W5", "claim": "예시 모드 에이전트 요약은 미리 쓴 문장", "by": "opus", "where": "web/src/lib/agent.ts 초판",
+     "peer": "—", "lead": "Argon 높음: 답변을 바꿔도 같은 요약 → 요약을 실제 결과로 생성, 모델 요약문은 화면에 쓰지 않음",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:14"]},
+    {"id": "W6", "claim": "예시 모드에서 내 사진을 올려도 'AI로 읽기'·'AI 초안'으로 표시", "by": "opus", "where": "web/src/components/App.tsx 초판",
+     "peer": "—", "lead": "Argon 중간: 실시간 분석으로 오해 → '예시 결과 보기'·'예시 초안'·분석 결과 아님 경고",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:24"]},
+    {"id": "W7", "claim": "live 모드 Anthropic 호출(구조화 출력·tool use)이 동작한다", "by": "opus", "where": "web/src/lib/provider.ts",
+     "peer": "—", "lead": "Argon 높음: 실호출 전 unknown, 다중 턴이 60초 초과 가능 → 50초 상한·비정상 종료 표시 추가, 호환성은 키 확보 후 확인",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:15"]},
+    {"id": "W8", "claim": "판독 불가·이전 단계 이동·부분 실패 처리", "by": "opus", "where": "web/src/lib/rules.ts, App.tsx",
+     "peer": "—", "lead": "Argon 중간 4건: 사용자 입력 시 판독 불가 해제, 단계 이동 시 점검 결과 초기화, allSettled로 성공한 초안 보존, 지연 배너에 직접 입력 버튼",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b006-review.argon.md:16", "runs/out/b006-review.argon.md:21", "runs/out/b006-review.argon.md:22"]}
+  ]
+}

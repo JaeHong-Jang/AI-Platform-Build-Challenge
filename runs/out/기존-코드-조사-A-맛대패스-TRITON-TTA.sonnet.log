@@ -1,0 +1,26 @@
+💬 Sonnet: 기존 코드 조사 A (맛대패스·TRITON·TTA)
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년"; for d in "AI Innovation 공모전/masdae-pass" TRITON "TTA 공모전/TTA-Service"; do echo "=== $d"; find "$d" \( -name node_modules -o -name dist -o -name .git \) -prune
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; sed -n 1,149p wiki/overviews/이사-지킴이-제작계획.md | cut -c1-400 | sed -n 40,149p
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; cat -n README.md | head -60; cat -n backend/package.json frontend/package.json | cut -c1-200; wc -l backend/src/*.ts shared/cont
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass/backend/src"; find . -type f | xargs wc -l; cat -n harness/llm.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass/backend/src"; cat -n harness/llm/ollama.ts; cat -n harness/runner.ts | sed -n 1,134p; sed -n 1,60p agents/orchestrator/plan.ts | c
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; cat -n backend/src/agents/orchestrator/summarize.ts | sed -n 1,118p; cat -n backend/src/agents/verify/wording-guard.ts; cat -n h
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; sed -n 1,80p backend/src/agents/connect/facility-reader.ts | cat -n; cat -n backend/src/harness/agent.ts backend/src/harness/gat
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; grep -n "verifyQuote" -A12 backend/src/agents/verify/provenance-checker.ts | head -30; sed -n 80,164p backend/src/agents/connect
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; cat -n frontend/src/features/intake/index.tsx frontend/src/features/intake/useIntakeForm.ts frontend/src/features/intake/FreeTex
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; sed -n 1,153p backend/src/api/app.ts | cat -n | cut -c1-200 | sed -n 1,153p; grep -n "chatJSON" -B15 -A25 backend/src/agents/ana
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON"; cat -n README.md | head -70; cat -n CLAUDE.md | head -50; find apps -type f \( -name node_modules -prune -o -print \) | grep -v -E 'node_modules|\.venv
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON"; cat -n AGENTS.md | head -90; cat -n tools/run.sh tools/checks/verify.sh | head -90; wc -l apps/backend/court/*.py apps/frontend/src/*.ts* apps/frontend
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/apps"; cat -n backend/court/llm.py; cat -n backend/court/agent_loop.py | head -200
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/apps"; ls frontend/src frontend/src/store* frontend/src/features/* 2>/dev/null; grep -rln zustand frontend/src | head; cat -n frontend/AGENTS.md backend/
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/apps"; cat -n backend/court/evidence.py | head -80; grep -n "schema\|SCHEMA" backend/court/agents.py | head -20; cat -n frontend/src/features/court/store
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON/apps"; sed -n 50,100p backend/court/agents.py | cat -n | sed 's/^ *\([0-9]*\)/\1+49/' | head -55; ls frontend/src/api/mock 2>/dev/null; grep -n "viewport
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service"; cat -n package.json .env.example .nvmrc; cat -n DESIGN.md | head -150; cat README.md | head -60; cat .github/workflows/ci.yml
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service/src"; wc -l agent/*.ts ui/*.tsx App.tsx styles.css | grep -v test; cat -n agent/llm.ts
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service/src"; cat -n agent/loop.ts | head -190
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service"; cat -n scripts/record-fixtures.mjs | head -140; cat -n src/agent/contract.ts | head -70; grep -n "fixtureKey\|adapter\|complete(" src/agen
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service"; sed -n 1,60p scripts/check-blind.mjs; sed -n 1,60p src/App.test.ts; sed -n 1,50p src/evaluation/golden.ts; head -c 700 golden/cases.json; 
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TTA 공모전/TTA-Service"; sed -n 1,50p src/standards/grounding.ts; grep -n "useState\|useReducer" src/App.tsx | head -12; grep -n "Wizard\|step" src/App.tsx | head 
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass"; sed -n 1,30p frontend/src/shared/api/client.ts; sed -n 1,40p backend/test/gates.test.ts; cat -n frontend/src/shared/ui/Section.t
+📝 작성 b006-ref-a.sonnet.md
+⚙ SubagentHandback

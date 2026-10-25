@@ -1,0 +1,7 @@
+# CUAD: An Expert-Annotated NLP Dataset for Legal Contract Review
+
+- 저자: Dan Hendrycks, Collin Burns, Anya Chen, Spencer Ball
+- 게시: 2021-03-10 · arXiv:2103.06268 · https://arxiv.org/abs/2103.06268
+
+## 초록 (원문)
+Many specialized domains remain untouched by deep learning, as large labeled datasets require expensive expert annotators. We address this bottleneck within the legal domain by introducing the Contract Understanding Atticus Dataset (CUAD), a new dataset for legal contract review. CUAD was created with dozens of legal experts from The Atticus Project and consists of over 13,000 annotations. The task is to highlight salient portions of a contract that are important for a human to review. We find that Transformer models have nascent performance, but that this performance is strongly influenced by model design and training dataset size. Despite these promising results, there is still substantial room for improvement. As one of the only large, specialized NLP benchmarks annotated by experts, CUAD can serve as a challenging research benchmark for the broader NLP community.

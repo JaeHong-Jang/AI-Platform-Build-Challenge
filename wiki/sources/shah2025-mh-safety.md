@@ -1,0 +1,7 @@
+# Evaluating the Clinical Safety of LLMs in Response to High-Risk Mental Health Disclosures
+
+- 저자: Siddharth Shah, Amit Gupta, Aarav Mann, Alexandre Vaz 외
+- 게시: 2025-09-01 · arXiv:2509.08839 · https://arxiv.org/abs/2509.08839
+
+## 초록 (원문)
+As large language models (LLMs) increasingly mediate emotionally sensitive conversations, especially in mental health contexts, their ability to recognize and respond to high-risk situations becomes a matter of public safety. This study evaluates the responses of six popular LLMs (Claude, Gemini, Deepseek, ChatGPT, Grok 3, and LLAMA) to user prompts simulating crisis-level mental health disclosures. Drawing on a coding framework developed by licensed clinicians, five safety-oriented behaviors were assessed: explicit risk acknowledgment, empathy, encouragement to seek help, provision of specific resources, and invitation to continue the conversation. Claude outperformed all others in global assessment, while Grok 3, ChatGPT, and LLAMA underperformed across multiple domains. Notably, most models exhibited empathy, but few consistently provided practical support or sustained engagement. These findings suggest that while LLMs show potential for emotionally attuned communication, none currently meet satisfactory clinical standards for crisis response. Ongoing development and targeted fine-tuning are essential to ensure ethical deployment of AI in mental health settings.

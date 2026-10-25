@@ -1,0 +1,30 @@
+{
+  "decision": "D005",
+  "brief": "B007",
+  "items": [
+    {"id": "K1", "claim": "모바일 5단계 화면 대신 레일·KPI·대조표·에이전트 패널 대시보드", "by": "sol·sonnet", "where": "b007-dashboard §2 · b007-design 디자인 지문",
+     "peer": "기존 사이트 6개 화면 직접 캡처로 확인", "lead": "Argon: 사용자 4대 요건 충족, 조건부 찬성",
+     "verdict": "확정", "evidence": ["runs/out/b007-dashboard.sol.md:43", "runs/out/b007-review.argon.md:136"]},
+    {"id": "K2", "claim": "색상 A안 토큰 (작은 글자 #94A3B8 포함)", "by": "opus", "where": "web/src/app/globals.css 초판",
+     "peer": "Sonnet 보고서: slate-400은 2.56이라 쓰지 말 것, text-sub #475569·brand-ink #115E59", "lead": "Argon 중간: 금지 색 8곳 사용·토큰 불일치 → 보고서 값으로 교정",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-design.sonnet.md:288", "runs/out/b007-review.argon.md:19"]},
+    {"id": "K3", "claim": "에이전트 qwen3:4b, 견적 읽기 ax4-light", "by": "sonnet", "where": "b007-ollama 실측",
+     "peer": "의장 직접 호출 1회 재확인(도구 형식 정상, 계단 조건부를 명시로 오분류)", "lead": "Argon: 호출 형식은 Ollama 명세 부합",
+     "verdict": "확정", "evidence": ["runs/out/b007-ollama.sonnet.md:1", "runs/out/b007-review.argon.md:20"]},
+    {"id": "K4", "claim": "'추가·별도' 뒤에 '없'이 오면 명시됨 허용", "by": "opus", "where": "web/src/lib/agent.ts 초판",
+     "peer": "—", "lead": "Argon 높음: '추가요금은 피할 수 없습니다'·'2만원 받습니다'가 명시됨 통과 → 금액·부담·거절 차단, '추가 비용 없음'·총액 언급만 예외",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-review.argon.md:13", "web/src/lib/rules.test.ts:138"]},
+    {"id": "K5", "claim": "승인 무효화는 카드 내용만 비교, 2차 점검 시 문의 목록 교체", "by": "opus", "where": "web/src/lib/store.ts · InquiryPanel.tsx 초판",
+     "peer": "—", "lead": "Argon 높음 2건: 답변 반영 칩·KPI가 남고 2차 점검에 3/7→0/4 → 총액·업체 포함 서명, 문의 상태 파생, 문의 누적, 실패 시 롤백",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-review.argon.md:14", "runs/out/b007-review.argon.md:15", "web/src/lib/rules.test.ts:191"]},
+    {"id": "K6", "claim": "KPI '비용 처리 미확인'", "by": "opus", "where": "web/src/components/Overview.tsx 초판",
+     "peer": "—", "lead": "Argon 높음: '확인 남음'과 항상 같은 수 → '비용 변동 요인'(별도 요금·작업조건·추가비 금액 미정)으로 재정의",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-review.argon.md:17"]},
+    {"id": "K7", "claim": "금액은 원문에 포함 문자열이면 인정, 이름 적힌 품목은 명시됨", "by": "opus", "where": "web/src/lib/extract.ts · rules.ts",
+     "peer": "Sol: 수량·제외 구분 필요", "lead": "Argon 중간: '35만원'에서 '5만' 통과, '35만 5천원' 오삭제, '에어컨 별도'가 총액 포함 → 숫자 경계·만천 표기, 별도·수량 불일치는 조건 모호",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-review.argon.md:18", "web/src/lib/rules.test.ts:173", "web/src/lib/rules.test.ts:181"]},
+    {"id": "K8", "claim": "가상 사례는 Ollama 없이는 실행 불가", "by": "opus", "where": "web/src/components/Dashboard.tsx 초판",
+     "peer": "—", "lead": "Argon 중간: 시연 사고 위험 → 미리 만든 초안을 원문 대조 후 표시 + 화면 안내",
+     "verdict": "정정 후 확정", "evidence": ["runs/out/b007-review.argon.md:20"]}
+  ]
+}

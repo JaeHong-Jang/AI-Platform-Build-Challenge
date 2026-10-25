@@ -1,0 +1,241 @@
+/* 이삿짐 운반 장면 (B010). 트럭 #C2410C는 사용자 선택 A '진남색' 보고 값. 나머지 그림 색은 진남색 토큰에서 섞어 만든다.
+   윤곽선은 var(--ink), 상태 구분은 색만이 아니라 기호(✓?△⌀)가 한다. */
+:root {
+  --scene-truck: #C2410C;
+  --scene-box: #B98742;
+  --scene-box-ink: #1F1303;
+  --scene-skin: #F0C4A0;
+  --scene-ai: var(--brand);
+  --scene-code: #0E7869;
+  --scene-stripe: #F59E0B;
+  --scene-off: #8A94A6;
+  --scene-sky-a: color-mix(in srgb, var(--brand) 16%, #FFFFFF);
+  --scene-sky-b: color-mix(in srgb, var(--brand) 6%, #FFFFFF);
+  --scene-city: color-mix(in srgb, var(--brand) 12%, #FFFFFF);
+  --scene-wall: #F4F6FA;
+  --scene-room: #FFF8EC;
+  --scene-core: #E3E8F0;
+  --scene-glass: color-mix(in srgb, var(--brand) 28%, #FFFFFF);
+  --scene-walk: #D5DCE6;
+  --scene-road: #5B6577;
+  --scene-cargo: #F7F3EC;
+}
+:root[data-theme="dark"] {
+  --scene-truck: #F08A3E;
+  --scene-box: #C99A4E;
+  --scene-box-ink: #1A1204;
+  --scene-code: #4FD1B8;
+  --scene-off: #5E6A80;
+  --scene-sky-a: #13213D;
+  --scene-sky-b: #0E192E;
+  --scene-city: #1A2945;
+  --scene-wall: #1E2A42;
+  --scene-room: #2A2A30;
+  --scene-core: #18233A;
+  --scene-glass: #2C4372;
+  --scene-walk: #2A3550;
+  --scene-road: #0A101C;
+  --scene-cargo: #22252C;
+}
+
+.ms-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+.ms { display: block; width: 100%; min-width: 760px; height: auto; font-family: inherit; }
+.ms text { font-family: inherit; }
+.ms-sky-a { stop-color: var(--scene-sky-a); }
+.ms-sky-b { stop-color: var(--scene-sky-b); }
+.ms-city rect { fill: var(--scene-city); }
+.ms-walk { fill: var(--scene-walk); }
+.ms-road { fill: var(--scene-road); }
+.ms-lane { stroke: #F5F7FA; stroke-width: 3; stroke-dasharray: 26 18; opacity: .7; }
+.ms-sub { fill: var(--muted); font-size: 11px; }
+
+/* 건물 */
+.ms-roof { fill: var(--rail-bg); }
+.ms-roof-text { fill: var(--rail-text); font-size: 12px; font-weight: 600; }
+.ms-roof-text.on { fill: #FFFFFF; }
+.ms-wall { fill: var(--scene-wall); stroke: var(--ink); stroke-width: 1.5; }
+.ms-slab { fill: var(--line); }
+.ms-glass { fill: var(--scene-glass); stroke: var(--ink); stroke-width: 1; }
+.ms-floor-no { fill: var(--faint); font-size: 10px; font-weight: 600; }
+.ms-room { fill: var(--scene-room); stroke: var(--ink); stroke-width: 1; }
+.ms-room-label { fill: var(--muted); font-size: 10px; font-weight: 700; }
+.ms-core { fill: var(--scene-core); stroke: var(--ink); stroke-width: 1; }
+.ms-core-label { fill: var(--faint); font-size: 10px; text-anchor: middle; }
+.ms-shaft { fill: color-mix(in srgb, var(--ink) 10%, transparent); stroke: var(--line); }
+.ms-car { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.ms-car-door { stroke: var(--ink); stroke-width: 1; }
+.ms-stairs { fill: none; stroke: var(--ink); stroke-width: 3; stroke-dasharray: 5 3; opacity: .55; }
+.ms-door { fill: var(--rail-act); stroke: var(--ink); }
+.ms-mat { stroke: var(--faint); stroke-width: 3; opacity: .5; }
+
+/* 검수대 · 게시판 · 멈춤선 */
+.ms-desk > rect:first-child { fill: var(--rail-bg); }
+.ms-desk-front { fill: var(--panel); stroke: var(--ink); stroke-width: 1.2; }
+.ms-desk-text { fill: var(--ink); font-size: 11px; font-weight: 700; text-anchor: middle; }
+.ms-desk-sub { fill: var(--muted); font-size: 8.5px; font-weight: 600; text-anchor: middle; }
+.ms-quote rect:first-child { fill: #FFFFFF; stroke: var(--ink); stroke-width: 1; }
+.ms-quote path { stroke: var(--faint); stroke-width: 1.2; }
+.ms-scan { fill: var(--brand); opacity: .7; animation: ms-scan 1s linear infinite; }
+.ms-pole { stroke: var(--faint); stroke-width: 3; }
+.ms-lamp-light { fill: var(--panel-2); stroke: var(--ink); stroke-width: 1.5; }
+.ms-lamp-light.s-ok, .ms-lamp-light.s-unknown, .ms-lamp-light.s-vague, .ms-lamp-light.s-unread { fill: var(--x-bg); stroke: var(--x-ink); stroke-width: 2.5; }
+.ms-lamp-text { fill: var(--ink); font-size: 11px; font-weight: 800; text-anchor: middle; }
+.ms-board rect:first-of-type { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.ms-board-title { fill: var(--ink); font-size: 11px; font-weight: 700; }
+.ms-board-count { fill: var(--ink); font-size: 14px; font-weight: 800; text-anchor: end; }
+.ms-note { fill: var(--unknown-bg); stroke: var(--unknown-ink); stroke-width: 1; }
+.ms-stopline { stroke: var(--vague-ink); stroke-width: 3; stroke-dasharray: 8 5; }
+.ms-stopsign rect { fill: var(--vague-bg); stroke: var(--vague-ink); stroke-width: 1.5; }
+.ms-stopsign text { fill: var(--vague-ink); font-size: 11px; font-weight: 800; text-anchor: middle; }
+
+/* 트럭 */
+.ms-truck { fill: var(--scene-truck); stroke: var(--ink); stroke-width: 1.5; }
+.ms-truck-text { fill: #FFFFFF; font-size: 10px; font-weight: 700; text-anchor: middle; }
+.ms-cargo-back { fill: var(--scene-cargo); }
+.ms-cargo-rib { stroke: var(--line); stroke-width: 1; }
+.ms-cargo-frame { fill: none; stroke: var(--ink); stroke-width: 2; }
+.ms-chassis { fill: var(--ink); }
+.ms-ramp { stroke: var(--faint); stroke-width: 5; stroke-linecap: round; }
+.ms-line { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.ms-lamp { fill: #FDE68A; stroke: var(--ink); }
+.ms-tire { fill: #1F2430; }
+.ms-hub { fill: #C9D1DD; }
+
+/* 구름 · 건물 꾸밈 · 트럭 꾸밈 */
+.ms-cloud ellipse { fill: #FFFFFF; opacity: .8; }
+:root[data-theme="dark"] .ms-cloud ellipse { fill: #22345A; opacity: .6; }
+.ms-sill { stroke: var(--faint); stroke-width: 2; }
+.ms-ac rect { fill: var(--panel-2); stroke: var(--ink); stroke-width: 1; }
+.ms-ac circle { fill: none; stroke: var(--faint); stroke-width: 1.2; }
+.ms-canopy { fill: var(--rail-act); }
+.ms-mirror { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.ms-truck-door { fill: #FFFFFF; font-size: 11px; font-weight: 800; text-anchor: middle; opacity: .9; }
+
+/* 상태 4종 + 대조 전 */
+.s-ok { --x-bg: var(--ok-bg); --x-ink: var(--ok-ink); }
+.s-unknown { --x-bg: var(--unknown-bg); --x-ink: var(--unknown-ink); }
+.s-vague { --x-bg: var(--vague-bg); --x-ink: var(--vague-ink); }
+.s-unread { --x-bg: var(--unread-bg); --x-ink: var(--unread-ink); }
+.s-pending { --x-bg: var(--panel); --x-ink: var(--faint); }
+
+/* 상자 · 표지 */
+.ms-box, .ms-sign { cursor: pointer; outline: none; }
+.ms-box-body { fill: var(--scene-box); stroke: var(--ink); stroke-width: 1.3; }
+.ms-box-flap { fill: none; stroke: color-mix(in srgb, var(--ink) 35%, transparent); stroke-width: 1; }
+.ms-tape { fill: #F3E3C3; opacity: .8; }
+.ms-box-text { fill: var(--scene-box-ink); font-size: 9.5px; font-weight: 700; text-anchor: middle; }
+/* 가전: 흰 몸체 / 가구: 이사용 담요(퀼팅 + 묶음 끈) */
+.shape-app .ms-box-body { fill: #E9EDF3; }
+.shape-app .ms-box-text { fill: #0E1A33; }
+.ms-app-dot { fill: #1E8A52; }
+.shape-furn .ms-box-body { fill: #2F4F8F; }
+.shape-furn .ms-box-text { fill: #FFFFFF; paint-order: stroke; stroke: #2F4F8F; stroke-width: 3px; }
+.ms-quilt { stroke: #FFFFFF; stroke-width: .8; opacity: .22; }
+.ms-strap { fill: var(--scene-stripe); opacity: .9; }
+.ms-mark { fill: var(--x-bg); stroke: var(--x-ink); stroke-width: 1.6; }
+.ms-mark-text { fill: var(--x-ink); font-size: 9.5px; font-weight: 800; text-anchor: middle; }
+.ms-sign-body { fill: var(--x-bg); stroke: var(--x-ink); stroke-width: 1.4; }
+.s-pending .ms-sign-body { stroke-dasharray: 4 3; }
+.ms-sign-text { fill: var(--x-ink); font-size: 11.5px; font-weight: 700; }
+.ms-group { fill: var(--faint); font-size: 10.5px; font-weight: 700; letter-spacing: .04em; }
+.ms-sel { fill: none; stroke: transparent; stroke-width: 2.5; }
+.is-sel .ms-sel, .ms-box:focus-visible .ms-sel, .ms-sign:focus-visible .ms-sel { stroke: var(--focus); }
+.ms-box:hover .ms-sel, .ms-sign:hover .ms-sel { stroke: color-mix(in srgb, var(--focus) 55%, transparent); }
+
+/* 사람 — 옷색: AI 진남색 / 코드 청록. 줄무늬 조끼는 이사 작업복 */
+.ms-shadow { fill: #000; opacity: .16; }
+.ms-person .ms-shirt { stroke: var(--ink); stroke-width: 1.2; }
+.ms-person.ai .ms-shirt, .ms-person.ai .ms-cap, .ms-person.ai .ms-badge-bg { fill: var(--scene-ai); }
+.ms-person.code .ms-shirt, .ms-person.code .ms-cap, .ms-person.code .ms-badge-bg { fill: var(--scene-code); }
+.ms-stripe { fill: var(--scene-stripe); }
+.ms-leg { fill: #2B3446; }
+.ms-arm { fill: var(--scene-skin); stroke: var(--ink); stroke-width: .8; }
+.ms-head { fill: var(--scene-skin); stroke: var(--ink); stroke-width: 1.2; }
+.ms-eye { fill: var(--ink); }
+.ms-paper { fill: #FFFFFF; stroke: var(--ink); stroke-width: .9; }
+.ms-ink { stroke: var(--faint); stroke-width: 1; }
+.ms-dark { fill: #2B3446; }
+.ms-screen { fill: #9CC2FF; }
+.ms-stamp { fill: var(--vague-ink); }
+.ms-dolly { fill: none; stroke: #4B5568; stroke-width: 2.5; stroke-linecap: round; }
+.ms-wheel { fill: #1F2430; }
+.ms-badge-bg { stroke: var(--panel); stroke-width: 2; }
+.ms-badge-text { fill: #FFFFFF; font-size: 8.5px; font-weight: 800; text-anchor: middle; }
+.ms-ring { fill: none; stroke: var(--focus); stroke-width: 2.5; }
+.ms-done { fill: var(--ok-ink); stroke: var(--panel); stroke-width: 1.5; }
+.ms-done-text { fill: #FFFFFF; font-size: 8px; font-weight: 800; text-anchor: middle; }
+.ms-off-text { fill: var(--muted); font-size: 10px; font-weight: 700; text-anchor: middle; }
+.ms-person.st-off { opacity: .55; }
+.ms-person.st-off .ms-shirt, .ms-person.st-off .ms-cap, .ms-person.st-off .ms-badge-bg { fill: var(--scene-off); }
+.ms-person.st-off .ms-shirt { stroke-dasharray: 3 2; }
+.ms-person.st-wait { opacity: .9; }
+
+/* 말풍선 */
+.ms-bubble rect, .ms-bubble path { fill: var(--panel); stroke: var(--ink); stroke-width: 1.3; }
+.ms-bubble.live rect, .ms-bubble.live path { stroke: var(--focus); stroke-width: 2; }
+.ms-bubble.end rect, .ms-bubble.end path { fill: var(--rail-bg); stroke: var(--rail-bg); }
+.ms-bubble-title { fill: var(--brand-ink); font-size: 10.5px; font-weight: 800; }
+.ms-bubble-text { fill: var(--ink); font-size: 12.5px; font-weight: 600; }
+.ms-bubble.end .ms-bubble-title { fill: var(--rail-text); }
+.ms-bubble.end .ms-bubble-text { fill: #FFFFFF; }
+.ms-bubble { animation: ms-pop .22s ease-out; transform-box: fill-box; transform-origin: bottom center; }
+
+/* 움직임 — transform·opacity만. 걷는 다리·팔, 일하는 사람의 고리 */
+.ms-leg, .ms-arm.swing-a, .ms-arm.swing-b { transform-box: fill-box; transform-origin: top center; }
+.ms-person.walk .ms-leg.l, .ms-person.walk .swing-b { animation: ms-swing .32s ease-in-out infinite alternate; }
+.ms-person.walk .ms-leg.r, .ms-person.walk .swing-a { animation: ms-swing .32s ease-in-out infinite alternate-reverse; }
+.ms-person.st-work:not(.walk) .ms-body { animation: ms-bob .9s ease-in-out infinite; }
+.ms-person.st-work .ms-tool { transform-box: fill-box; transform-origin: center; animation: ms-tool .7s ease-in-out infinite alternate; }
+.ms-ring { animation: ms-pulse 1.1s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+
+@keyframes ms-swing { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+@keyframes ms-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes ms-tool { from { transform: rotate(-10deg); } to { transform: rotate(10deg) translateY(-1px); } }
+@keyframes ms-pulse { from { opacity: 1; transform: scale(.85); } to { opacity: 0; transform: scale(1.35); } }
+@keyframes ms-scan { from { transform: translateY(0); } to { transform: translateY(16px); } }
+@keyframes ms-pop { from { opacity: 0; transform: translateY(4px) scale(.96); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ms *, .ms *::before, .ms *::after { animation: none !important; transition: none !important; }
+}
+
+/* TRITON식 실행 흐름: 단계 상자 + 화살표 */
+.flow { display: grid; gap: 10px; }
+.flow-row { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; position: relative; }
+.flow-row.side { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: calc(3 / 8 * 100%); }
+.flow-label { font-size: 11px; font-weight: 700; color: var(--faint); letter-spacing: .06em; margin: 2px 0 -2px; }
+.step { position: relative; display: grid; gap: 3px; align-content: start; min-height: 96px; padding: 9px 10px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--panel); font-size: 12px; }
+.flow-row:not(.side) .step:not(:last-child)::after { content: ""; position: absolute; right: -12px; top: 50%; width: 10px; height: 10px; border-top: 2px solid var(--faint); border-right: 2px solid var(--faint); transform: translateY(-50%) rotate(45deg); }
+.step-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 4px; font-size: 10.5px; font-weight: 700; color: var(--faint); letter-spacing: .02em; }
+.step-meta > span { white-space: nowrap; }
+.step-meta .actor { padding: 0 5px; border-radius: 4px; background: var(--panel-2); border: 1px solid var(--line); }
+.step-meta .actor.ai { background: var(--brand-soft); color: var(--brand-ink); border-color: color-mix(in srgb, var(--brand) 30%, transparent); }
+.step b { font-size: 13px; color: var(--ink-strong); line-height: 1.3; }
+.step .out { color: var(--muted); font-size: 11.5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.step[data-state="작동 중"] { border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent); }
+.step[data-state="작동 중"] .st { color: var(--brand-ink); }
+.step[data-state="완료"] { border-left: 3px solid var(--ok-ink); }
+.step[data-state="완료"] .st { color: var(--ok-ink); }
+.step[data-state="꺼짐"], .step[data-state="입력 없음"] { background: var(--panel-2); }
+.step[data-state="꺼짐"] b { color: var(--muted); text-decoration: line-through; }
+.step.human { background: var(--rail-bg); border-color: var(--rail-bg); }
+.step.human b { color: #FFFFFF; }
+.step.human .out, .step.human .step-meta { color: var(--rail-text); }
+.step .switch { position: absolute; right: 8px; bottom: 8px; }
+.step .lock { position: absolute; right: 9px; bottom: 9px; color: var(--faint); }
+@media (max-width: 1180px) {
+  .flow-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .flow-row.side { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; }
+  .flow-row:not(.side) .step:nth-child(4n)::after { display: none; }
+}
+@media (max-width: 640px) {
+  .flow-row, .flow-row.side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow-row .step::after { display: none; }
+}
+
+/* B012 점검 에이전트 — 도구를 쓰는 AI 에이전트는 안테나로 구분한다 */
+.ms-antenna path { stroke: var(--scene-ai); stroke-width: 1.6; stroke-linecap: round; }
+.ms-antenna circle { fill: var(--scene-stripe); }
+.ms-person.st-work .ms-antenna circle { animation: ms-blink .8s ease-in-out infinite alternate; }
+@keyframes ms-blink { from { opacity: .35; } to { opacity: 1; } }
+.step .tools { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }

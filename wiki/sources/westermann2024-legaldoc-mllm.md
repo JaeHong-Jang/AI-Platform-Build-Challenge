@@ -1,0 +1,7 @@
+# Analyzing Images of Legal Documents: Toward Multi-Modal LLMs for Access to Justice
+
+- 저자: Hannes Westermann, Jaromir Savelka
+- 게시: 2024-12-16 · arXiv:2412.15260 · https://arxiv.org/abs/2412.15260
+
+## 초록 (원문)
+Interacting with the legal system and the government requires the assembly and analysis of various pieces of information that can be spread across different (paper) documents, such as forms, certificates and contracts (e.g. leases). This information is required in order to understand one's legal rights, as well as to fill out forms to file claims in court or obtain government benefits. However, finding the right information, locating the correct forms and filling them out can be challenging for laypeople. Large language models (LLMs) have emerged as a powerful technology that has the potential to address this gap, but still rely on the user to provide the correct information, which may be challenging and error-prone if the information is only available in complex paper documents. We present an investigation into utilizing multi-modal LLMs to analyze images of handwritten paper forms, in order to automatically extract relevant information in a structured format. Our initial results are promising, but reveal some limitations (e.g., when the image quality is low). Our work demonstrates the potential of integrating multi-modal LLMs to support laypeople and self-represented litigants in finding and assembling relevant information.

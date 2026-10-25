@@ -1,0 +1,14 @@
+💬 Sonnet: 기획서 B013 사실 검증
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; cat team/prompts/_context.md | head -40; wc -c 보고서/build/proposal-hwp.md; diff 보고서/build/proposal-hwp.b012.md 보고서/build/proposal-h
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; cat web/src/lib/incident-bases.ts; cat runs/out/b013-review.sonnet.md | head -80
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; cat web/eval/results-incident.json | head -c 3000; echo; python3 - <<'E' import json d=json.load(open('web/eval/results-incident.j
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -nE "최초|유일|경쟁|업계 최|배상 책임|돌려받|받을 수|보장|반드시|책임이 있|위법|불법|추천|%|[0-9]+건" 보고서/build/proposal-hwp.md | cut -c1-260; grep -n "\[1[5-7]
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; sed -n '26,27p;37p;72p;90p;107p;95p;105p' 보고서/build/proposal-hwp.md; cd web/src/lib; wc -l incident.ts responder.ts agents.ts; cat
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src"; cat lib/agents.ts; sed -n 1,98p lib/responder.ts; grep -n "damageCard" -r . | head; grep -n "검증기\|records\|계약 전\|법률" compo
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -n "소비자분쟁\|k-photo\|촬영\|이사 전" runs/out/b013-incident.sonnet.md | head -12; grep -n "촬영" runs/out/b013-incident.sol.md | head;
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web"; sed -n 170,212p src/lib/rules.ts; python3 - <<'E' import json d=json.load(open('eval/results-inspect-holdout.json')) print(d.g
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -rln "청구할 수 없습니다" --include=*.md --include=*.json --include=*.mts --include=*.ts . 2>/dev/null | grep -v node_modules | head;
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; sed -n 34,46p briefs/B013-파손-분실과-사고-대응.md | cut -c1-700; grep -n "청구할 수 없습니다" web/src/lib/incident.test.ts | head -3
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge"; grep -rln "24\.9" runs/out wiki 2>/dev/null | head -4; grep -rhn "24\.9%\|13\.9%" runs/out/*.md wiki/sources/*.md 2>/dev/null | cu
+📝 작성 b013-proposal-review.sonnet.md
+⚙ SubagentHandback

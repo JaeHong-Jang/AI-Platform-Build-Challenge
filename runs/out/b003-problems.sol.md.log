@@ -1,0 +1,1315 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16794-08dd-7280-ba17-d2cdc2fd44b3
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-23이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+
+# 과제 B003 · 조사 (당신: Sol, 실무팀) — 문제 인벤토리
+아이디어를 먼저 내지 말고 **문제부터** 찾는다. 이 대회 주최(서울시·관악구·금천청년꿈터·서울대 캠퍼스타운) 맥락의 사람들(청년 1인가구·대학생·아르바이트생·이주민·고령자·소상공인·소규모 사업장 등)이 겪는 문제 중, 아래 조건을 모두 만족하는 문제를 **12개** 찾아라.
+1. **구체적 장면**: 누가, 언제(어떤 순간), 무엇 때문에 막히는가 — 한 문장으로
+2. **심각도 근거**: 공식 통계·조사·보도 1~2개 (출처 URL, 기준 연도). 없으면 unknown
+3. **왜 지금**: 최근 1~2년 사이 제도·기술·사회 변화로 이 문제가 커졌거나 해결 가능해진 이유
+4. **기존 해결책 조사**: 이 문제를 다루는 국내외 서비스·공공 서비스 3~5개 — 각각 이름, URL, 무엇을 해 주는지(공식 페이지 기준), 무엇을 안 해 주는지("공식 자료에서 확인 안 됨"으로 표기, 단정 금지)
+5. **빈 곳**: 기존 해결책들이 공통으로 놓치는 지점 한 문장 — 그리고 그 빈 곳을 메우는 데 AI가 꼭 필요한 이유
+6. 하루 해커톤(9시간)에 시연 가능한 규모로 좁힐 수 있는가 (가능/어려움 + 이유)
+
+출력: 문제마다 위 6항목을 표 또는 소제목으로. 마지막에 "빈 곳이 가장 뚜렷한 문제 TOP 5"와 이유. 이미 포화된 유형(범용 정책 추천 챗봇, 주소 기반 전세 위험조회, 범용 법률 챗봇, 병원 지도 등)은 빈 곳이 증명되지 않으면 제외.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-23T07:05:17.958975Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+2026-10-23T07:05:18.464745Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+공식 통계와 서비스 안내를 확인해 문제 12개를 정리하겠습니다. 서비스의 미제공 기능과 AI 필요성은 확인된 사실과 추정을 구분하고, 9시간 시연으로 좁힐 수 있는지도 함께 검토하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc pwd in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "rg --files -g 'AGENTS.md' -g '*B003*' -g '*index.md' -g '*_context*' -g '*SKILL.md' -g '*b003*'" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+AGENTS.md
+wiki/index.md
+briefs/B003-아이디어-재설계.md
+team/prompts/b003-research-sol.md
+team/prompts/_context.md
+runs/out/b003-problems.sol.md.log
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat AGENTS.md wiki/index.md briefs/B003-아이디어-재설계.md' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# AGENTS.md — 오케스트라 팀 운영 매뉴얼
+
+이 저장소에서 일하는 모든 에이전트(Claude Code, Codex, Antigravity)는 이 파일을 단일 운영 매뉴얼로 따른다.
+
+## 1. 팀 구성 — 지휘와 실무를 나눈다
+
+| 구분 | 멤버 | 모델 / 호출 | 하는 일 | 하지 않는 일 |
+|---|---|---|---|---|
+| ◆ 지휘 (의장) | **Opus** | Claude Opus 5.5 — 메인 Claude Code 세션 | brief 작성, 배정, 토론 진행, 최종 판정, 위키·저장소 반영 | 조사·분석 본작업 |
+| ◆ 지휘 | **Astra** | GPT 6 Astra — `team/bin/ask.sh astra` | 지휘부 검증(전략·사업성·심사 관점), 토론 | 조사·분석 본작업 |
+| ◆ 지휘 | **Argon** | Gemini 4 Argon — `team/bin/ask.sh argon` | 지휘부 검증(기술·구현 관점), 토론 | 조사·분석 본작업 |
+| ○ 실무 | **Sol** | GPT 6.1 Sol — `team/bin/ask.sh sol` | **조사 · 분석 · 상호 검증** | 최종 판정 |
+| ○ 실무 | **Sonnet** | Claude Sonnet 5.5 — Agent 도구 `model: sonnet` | **조사 · 분석 · 상호 검증**, 위키 ingest | 최종 판정 |
+
+실무팀(Sol·Sonnet)이 일을 하고, 지휘부(Opus·Astra·Argon)는 방향을 정하고 검증하고 판정한다.
+
+## 2. 파이프라인 (stage)
+
+```
+brief ─▶ 조사 ─▶ 분석 ─▶ 상호 검증 ─▶ 지휘부 검증 ─▶ 토론 ─▶ 판정 ─▶ 위키 반영 ─▶ 저장소 반영 ─┐
+  ▲                                                                                       │
+  └──────────────────────────── 결과가 다음 brief로 되돌아간다 ──────────────────────────┘
+```
+
+| stage | 누가 | 규칙 |
+|---|---|---|
+| `brief` | Opus | `briefs/Bxxx-*.md` 작성: 질문, 범위, 성공 기준, 마감. status: active / waiting / done |
+| `research` 조사 | Sol ∥ Sonnet | 서로 결과를 보지 않고 병렬. 사실마다 출처 URL, 못 찾으면 `unknown` |
+| `analysis` 분석 | Sol ∥ Sonnet | 두 조사 결과를 모두 입력으로 받아 **각자 독립적으로** 분석 |
+| `peer` 상호 검증 | Sol ↔ Sonnet | Sol의 분석은 Sonnet이, Sonnet의 분석은 Sol이 검증(출처·수치·논리). 자기 산출물 승인 금지 |
+| `review` 지휘부 검증 | Astra ∥ Argon | 블라인드 독립 리뷰. Astra=전략·사업성·심사, Argon=기술·구현성. 각 주장에 찬성/반대/보류 |
+| `debate` 토론 | Astra · Argon (+Opus 의장) | **판정이 갈리는 주장만**. 각자 상대 의견을 받아 1회 반박 → Opus가 정리 |
+| `decision` 판정 | Opus | `decisions/Dxxx-*.md`: 결론, 근거 run, 반대 의견, 남은 unknown |
+| `wiki` 위키 반영 | Sonnet · Opus | 노트·링크 갱신, `wiki/log.md` 기록 |
+| `repo` 저장소 반영 | Sonnet · Opus | 코드·문서·제출물 반영 |
+
+작은 과업은 stage를 건너뛸 수 있으나 **peer 또는 review 중 하나는 반드시** 거친다.
+
+## 3. 실행 기록 — 관측소에 실시간으로 보인다
+
+- 외부 모델: `team/bin/ask.sh <astra|argon|sol> <task-id> <prompt-file> <stage>` → 시작·종료가 `runs/events.jsonl`, 완료가 `runs/runs.jsonl`에 기록. 결과 `runs/out/<task-id>.<member>.md`, 진행 로그 `.log`.
+- Claude 서브에이전트(Sonnet): 띄우기 직전 `rid=$(team/bin/event.py start sonnet <task> <stage> <out>)`, 완료 알림 후 `team/bin/event.py end $rid ok|fail`.
+- Opus 직접 작업(판정·ingest 등)도 같은 방식으로 `event.py start opus …` / `end`.
+- 프롬프트는 `team/prompts/`에 남기고 `_context.md`를 앞에 붙인다.
+
+## 4. LLM 위키 규칙 (`wiki/`)
+
+```
+wiki/papers/<stem>.pdf          원문 (가능할 때)
+wiki/sources/<stem>.md          논문 초록·요약 (원문에 충실)
+wiki/notes/<type>/<이름>.md      연결된 지식 노트
+wiki/overviews/<주제>.md         종합 문서
+wiki/index.md, wiki/log.md      목차, 변경 기록
+```
+- stem: `<첫저자성><연도>-<키워드>` (예: `lewis2020-rag`)
+- frontmatter: `type: hub|concept|idea|paper|system|experiment|verdict`, `tags`, `status: draft|verified|confirmed|rejected`, `source`
+- 링크는 `[[노트이름]]`. 관측소 그래프가 이 링크로 그려진다.
+- **4대 규칙**: ① 위키 우선, 웹검색은 조사 stage에서만 ② 불확실하면 원문 확인 ③ 확인 못한 값은 `unknown` ④ 근거가 없으면 자료 추가 요청
+- 논문은 arXiv ID·DOI로 실재를 확인한 경우에만 `status: verified` (`team/bin/ingest_papers.py`)
+
+## 5. 관측소 (`observatory/`)
+
+- **실시간**: `python3 observatory/server.py` → http://localhost:8777 (홈 · 시스템 동작 · 지식 그래프 · 실험 기록). 실행 중인 팀원, 진행 시간, 검색어·명령 로그, D-day가 1초 단위로 갱신된다.
+- **정적 스냅샷**: `python3 observatory/build.py` → `observatory/index.html`
+
+## 6. 금지
+
+- 확인하지 않은 통계·논문·데이터셋·경쟁 부재 주장 생성 금지 (경쟁 주장은 실무팀 검증 필수)
+- 개인정보·권한 없는 자료를 저장소에 넣지 않는다
+- 다른 멤버의 산출물(`runs/out/`)을 덮어쓰지 않는다
+# 위키 목차
+- 허브: [[팀-구조]] · [[대회-개요]] · [[아이디어-허브]]
+- 시스템: [[Opus]] [[Astra]] [[Argon]] [[Sol]] [[Sonnet]] [[작업-파이프라인]] [[관측소]]
+- 개념: [[아이디어-평가-루브릭]]
+- 종합: [[아이디어-롱리스트]] · [[아이디어-최종추천]] · [[아이디어-상세카드]] · [[논문-허브]]
+---
+id: B003
+title: 문제 중심 아이디어 재설계 + 기존 서비스 벤치마킹
+status: active
+stage: research
+created: 2026-10-23T16:05:00+09:00
+---
+# B003 문제 중심 아이디어 재설계 + 기존 서비스 벤치마킹
+
+- **질문**: 누구의 어떤 문제를 겨냥하고, 왜 지금 해결해야 하며, 기존 서비스가 못 하는 것을 AI로 어떻게 해결하는가? 이 기준으로 아이디어를 다시 세우고 10~15개를 추천하라.
+- **범위**: (1) 문제 인벤토리(문제→대상→심각도 근거→기존 해결책→빈 곳) (2) 기존 서비스 벤치마킹(국내·해외, 기능 비교표) (3) 문제 중심 아이디어 카드
+- **성공 기준**: 아이디어마다 경쟁 서비스 3개 이상을 공식 페이지로 확인한 비교표가 있고, "기존 서비스엔 없다"는 주장은 모두 상호 검증을 통과할 것
+- **유지 후보**: D001 상위 8개(L03·L08·L09·L01·L04·L13·L05·L06)는 벤치마킹 후 살리거나 버린다
+- **마감**: 2026-10-24 오전 (기획서 작성 시간 확보)
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.moel.go.kr 2024 임금체불 2조 448 고용노동부 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'rg --files wiki/overviews wiki/notes | head -45' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+wiki/overviews/아이디어-롱리스트.md
+wiki/overviews/아이디어-상세카드.md
+wiki/overviews/아이디어-최종추천.md
+wiki/notes/competition/대회-개요.md
+wiki/notes/concepts/아이디어-평가-루브릭.md
+wiki/notes/ideas/L12-의료-통역-문답-카드.md
+wiki/notes/ideas/L11-송금-전-사기-흐름-탐지.md
+wiki/notes/ideas/L10-다제약물-복약-대조.md
+wiki/notes/ideas/L09-지시어-연결-강의-자막.md
+wiki/notes/ideas/L08-과업-기반-웹-접근성-재현.md
+wiki/notes/ideas/L07-출입구-단위-휠체어-접근-확인.md
+wiki/notes/ideas/L06-쉬운-고지서.md
+wiki/notes/ideas/L05-화면-보고-알려주는-디지털-도우미.md
+wiki/notes/ideas/L04-복지-청년정책-증빙-빈칸-찾기.md
+wiki/notes/ideas/L03-임금-누락-증거-복원.md
+wiki/notes/ideas/L02-방-상태-증거기록.md
+wiki/notes/ideas/L01-전월세-서류-교차검증.md
+wiki/notes/ideas/L18-첫-오개념-진단.md
+wiki/notes/ideas/L17-고립-청년-저부담-연결.md
+wiki/notes/ideas/L16-잔반-원가-분석.md
+wiki/notes/ideas/L15-골목상권-점주-코파일럿.md
+wiki/notes/ideas/L14-반지하-침수-개인-행동-에이전트.md
+wiki/notes/ideas/L13-소규모-사업장-작업-전-위험-점검.md
+wiki/notes/ideas/L21-합성-페르소나-시장검증.md
+wiki/notes/ideas/L20-응급-사전분류-병상-매칭.md
+wiki/notes/ideas/L19-복합-포장재-분리-안내.md
+wiki/notes/ideas/L23-사진-한-장-생활민원.md
+wiki/notes/ideas/L22-고장-증상-좁히기.md
+wiki/notes/ideas/L24-논문-수식-도표-재현.md
+wiki/notes/systems/Sol.md
+wiki/notes/systems/Astra.md
+wiki/notes/systems/Argon.md
+wiki/notes/systems/Opus.md
+wiki/notes/systems/관측소.md
+wiki/notes/systems/Sonnet.md
+wiki/notes/systems/작업-파이프라인.md
+wiki/notes/hubs/아이디어-허브.md
+wiki/notes/hubs/논문-허브.md
+wiki/notes/hubs/팀-구조.md
+wiki/notes/papers/kuhn2024-asr-accuracy.md
+wiki/notes/papers/rokhva2025-foodwaste-cv.md
+wiki/notes/papers/kodandaram2026-cua-blind.md
+wiki/notes/papers/kirillov2023-sam.md
+wiki/notes/papers/kim2025-diagnose-handwritten.md
+wiki/notes/papers/kim2021-donut-ocrfree.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.moel.go.kr 2024 산업재해 외국인 사망 2025 2024 50인 미만 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat wiki/notes/ideas/L03-임금-누락-증거-복원.md wiki/notes/ideas/L09-지시어-연결-강의-자막.md wiki/notes/ideas/L08-과업-기반-웹-접근성-재현.md wiki/notes/ideas/L13-소규모-사업장-작업-전-위험-점검.md' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+---
+type: idea
+tags: [아이디어, L03]
+status: draft
+source: wiki/overviews/아이디어-롱리스트.md
+---
+# L03 임금 누락 증거 복원
+
+요약은 [[아이디어-롱리스트]] 참고. 상위: [[아이디어-허브]]
+
+## 근거 논문
+- [[westermann2024-legaldoc-mllm]]
+- [[kim2021-donut-ocrfree]]
+- [[mathew2020-docvqa-document]]
+- [[huang2022-layoutlmv3-docai]]
+---
+type: idea
+tags: [아이디어, L09]
+status: draft
+source: wiki/overviews/아이디어-롱리스트.md
+---
+# L09 지시어 연결 강의 자막
+
+요약은 [[아이디어-롱리스트]] 참고. 상위: [[아이디어-허브]]
+
+## 근거 논문
+- [[lee2022-lectureslides-mm]]
+- [[radford2022-whisper]]
+- [[kuhn2024-asr-accuracy]]
+---
+type: idea
+tags: [아이디어, L08]
+status: draft
+source: wiki/overviews/아이디어-롱리스트.md
+---
+# L08 과업 기반 웹 접근성 재현
+
+요약은 [[아이디어-롱리스트]] 참고. 상위: [[아이디어-허브]]
+
+## 근거 논문
+- [[huang2024-access-a11yfix]]
+- [[aljedaani2026-llm-a11y-slr]]
+- [[zhou2023-webarena]]
+- [[kodandaram2026-cua-blind]]
+- [[ramineni2026-a11ytree-agent]]
+---
+type: idea
+tags: [아이디어, L13]
+status: draft
+source: wiki/overviews/아이디어-롱리스트.md
+---
+# L13 소규모 사업장 작업 전 위험 점검
+
+요약은 [[아이디어-롱리스트]] 참고. 상위: [[아이디어-허브]]
+
+## 근거 논문
+- [[adil2025-vlm-construction-hazard]]
+- [[naderi2025-vlmllm-siteinspect]]
+- [[sahraoui2025-hazard-llm-vlm]]
+- [[abdalwhab2025-openvocab-site]]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr 임대차 원상회복 분쟁 2024 2025 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "2024년" "웹 접근성" "66.7" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.korea.kr "2024" "디지털정보격차" "71.4" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.moel.go.kr "2025" "폭염" "2시간" "20분" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.recycling-info.or.kr "2024" "분리배출" "조사" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+지금까지는 임금체불, 상가 원상회복, 헬스장 해지에서 구체적인 피해·분쟁 근거를 확인했습니다. 다만 통계는 문제의 규모를 보여 줄 뿐 서비스의 빈 곳까지 증명하지는 않습니다. 기존 서비스의 증거 정리 기능과 최근 제도 변화를 더 확인하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 시프티 근태관리 급여정산 공식 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.deque.com/axe/
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://shiftee.io/ko
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.sovoro.kr 소보로 실시간 자막 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.dicle.or.kr 디지털배움터 교육 키오스크 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "위기탈출 안전보건" "다국어" 앱 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 외국인 근로자 안전보건 2025 AI 번역 모국어 자료 플랫폼 공식 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.housing.seoul.go.kr "2026" "청년월세" "제출서류" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.hira.or.kr "내가 먹는 약" "DUR" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 계단뿌셔클럽 계단정복지도 공식 출입구 사진 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.moel.go.kr "2024년" "589명" "재해조사" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.wasteguide.or.kr 분리의정석 "AI" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.wasteguide.or.kr/
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.nhis.or.kr "다제약물 관리사업" "방문" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kpanews.co.kr/news/articleView.html?idxno=546443
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "헬스장" "3412" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+기존 기능과 겹치는 후보도 확인됐습니다. 해외 서비스에는 이미 AI 부동산 점검보고서와 사진 기반 안전점검이 있고, 국내 분리배출 누리집은 지역별 규칙을 제공합니다. 남길 후보는 입력 자료와 막히는 순간을 더 좁히고, 차별성이 아직 확인되지 않은 항목은 보류로 표시하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.korea.kr "2025년" "웹 접근성" "70.4" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.help.naver.com "클로바노트" "음성" "요약" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "장애대학생" "2023" "개선요망" "2024" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.wisefollow.com/en/ai-inspections
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+**조사 결과, 문제 12개를 아래와 같이 정리했다. 우선 검증할 TOP 5는 임금 증거 정리, 청년월세 증빙 누락, 강의 지시어 이해, 헬스장 해지 증거 정리, 상가 원상회복 기록이다.**
+
+기준일은 **2026-10-23**이다. 기존 서비스의 기능은 공식 안내로 확인했으며, **“공식 자료에서 확인 안 됨”은 기능이 없다는 뜻이 아니다.** 빈 곳과 AI 필요성은 아직 상호 검증 전인 **추정**으로 표시했다. 아래 결과는 B003 조사 산출물이며 최종 선정 판정이 아니다.
+
+또한 AI의 필요성은 비정형 사진·음성·문서를 자동으로 해석하는 부분에 한정했다. 금액 계산, 자격 판정, 법규 적용은 규칙과 사람의 확인이 필요한 영역이다.
+
+---
+
+## 1. 아르바이트 임금이 덜 들어왔는데, 흩어진 기록을 대조하지 못한다
+
+**① 구체적 장면**  
+대학생 아르바이트생이 급여일에 예상보다 적은 입금을 확인하지만, 변경된 근무표·메신저 대화·급여명세서가 흩어져 어느 날짜의 임금이 빠졌는지 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 전국 임금체불액 2조 448억 원, 피해 노동자 약 28.3만 명.** 다만 이 중 대학생·아르바이트생의 비중과 ‘증거 정리 실패’ 비율은 **unknown**이다. [고용노동부 노동포털 연도별 통계](https://labor.moel.go.kr/arrstat/arrstat_list.do?edScleYear=2024&edToidYear=2024&edYrYear=2024&stScleYear=2022&stToidYear=2020&stYrYear=2020&tabArea=tab04)
+
+**③ 왜 지금**
+
+- **2025-10-23 상습체불 제재를 강화한 개정 근로기준법 시행.** 추정: 제재 강화와 별개로, 상담·진정 전에 근로 사실과 지급 내역을 정리하는 부담은 남는다. [고용노동부 시행 안내](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18467)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 해당 장면에 필요한데 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [고용노동부 노동포털](https://labor.moel.go.kr/) | 임금체불 등 노동 민원 신청 | 근무표 사진·대화·입금 내역에서 날짜별 불일치를 자동 복원 |
+| [시프티](https://shiftee.io/ko) | 근무일정, 출퇴근 기록, 근태 집계, 급여정산 | 사업장 시스템 밖에 남은 과거 개인 기록의 체불 증거 복원 |
+| [서울노동권익센터](https://www.labors.or.kr/) | 무료 노동상담과 권리구제 지원 | 상담 전 여러 종류의 파일을 자동 대조하고 원문 위치까지 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 근태 시스템을 쓰지 않았거나 기록 접근권이 없는 노동자가, 자신에게 남은 자료만으로 상담용 사실관계를 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 근무 변경 대화와 표 사진에서 날짜·시간·조건을 추출하고 연결해야 한다. 임금 계산 자체는 AI보다 규칙 기반 계산이 적합하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 근무표·대화·명세서 1개월분에서 ‘일치·불일치·확인 필요’를 표시하고, 각 항목을 원문에 연결한다. 체불 확정이나 자동 진정 제출까지 확장하지 않는다.
+
+---
+
+## 2. 폐업·이전하는 소상공인이 원상회복 요구를 반박할 기록을 찾지 못한다
+
+**① 구체적 장면**  
+작은 음식점 점주가 퇴거 직전 시설 철거·수리비를 요구받지만, 입점 당시 사진·시설 인수 내역·특약을 연결하지 못해 무엇을 원래대로 돌려놓아야 하는지 협의하지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 서울시 상가임대차 분쟁 신청에서 수리비·누수 52건, 원상회복 24건.** 서울시는 구조·노후도·사용 흔적을 확인하는 전문가 현장조사를 운영한다고 설명한다. 이는 사진만으로 책임을 판단하기 어렵다는 점도 보여 준다. [서울시 발표](https://mediahub.seoul.go.kr/archives/2016793)
+- **2024년 원상회복 분쟁은 24건으로, 2023년 8건보다 증가.** 전체 잠재 피해 규모는 **unknown**이다. [서울시 자료를 인용한 보도, 2025](https://inews24.com/view/1810202)
+
+**③ 왜 지금**
+
+- **2025년 서울시가 원상회복 분쟁에 현장조사와 당사자 조정을 강화.** 추정: 조정 과정에 제출할 사진·특약·시설 변경 기록을 정리하는 수요가 있다. [서울시 공식 사례 영상](https://tv.seoul.go.kr/v/61e2f8b1a81740908fa74509da511be0)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [서울시 상가임대차 상담·조정](https://mediahub.seoul.go.kr/archives/2016793) | 상담, 조정, 동의에 따른 전문가 현장조사 | 이용자가 보유한 과거 사진과 특약의 자동 연결 |
+| [한국부동산원·LH 임대차분쟁조정](https://adrhome.reb.or.kr/adrhome/reb/main.do) | 주택·상가 분쟁 신청, 추가서류 제출, 사례 제공 | 공간별 사진과 시설 인수·변경 기록의 자동 대조 |
+| [RentCheck](https://www.getrentcheck.com/) | 입주·퇴거 점검, 시간 정보가 있는 사진, 보고서 | 한국 상가 특약과 과거 시설 인수 자료를 연결한 쟁점 정리 |
+| [zInspector](https://zinspector.com/) | 사진·서명 점검, AI 점검보고서 작성 | 한국 상가 원상회복 협의에 맞춘 다문서 증거 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 새 점검보고서를 만드는 기능보다, 이미 흩어져 있는 입점 전후 자료를 시설별로 연결해 ‘확인된 사실과 미확인 사실’을 구분하는 단계가 빈 곳이다.**
+- AI 필요성: 서로 다른 각도의 사진에서 같은 시설을 찾고, 자유롭게 쓰인 특약·인수 메모와 연결해야 한다. 사진으로 설치 시점이나 귀책을 확정할 수는 없다.
+- **경쟁 주의:** AI 부동산 점검보고서는 이미 존재하므로 그 자체를 차별점으로 삼기 어렵다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 점포 한 곳, 시설 5개, 사진 10장과 특약 1장으로 증거 목록을 만든다. 손상 원인·법적 책임 판정은 시연 범위에서 제외한다.
+
+---
+
+## 3. 청년월세 지원을 알아도, 제출 직전에 증빙 누락을 알아채지 못한다
+
+**① 구체적 장면**  
+청년 1인가구가 월세지원 신청 마지막 날 계약서와 이체 내역을 준비했지만, 필요한 항목·기간·추가서류가 충족됐는지 확인하지 못한 채 제출한다.
+
+**② 심각도 근거**
+
+- **2026년 서울시 청년월세지원 안내는 필수서류 미제출 시 심사 탈락하며 이의신청 때 추가 제출할 수 없다고 명시한다.** 계약 형태에 따라 대체·추가 증빙도 달라진다. 실제 서류 미비 탈락자 수는 **unknown**이다. [서울주거포털 사업 안내](https://housing.seoul.go.kr/site/main/content/sh01_060513)
+- **2025년 서울시는 청년월세지원의 서류 제출 부담을 줄이는 개선을 발표했다.** 서류 부담이 행정 개선 대상으로 확인된 사례다. [서울시 공식 발표](https://news.seoul.go.kr/gov/archives/568548?listPage=12)
+
+**③ 왜 지금**
+
+- **2025~2026년 제출 절차와 사업 안내가 변경됐다.** 추정: 과거 블로그의 서류 목록보다 해당 연도 공식 공고와 실제 제출 파일을 대조하는 필요가 커진다. 위 두 공식 자료가 변경 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [서울주거포털 청년월세지원](https://housing.seoul.go.kr/site/main/content/sh01_060513) | 사업 안내, 신청, 서류 요건, 진행 확인 | 제출 전 계약서·이체 이미지의 내용 충족 여부 자동 대조 |
+| [정부24 보조금24](https://m.gov.kr/portal/main?cs=gov24) | 본인·가족에게 맞는 혜택 안내 | 청년월세 첨부파일의 필수 항목·기간 자동 점검 |
+| [복지로](https://www.bokjiro.go.kr/ssis-tbu/cms/pc/intro/intro/info/01/index.html) | 복지서비스 검색, 모의계산, 맞춤 안내, 온라인 신청 | 서울시 월세지원 공고와 개인 파일을 연결한 제출 전 검사 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: ‘어떤 정책을 받을 수 있나’ 이후, ‘내가 준비한 파일에 필요한 내용이 실제로 들어 있나’를 확인하는 단계가 빈 곳이다.**
+- AI 필요성: 계약서와 은행별 이체 화면의 표현·배치가 다르므로 항목 추출과 문서 간 연결이 필요하다. 필수 조건 판정은 공고를 구조화한 규칙으로 처리할 수 있다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 서울시 사업 한 개·공고 버전 한 개에 고정하고, 가상 계약서와 이체 증빙에서 누락 항목을 원문 근거와 함께 표시한다. 실제 공공 신청시스템 연동은 필요하지 않다.
+
+---
+
+## 4. 강의 자막은 읽었지만 “이것·여기·왼쪽 식”이 무엇인지 놓친다
+
+**① 구체적 장면**  
+청각장애 대학생이 수식·도표 강의의 자막을 읽는 동안 강사가 “여기서 이것을 옮기면”이라고 설명해, 어떤 기호와 그림을 가리켰는지 따라가지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 한국대학교육협의회 안내는 장애대학생 지원에 자막·실시간 속기·문자통역·화면해설 등을 포함한다.** 여러 방식의 학습 접근 지원이 필요한 대상임은 확인된다. 다만 **지시어 때문에 발생하는 이해 실패의 빈도·학업 손실은 unknown**이다. [장애인고등교육지원센터 공식 안내](https://www.kcue.or.kr/_upload/pds/2024/12/12/application_cb03d61cc734939d604082224c7e9f43.pdf)
+
+**③ 왜 지금**
+
+- **2025년 Qwen2.5-VL 보고서는 문서·도표 해석, 객체 위치 지정, 영상의 시간별 사건 위치 파악을 제시했다.** 추정: 자막과 강의 화면을 함께 해석하는 제한적 실험이 가능해졌다. 이 사실이 한국어 강의 정확도를 보장하지는 않는다. [Qwen2.5-VL Technical Report, arXiv:2502.13923](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [클로바노트](https://help.naver.com/service/24269/contents/12810?lang=ko) | 음성의 텍스트 변환·기록 관리·요약 | 발화 속 지시어를 슬라이드의 특정 수식·도형에 자동 연결 |
+| [Google Slides 자막](https://support.google.com/docs/answer/9109474) | 발표자 음성의 실시간 자막 | 지시 대상의 시각적 위치 해석 |
+| [Genio Notes, 구 Glean](https://www.glean.co/hubfs/AT%20Services/Needs%20Assessors%20Guide%20to%20Recommending%20Glean%20-%20DSA.pdf) | 녹음, 자막, 전사, 슬라이드 삽입, 복습 지원 | “이것”을 슬라이드 내부 특정 요소에 자동 연결하고 근거 표시 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 음성을 문자로 옮기는 것과 별도로, 발화 시점의 화면에서 지시 대상을 찾아 연결하는 단계가 빈 곳이다.**
+- AI 필요성: 언어 문맥과 도표·포인터·화면 변화의 공동 해석이 필요해 고정 키워드 규칙으로 처리하기 어렵다.
+- **추가 검증 필요:** 실제 학생에게 이 장면의 빈도와 기존 도구 사용 후 남는 불편을 확인해야 한다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 제작한 2~3분 강의에서 지시어 10개를 화면 영역에 연결한다. 모호한 지시어는 ‘대상 불명’으로 남기고, 자막만 제공한 조건과 이해도를 비교한다.
+
+---
+
+## 5. 접근성 오류 목록은 받았지만 실제 신청 실패를 재현하지 못한다
+
+**① 구체적 장면**  
+대학·소규모 서비스 운영자가 접근성 검사 경고를 받았지만, 키보드 이용자가 신청서의 어느 단계에서 막히는지 재현하지 못해 수정 우선순위를 정하지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 8개 업종 1,000개 웹사이트의 접근성 평균은 70.4점, 도매·소매업은 65.7점.** 특정 대학·관악구·금천구 사이트의 수준이나 과업 실패율을 뜻하는 수치는 아니다. [과기정통부 발표, KDI 수록](https://eiec.kdi.re.kr/policy/materialView.do?num=278528&pg=&pp=&topic=C)
+
+**③ 왜 지금**
+
+- **2026-01-22 디지털포용법 시행.** 추정: 접근성을 운영 과정에서 확인하고 설명할 필요성이 커질 수 있다. 구체적인 의무 적용은 기관·서비스별 확인이 필요하다. [국가법령정보센터](https://www.law.go.kr/LSW/lsInfoP.do?chrClsCd=010202&efYd=20260122&lsiSeq=268533&urlMode=lsInfoP)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [Deque Axe](https://www.deque.com/axe/) | 자동·AI·가이드·수동 검사와 보고 | 한국어 신청 목표에서 실패 경로를 스스로 탐색해 증거로 묶는 전체 흐름 |
+| [WAVE](https://wave.webaim.org/) | 접근성 오류 식별, 브라우저 검사, 사람의 평가 지원 | 신청 목표를 입력받아 여러 화면의 실패 원인을 자동 재현 |
+| [Accessibility Insights](https://accessibilityinsights.io/) | 웹·Windows 검사, FastPass, 가이드 평가 | 한국어 업무 목표에서 실패 단계와 수정 전후 결과를 자동 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 개별 오류와 ‘신청 완료 실패’를 연결한 재현 기록에 빈 곳이 있을 수 있다.**
+- AI 필요성: 목표·화면·상태 변화를 해석하며 경로를 탐색하는 부분이다. 색 대비나 레이블 검사는 기존 규칙 엔진으로 충분하다.
+- **보류:** Axe는 이미 AI와 수동 검사까지 제공한다. “기존 도구는 정적 검사만 한다”는 차별화 주장은 사용할 수 없다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 만든 신청 페이지 한 개에 한정해 키보드 경로·실패 화면·관련 요소를 기록한다. 실제 스크린리더 이용자의 경험을 완전히 재현했다는 주장은 어렵다.
+
+---
+
+## 6. 고령자가 실제 무인기기 화면 앞에서 다음 조작을 찾지 못한다
+
+**① 구체적 장면**  
+고령자가 생활시설의 무인 접수 화면에서 안내 문구와 선택지를 이해하지 못하고, 뒤에 사람이 기다리자 도움을 요청하지 못한 채 접수를 포기한다.
+
+**② 심각도 근거**
+
+- **2024년 고령층 디지털정보화 수준은 일반 국민 대비 71.4%.** 접수 포기율이나 특정 키오스크 실패율과는 다른 지표다. [NIA 공식 보고서](https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=81623&bcIdx=27832&parentSeq=27832)
+- **서울시는 2025년 디지털 안내사 사업에서 누적 약 56만 명 지원 실적을 발표했다.** 이는 지원 실적이며 고유 이용자 수·미충족 수요로 해석하면 안 된다. [서울시 공식 발표](https://news.seoul.go.kr/gov/archives/565012?listPage=1)
+
+**③ 왜 지금**
+
+- **2026년 디지털포용법 시행**, **2025년 서울시 현장 안내 노선 확대**가 확인된다. 추정: 일회성 교육 이후 실제 화면에서 막히는 순간을 지원하는 방식을 검증할 시점이다. [법령](https://www.law.go.kr/LSW/lsInfoP.do?chrClsCd=010202&efYd=20260122&lsiSeq=268533&urlMode=lsInfoP), [서울시 사업 안내](https://news.seoul.go.kr/gov/archives/565012?listPage=1)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [AI디지털배움터](https://www.xn--2z1bw8k1pjz5ccumkb.kr/cmm/spt/faq.do) | 무료 디지털 교육, 방문·파견교육 | 이용 중인 임의 기기 화면에 대한 상시 자동 안내 |
+| [서울시 디지털 안내사](https://news.seoul.go.kr/gov/archives/565012?listPage=1) | 현장에서 스마트폰·키오스크 사용 지원 | 안내사가 없는 시간·장소의 자동 지원 |
+| [서울디지털동행플라자](https://didong.kr/program/1) | 생활 디지털 교육, 키오스크 기초 체험 | 이용자가 현장에서 촬영한 화면의 즉시 과업 안내 |
+| [Be My AI](https://support.bemyeyes.com/hc/en-us/articles/48284651305489-Using-Be-My-AI-on-desktop) | 이미지·화면 설명, 후속 질문 | 한국어 고령자의 접수 과정 전체를 화면 변화에 따라 지속 안내 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 사람이 없는 현장에서 낯선 화면을 이해하고 한 단계씩 진행하도록 돕는 지원에 빈 곳이 있을 수 있다.**
+- AI 필요성: 서로 다른 화면의 문구·버튼 위치와 사용자의 목적을 함께 이해해야 한다.
+- **보류:** Be My AI 등 시각 보조 서비스와 직접 겹친다. ‘사진을 설명해 준다’만으로는 빈 곳이 증명되지 않는다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 만든 무인 접수 화면 3개에서 사진 입력→큰 글씨·음성 안내→다음 화면 확인을 시연한다. 결제·본인인증 화면까지 다루는 것은 어렵다.
+
+---
+
+## 7. 이주노동자가 안전수칙을 번역해 읽어도 실제 작업 지시와 연결하지 못한다
+
+**① 구체적 장면**  
+금천구 소규모 작업장의 이주노동자가 작업 시작 전 한국어 지시와 안전 안내를 받지만, 생략된 주어·현장 별칭·금지 조건 때문에 어떤 장비에서 무엇을 하면 안 되는지 확인하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 국내 외국인 취업자는 101만 명으로 전년보다 8.7만 명 증가.** 이 수치는 위험 노출 인구의 배경이며 언어 때문에 발생한 사고 건수가 아니다. [통계청·법무부 조사 발표](https://www.korea.kr/news/policyNewsView.do?newsId=156666055)
+- 안전보건공단의 **「외국인 근로자 재해예방 강화 방안」**은 원어민 강사·통역 및 외국인 안전 리더 등 대응 방안을 다룬다. 해당 장면의 발생률은 **unknown**이다. [안전보건공단 연구보고서](https://oshri.kosha.or.kr/oshri/publication/researchReportSearch.do?articleNo=454342&attachNo=260683&mode=download)
+
+**③ 왜 지금**
+
+- **2024년 외국인 취업자 증가와 2025년 재해예방 연구·대응 논의**가 확인된다. 추정: 자료 번역을 넘어 작업별 이해 여부를 확인할 필요가 커진다. 위 조사·보고서가 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [안전보건공단 다국어 자료·교육 지원](https://oshri.kosha.or.kr/oshri/publication/researchReportSearch.do?articleNo=454342&attachNo=260683&mode=download) | 외국인 안전교육·통역 관련 지원과 자료 | 당일 현장 지시와 특정 장비를 연결하고 이해 여부를 자동 확인 |
+| [Papago](https://help.naver.com/service/16448/contents/5911?lang=ko&osType=MOBILE) | 사진 속 문자 번역, 이미지 번역 | 안전 지시의 누락 조건 탐지와 작업자 이해 확인 |
+| [Google Translate](https://support.google.com/translate/?hl=en) | 텍스트·이미지·음성 번역 | 장비별 지시의 안전상 모호성을 판별하고 확인 질문 생성 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 번역된 문장을 제공한 뒤, 작업자가 ‘어느 장비에서 어떤 조건으로 행동하는지’를 다시 설명해 확인하는 단계가 빈 곳이다.**
+- AI 필요성: 자유로운 현장 발화와 작업자의 재설명을 비교하고, 생략·모호성을 찾는 데 언어 해석이 필요하다. 정형 수칙 번역만 한다면 새 AI 서비스의 필요성은 약하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 작업 한 종류·언어 한 쌍에 한정해 지시문→확인 질문→작업자 재설명 비교를 시연한다. 실제 안전교육 이수나 작업 허가를 대체할 수준은 어렵다.
+
+---
+
+## 8. 소규모 사업장이 오늘의 현장 상태를 작업 전 점검항목으로 바꾸지 못한다
+
+**① 구체적 장면**  
+작은 사업장의 현장 책임자가 작업 직전 적치물·통로·임시 전선의 상태를 보지만, 기존 체크리스트에서 오늘 달라진 위험을 찾아 기록하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 재해조사 대상 사고사망자 589명·553건.** 끼임·물체에 맞음·화재·폭발 사망자는 전년보다 증가했다. 이 통계는 전체 산재 사망이나 사진으로 탐지 가능한 사고 수와 다르다. [고용노동부, 2025-03 발표](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=17595)
+- ‘체크리스트를 현장 상태에 맞추지 못해 발생한 사고’의 비중은 **unknown**이다.
+
+**③ 왜 지금**
+
+- **2025-01-02 KRAS 개편**으로 모바일 위험요인 발굴·등록과 작업 전 안전점검인 TBM 연계가 강화됐다. 추정: 현장 관찰 내용을 디지털 점검으로 연결할 기반이 확대됐다. [고용노동부 공식 안내](https://moel.go.kr/local/seouldongbu/news/notice/noticeView.do?bbs_seq=20250200428)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [KRAS·산업안전포털](https://portal.kosha.or.kr/?startNo=-1) | 위험성평가, 위험요인 관리, TBM 일지·이력 | 사진에서 보이는 상태와 기존 점검항목의 누락 자동 대조 |
+| [SafetyCulture](https://safetyculture.com/pricing/) | 디지털 점검, 템플릿·AI 템플릿 작성 | 한국 소규모 사업장의 KRAS 항목과 사진을 연결한 전체 흐름 |
+| [WiseFollow](https://www.wisefollow.com/en/ai-inspections) | 사진 기반 위험·보호구 누락 탐지, 오프라인 점검, 보고서 | 한국 KRAS·TBM 기준과의 구체적 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 한국의 기존 점검항목과 오늘 촬영한 현장 증거를 연결하고, 사진으로 확인할 수 없는 항목을 따로 남기는 단계에 제한적인 빈 곳이 있을 수 있다.**
+- AI 필요성: 이미지에서 상태를 추출해 문장형 항목과 연결하는 부분이다.
+- **보류:** WiseFollow가 이미 사진 기반 위험 탐지를 제공한다. “사진으로 위험을 찾아 준다”는 범용 형태는 제외해야 한다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 안전하게 연출한 작업공간과 항목 5개만 사용해 ‘관찰됨·판독 불가·추가 확인’을 표시한다. 실제 사업장 안전 판정은 어렵다.
+
+---
+
+## 9. 퇴원한 고령자가 새 처방과 집에 남은 약의 관계를 설명하지 못한다
+
+**① 구체적 장면**  
+여러 병원을 이용하는 고령자가 퇴원 후 새 약봉투와 집에 남은 약을 함께 놓고, 어떤 약이 계속 복용 중인지 약사에게 정확히 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 상반기 10종 이상 약을 60일 이상 복용한 만성질환자는 약 136.2만 명.** 국민건강보험공단 제출자료를 인용한 보도이며, 이 중 실제 복용 목록 불일치 비율은 **unknown**이다. [국회 제출자료 인용 보도](https://m.health.chosun.com/svc/news_view.html?contid=2024101402040)
+- 심평원은 기존 연구에서 **실제 복용 의약품·건강식품 목록 확인과 medication reconciliation**의 필요성을 다뤘다. [HIRA 연구자료](https://repository.hira.or.kr/handle/2019.oak/1247)
+
+**③ 왜 지금**
+
+- **2026-03-27 의료·요양·돌봄 통합지원 제도 시행.** 추정: 병원에서 지역사회로 돌아온 사람의 실제 복약 정보를 서비스 간 전달하는 접점이 중요해졌다. [보건복지부 통합돌봄 안내](https://www.mohw.go.kr/menu.es?mid=a60100000000)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [심평원 ‘내가 먹는 약! 한눈에’](https://www.khidi.or.kr/board/view?boardStyle=&categoryId=&continent=&country=&linkId=48833560&maxIndex=&menuId=MENU01810&minIndex=&no1=&pageNum=48&rowCnt=10&schText=&schType=0&upDown=0) | 투약이력 조회, 알레르기·부작용 정보 등록·확인 | 집에 남아 있는 약과 실제 복용·중단 상태의 자동 대조 |
+| [Medisafe](https://help-center.medisafe.com/en/) | 약 등록, 복약·재구매 알림, 건강 기록 | 한국 퇴원서류와 여러 약봉투에서 변경 근거를 자동 연결 |
+| [약체크](https://www.yakcheck.co.kr/) | 약봉투·알약 사진 입력, 약 정보·가격·병용금기 등 조회 | 퇴원 전후 복용 상태를 문서 근거와 함께 시간순으로 구분 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 약 이름 조회 이후, ‘처방·조제 이력’과 ‘집에 있는 약·실제로 먹는 약’의 차이를 상담 전에 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 약봉투·퇴원서류·사용자 설명을 연결해 불일치를 찾는 부분이다. 약물 상호작용 판단과 복용 변경은 AI 생성 판단의 대상에서 제외해야 한다.
+- **보류:** 약봉투 OCR과 병용금기 조회는 이미 있으므로 그것만으로는 차별성이 없다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 약봉투 3장과 퇴원안내 1장으로 ‘중복 기록·상태 불명·약사 확인 질문’을 만든다. 임상 안전성 검증은 9시간에 어렵다.
+
+---
+
+## 10. 휠체어 이용자가 ‘접근 가능’ 표시를 보고도 어느 문으로 들어갈지 모른다
+
+**① 구체적 장면**  
+휠체어 이용 대학생이 접근 가능으로 표시된 건물에 도착했지만, 정문에는 계단이 있고 대체 출입구의 위치·개방 상태를 찾지 못해 약속에 늦는다.
+
+**② 심각도 근거**
+
+- **2023년 장애인 편의시설 조사에서 매개시설 적정설치율 84.2%, 내부시설 79.5%.** 설치 대상 항목의 충족률이며 모든 점포의 실제 진입 성공률이 아니다. 대체 출입구 탐색 실패율은 **unknown**이다. [보건복지부 「통계로 보는 사회보장 2024」](https://m.bokjiro.go.kr/ssis-tem/cms/mob/customer/notice/__icsFiles/afieldfile/2025/09/30/%ED%86%B5%EA%B3%84%EB%A1%9C%20%EB%B3%B4%EB%8A%94%20%EC%82%AC%ED%9A%8C%EB%B3%B4%EC%9E%A5%202024.pdf)
+
+**③ 왜 지금**
+
+- **2025년 시각언어모델의 객체 위치 지정 기술 공개.** 추정: 새로 촬영한 출입구 사진과 기존 안내를 연결하는 실험이 가능해졌다. 실제 통과 가능성 보장과는 다르다. [Qwen2.5-VL 보고서](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [계단뿌셔클럽](https://staircrusher.club/) | 접근성 중심 장소 탐색, 이용자 리뷰, 계단 정보 수집 | 현재 사진과 과거 안내의 불일치 자동 탐지 |
+| [Wheelmap](https://news.wheelmap.org/en/faq/) | 출입구·실내·화장실 접근성 평가, 사진, 대체 출입구 확인 안내 | 현장 사진으로 대체 문 위치와 최신 상태를 자동 연결 |
+| [AccessNow](https://accessnow.com/mapmissionguide/) | 접근성 평가, 사진·태그·경험 리뷰 | 현재 위치에서 특정 대체 출입구까지의 증거 기반 안내 자동 생성 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 장소 평가 자체보다, 방문 시점의 사진으로 기존 안내가 가리키는 문을 찾고 정보 충돌을 드러내는 단계가 빈 곳일 수 있다.**
+- AI 필요성: 서로 다른 사진·설명 속 동일 출입구를 연결하는 부분이다.
+- **보류:** 출입구·경사로 정보는 이미 기존 서비스의 핵심이다. 사진만으로 폭·경사·개방 여부를 확정하면 안 된다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 동의받아 촬영한 건물 한 곳의 출입구 3개에서 문 식별과 안내 충돌을 보여 준다. 도시 단위 데이터 확보와 최신성 유지는 어렵다.
+
+---
+
+## 11. 헬스장 해지 의사는 밝혔지만 환급 협의에 필요한 사실을 정리하지 못한다
+
+**① 구체적 장면**  
+대학생이 헬스장·PT 이용을 중도 해지하려 하지만, 계약서·결제 영수증·출석 내역·해지 요청 대화가 달라 환급 협의에 필요한 기준일과 이용 사실을 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2021년~2024년 3분기 헬스장 피해구제 신청 10,746건.** 한국소비자원은 계약해지 관련 피해가 대부분이며, 문자·내용증명 등 입증자료 확보를 당부했다. [한국소비자원 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1003802911&page=3)
+- **2024년 헬스장 피해구제 신청 3,412건**으로 전년보다 증가했다. [소비자원 자료 인용 보도, 2025](https://www.mk.co.kr/news/economy/11317938)
+
+**③ 왜 지금**
+
+- **2024년 피해 증가와 2025년 관련 주의보·보도가 확인된다.** 추정: 상담 접수 이전에 해지 시점과 이용 내역을 정리하는 부담을 검증할 가치가 있다. 위 자료가 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [1372 소비자상담](https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do) | 상담·정보 제공, 미해결 시 피해구제 단계 연계 | 계약·결제·출석·대화 파일의 자동 시간순 대조 |
+| [한국소비자원 ODR](https://www.kca.go.kr/odr/) | 피해구제 신청, 사건 확인, 분쟁 기준·내용증명 작성 안내 | 원문 위치가 연결된 개인 증거 목록 자동 작성 |
+| [소비자24](https://www.consumer.go.kr/user/ftc/consumer/dmrecnslt/316/selectDmreCnsltList.do?cnsltRegistDt1=&cnsltRegistDt2=&memberId=&mypage=N&page=1532&row=10&searchCode=&searchNm=&sprogrsSttus=) | 온라인 상담 및 진행현황 확인 | 파일 간 계약일·해지 요청일·이용 횟수 불일치 자동 확인 |
+
+세 서비스는 **서로 연계되는 공공 상담·구제 체계**이므로 독립적인 경쟁사 세 곳으로 해석하면 안 된다.
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 상담과 환급기준 안내 이전에, 이용자가 가진 자료에서 해지 요청 시점·이용 사실·결제 조건을 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 계약서 사진, 출석 화면, 자연어 대화에서 관련 사실을 추출·연결해야 한다. 환급액 계산은 적용 조건을 확인한 뒤 규칙으로 수행하는 편이 적합하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 계약 한 건에서 날짜·금액·횟수의 충돌과 추가 확인 질문을 출력한다. 실제 환급 보장이나 분쟁 승소 예측은 범위에 넣지 않는다.
+
+---
+
+## 12. 복합 포장재를 버릴 때 재질 표시와 실제 분리 방법을 연결하지 못한다
+
+**① 구체적 장면**  
+관악구 원룸 거주자가 배달 포장의 용기·필름·흡수패드·라벨을 버리면서, 무엇을 떼어내고 어떤 지역 기준으로 배출해야 하는지 품목 이름조차 찾지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 ‘내 손안의 분리배출’에 접수된 Q&A 1,107건 중 100건을 한국폐기물협회가 2026년 사례집으로 배포했다.** 정보 수요의 근거이며, 전체 주민의 오배출률이나 복합 포장재 피해 규모는 **unknown**이다. [한국폐기물협회 공식 안내](https://www.kwaste.or.kr/community/01.php?admin_mode=read&no=6128&page=3)
+
+**③ 왜 지금**
+
+- **2026년 수도권 생활폐기물 직매립 금지 시행**으로 분리·처리 부담에 대한 관심이 커졌다. 개인 분리배출 정확도 개선이 처리비를 얼마나 줄이는지는 **unknown**이다. [시행 상황 보도, 2026](https://www.newspim.com/news/view/20260327000796)
+- 추정: 2025년 시각언어모델 기술을 이용해 사진 속 부품·표시를 구분하는 제한적 시연이 가능하다. [Qwen2.5-VL 보고서](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [내 손안의 분리배출](https://www.kca.go.kr/smartconsumer/sub.do?menukey=7742) | 재질별·품목별 분리배출 안내 | 한 사진의 여러 부품을 구분해 지역 규칙에 연결 |
+| [분리의정석](https://www.wasteguide.or.kr/) | 품목사전, 지역·주택 유형별 배출방법, 장소 지도, Q&A | 복합 포장의 부품별 시각 식별과 분해 순서 자동 안내 |
+| [Recycle Coach](https://www.recyclecoach.com/) | 지역별 분류 검색, 수거 일정·알림, 배출장소 정보 | 한국 자치구 기준에 따른 복합 포장 사진의 부품별 안내 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 품목명으로 검색하기 전에, 눈앞의 복합 포장을 구성 부품으로 나누고 무엇을 추가 확인해야 하는지 알려 주는 단계가 빈 곳이다.**
+- AI 필요성: 사진 속 부품과 재질 표시를 읽는 부분이다. 재질 표시가 없거나 내부 코팅이 보이지 않으면 추가 질문이 필요하다.
+- **보류:** 지역별 규칙 안내는 이미 있다. ‘사진 한 장으로 분리배출 답변’도 추가 경쟁조사 없이 차별점으로 주장하기 어렵다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 관악구 공식 안내와 포장 유형 10개에 한정한다. 보이지 않는 소재는 판정하지 않고 표시 확대 촬영·분리 가능 여부를 질문한다.
+
+---
+
+## 빈 곳이 가장 뚜렷한 문제 TOP 5
+
+**추정: 아래 순위는 공식 안내에서 확인한 기능과 문제 장면 사이의 간격, 시연 가능성을 기준으로 정했다. 경쟁 부재가 입증된 순위는 아니다.**
+
+| 순위 | 문제 | 우선 검증할 이유 | 선정 전에 반드시 확인할 것 |
+|---|---|---|---|
+| **1** | **아르바이트 임금 증거 정리** | 피해 규모가 확인되고, 기존 근태 시스템을 이용하지 못한 노동자의 과거 자료라는 경계가 구체적이다. | 기존 노동상담·노무 서비스가 같은 파일 대조를 제공하는지, 실제 정리 시간이 얼마나 드는지 |
+| **2** | **청년월세 증빙 누락** | 공식 공고에 누락의 결과와 확인 항목이 명시돼 있어 정답 기준을 만들기 쉽다. | 서류 미비로 실제 탈락·보완한 비율, 신청 화면에 이미 있는 검증 범위 |
+| **3** | **강의 지시어와 화면 연결** | 전사·요약과 구분되는 입력·출력이 명확하고, 자막만 제공한 경우와 비교할 수 있다. | 청각장애 학생이 이 장면을 얼마나 자주 겪는지, Genio 등에서 이미 해결되는 범위 |
+| **4** | **헬스장 해지 증거 정리** | 공식 피해자료가 입증자료 확보 필요성을 직접 지적하며, 사건 단위 시연이 가능하다. | 기존 상담기관·민간 서비스의 자동 증거 정리 기능과 이용자의 실제 준비 부담 |
+| **5** | **상가 원상회복 기록 연결** | 서울시 분쟁 사례가 구체적이고, 사진·특약·시설 인수 기록이라는 자료 경계가 분명하다. | 해외 AI 점검 서비스의 비교 기능, 한국 상가 특약 연결의 추가 가치 |
+
+**다음 peer 검증에서는 TOP 5마다 기존 서비스에 동일한 샘플 자료를 넣어 보고, 남는 작업과 수작업 시간을 비교해야 한다.** 특히 3번은 문제 빈도, 2번은 실제 누락 피해 규모가 **unknown**이므로 사용자·담당기관 확인 없이는 심각도를 강하게 주장하기 어렵다.
+hook: Stop
+hook: Stop Completed
+tokens used
+199,437
+**조사 결과, 문제 12개를 아래와 같이 정리했다. 우선 검증할 TOP 5는 임금 증거 정리, 청년월세 증빙 누락, 강의 지시어 이해, 헬스장 해지 증거 정리, 상가 원상회복 기록이다.**
+
+기준일은 **2026-10-23**이다. 기존 서비스의 기능은 공식 안내로 확인했으며, **“공식 자료에서 확인 안 됨”은 기능이 없다는 뜻이 아니다.** 빈 곳과 AI 필요성은 아직 상호 검증 전인 **추정**으로 표시했다. 아래 결과는 B003 조사 산출물이며 최종 선정 판정이 아니다.
+
+또한 AI의 필요성은 비정형 사진·음성·문서를 자동으로 해석하는 부분에 한정했다. 금액 계산, 자격 판정, 법규 적용은 규칙과 사람의 확인이 필요한 영역이다.
+
+---
+
+## 1. 아르바이트 임금이 덜 들어왔는데, 흩어진 기록을 대조하지 못한다
+
+**① 구체적 장면**  
+대학생 아르바이트생이 급여일에 예상보다 적은 입금을 확인하지만, 변경된 근무표·메신저 대화·급여명세서가 흩어져 어느 날짜의 임금이 빠졌는지 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 전국 임금체불액 2조 448억 원, 피해 노동자 약 28.3만 명.** 다만 이 중 대학생·아르바이트생의 비중과 ‘증거 정리 실패’ 비율은 **unknown**이다. [고용노동부 노동포털 연도별 통계](https://labor.moel.go.kr/arrstat/arrstat_list.do?edScleYear=2024&edToidYear=2024&edYrYear=2024&stScleYear=2022&stToidYear=2020&stYrYear=2020&tabArea=tab04)
+
+**③ 왜 지금**
+
+- **2025-10-23 상습체불 제재를 강화한 개정 근로기준법 시행.** 추정: 제재 강화와 별개로, 상담·진정 전에 근로 사실과 지급 내역을 정리하는 부담은 남는다. [고용노동부 시행 안내](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=18467)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 해당 장면에 필요한데 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [고용노동부 노동포털](https://labor.moel.go.kr/) | 임금체불 등 노동 민원 신청 | 근무표 사진·대화·입금 내역에서 날짜별 불일치를 자동 복원 |
+| [시프티](https://shiftee.io/ko) | 근무일정, 출퇴근 기록, 근태 집계, 급여정산 | 사업장 시스템 밖에 남은 과거 개인 기록의 체불 증거 복원 |
+| [서울노동권익센터](https://www.labors.or.kr/) | 무료 노동상담과 권리구제 지원 | 상담 전 여러 종류의 파일을 자동 대조하고 원문 위치까지 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 근태 시스템을 쓰지 않았거나 기록 접근권이 없는 노동자가, 자신에게 남은 자료만으로 상담용 사실관계를 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 근무 변경 대화와 표 사진에서 날짜·시간·조건을 추출하고 연결해야 한다. 임금 계산 자체는 AI보다 규칙 기반 계산이 적합하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 근무표·대화·명세서 1개월분에서 ‘일치·불일치·확인 필요’를 표시하고, 각 항목을 원문에 연결한다. 체불 확정이나 자동 진정 제출까지 확장하지 않는다.
+
+---
+
+## 2. 폐업·이전하는 소상공인이 원상회복 요구를 반박할 기록을 찾지 못한다
+
+**① 구체적 장면**  
+작은 음식점 점주가 퇴거 직전 시설 철거·수리비를 요구받지만, 입점 당시 사진·시설 인수 내역·특약을 연결하지 못해 무엇을 원래대로 돌려놓아야 하는지 협의하지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 서울시 상가임대차 분쟁 신청에서 수리비·누수 52건, 원상회복 24건.** 서울시는 구조·노후도·사용 흔적을 확인하는 전문가 현장조사를 운영한다고 설명한다. 이는 사진만으로 책임을 판단하기 어렵다는 점도 보여 준다. [서울시 발표](https://mediahub.seoul.go.kr/archives/2016793)
+- **2024년 원상회복 분쟁은 24건으로, 2023년 8건보다 증가.** 전체 잠재 피해 규모는 **unknown**이다. [서울시 자료를 인용한 보도, 2025](https://inews24.com/view/1810202)
+
+**③ 왜 지금**
+
+- **2025년 서울시가 원상회복 분쟁에 현장조사와 당사자 조정을 강화.** 추정: 조정 과정에 제출할 사진·특약·시설 변경 기록을 정리하는 수요가 있다. [서울시 공식 사례 영상](https://tv.seoul.go.kr/v/61e2f8b1a81740908fa74509da511be0)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [서울시 상가임대차 상담·조정](https://mediahub.seoul.go.kr/archives/2016793) | 상담, 조정, 동의에 따른 전문가 현장조사 | 이용자가 보유한 과거 사진과 특약의 자동 연결 |
+| [한국부동산원·LH 임대차분쟁조정](https://adrhome.reb.or.kr/adrhome/reb/main.do) | 주택·상가 분쟁 신청, 추가서류 제출, 사례 제공 | 공간별 사진과 시설 인수·변경 기록의 자동 대조 |
+| [RentCheck](https://www.getrentcheck.com/) | 입주·퇴거 점검, 시간 정보가 있는 사진, 보고서 | 한국 상가 특약과 과거 시설 인수 자료를 연결한 쟁점 정리 |
+| [zInspector](https://zinspector.com/) | 사진·서명 점검, AI 점검보고서 작성 | 한국 상가 원상회복 협의에 맞춘 다문서 증거 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 새 점검보고서를 만드는 기능보다, 이미 흩어져 있는 입점 전후 자료를 시설별로 연결해 ‘확인된 사실과 미확인 사실’을 구분하는 단계가 빈 곳이다.**
+- AI 필요성: 서로 다른 각도의 사진에서 같은 시설을 찾고, 자유롭게 쓰인 특약·인수 메모와 연결해야 한다. 사진으로 설치 시점이나 귀책을 확정할 수는 없다.
+- **경쟁 주의:** AI 부동산 점검보고서는 이미 존재하므로 그 자체를 차별점으로 삼기 어렵다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 점포 한 곳, 시설 5개, 사진 10장과 특약 1장으로 증거 목록을 만든다. 손상 원인·법적 책임 판정은 시연 범위에서 제외한다.
+
+---
+
+## 3. 청년월세 지원을 알아도, 제출 직전에 증빙 누락을 알아채지 못한다
+
+**① 구체적 장면**  
+청년 1인가구가 월세지원 신청 마지막 날 계약서와 이체 내역을 준비했지만, 필요한 항목·기간·추가서류가 충족됐는지 확인하지 못한 채 제출한다.
+
+**② 심각도 근거**
+
+- **2026년 서울시 청년월세지원 안내는 필수서류 미제출 시 심사 탈락하며 이의신청 때 추가 제출할 수 없다고 명시한다.** 계약 형태에 따라 대체·추가 증빙도 달라진다. 실제 서류 미비 탈락자 수는 **unknown**이다. [서울주거포털 사업 안내](https://housing.seoul.go.kr/site/main/content/sh01_060513)
+- **2025년 서울시는 청년월세지원의 서류 제출 부담을 줄이는 개선을 발표했다.** 서류 부담이 행정 개선 대상으로 확인된 사례다. [서울시 공식 발표](https://news.seoul.go.kr/gov/archives/568548?listPage=12)
+
+**③ 왜 지금**
+
+- **2025~2026년 제출 절차와 사업 안내가 변경됐다.** 추정: 과거 블로그의 서류 목록보다 해당 연도 공식 공고와 실제 제출 파일을 대조하는 필요가 커진다. 위 두 공식 자료가 변경 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [서울주거포털 청년월세지원](https://housing.seoul.go.kr/site/main/content/sh01_060513) | 사업 안내, 신청, 서류 요건, 진행 확인 | 제출 전 계약서·이체 이미지의 내용 충족 여부 자동 대조 |
+| [정부24 보조금24](https://m.gov.kr/portal/main?cs=gov24) | 본인·가족에게 맞는 혜택 안내 | 청년월세 첨부파일의 필수 항목·기간 자동 점검 |
+| [복지로](https://www.bokjiro.go.kr/ssis-tbu/cms/pc/intro/intro/info/01/index.html) | 복지서비스 검색, 모의계산, 맞춤 안내, 온라인 신청 | 서울시 월세지원 공고와 개인 파일을 연결한 제출 전 검사 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: ‘어떤 정책을 받을 수 있나’ 이후, ‘내가 준비한 파일에 필요한 내용이 실제로 들어 있나’를 확인하는 단계가 빈 곳이다.**
+- AI 필요성: 계약서와 은행별 이체 화면의 표현·배치가 다르므로 항목 추출과 문서 간 연결이 필요하다. 필수 조건 판정은 공고를 구조화한 규칙으로 처리할 수 있다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 서울시 사업 한 개·공고 버전 한 개에 고정하고, 가상 계약서와 이체 증빙에서 누락 항목을 원문 근거와 함께 표시한다. 실제 공공 신청시스템 연동은 필요하지 않다.
+
+---
+
+## 4. 강의 자막은 읽었지만 “이것·여기·왼쪽 식”이 무엇인지 놓친다
+
+**① 구체적 장면**  
+청각장애 대학생이 수식·도표 강의의 자막을 읽는 동안 강사가 “여기서 이것을 옮기면”이라고 설명해, 어떤 기호와 그림을 가리켰는지 따라가지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 한국대학교육협의회 안내는 장애대학생 지원에 자막·실시간 속기·문자통역·화면해설 등을 포함한다.** 여러 방식의 학습 접근 지원이 필요한 대상임은 확인된다. 다만 **지시어 때문에 발생하는 이해 실패의 빈도·학업 손실은 unknown**이다. [장애인고등교육지원센터 공식 안내](https://www.kcue.or.kr/_upload/pds/2024/12/12/application_cb03d61cc734939d604082224c7e9f43.pdf)
+
+**③ 왜 지금**
+
+- **2025년 Qwen2.5-VL 보고서는 문서·도표 해석, 객체 위치 지정, 영상의 시간별 사건 위치 파악을 제시했다.** 추정: 자막과 강의 화면을 함께 해석하는 제한적 실험이 가능해졌다. 이 사실이 한국어 강의 정확도를 보장하지는 않는다. [Qwen2.5-VL Technical Report, arXiv:2502.13923](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [클로바노트](https://help.naver.com/service/24269/contents/12810?lang=ko) | 음성의 텍스트 변환·기록 관리·요약 | 발화 속 지시어를 슬라이드의 특정 수식·도형에 자동 연결 |
+| [Google Slides 자막](https://support.google.com/docs/answer/9109474) | 발표자 음성의 실시간 자막 | 지시 대상의 시각적 위치 해석 |
+| [Genio Notes, 구 Glean](https://www.glean.co/hubfs/AT%20Services/Needs%20Assessors%20Guide%20to%20Recommending%20Glean%20-%20DSA.pdf) | 녹음, 자막, 전사, 슬라이드 삽입, 복습 지원 | “이것”을 슬라이드 내부 특정 요소에 자동 연결하고 근거 표시 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 음성을 문자로 옮기는 것과 별도로, 발화 시점의 화면에서 지시 대상을 찾아 연결하는 단계가 빈 곳이다.**
+- AI 필요성: 언어 문맥과 도표·포인터·화면 변화의 공동 해석이 필요해 고정 키워드 규칙으로 처리하기 어렵다.
+- **추가 검증 필요:** 실제 학생에게 이 장면의 빈도와 기존 도구 사용 후 남는 불편을 확인해야 한다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 제작한 2~3분 강의에서 지시어 10개를 화면 영역에 연결한다. 모호한 지시어는 ‘대상 불명’으로 남기고, 자막만 제공한 조건과 이해도를 비교한다.
+
+---
+
+## 5. 접근성 오류 목록은 받았지만 실제 신청 실패를 재현하지 못한다
+
+**① 구체적 장면**  
+대학·소규모 서비스 운영자가 접근성 검사 경고를 받았지만, 키보드 이용자가 신청서의 어느 단계에서 막히는지 재현하지 못해 수정 우선순위를 정하지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 8개 업종 1,000개 웹사이트의 접근성 평균은 70.4점, 도매·소매업은 65.7점.** 특정 대학·관악구·금천구 사이트의 수준이나 과업 실패율을 뜻하는 수치는 아니다. [과기정통부 발표, KDI 수록](https://eiec.kdi.re.kr/policy/materialView.do?num=278528&pg=&pp=&topic=C)
+
+**③ 왜 지금**
+
+- **2026-01-22 디지털포용법 시행.** 추정: 접근성을 운영 과정에서 확인하고 설명할 필요성이 커질 수 있다. 구체적인 의무 적용은 기관·서비스별 확인이 필요하다. [국가법령정보센터](https://www.law.go.kr/LSW/lsInfoP.do?chrClsCd=010202&efYd=20260122&lsiSeq=268533&urlMode=lsInfoP)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [Deque Axe](https://www.deque.com/axe/) | 자동·AI·가이드·수동 검사와 보고 | 한국어 신청 목표에서 실패 경로를 스스로 탐색해 증거로 묶는 전체 흐름 |
+| [WAVE](https://wave.webaim.org/) | 접근성 오류 식별, 브라우저 검사, 사람의 평가 지원 | 신청 목표를 입력받아 여러 화면의 실패 원인을 자동 재현 |
+| [Accessibility Insights](https://accessibilityinsights.io/) | 웹·Windows 검사, FastPass, 가이드 평가 | 한국어 업무 목표에서 실패 단계와 수정 전후 결과를 자동 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 개별 오류와 ‘신청 완료 실패’를 연결한 재현 기록에 빈 곳이 있을 수 있다.**
+- AI 필요성: 목표·화면·상태 변화를 해석하며 경로를 탐색하는 부분이다. 색 대비나 레이블 검사는 기존 규칙 엔진으로 충분하다.
+- **보류:** Axe는 이미 AI와 수동 검사까지 제공한다. “기존 도구는 정적 검사만 한다”는 차별화 주장은 사용할 수 없다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 만든 신청 페이지 한 개에 한정해 키보드 경로·실패 화면·관련 요소를 기록한다. 실제 스크린리더 이용자의 경험을 완전히 재현했다는 주장은 어렵다.
+
+---
+
+## 6. 고령자가 실제 무인기기 화면 앞에서 다음 조작을 찾지 못한다
+
+**① 구체적 장면**  
+고령자가 생활시설의 무인 접수 화면에서 안내 문구와 선택지를 이해하지 못하고, 뒤에 사람이 기다리자 도움을 요청하지 못한 채 접수를 포기한다.
+
+**② 심각도 근거**
+
+- **2024년 고령층 디지털정보화 수준은 일반 국민 대비 71.4%.** 접수 포기율이나 특정 키오스크 실패율과는 다른 지표다. [NIA 공식 보고서](https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=81623&bcIdx=27832&parentSeq=27832)
+- **서울시는 2025년 디지털 안내사 사업에서 누적 약 56만 명 지원 실적을 발표했다.** 이는 지원 실적이며 고유 이용자 수·미충족 수요로 해석하면 안 된다. [서울시 공식 발표](https://news.seoul.go.kr/gov/archives/565012?listPage=1)
+
+**③ 왜 지금**
+
+- **2026년 디지털포용법 시행**, **2025년 서울시 현장 안내 노선 확대**가 확인된다. 추정: 일회성 교육 이후 실제 화면에서 막히는 순간을 지원하는 방식을 검증할 시점이다. [법령](https://www.law.go.kr/LSW/lsInfoP.do?chrClsCd=010202&efYd=20260122&lsiSeq=268533&urlMode=lsInfoP), [서울시 사업 안내](https://news.seoul.go.kr/gov/archives/565012?listPage=1)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [AI디지털배움터](https://www.xn--2z1bw8k1pjz5ccumkb.kr/cmm/spt/faq.do) | 무료 디지털 교육, 방문·파견교육 | 이용 중인 임의 기기 화면에 대한 상시 자동 안내 |
+| [서울시 디지털 안내사](https://news.seoul.go.kr/gov/archives/565012?listPage=1) | 현장에서 스마트폰·키오스크 사용 지원 | 안내사가 없는 시간·장소의 자동 지원 |
+| [서울디지털동행플라자](https://didong.kr/program/1) | 생활 디지털 교육, 키오스크 기초 체험 | 이용자가 현장에서 촬영한 화면의 즉시 과업 안내 |
+| [Be My AI](https://support.bemyeyes.com/hc/en-us/articles/48284651305489-Using-Be-My-AI-on-desktop) | 이미지·화면 설명, 후속 질문 | 한국어 고령자의 접수 과정 전체를 화면 변화에 따라 지속 안내 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 사람이 없는 현장에서 낯선 화면을 이해하고 한 단계씩 진행하도록 돕는 지원에 빈 곳이 있을 수 있다.**
+- AI 필요성: 서로 다른 화면의 문구·버튼 위치와 사용자의 목적을 함께 이해해야 한다.
+- **보류:** Be My AI 등 시각 보조 서비스와 직접 겹친다. ‘사진을 설명해 준다’만으로는 빈 곳이 증명되지 않는다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 직접 만든 무인 접수 화면 3개에서 사진 입력→큰 글씨·음성 안내→다음 화면 확인을 시연한다. 결제·본인인증 화면까지 다루는 것은 어렵다.
+
+---
+
+## 7. 이주노동자가 안전수칙을 번역해 읽어도 실제 작업 지시와 연결하지 못한다
+
+**① 구체적 장면**  
+금천구 소규모 작업장의 이주노동자가 작업 시작 전 한국어 지시와 안전 안내를 받지만, 생략된 주어·현장 별칭·금지 조건 때문에 어떤 장비에서 무엇을 하면 안 되는지 확인하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 국내 외국인 취업자는 101만 명으로 전년보다 8.7만 명 증가.** 이 수치는 위험 노출 인구의 배경이며 언어 때문에 발생한 사고 건수가 아니다. [통계청·법무부 조사 발표](https://www.korea.kr/news/policyNewsView.do?newsId=156666055)
+- 안전보건공단의 **「외국인 근로자 재해예방 강화 방안」**은 원어민 강사·통역 및 외국인 안전 리더 등 대응 방안을 다룬다. 해당 장면의 발생률은 **unknown**이다. [안전보건공단 연구보고서](https://oshri.kosha.or.kr/oshri/publication/researchReportSearch.do?articleNo=454342&attachNo=260683&mode=download)
+
+**③ 왜 지금**
+
+- **2024년 외국인 취업자 증가와 2025년 재해예방 연구·대응 논의**가 확인된다. 추정: 자료 번역을 넘어 작업별 이해 여부를 확인할 필요가 커진다. 위 조사·보고서가 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [안전보건공단 다국어 자료·교육 지원](https://oshri.kosha.or.kr/oshri/publication/researchReportSearch.do?articleNo=454342&attachNo=260683&mode=download) | 외국인 안전교육·통역 관련 지원과 자료 | 당일 현장 지시와 특정 장비를 연결하고 이해 여부를 자동 확인 |
+| [Papago](https://help.naver.com/service/16448/contents/5911?lang=ko&osType=MOBILE) | 사진 속 문자 번역, 이미지 번역 | 안전 지시의 누락 조건 탐지와 작업자 이해 확인 |
+| [Google Translate](https://support.google.com/translate/?hl=en) | 텍스트·이미지·음성 번역 | 장비별 지시의 안전상 모호성을 판별하고 확인 질문 생성 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 번역된 문장을 제공한 뒤, 작업자가 ‘어느 장비에서 어떤 조건으로 행동하는지’를 다시 설명해 확인하는 단계가 빈 곳이다.**
+- AI 필요성: 자유로운 현장 발화와 작업자의 재설명을 비교하고, 생략·모호성을 찾는 데 언어 해석이 필요하다. 정형 수칙 번역만 한다면 새 AI 서비스의 필요성은 약하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 작업 한 종류·언어 한 쌍에 한정해 지시문→확인 질문→작업자 재설명 비교를 시연한다. 실제 안전교육 이수나 작업 허가를 대체할 수준은 어렵다.
+
+---
+
+## 8. 소규모 사업장이 오늘의 현장 상태를 작업 전 점검항목으로 바꾸지 못한다
+
+**① 구체적 장면**  
+작은 사업장의 현장 책임자가 작업 직전 적치물·통로·임시 전선의 상태를 보지만, 기존 체크리스트에서 오늘 달라진 위험을 찾아 기록하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 재해조사 대상 사고사망자 589명·553건.** 끼임·물체에 맞음·화재·폭발 사망자는 전년보다 증가했다. 이 통계는 전체 산재 사망이나 사진으로 탐지 가능한 사고 수와 다르다. [고용노동부, 2025-03 발표](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=17595)
+- ‘체크리스트를 현장 상태에 맞추지 못해 발생한 사고’의 비중은 **unknown**이다.
+
+**③ 왜 지금**
+
+- **2025-01-02 KRAS 개편**으로 모바일 위험요인 발굴·등록과 작업 전 안전점검인 TBM 연계가 강화됐다. 추정: 현장 관찰 내용을 디지털 점검으로 연결할 기반이 확대됐다. [고용노동부 공식 안내](https://moel.go.kr/local/seouldongbu/news/notice/noticeView.do?bbs_seq=20250200428)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [KRAS·산업안전포털](https://portal.kosha.or.kr/?startNo=-1) | 위험성평가, 위험요인 관리, TBM 일지·이력 | 사진에서 보이는 상태와 기존 점검항목의 누락 자동 대조 |
+| [SafetyCulture](https://safetyculture.com/pricing/) | 디지털 점검, 템플릿·AI 템플릿 작성 | 한국 소규모 사업장의 KRAS 항목과 사진을 연결한 전체 흐름 |
+| [WiseFollow](https://www.wisefollow.com/en/ai-inspections) | 사진 기반 위험·보호구 누락 탐지, 오프라인 점검, 보고서 | 한국 KRAS·TBM 기준과의 구체적 연결 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 한국의 기존 점검항목과 오늘 촬영한 현장 증거를 연결하고, 사진으로 확인할 수 없는 항목을 따로 남기는 단계에 제한적인 빈 곳이 있을 수 있다.**
+- AI 필요성: 이미지에서 상태를 추출해 문장형 항목과 연결하는 부분이다.
+- **보류:** WiseFollow가 이미 사진 기반 위험 탐지를 제공한다. “사진으로 위험을 찾아 준다”는 범용 형태는 제외해야 한다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 안전하게 연출한 작업공간과 항목 5개만 사용해 ‘관찰됨·판독 불가·추가 확인’을 표시한다. 실제 사업장 안전 판정은 어렵다.
+
+---
+
+## 9. 퇴원한 고령자가 새 처방과 집에 남은 약의 관계를 설명하지 못한다
+
+**① 구체적 장면**  
+여러 병원을 이용하는 고령자가 퇴원 후 새 약봉투와 집에 남은 약을 함께 놓고, 어떤 약이 계속 복용 중인지 약사에게 정확히 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2024년 상반기 10종 이상 약을 60일 이상 복용한 만성질환자는 약 136.2만 명.** 국민건강보험공단 제출자료를 인용한 보도이며, 이 중 실제 복용 목록 불일치 비율은 **unknown**이다. [국회 제출자료 인용 보도](https://m.health.chosun.com/svc/news_view.html?contid=2024101402040)
+- 심평원은 기존 연구에서 **실제 복용 의약품·건강식품 목록 확인과 medication reconciliation**의 필요성을 다뤘다. [HIRA 연구자료](https://repository.hira.or.kr/handle/2019.oak/1247)
+
+**③ 왜 지금**
+
+- **2026-03-27 의료·요양·돌봄 통합지원 제도 시행.** 추정: 병원에서 지역사회로 돌아온 사람의 실제 복약 정보를 서비스 간 전달하는 접점이 중요해졌다. [보건복지부 통합돌봄 안내](https://www.mohw.go.kr/menu.es?mid=a60100000000)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [심평원 ‘내가 먹는 약! 한눈에’](https://www.khidi.or.kr/board/view?boardStyle=&categoryId=&continent=&country=&linkId=48833560&maxIndex=&menuId=MENU01810&minIndex=&no1=&pageNum=48&rowCnt=10&schText=&schType=0&upDown=0) | 투약이력 조회, 알레르기·부작용 정보 등록·확인 | 집에 남아 있는 약과 실제 복용·중단 상태의 자동 대조 |
+| [Medisafe](https://help-center.medisafe.com/en/) | 약 등록, 복약·재구매 알림, 건강 기록 | 한국 퇴원서류와 여러 약봉투에서 변경 근거를 자동 연결 |
+| [약체크](https://www.yakcheck.co.kr/) | 약봉투·알약 사진 입력, 약 정보·가격·병용금기 등 조회 | 퇴원 전후 복용 상태를 문서 근거와 함께 시간순으로 구분 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 약 이름 조회 이후, ‘처방·조제 이력’과 ‘집에 있는 약·실제로 먹는 약’의 차이를 상담 전에 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 약봉투·퇴원서류·사용자 설명을 연결해 불일치를 찾는 부분이다. 약물 상호작용 판단과 복용 변경은 AI 생성 판단의 대상에서 제외해야 한다.
+- **보류:** 약봉투 OCR과 병용금기 조회는 이미 있으므로 그것만으로는 차별성이 없다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 약봉투 3장과 퇴원안내 1장으로 ‘중복 기록·상태 불명·약사 확인 질문’을 만든다. 임상 안전성 검증은 9시간에 어렵다.
+
+---
+
+## 10. 휠체어 이용자가 ‘접근 가능’ 표시를 보고도 어느 문으로 들어갈지 모른다
+
+**① 구체적 장면**  
+휠체어 이용 대학생이 접근 가능으로 표시된 건물에 도착했지만, 정문에는 계단이 있고 대체 출입구의 위치·개방 상태를 찾지 못해 약속에 늦는다.
+
+**② 심각도 근거**
+
+- **2023년 장애인 편의시설 조사에서 매개시설 적정설치율 84.2%, 내부시설 79.5%.** 설치 대상 항목의 충족률이며 모든 점포의 실제 진입 성공률이 아니다. 대체 출입구 탐색 실패율은 **unknown**이다. [보건복지부 「통계로 보는 사회보장 2024」](https://m.bokjiro.go.kr/ssis-tem/cms/mob/customer/notice/__icsFiles/afieldfile/2025/09/30/%ED%86%B5%EA%B3%84%EB%A1%9C%20%EB%B3%B4%EB%8A%94%20%EC%82%AC%ED%9A%8C%EB%B3%B4%EC%9E%A5%202024.pdf)
+
+**③ 왜 지금**
+
+- **2025년 시각언어모델의 객체 위치 지정 기술 공개.** 추정: 새로 촬영한 출입구 사진과 기존 안내를 연결하는 실험이 가능해졌다. 실제 통과 가능성 보장과는 다르다. [Qwen2.5-VL 보고서](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [계단뿌셔클럽](https://staircrusher.club/) | 접근성 중심 장소 탐색, 이용자 리뷰, 계단 정보 수집 | 현재 사진과 과거 안내의 불일치 자동 탐지 |
+| [Wheelmap](https://news.wheelmap.org/en/faq/) | 출입구·실내·화장실 접근성 평가, 사진, 대체 출입구 확인 안내 | 현장 사진으로 대체 문 위치와 최신 상태를 자동 연결 |
+| [AccessNow](https://accessnow.com/mapmissionguide/) | 접근성 평가, 사진·태그·경험 리뷰 | 현재 위치에서 특정 대체 출입구까지의 증거 기반 안내 자동 생성 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 장소 평가 자체보다, 방문 시점의 사진으로 기존 안내가 가리키는 문을 찾고 정보 충돌을 드러내는 단계가 빈 곳일 수 있다.**
+- AI 필요성: 서로 다른 사진·설명 속 동일 출입구를 연결하는 부분이다.
+- **보류:** 출입구·경사로 정보는 이미 기존 서비스의 핵심이다. 사진만으로 폭·경사·개방 여부를 확정하면 안 된다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 동의받아 촬영한 건물 한 곳의 출입구 3개에서 문 식별과 안내 충돌을 보여 준다. 도시 단위 데이터 확보와 최신성 유지는 어렵다.
+
+---
+
+## 11. 헬스장 해지 의사는 밝혔지만 환급 협의에 필요한 사실을 정리하지 못한다
+
+**① 구체적 장면**  
+대학생이 헬스장·PT 이용을 중도 해지하려 하지만, 계약서·결제 영수증·출석 내역·해지 요청 대화가 달라 환급 협의에 필요한 기준일과 이용 사실을 설명하지 못한다.
+
+**② 심각도 근거**
+
+- **2021년~2024년 3분기 헬스장 피해구제 신청 10,746건.** 한국소비자원은 계약해지 관련 피해가 대부분이며, 문자·내용증명 등 입증자료 확보를 당부했다. [한국소비자원 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1003802911&page=3)
+- **2024년 헬스장 피해구제 신청 3,412건**으로 전년보다 증가했다. [소비자원 자료 인용 보도, 2025](https://www.mk.co.kr/news/economy/11317938)
+
+**③ 왜 지금**
+
+- **2024년 피해 증가와 2025년 관련 주의보·보도가 확인된다.** 추정: 상담 접수 이전에 해지 시점과 이용 내역을 정리하는 부담을 검증할 가치가 있다. 위 자료가 근거다.
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [1372 소비자상담](https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do) | 상담·정보 제공, 미해결 시 피해구제 단계 연계 | 계약·결제·출석·대화 파일의 자동 시간순 대조 |
+| [한국소비자원 ODR](https://www.kca.go.kr/odr/) | 피해구제 신청, 사건 확인, 분쟁 기준·내용증명 작성 안내 | 원문 위치가 연결된 개인 증거 목록 자동 작성 |
+| [소비자24](https://www.consumer.go.kr/user/ftc/consumer/dmrecnslt/316/selectDmreCnsltList.do?cnsltRegistDt1=&cnsltRegistDt2=&memberId=&mypage=N&page=1532&row=10&searchCode=&searchNm=&sprogrsSttus=) | 온라인 상담 및 진행현황 확인 | 파일 간 계약일·해지 요청일·이용 횟수 불일치 자동 확인 |
+
+세 서비스는 **서로 연계되는 공공 상담·구제 체계**이므로 독립적인 경쟁사 세 곳으로 해석하면 안 된다.
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 상담과 환급기준 안내 이전에, 이용자가 가진 자료에서 해지 요청 시점·이용 사실·결제 조건을 정리하는 단계가 빈 곳이다.**
+- AI 필요성: 계약서 사진, 출석 화면, 자연어 대화에서 관련 사실을 추출·연결해야 한다. 환급액 계산은 적용 조건을 확인한 뒤 규칙으로 수행하는 편이 적합하다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 가상 계약 한 건에서 날짜·금액·횟수의 충돌과 추가 확인 질문을 출력한다. 실제 환급 보장이나 분쟁 승소 예측은 범위에 넣지 않는다.
+
+---
+
+## 12. 복합 포장재를 버릴 때 재질 표시와 실제 분리 방법을 연결하지 못한다
+
+**① 구체적 장면**  
+관악구 원룸 거주자가 배달 포장의 용기·필름·흡수패드·라벨을 버리면서, 무엇을 떼어내고 어떤 지역 기준으로 배출해야 하는지 품목 이름조차 찾지 못한다.
+
+**② 심각도 근거**
+
+- **2025년 ‘내 손안의 분리배출’에 접수된 Q&A 1,107건 중 100건을 한국폐기물협회가 2026년 사례집으로 배포했다.** 정보 수요의 근거이며, 전체 주민의 오배출률이나 복합 포장재 피해 규모는 **unknown**이다. [한국폐기물협회 공식 안내](https://www.kwaste.or.kr/community/01.php?admin_mode=read&no=6128&page=3)
+
+**③ 왜 지금**
+
+- **2026년 수도권 생활폐기물 직매립 금지 시행**으로 분리·처리 부담에 대한 관심이 커졌다. 개인 분리배출 정확도 개선이 처리비를 얼마나 줄이는지는 **unknown**이다. [시행 상황 보도, 2026](https://www.newspim.com/news/view/20260327000796)
+- 추정: 2025년 시각언어모델 기술을 이용해 사진 속 부품·표시를 구분하는 제한적 시연이 가능하다. [Qwen2.5-VL 보고서](https://arxiv.org/abs/2502.13923)
+
+**④ 기존 해결책**
+
+| 서비스·공식 URL | 확인한 기능 | 공식 자료에서 확인 안 됨 |
+|---|---|---|
+| [내 손안의 분리배출](https://www.kca.go.kr/smartconsumer/sub.do?menukey=7742) | 재질별·품목별 분리배출 안내 | 한 사진의 여러 부품을 구분해 지역 규칙에 연결 |
+| [분리의정석](https://www.wasteguide.or.kr/) | 품목사전, 지역·주택 유형별 배출방법, 장소 지도, Q&A | 복합 포장의 부품별 시각 식별과 분해 순서 자동 안내 |
+| [Recycle Coach](https://www.recyclecoach.com/) | 지역별 분류 검색, 수거 일정·알림, 배출장소 정보 | 한국 자치구 기준에 따른 복합 포장 사진의 부품별 안내 |
+
+**⑤ 빈 곳과 AI 필요성**
+
+- **추정: 품목명으로 검색하기 전에, 눈앞의 복합 포장을 구성 부품으로 나누고 무엇을 추가 확인해야 하는지 알려 주는 단계가 빈 곳이다.**
+- AI 필요성: 사진 속 부품과 재질 표시를 읽는 부분이다. 재질 표시가 없거나 내부 코팅이 보이지 않으면 추가 질문이 필요하다.
+- **보류:** 지역별 규칙 안내는 이미 있다. ‘사진 한 장으로 분리배출 답변’도 추가 경쟁조사 없이 차별점으로 주장하기 어렵다.
+
+**⑥ 9시간 시연**
+
+- **추정: 가능.** 관악구 공식 안내와 포장 유형 10개에 한정한다. 보이지 않는 소재는 판정하지 않고 표시 확대 촬영·분리 가능 여부를 질문한다.
+
+---
+
+## 빈 곳이 가장 뚜렷한 문제 TOP 5
+
+**추정: 아래 순위는 공식 안내에서 확인한 기능과 문제 장면 사이의 간격, 시연 가능성을 기준으로 정했다. 경쟁 부재가 입증된 순위는 아니다.**
+
+| 순위 | 문제 | 우선 검증할 이유 | 선정 전에 반드시 확인할 것 |
+|---|---|---|---|
+| **1** | **아르바이트 임금 증거 정리** | 피해 규모가 확인되고, 기존 근태 시스템을 이용하지 못한 노동자의 과거 자료라는 경계가 구체적이다. | 기존 노동상담·노무 서비스가 같은 파일 대조를 제공하는지, 실제 정리 시간이 얼마나 드는지 |
+| **2** | **청년월세 증빙 누락** | 공식 공고에 누락의 결과와 확인 항목이 명시돼 있어 정답 기준을 만들기 쉽다. | 서류 미비로 실제 탈락·보완한 비율, 신청 화면에 이미 있는 검증 범위 |
+| **3** | **강의 지시어와 화면 연결** | 전사·요약과 구분되는 입력·출력이 명확하고, 자막만 제공한 경우와 비교할 수 있다. | 청각장애 학생이 이 장면을 얼마나 자주 겪는지, Genio 등에서 이미 해결되는 범위 |
+| **4** | **헬스장 해지 증거 정리** | 공식 피해자료가 입증자료 확보 필요성을 직접 지적하며, 사건 단위 시연이 가능하다. | 기존 상담기관·민간 서비스의 자동 증거 정리 기능과 이용자의 실제 준비 부담 |
+| **5** | **상가 원상회복 기록 연결** | 서울시 분쟁 사례가 구체적이고, 사진·특약·시설 인수 기록이라는 자료 경계가 분명하다. | 해외 AI 점검 서비스의 비교 기능, 한국 상가 특약 연결의 추가 가치 |
+
+**다음 peer 검증에서는 TOP 5마다 기존 서비스에 동일한 샘플 자료를 넣어 보고, 남는 작업과 수작업 시간을 비교해야 한다.** 특히 3번은 문제 빈도, 2번은 실제 누락 피해 규모가 **unknown**이므로 사용자·담당기관 확인 없이는 심각도를 강하게 주장하기 어렵다.

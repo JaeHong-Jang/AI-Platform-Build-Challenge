@@ -1,0 +1,614 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16ef4-81bf-7223-ac8e-f6c80c6f4b2d
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-25이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+## 과제 B013-사고 대응 근거 조사 (실무팀 · 조사)
+
+오늘은 2026-10-25다. 웹 검색 가능. 저장소 파일은 읽기만 한다.
+
+### 배경
+'이사 지킴이'에 **사고 대응 에이전트**를 넣는다. 소규모 이사에서 ① 이사 당일 업체가 추가요금을 요구하거나(거부하면 이사 거부) ② 이사 후 짐이 파손·분실됐을 때, 사용자가 **무엇을 근거로, 무엇을 챙겨, 언제까지, 누구에게** 해야 하는지 빠르게 알려 준다. 법률 판단·배상액 계산은 하지 않고 **공식 기준을 인용**만 한다. 그래서 인용할 근거가 정확해야 한다.
+
+### 찾을 것 (항목마다 공식 출처 URL과 조항 번호·원문 문장. 못 찾으면 unknown)
+1. **이사화물 표준약관**(공정거래위원회 표준약관 제10035호 또는 최신판): 
+   - 사업자의 손해배상 책임과 면책 사유 조항, 배상 기준(견적서·계약서 기재 금액 등)
+   - 고객의 멸실·훼손 통지 기한(인도받은 날로부터 며칠 이내 통지하지 않으면 책임 소멸 등) 조항 번호와 문장
+   - 계약금액 초과 청구 제한(제5조 제3항 등), 이사화물의 인수 거절·계약 해제, 계약금 반환·손해배상(사업자 귀책 해제 시 배액 등) 조항
+   - 사업자의 사고증명서 발행 의무가 있다면 그 조항
+2. **소비자분쟁해결기준**(공정위 고시) 중 이사화물 취급(포장이사) 관련 분쟁 유형별 해결 기준 — 파손·분실, 계약 해제, 운송 지연 등.
+3. **절차**: 1372 소비자상담센터, 한국소비자원 피해구제 신청, 이사화물 관련 분쟁조정 — 각 경로와 순서. 이사화물배상책임보험(허가업체 가입 의무 여부)과 확인 방법(허가이사.org 등).
+4. **당일 추가요금 요구 시 소비자원 권고**가 있으면 원문(`wiki/sources/kca2026-소규모이사-피해.md`의 원문 PDF p8 붙임3 등).
+5. 증거로 무엇을 남기라고 공식 자료가 권하는지(사진·계약서·문자 등).
+
+### 출력
+- 표: 상황(당일 추가 요구 / 파손 / 분실 / 이사 거부·계약금) | 근거(문서·조항·원문 문장) | 기한 | 사용자 행동 | 출처 URL
+- 확인 못 한 것은 unknown으로 남긴다. 최신판 여부(개정일)를 함께 적는다. 블로그·사설 사이트는 근거로 쓰지 않는다(공정위·법제처·소비자원·국토교통부·지자체만).
+한국어 마크다운, 결과만.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-24T17:28:01.022355Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+저장소의 소비자원 자료와 공식 법령·약관을 대조해 조항, 통지 기한, 대응 절차를 확인하겠습니다. 원문이나 최신 개정 여부를 확인하지 못한 항목은 `unknown`으로 남기겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "pwd && rg --files -g 'AGENTS.md' -g '*kca2026*' -g '*B013*' -g '*이사*'" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 1168ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+AGENTS.md
+briefs/B007-이사-지킴이-대시보드.md
+briefs/B006-이사-지킴이-웹-구현.md
+briefs/B005-이사-지킴이.md
+briefs/B008-이사-지킴이-에이전트-관제.md
+briefs/B013-파손-분실과-사고-대응.md
+보고서/이사지킴이_예선기획서(한글양식).pdf
+보고서/이사지킴이_예선기획서.pdf
+보고서/이사지킴이_예선기획서.hwpx
+decisions/D004-이사-지킴이-웹-구현.verdict.json
+decisions/D004-이사-지킴이-웹-구현.md
+decisions/D003-이사-지킴이-제작계획.verdict.json
+decisions/D003-이사-지킴이-제작계획.md
+decisions/D005-이사-지킴이-대시보드.verdict.json
+decisions/D005-이사-지킴이-대시보드.md
+decisions/D006-이사-지킴이-에이전트-관제.md
+decisions/D006-이사-지킴이-에이전트-관제.verdict.json
+runs/out/분석-이사-지킴이-색-3안.sonnet.prompt.md
+runs/out/분석-이사-지킴이-색-3안.sonnet.log
+runs/out/분석-이사-서비스-제작-계획서.sonnet.log
+runs/out/분석-이사-팔레트-후보.sonnet.prompt.md
+runs/out/분석-이사-팔레트-후보.sonnet.log
+runs/out/조사-이사-서비스-경쟁-벤치마킹.sonnet.log
+wiki/overviews/이사-지킴이-웹-설계.md
+wiki/overviews/이사-지킴이-제작계획.md
+wiki/sources/kca2026-소규모이사-피해.md
+보고서/build/이사지킴이_예선기획서(한글양식).B011.pdf
+보고서/build/이사지킴이_예선기획서.B011.hwpx
+web/node_modules/next/AGENTS.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+web search: 
+exec
+/bin/bash -lc 'cat AGENTS.md wiki/sources/kca2026-소규모이사-피해.md briefs/B013-파손-분실과-사고-대응.md' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# AGENTS.md — 오케스트라 팀 운영 매뉴얼
+
+이 저장소에서 일하는 모든 에이전트(Claude Code, Codex, Antigravity)는 이 파일을 단일 운영 매뉴얼로 따른다.
+
+## 1. 팀 구성 — 지휘와 실무를 나눈다
+
+| 구분 | 멤버 | 모델 / 호출 | 하는 일 | 하지 않는 일 |
+|---|---|---|---|---|
+| ◆ 지휘 (의장) | **Opus** | Claude Opus 5.5 — 메인 Claude Code 세션 | brief 작성, 배정, 토론 진행, 최종 판정, 위키·저장소 반영 | 조사·분석 본작업 |
+| ◆ 지휘 | **Astra** | GPT 6 Astra — `team/bin/ask.sh astra` | 지휘부 검증(전략·사업성·심사 관점), 토론 | 조사·분석 본작업 |
+| ◆ 지휘 | **Argon** | Gemini 4 Argon — `team/bin/ask.sh argon` | 지휘부 검증(기술·구현 관점), 토론 | 조사·분석 본작업 |
+| ○ 실무 | **Sol** | GPT 6.1 Sol — `team/bin/ask.sh sol` | **조사 · 분석 · 상호 검증** | 최종 판정 |
+| ○ 실무 | **Sonnet** | Claude Sonnet 5.5 — Agent 도구 `model: sonnet` | **조사 · 분석 · 상호 검증**, 위키 ingest | 최종 판정 |
+
+실무팀(Sol·Sonnet)이 일을 하고, 지휘부(Opus·Astra·Argon)는 방향을 정하고 검증하고 판정한다.
+
+## 2. 파이프라인 (stage)
+
+```
+brief ─▶ 조사 ─▶ 분석 ─▶ 상호 검증 ─▶ 지휘부 검증 ─▶ 토론 ─▶ 판정 ─▶ 위키 반영 ─▶ 저장소 반영 ─┐
+  ▲                                                                                       │
+  └──────────────────────────── 결과가 다음 brief로 되돌아간다 ──────────────────────────┘
+```
+
+| stage | 누가 | 규칙 |
+|---|---|---|
+| `brief` | Opus | `briefs/Bxxx-*.md` 작성: 질문, 범위, 성공 기준, 마감. status: active / waiting / done |
+| `research` 조사 | Sol ∥ Sonnet | 서로 결과를 보지 않고 병렬. 사실마다 출처 URL, 못 찾으면 `unknown` |
+| `analysis` 분석 | Sol ∥ Sonnet | 두 조사 결과를 모두 입력으로 받아 **각자 독립적으로** 분석 |
+| `peer` 상호 검증 | Sol ↔ Sonnet | Sol의 분석은 Sonnet이, Sonnet의 분석은 Sol이 검증(출처·수치·논리). 자기 산출물 승인 금지 |
+| `review` 지휘부 검증 | Astra ∥ Argon | 블라인드 독립 리뷰. Astra=전략·사업성·심사, Argon=기술·구현성. 각 주장에 찬성/반대/보류 |
+| `debate` 토론 | Astra · Argon (+Opus 의장) | **판정이 갈리는 주장만**. 각자 상대 의견을 받아 1회 반박 → Opus가 정리 |
+| `decision` 판정 | Opus | `decisions/Dxxx-*.md`: 결론, 근거 run, 반대 의견, 남은 unknown |
+| `wiki` 위키 반영 | Sonnet · Opus | 노트·링크 갱신, `wiki/log.md` 기록 |
+| `repo` 저장소 반영 | Sonnet · Opus | 코드·문서·제출물 반영 |
+
+작은 과업은 stage를 건너뛸 수 있으나 **peer 또는 review 중 하나는 반드시** 거친다.
+
+## 3. 실행 기록 — 관측소에 실시간으로 보인다
+
+- 외부 모델: `team/bin/ask.sh <astra|argon|sol> <task-id> <prompt-file> <stage>` → 시작·종료가 `runs/events.jsonl`, 완료가 `runs/runs.jsonl`에 기록. 결과 `runs/out/<task-id>.<member>.md`, 진행 로그 `.log`.
+- **Claude Code 세션은 훅이 자동 기록한다** (`.claude/settings.json` → `team/bin/hook.py`):
+  - 사용자가 지시하면 Opus(과제 지시) 실행이 시작되고 지시 문장이 관측소에 뜬다. 응답이 끝나면(Stop) 종료.
+  - Opus·서브에이전트가 쓰는 도구(명령·검색·파일 작성·팀원 호출)가 한 줄씩 진행 로그에 쌓인다.
+  - `Agent` 도구를 `model: sonnet`으로 부르면 Sonnet 실행이 자동 시작되고, 끝나면(SubagentStop) 자동 종료된다.
+    단계는 description의 낱말로 정한다: 조사·벤치→조사, 분석→분석, 검증·상호→상호 검증, 리뷰→지휘부 검증, 토론→토론, 위키→위키 반영.
+    그래서 description은 `Sonnet: <단계 낱말이 들어간 짧은 제목>` 으로 쓴다.
+- 훅이 꺼져 있을 때만 수동으로: `rid=$(team/bin/event.py start <member> <task> <stage> <out>)` → `team/bin/event.py end $rid ok|fail`.
+- 프롬프트는 `team/prompts/`에 남기고 `_context.md`를 앞에 붙인다.
+
+## 4. LLM 위키 규칙 (`wiki/`)
+
+```
+wiki/papers/<stem>.pdf          원문 (가능할 때)
+wiki/sources/<stem>.md          논문 초록·요약 (원문에 충실)
+wiki/notes/<type>/<이름>.md      연결된 지식 노트
+wiki/overviews/<주제>.md         종합 문서
+wiki/index.md, wiki/log.md      목차, 변경 기록
+```
+- stem: `<첫저자성><연도>-<키워드>` (예: `lewis2020-rag`)
+- frontmatter: `type: hub|concept|idea|paper|system|experiment|verdict`, `tags`, `status: draft|verified|confirmed|rejected`, `source`
+- 링크는 `[[노트이름]]`. 관측소 그래프가 이 링크로 그려진다.
+- **4대 규칙**: ① 위키 우선, 웹검색은 조사 stage에서만 ② 불확실하면 원문 확인 ③ 확인 못한 값은 `unknown` ④ 근거가 없으면 자료 추가 요청
+- 논문은 arXiv ID·DOI로 실재를 확인한 경우에만 `status: verified` (`team/bin/ingest_papers.py`)
+
+## 5. AI Platform Build Challenge 관측소 (`observatory/`)
+
+- **실시간**: `python3 observatory/server.py` → http://localhost:8777 (홈 · 시스템 동작 · 지식 그래프 · 실험 기록). 실행 중인 팀원, 진행 시간, 검색어·명령 로그, D-day가 1초 단위로 갱신된다.
+- **정적 스냅샷**: `python3 observatory/build.py` → `observatory/index.html`
+
+## 6. 금지
+
+- 확인하지 않은 통계·논문·데이터셋·경쟁 부재 주장 생성 금지 (경쟁 주장은 실무팀 검증 필수)
+- 개인정보·권한 없는 자료를 저장소에 넣지 않는다
+- 다른 멤버의 산출물(`runs/out/`)을 덮어쓰지 않는다
+---
+type: paper
+tags: [근거, 이사, 통계]
+status: verified
+source: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+---
+# 한국소비자원 피해예방주의보 — 방문 견적 없는 소규모 이사 계약, 추가 비용 요구 등 피해 많아
+
+- 발행: 한국소비자원, 보도 2026-04-21(화) 12:00 · 배포 2026-04-20
+- 게시글: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+- 첨부 PDF(10쪽): https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+- 확인: 2026-10-23 Opus가 첨부 PDF를 내려받아 텍스트를 추출해 아래 수치를 원문과 대조함 (D003 쟁점 D2)
+
+## 원문 수치 (쪽 번호는 첨부 PDF 기준)
+- p1 이사(포장·반포장·일반) 피해구제 신청: 2023년 603건 → 2024년 785건 → 2025년 961건
+- p1 2025년 961건 중 소규모 이사(총계약대금 10만 원 이상 100만 원 이하) **241건** 분석
+- p1 20~30대 **65.1%(157건)**, 그중 20대 **22.8%(55건)** — 전체 이사서비스 이용자의 20대 비율 **11.6%** 대비 2배 가까이
+- p2·p5 소규모 이사 피해 유형(’25년) — **계 281건\***
+
+| 물품 파손·분실 | 추가 비용 요구 | 이사거부/계약불이행 | 과도한 위약금 요구 | 기타 | 계 |
+|---|---|---|---|---|---|
+| 134건 (47.7%) | **70건 (24.9%)** | 39건 (13.9%) | 27건 (9.6%) | 11건 (3.9%) | 281건\* (100.0%) |
+
+\* p2: "피해구제 241건의 유형 분석으로 1개 사건이 2가지 이상 유형 해당 시 각각의 건수로 산정" · p5: "1개 피해구제 사례에 여러 가지 유형이 포함된 경우 중복 건수로 산정"
+
+## 원문 서술 (요지)
+- p5 추가 비용 요구: 이삿짐의 양이나 건물 구조 등을 이유로 화물차·인력·사다리차를 추가로 써야 한다는 사유가 대부분
+- p5 이사 거부: 소비자가 추가 비용 지급을 거부하거나 감액을 요구하면 업체가 계약 이행을 거부하는 '계약불이행' 피해로 이어지는 사례가 많음
+- p5 소규모 이사는 방문 견적 없이 구두 설명이나 온라인 입력을 토대로 비대면 계약을 맺는 경우가 많아 추가비용 요구 등 피해에 더욱 취약
+
+## 소비자원 권고 (p8 붙임3 소비자 주의사항 — 원문 인용)
+- 계약 체결 시: "전화나 홈페이지를 통해 견적을 받을 경우 작업조건(사다리 비용 등) 및 이사화물 내역에 따라 추가 요금이 발생할 수 있으므로, 가급적 방문견적을 통해 화물의 양과 주요 물품을 쌍방이 확인한다."
+- "계약서 작성 시 이사일시, 이사화물 내역, 작업인원 수, 추가서비스 내역 및 비용 등 계약사항을 상세히 기재하여 추가요금 요구 등 향후 분쟁에 대비한다."
+- 계약 체결 전: 허가업체(www.허가이사.org)·이사화물배상책임보험 가입 여부 확인
+- 분쟁 시: 1372소비자상담센터(국번없이 1372, www.ccn.go.kr)
+
+## 쓸 때 주의
+- 24.9%의 분모는 281건(유형별 중복 집계)이다. 241건을 분모로 읽히게 쓰지 않는다.
+- 피해 유형 1위는 추가 비용이 아니라 **물품 파손·분실(47.7%)** 이다.
+- 피해구제 **신청** 통계다. 전체 이사 이용자의 피해 발생률이 아니다.
+---
+id: B013
+title: 피해 1위 파손·분실 — 계약 전 점검(1번) + 사고 대응 에이전트(3번)
+status: active
+stage: research
+created: 2026-10-25T02:05:00+09:00
+deadline: 2026-10-25T23:59:00+09:00 (기획서 제출)
+---
+# B013 파손·분실과 사고 대응
+
+## 사용자 요구 (2026-10-25 02:00)
+- "원래 피해 1위 파손·분실(47.7%) 이거 하려고 한 거 아니었어?"
+- 선택: "1번으로 하면 좋은데.. 1번으로 해결이 어느 정도 되는지를 파악하고 안 되면 3번을 넣어야 할 거 같다", "원래 3번이 목적이었던 거 아니야? 이 문제가 생겼을 때 그 법적이나 업체에게 어떻게 해야 하는지를 빠르게 해결해 줄 수 있게 하는 게 목적이었어서"
+
+## 기록 확인 (Opus)
+- B005 범위는 견적 전→당일→입주 후 전 과정이었다. D003(10/23)이 하루 구현 범위로 좁히며 '계약 전 확인'만 P0로 두고, 당일 대응 화면은 P1, 파손·분실 배상·분쟁 대행은 '하지 않는 것'으로 뺐다.
+
+## 계획
+1. **1번 — 계약 전 파손 점검**: 점검 에이전트가 견적·계약서에 파손 배상 기준·이사화물배상책임보험·포장 방식이 적혔는지, 깨지기 쉬운 짐(TV·유리·모니터 등)의 취급을 묻는다. (예방)
+2. **1번의 해결 범위 평가**: 예방만 하고, 사고가 난 뒤·당일 요구 상황에는 도움을 주지 못한다는 공백을 확인.
+3. **3번 — 사고 대응 에이전트**: 당일 추가요금 요구 / 이사 후 파손·분실이 생기면 상황을 듣고 → 표준약관·소비자분쟁해결기준의 해당 조항 → 챙길 증거와 통지 기한 → 업체에 보낼 문자 → 1372·피해구제 순서. 법률 판단·배상액 단정 금지, 공식 기준 인용만.
+
+## 배정
+| 일 | 누가 | stage | 산출물 |
+|---|---|---|---|
+| 사고 대응 근거 조사(조항·기한·절차) | Sol ∥ Sonnet | research | `runs/out/b013-incident.{sol,sonnet}.md` |
+| 1번·3번 구현 | Opus | repo | `web/` |
+| 검증 | Sonnet(peer)·Astra(review) | peer/review | `runs/out/b013-*.md` |
+
+## 성공 기준
+- 사고 대응의 모든 조항·기한·절차가 공식 출처(URL·조항 번호)로 확인되고, 확인 못 한 것은 쓰지 않는다.
+- 웹: 사고 상황을 넣으면 에이전트가 도구로 해당 기준을 찾아 대응 순서·문자 초안을 만들고, 검증기가 출처 없는 조항·금액을 막는다.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: site.kca.go.kr 이사화물 표준약관 14일 제10035 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.ftc.go.kr "이사화물" "2014.9.19" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "python - <<'PY'
+import urllib.request,io
+import fitz
+u='https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005'
+b=urllib.request.urlopen(u).read()
+d=fitz.open(stream=b,filetype='pdf')
+for i in [6,7,8,9]:
+ print('PAGE',i+1); print(d[i].get_text())
+PY" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ exited 127 in 79ms:
+/bin/bash: line 1: python: command not found
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.ftc.go.kr "제10035호" "이사화물" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "python3 - <<'PY'
+import urllib.request,io
+u='https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005'
+b=urllib.request.urlopen(u).read()
+try:
+ import fitz
+ d=fitz.open(stream=b,filetype='pdf')
+ for i in [6,7,8,9]:
+  print('PAGE',i+1);print(d[i].get_text())
+except ImportError:
+ import subprocess
+ p=subprocess.run(['pdftotext','-layout','-','-'],input=b,stdout=subprocess.PIPE)
+ print(p.stdout.decode())
+PY" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ exited 1 in 204ms:
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/urllib/request.py", line 1321, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              encode_chunked=req.has_header('Transfer-encoding'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1367, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1413, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1362, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1122, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/usr/lib/python3.14/http/client.py", line 1066, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 1501, in connect
+    super().connect()
+    ~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/http/client.py", line 1032, in connect
+    self.sock = self._create_connection(
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+        (self.host,self.port), self.timeout, self.source_address)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/socket.py", line 846, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/socket.py", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "/usr/lib/python3.14/urllib/request.py", line 187, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 487, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.14/urllib/request.py", line 504, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+                              '_open', req)
+  File "/usr/lib/python3.14/urllib/request.py", line 464, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.14/urllib/request.py", line 1369, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        context=self._context)
+                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/urllib/request.py", line 1324, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name resolution>
+
+hook: PostToolUse
+hook: PostToolUse Completed
+web search: site.kca.go.kr "피해구제" "피해구제 절차 안내" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "rg --files wiki team | rg 'pdf"'$|10035|incident|약관'"'" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+team/prompts/b013-incident.md
+team/prompts/b013-incident.full.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "1004458186" "추가" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "소규모" "추가요금을" "2026" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.busan.go.kr "방문 견적 없는 소규모 이사 계약" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.law.go.kr/법령/화물자동차운수사업법/제35조
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.law.go.kr "이사화물 운송주선사업자" "35조" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "피해구제 접수방법" "증빙" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "소규모 이사" "추가" site.news.seoul.go.kr ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "소규모 이사" "이사화물배상책임보험" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.easylaw.go.kr "1인가구" "제18조" "이사" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+**확인 기준일: 2026-10-25.** 조항의 내용과 조항 번호를 공식 해설에서 확인한 경우와, 약관·고시 원문을 직접 확인한 경우를 구분했다. 아래의 **‘요지’는 직접 인용문이 아니다.**
+
+- **이사화물 표준약관 제10035호:** 공정위 게시목록의 등록일은 **2014-10-01**. 첨부 원문을 열지 못해 **개정일·최신판 여부·조문 전체 원문은 `unknown`**이다. 아래 조항 내용은 법제처 공식 해설로 확인했다. [공정위 표준약관 목록](https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all)
+- **소비자분쟁해결기준:** 국가법령정보센터에서 **공정거래위원회고시 제2025-14호, 2025-12-18 일부개정·시행**을 확인했다. 다만 해당 판의 별표 전체를 직접 판독하지 못했으므로, 아래에서는 공식 해설과 직접 열람한 별표의 확인 범위를 표시했다. [현행 고시](https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000270136)
+- 표준약관은 실제 계약의 약관·개별 합의를 확인해야 한다. 소비자분쟁해결기준은 **합의 또는 권고의 기준**이며, 개별 사건의 배상액 확정 기준으로 단정할 수 없다. [법제처 계약 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629), [한국소비자원 기준 안내](https://www.kca.go.kr/odr/cm/in/rsltnCrtral.do)
+
+| 상황 | 근거: 문서·조항·확인 문장 또는 요지 | 기한 | 사용자 행동 | 출처 URL |
+|---|---|---|---|---|
+| **당일 추가 요구 — 견적과 다른 계약금액** | 표준약관 **제5조제3항**. **요지:** 견적액을 넘겨 계약서에 기재할 수 없으나, 고객 요청으로 산정사항이 변경되고 초과금액을 미리 고지한 경우 예외. 약관 원문 전체: `unknown`. | 계약서 작성 시 | 견적서와 계약서의 금액·작업조건을 대조한다. 변경 요청과 사전 고지 여부를 확인한다. | [법제처 이사업체 선정·계약](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666) |
+| **당일 추가 요구 — 계약 후 초과 청구** | 표준약관 **제8조제2항**. **요지:** 계약금액 초과 청구는 원칙적으로 제한된다. 고객 책임으로 화물 내역·보관기간·포장·정리 등 산정사항이 바뀌고, 변경 시 초과청구 가능성을 미리 알린 경우 예외. **제8조제3항:** 운임·적법한 초과운임 외 수고비 등 추가 지급 의무가 없다는 내용. 원문 전체: `unknown`. | 추가 요구를 받은 때 확인 | 추가 항목·금액·변경 사유·사전 고지 근거를 요청한다. 요구 내용과 답변을 보관한다. | [법제처 운임 지급 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666) |
+| **당일 추가 요구 — 이미 지급한 부당요금** | 소비자분쟁해결기준의 부당 운임·추가작업 외 수고비 요구 항목. 직접 확인한 별표의 해결기준: **“부당요금반환 및 시정”**. 최신판 동일 문구 여부: `unknown`. | 별도 반환청구 기한: `unknown` | 계약서·결제내역·추가 요구 증거를 갖춰 반환을 요구하고, 해결되지 않으면 1372 상담. | [국가법령정보센터 별표, PDF 130쪽](https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200201&flSeq=137702403), [법제처 분쟁 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+| **파손** | 표준약관 **제14조제1·2항**. **요지:** 사업자가 포장·운송·보관·정리 등에 관한 주의를 다했음을 증명하지 못하면 배상책임. 수선 가능하면 수선, 불가능하면 **약정 인도일·도착장소의 화물 가액**으로 산정. **계약서의 이사비용을 파손 배상액으로 삼는다는 뜻이 아니다.** 원문 전체: `unknown`. | 제18조제1항의 통지 기한 확인 | 현장 책임자와 확인하고 사실확인서·사진을 확보해 업체에 보상 요구. | [법제처 손해배상 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **파손·일부 분실 — 통지** | 표준약관 **제18조제1항**. 법제처 설명 원문 발췌: **“30일 이내에 그 사실을 사업자에게 통지하지 않으면 소멸합니다.”** 조문 전체 원문: `unknown`. | **인도받은 날부터 30일 이내 업체에 통지** | 발견 즉시 업체에 알리고, 통지 날짜·내용을 확인할 수 있는 기록을 남긴다. | [법제처 책임 소멸 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **분실** | 표준약관 **제14조제2항**. **요지:** 전부·일부 멸실은 약정 인도일·도착장소의 화물 가액을 기준으로 산정. **제18조제2·3항:** 일반적인 책임 소멸은 인도일부터 1년, 사업자 등이 알고 숨긴 일부 멸실·훼손은 5년이라는 공식 설명 확인. 전부 멸실의 기산일 원문: `unknown`. | 일부 분실은 위 **30일 통지**를 우선 확인. 1년과 별개 | 누락 물품을 특정하고 현장 확인·업체 통지·증빙 확보. 전부 멸실은 별도 상담으로 기산일 확인. | [법제처 손해배상·시효 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **파손·분실 — 보험과 업체 배상** | 소비자분쟁해결기준의 멸실·파손·훼손 항목. 직접 확인한 별표 원문: **“피해액은 사업자가 직접 배상하되 피해물품이 보험에 가입되어 보험금을 지급받는 경우에는 동 금액을 차감한 후 배상”**. 최신판 동일 문구 여부: `unknown`. | 해당 항목의 별도 통지 기한: `unknown` | 업체에 보상을 요구하고 보험 접수 여부·이미 받은 보험금을 함께 정리한다. | [국가법령정보센터 별표, PDF 129쪽](https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200201&flSeq=137702403) |
+| **이사 거부·사업자 귀책 계약 해제 / 계약금** | 표준약관 **제9조제2항** 및 소비자분쟁해결기준 공식 해설. **요지:** 2일 전까지 통지 시 계약금 2배, 1일 전 4배, 당일 6배, 당일까지 미통지 10배 배상. **이미 낸 계약금 반환은 별도**. 분쟁해결기준의 미통지 항목에는 실손해액 배상 선택도 제시됨. 원문 전체: `unknown`. | 해제 통지 시점에 따라 구분 | 업체의 거부·해제 발언, 통지 시각, 계약금 지급내역을 확보한다. 귀책을 스스로 확정하지 않고 상담 시 제시한다. | [법제처 계약 해제 기준](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+| **운송 지연 — 짐을 받으러 오지 않음** | **기준 차이 확인 필요.** 표준약관 **제9조제3항** 공식 해설은 사업자 귀책으로 인수가 2시간 이상 지연되면 해제·계약금 반환·6배 배상. 소비자분쟁해결기준 공식 해설은 해제·반환·2배 배상. | **약정 인수일시부터 2시간 이상** | 실제 계약약관과 도착 시각을 확인해 상담한다. 두 기준을 혼합하지 않는다. | [표준약관 해설](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629), [분쟁해결기준 해설](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+
+**추가로 확인한 조항**
+
+| 항목 | 확인 내용 | 공식 출처 |
+|---|---|---|
+| **면책 사유 — 제16조** | **요지:** 화물 결함·자연적 소모, 화물 성질에 따른 발화·폭발·곰팡이·부패·변색 등, 법령·공권력에 따른 운송 금지·몰수·압류 등, 천재지변 등 불가항력. 사업자는 해당 사유 발생에 자기 책임이 없음을 입증해야 한다는 공식 설명 확인. 조문 전체 원문: `unknown`. | [법제처 면책 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **인수 거절 — 제7조** | **요지:** 휴대 가능한 귀중품, 다른 화물에 위해를 줄 물건, 특수 관리가 필요한 동식물·미술품·골동품, 일반이사에서 적합한 포장 요청을 고객이 거절한 화물. 특별조건 합의 시 인수 가능. **추가요금 지급 거절 자체가 이 조항의 거절 사유라는 근거는 확인하지 못함.** | [법제처 인수 거절 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **사고증명서 — 제19조** | 멸실·훼손·연착 시 **그 날부터 1년간 발행을 요청하여 받을 수 있다**는 공식 설명 확인. 자동 발급 의무인지, 요청 시 발급 의무인지에 관한 조문 전체 원문: `unknown`. | [법제처 사고증명서 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **도착 지연 — 제14조제2항** | **요지:** 멸실·훼손 없는 연착은 지연 1시간마다 계약금의 반액, 계약금 10배 한도, 1시간 미만 제외. 출발지 인수 지연과 구분해야 한다. 원문 전체: `unknown`. | [법제처 연착 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **고객 귀책 취소·계약금** | 표준약관 **제6조·제9조제1항** 공식 설명: 계약금은 운임 등 합계액의 10%. 고객 귀책 해제는 인수일 1일 전까지 계약금, 당일 계약금 배액을 배상하는 구조. | [계약금 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666), [취소 기준](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+
+**상담·피해구제·분쟁조정 경로**
+
+| 순서 | 누구에게·어떻게 | 공식 근거·기한 |
+|---|---|---|
+| 1 | 업체에 피해 사실과 요구사항을 전달하고 증빙 확보 | 소비자원은 현장 책임자의 사실확인서와 사진 등 자료를 확보해 신속히 보상을 요구하도록 안내한다. [이사 피해예방 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170) |
+| 2 | **국번 없이 1372**, 인터넷은 **1372소비자상담센터** | 상담에서 해결되지 않으면 피해구제로 이관될 수 있다. [소비자원 상담 안내](https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do), [1372 인터넷 상담](https://www.ccn.go.kr/) |
+| 3 | **한국소비자원 피해구제** — 온라인·방문·우편 | 공식 안내 원문: **“피해구제 신청 전 먼저 상담을 받아야 합니다.”** 접수 후 원칙 30일, 사안에 따라 90일까지 연장 가능하며 토·일·법정공휴일 제외. [절차 안내](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo.do) |
+| 4 | 신청서와 계약·결제·이의제기 증빙 제출 | 온라인 신청은 상담으로 피해구제 절차를 안내받은 경우 **6개월 이내**라는 접수조건이 있다. 이는 업체에 대한 **30일 통지 기한과 다르다**. [접수방법](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo2.do) |
+| 5 | 합의가 안 되면 **소비자분쟁조정위원회** | 피해구제에서 미합의 시 조정 신청. 조정내용 통지 후 수락 여부 회신은 **15일 이내**, 성립한 조정은 재판상 화해 효력. [분쟁조정 안내](https://www.kca.go.kr/odr/bj/ma/bjInfo.do) |
+
+**보험 의무와 확인 방법**
+
+- 법제처는 「화물자동차 운수사업법」 **제35조**를 근거로 이사업체의 **적재물배상 책임보험 또는 공제 가입 의무**를 안내한다. 다만 업종·차량별 법정 대상과 시행규칙의 정확한 현행 문장은 이번 조사에서 직접 판독하지 못해 `unknown`이다. [법제처 보험 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666)
+- **적재물배상책임보험과 이사화물배상책임보험을 같은 것으로 안내하면 안 된다.** 소비자원은 전자는 운송 과정 피해에 대한 보상이라고 설명하고, 이사 과정 전반을 보상하는 후자에 **추가 가입한 업체 이용을 권고**한다. 후자 자체의 법정 의무가입 근거는 `unknown`이다. [소비자원 2026-04-21 공식 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170)
+- 허가는 **허가이사.org 또는 업체 소재지 관할관청**에서 확인하도록 소비자원이 안내한다. 보험 가입 여부는 별도로 확인해야 하며, 허가 검색만으로 보험의 현재 유효기간·담보범위까지 확인된다고 볼 근거는 `unknown`이다. [소비자원 허가 확인 안내](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+**2026년 소비자원 권고와 증거**
+
+| 확인 대상 | 조사 결과 |
+|---|---|
+| **당일 추가요금 요구 시 지급·거절 방법에 관한 특별 권고** | 지정 PDF **8쪽 붙임3을 직접 판독하지 못해 원문은 `unknown`**. 공개 본문·공식 카드뉴스에서 “일단 지급하라”, “이의 유보 후 지급하라” 등의 권고는 확인하지 못했다. [원문 PDF](https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005) |
+| **추가요금 분쟁 예방** | 소비자원 공식 카드뉴스는 방문견적과 계약조건 상세 기재를 권한다. 원문 발췌: **“방문 견적을 받고, 계약서 작성 시 계약사항을 상세히 기재하세요”**. [2026-04-21 공식 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170) |
+| **이사 전후 사진·현장 점검** | 파손 우려 물품은 이사 전에 촬영하고 이사 후 현장에서 점검하도록 권고한다. [2026년 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186) |
+| **사실확인서·사고 사진** | 현장 책임자에게 피해내용 사실확인서를 요구하고 사진 등 입증자료를 확보하라는 권고 확인. [소비자원 이사 주의사항](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1001604858&page=13) |
+| **계약서·영수증·이의제기 기록** | 피해구제 접수 안내는 계약서·영수증, 사업자에게 이의를 제기한 서면·전자문서·게시판 자료 사본과 화면 캡처 등을 요구한다. **추정:** 업체와 주고받은 문자도 해당 내용을 입증하는 전자문서 자료로 보관하는 것이 적절하다. [피해구제 제출자료](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo2.do) |
+
+**남은 `unknown`:** 표준약관 최신 개정일과 조문 전체 원문, 2025-14호 별표의 이사 항목 원문·번호, 지정 PDF 8쪽의 당일 대응 문장, 전부 멸실 시 시효 기산일 원문, 보험 의무가입 대상의 현행 세부 조문. 따라서 현재 자료는 **공식 해설에 근거한 조사 결과**이며, 약관·고시 전문 대조와 peer/review를 마친 확정 근거집으로 표시하면 안 된다.
+hook: Stop
+hook: Stop Completed
+tokens used
+182,833
+**확인 기준일: 2026-10-25.** 조항의 내용과 조항 번호를 공식 해설에서 확인한 경우와, 약관·고시 원문을 직접 확인한 경우를 구분했다. 아래의 **‘요지’는 직접 인용문이 아니다.**
+
+- **이사화물 표준약관 제10035호:** 공정위 게시목록의 등록일은 **2014-10-01**. 첨부 원문을 열지 못해 **개정일·최신판 여부·조문 전체 원문은 `unknown`**이다. 아래 조항 내용은 법제처 공식 해설로 확인했다. [공정위 표준약관 목록](https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all)
+- **소비자분쟁해결기준:** 국가법령정보센터에서 **공정거래위원회고시 제2025-14호, 2025-12-18 일부개정·시행**을 확인했다. 다만 해당 판의 별표 전체를 직접 판독하지 못했으므로, 아래에서는 공식 해설과 직접 열람한 별표의 확인 범위를 표시했다. [현행 고시](https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000270136)
+- 표준약관은 실제 계약의 약관·개별 합의를 확인해야 한다. 소비자분쟁해결기준은 **합의 또는 권고의 기준**이며, 개별 사건의 배상액 확정 기준으로 단정할 수 없다. [법제처 계약 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629), [한국소비자원 기준 안내](https://www.kca.go.kr/odr/cm/in/rsltnCrtral.do)
+
+| 상황 | 근거: 문서·조항·확인 문장 또는 요지 | 기한 | 사용자 행동 | 출처 URL |
+|---|---|---|---|---|
+| **당일 추가 요구 — 견적과 다른 계약금액** | 표준약관 **제5조제3항**. **요지:** 견적액을 넘겨 계약서에 기재할 수 없으나, 고객 요청으로 산정사항이 변경되고 초과금액을 미리 고지한 경우 예외. 약관 원문 전체: `unknown`. | 계약서 작성 시 | 견적서와 계약서의 금액·작업조건을 대조한다. 변경 요청과 사전 고지 여부를 확인한다. | [법제처 이사업체 선정·계약](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666) |
+| **당일 추가 요구 — 계약 후 초과 청구** | 표준약관 **제8조제2항**. **요지:** 계약금액 초과 청구는 원칙적으로 제한된다. 고객 책임으로 화물 내역·보관기간·포장·정리 등 산정사항이 바뀌고, 변경 시 초과청구 가능성을 미리 알린 경우 예외. **제8조제3항:** 운임·적법한 초과운임 외 수고비 등 추가 지급 의무가 없다는 내용. 원문 전체: `unknown`. | 추가 요구를 받은 때 확인 | 추가 항목·금액·변경 사유·사전 고지 근거를 요청한다. 요구 내용과 답변을 보관한다. | [법제처 운임 지급 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666) |
+| **당일 추가 요구 — 이미 지급한 부당요금** | 소비자분쟁해결기준의 부당 운임·추가작업 외 수고비 요구 항목. 직접 확인한 별표의 해결기준: **“부당요금반환 및 시정”**. 최신판 동일 문구 여부: `unknown`. | 별도 반환청구 기한: `unknown` | 계약서·결제내역·추가 요구 증거를 갖춰 반환을 요구하고, 해결되지 않으면 1372 상담. | [국가법령정보센터 별표, PDF 130쪽](https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200201&flSeq=137702403), [법제처 분쟁 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+| **파손** | 표준약관 **제14조제1·2항**. **요지:** 사업자가 포장·운송·보관·정리 등에 관한 주의를 다했음을 증명하지 못하면 배상책임. 수선 가능하면 수선, 불가능하면 **약정 인도일·도착장소의 화물 가액**으로 산정. **계약서의 이사비용을 파손 배상액으로 삼는다는 뜻이 아니다.** 원문 전체: `unknown`. | 제18조제1항의 통지 기한 확인 | 현장 책임자와 확인하고 사실확인서·사진을 확보해 업체에 보상 요구. | [법제처 손해배상 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **파손·일부 분실 — 통지** | 표준약관 **제18조제1항**. 법제처 설명 원문 발췌: **“30일 이내에 그 사실을 사업자에게 통지하지 않으면 소멸합니다.”** 조문 전체 원문: `unknown`. | **인도받은 날부터 30일 이내 업체에 통지** | 발견 즉시 업체에 알리고, 통지 날짜·내용을 확인할 수 있는 기록을 남긴다. | [법제처 책임 소멸 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **분실** | 표준약관 **제14조제2항**. **요지:** 전부·일부 멸실은 약정 인도일·도착장소의 화물 가액을 기준으로 산정. **제18조제2·3항:** 일반적인 책임 소멸은 인도일부터 1년, 사업자 등이 알고 숨긴 일부 멸실·훼손은 5년이라는 공식 설명 확인. 전부 멸실의 기산일 원문: `unknown`. | 일부 분실은 위 **30일 통지**를 우선 확인. 1년과 별개 | 누락 물품을 특정하고 현장 확인·업체 통지·증빙 확보. 전부 멸실은 별도 상담으로 기산일 확인. | [법제처 손해배상·시효 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **파손·분실 — 보험과 업체 배상** | 소비자분쟁해결기준의 멸실·파손·훼손 항목. 직접 확인한 별표 원문: **“피해액은 사업자가 직접 배상하되 피해물품이 보험에 가입되어 보험금을 지급받는 경우에는 동 금액을 차감한 후 배상”**. 최신판 동일 문구 여부: `unknown`. | 해당 항목의 별도 통지 기한: `unknown` | 업체에 보상을 요구하고 보험 접수 여부·이미 받은 보험금을 함께 정리한다. | [국가법령정보센터 별표, PDF 129쪽](https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200201&flSeq=137702403) |
+| **이사 거부·사업자 귀책 계약 해제 / 계약금** | 표준약관 **제9조제2항** 및 소비자분쟁해결기준 공식 해설. **요지:** 2일 전까지 통지 시 계약금 2배, 1일 전 4배, 당일 6배, 당일까지 미통지 10배 배상. **이미 낸 계약금 반환은 별도**. 분쟁해결기준의 미통지 항목에는 실손해액 배상 선택도 제시됨. 원문 전체: `unknown`. | 해제 통지 시점에 따라 구분 | 업체의 거부·해제 발언, 통지 시각, 계약금 지급내역을 확보한다. 귀책을 스스로 확정하지 않고 상담 시 제시한다. | [법제처 계약 해제 기준](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+| **운송 지연 — 짐을 받으러 오지 않음** | **기준 차이 확인 필요.** 표준약관 **제9조제3항** 공식 해설은 사업자 귀책으로 인수가 2시간 이상 지연되면 해제·계약금 반환·6배 배상. 소비자분쟁해결기준 공식 해설은 해제·반환·2배 배상. | **약정 인수일시부터 2시간 이상** | 실제 계약약관과 도착 시각을 확인해 상담한다. 두 기준을 혼합하지 않는다. | [표준약관 해설](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629), [분쟁해결기준 해설](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+
+**추가로 확인한 조항**
+
+| 항목 | 확인 내용 | 공식 출처 |
+|---|---|---|
+| **면책 사유 — 제16조** | **요지:** 화물 결함·자연적 소모, 화물 성질에 따른 발화·폭발·곰팡이·부패·변색 등, 법령·공권력에 따른 운송 금지·몰수·압류 등, 천재지변 등 불가항력. 사업자는 해당 사유 발생에 자기 책임이 없음을 입증해야 한다는 공식 설명 확인. 조문 전체 원문: `unknown`. | [법제처 면책 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **인수 거절 — 제7조** | **요지:** 휴대 가능한 귀중품, 다른 화물에 위해를 줄 물건, 특수 관리가 필요한 동식물·미술품·골동품, 일반이사에서 적합한 포장 요청을 고객이 거절한 화물. 특별조건 합의 시 인수 가능. **추가요금 지급 거절 자체가 이 조항의 거절 사유라는 근거는 확인하지 못함.** | [법제처 인수 거절 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **사고증명서 — 제19조** | 멸실·훼손·연착 시 **그 날부터 1년간 발행을 요청하여 받을 수 있다**는 공식 설명 확인. 자동 발급 의무인지, 요청 시 발급 의무인지에 관한 조문 전체 원문: `unknown`. | [법제처 사고증명서 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **도착 지연 — 제14조제2항** | **요지:** 멸실·훼손 없는 연착은 지연 1시간마다 계약금의 반액, 계약금 10배 한도, 1시간 미만 제외. 출발지 인수 지연과 구분해야 한다. 원문 전체: `unknown`. | [법제처 연착 안내](https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629) |
+| **고객 귀책 취소·계약금** | 표준약관 **제6조·제9조제1항** 공식 설명: 계약금은 운임 등 합계액의 10%. 고객 귀책 해제는 인수일 1일 전까지 계약금, 당일 계약금 배액을 배상하는 구조. | [계약금 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666), [취소 기준](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=2&csmSeq=666) |
+
+**상담·피해구제·분쟁조정 경로**
+
+| 순서 | 누구에게·어떻게 | 공식 근거·기한 |
+|---|---|---|
+| 1 | 업체에 피해 사실과 요구사항을 전달하고 증빙 확보 | 소비자원은 현장 책임자의 사실확인서와 사진 등 자료를 확보해 신속히 보상을 요구하도록 안내한다. [이사 피해예방 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170) |
+| 2 | **국번 없이 1372**, 인터넷은 **1372소비자상담센터** | 상담에서 해결되지 않으면 피해구제로 이관될 수 있다. [소비자원 상담 안내](https://www.kca.go.kr/odr/pg/ma/cnsutInfo.do), [1372 인터넷 상담](https://www.ccn.go.kr/) |
+| 3 | **한국소비자원 피해구제** — 온라인·방문·우편 | 공식 안내 원문: **“피해구제 신청 전 먼저 상담을 받아야 합니다.”** 접수 후 원칙 30일, 사안에 따라 90일까지 연장 가능하며 토·일·법정공휴일 제외. [절차 안내](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo.do) |
+| 4 | 신청서와 계약·결제·이의제기 증빙 제출 | 온라인 신청은 상담으로 피해구제 절차를 안내받은 경우 **6개월 이내**라는 접수조건이 있다. 이는 업체에 대한 **30일 통지 기한과 다르다**. [접수방법](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo2.do) |
+| 5 | 합의가 안 되면 **소비자분쟁조정위원회** | 피해구제에서 미합의 시 조정 신청. 조정내용 통지 후 수락 여부 회신은 **15일 이내**, 성립한 조정은 재판상 화해 효력. [분쟁조정 안내](https://www.kca.go.kr/odr/bj/ma/bjInfo.do) |
+
+**보험 의무와 확인 방법**
+
+- 법제처는 「화물자동차 운수사업법」 **제35조**를 근거로 이사업체의 **적재물배상 책임보험 또는 공제 가입 의무**를 안내한다. 다만 업종·차량별 법정 대상과 시행규칙의 정확한 현행 문장은 이번 조사에서 직접 판독하지 못해 `unknown`이다. [법제처 보험 안내](https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666)
+- **적재물배상책임보험과 이사화물배상책임보험을 같은 것으로 안내하면 안 된다.** 소비자원은 전자는 운송 과정 피해에 대한 보상이라고 설명하고, 이사 과정 전반을 보상하는 후자에 **추가 가입한 업체 이용을 권고**한다. 후자 자체의 법정 의무가입 근거는 `unknown`이다. [소비자원 2026-04-21 공식 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170)
+- 허가는 **허가이사.org 또는 업체 소재지 관할관청**에서 확인하도록 소비자원이 안내한다. 보험 가입 여부는 별도로 확인해야 하며, 허가 검색만으로 보험의 현재 유효기간·담보범위까지 확인된다고 볼 근거는 `unknown`이다. [소비자원 허가 확인 안내](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186)
+
+**2026년 소비자원 권고와 증거**
+
+| 확인 대상 | 조사 결과 |
+|---|---|
+| **당일 추가요금 요구 시 지급·거절 방법에 관한 특별 권고** | 지정 PDF **8쪽 붙임3을 직접 판독하지 못해 원문은 `unknown`**. 공개 본문·공식 카드뉴스에서 “일단 지급하라”, “이의 유보 후 지급하라” 등의 권고는 확인하지 못했다. [원문 PDF](https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005) |
+| **추가요금 분쟁 예방** | 소비자원 공식 카드뉴스는 방문견적과 계약조건 상세 기재를 권한다. 원문 발췌: **“방문 견적을 받고, 계약서 작성 시 계약사항을 상세히 기재하세요”**. [2026-04-21 공식 안내](https://www.kca.go.kr/kca/sub.do?menukey=5293&mode=view&no=1004455170) |
+| **이사 전후 사진·현장 점검** | 파손 우려 물품은 이사 전에 촬영하고 이사 후 현장에서 점검하도록 권고한다. [2026년 피해예방주의보](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186) |
+| **사실확인서·사고 사진** | 현장 책임자에게 피해내용 사실확인서를 요구하고 사진 등 입증자료를 확보하라는 권고 확인. [소비자원 이사 주의사항](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1001604858&page=13) |
+| **계약서·영수증·이의제기 기록** | 피해구제 접수 안내는 계약서·영수증, 사업자에게 이의를 제기한 서면·전자문서·게시판 자료 사본과 화면 캡처 등을 요구한다. **추정:** 업체와 주고받은 문자도 해당 내용을 입증하는 전자문서 자료로 보관하는 것이 적절하다. [피해구제 제출자료](https://www.kca.go.kr/odr/pg/ma/pgProcssInfo2.do) |
+
+**남은 `unknown`:** 표준약관 최신 개정일과 조문 전체 원문, 2025-14호 별표의 이사 항목 원문·번호, 지정 PDF 8쪽의 당일 대응 문장, 전부 멸실 시 시효 기산일 원문, 보험 의무가입 대상의 현행 세부 조문. 따라서 현재 자료는 **공식 해설에 근거한 조사 결과**이며, 약관·고시 전문 대조와 peer/review를 마친 확정 근거집으로 표시하면 안 된다.

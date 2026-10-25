@@ -1,0 +1,883 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16c3c-55b8-7773-a8ef-563b0e1788c8
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-24이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+# 과제 B008 · 조사 (당신: sol, 실무팀) — 이사 산정·업체 선택에 쓸 근거 자료
+오늘은 2026-10-24이다. 먼저 읽어라: `briefs/B008-이사-지킴이-에이전트-관제.md`, `decisions/D005-이사-지킴이-대시보드.md`, `wiki/sources/kca2026-소규모이사-피해.md`, `web/src/lib/references.ts`.
+
+서비스 '이사 지킴이'를 바꾼다: 사용자가 **조건(집 유형·층·엘리베이터·이사일·출발/도착 구)**만 넣으면 로컬 AI 에이전트들이 ① 짐 목록 초안 ② 짐 부피·필요 차량·인원 ③ 계약 전에 받아야 할 서류와 그 필수 기재 항목 ④ 업체를 고르는 기준을 산정해 보여 준다. 업체를 처음부터 정해 두지 않는다. **지어낸 수치·업체명·평점은 절대 쓰지 않는다.** 각 사실에 URL, 못 찾으면 `unknown`.
+
+조사할 것:
+1. **짐 부피 → 차량 톤수 → 인원** 산정 근거: 공공·업계 기준(예: 국토부·한국통합물류협회·공정위 이사화물 표준약관 부속서, 대형 이사업체가 공개한 '원룸 1톤/투룸 2.5톤' 같은 안내), 가구·가전 품목별 표준 부피(㎥)를 공개한 자료가 있는지. 1톤·2.5톤·5톤 화물칸 적재 용적(㎥) 공식 수치. 없으면 unknown이라고 하고, 그 경우 서비스가 "범위 + 근거 없음"으로 표시해야 함을 적어라.
+2. **업체 선택 기준**: 이사화물 운송(주선)사업 허가 확인 방법(조회 사이트·API URL, 공공데이터포털 data.go.kr에 허가업체 목록 데이터가 있는지와 이용 조건·갱신 주기), 적재물배상책임보험 확인, 한국소비자원 권고(관허업체·서면 계약·방문 견적 등) 원문 문구. 실제로 웹앱이 호출할 수 있는 공개 API가 있으면 엔드포인트·키 필요 여부·라이선스.
+3. **서류**: 공정위 이사화물 표준약관(최신 개정판 번호·날짜)에서 사업자가 교부해야 하는 견적서·계약서·인수증 등 서류와 필수 기재 항목, 계약금·손해배상·지연 규정의 조항 번호. 이미 `references.ts`에 있는 조항과 겹치면 그 조항이 맞는지도 검증.
+4. **가격 산정**: 소규모 이사 비용의 공개 통계(지역·평형별)가 있는지. 없으면 unknown — 서비스가 금액을 '추정'으로라도 보여도 되는지 판단 근거를 적어라.
+5. **집 유형별 기본 짐 목록** 근거(원룸·투룸 표준 짐 목록을 공개한 자료) — 없으면 unknown.
+
+결과: 마크다운 한 문서. 항목마다 표(사실 | 수치 | URL | 확인 상태 confirmed/추정/unknown). 마지막에 "서비스에서 근거로 쓸 수 있는 것 / 쓰면 안 되는 것" 요약.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-24T04:47:36.816481Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+2026-10-24T04:47:38.015664Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+지정된 네 파일을 먼저 읽고 원문·공개 데이터를 조사하겠습니다. 확인된 기준과 근거가 없는 산정값을 구분해, 파일 수정 없이 마크다운 문서로 정리하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "pwd; rg --files -g AGENTS.md -g 'B008*' -g 'D005*' -g 'kca2026*' -g references.ts" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 852ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+AGENTS.md
+briefs/B008-이사-지킴이-에이전트-관제.md
+decisions/D005-이사-지킴이-대시보드.md
+decisions/D005-이사-지킴이-대시보드.verdict.json
+wiki/sources/kca2026-소규모이사-피해.md
+web/src/lib/references.ts
+web/node_modules/next/AGENTS.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat AGENTS.md briefs/B008-이사-지킴이-에이전트-관제.md decisions/D005-이사-지킴이-대시보드.md wiki/sources/kca2026-소규모이사-피해.md web/src/lib/references.ts' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# AGENTS.md — 오케스트라 팀 운영 매뉴얼
+
+이 저장소에서 일하는 모든 에이전트(Claude Code, Codex, Antigravity)는 이 파일을 단일 운영 매뉴얼로 따른다.
+
+## 1. 팀 구성 — 지휘와 실무를 나눈다
+
+| 구분 | 멤버 | 모델 / 호출 | 하는 일 | 하지 않는 일 |
+|---|---|---|---|---|
+| ◆ 지휘 (의장) | **Opus** | Claude Opus 5.5 — 메인 Claude Code 세션 | brief 작성, 배정, 토론 진행, 최종 판정, 위키·저장소 반영 | 조사·분석 본작업 |
+| ◆ 지휘 | **Astra** | GPT 6 Astra — `team/bin/ask.sh astra` | 지휘부 검증(전략·사업성·심사 관점), 토론 | 조사·분석 본작업 |
+| ◆ 지휘 | **Argon** | Gemini 4 Argon — `team/bin/ask.sh argon` | 지휘부 검증(기술·구현 관점), 토론 | 조사·분석 본작업 |
+| ○ 실무 | **Sol** | GPT 6.1 Sol — `team/bin/ask.sh sol` | **조사 · 분석 · 상호 검증** | 최종 판정 |
+| ○ 실무 | **Sonnet** | Claude Sonnet 5.5 — Agent 도구 `model: sonnet` | **조사 · 분석 · 상호 검증**, 위키 ingest | 최종 판정 |
+
+실무팀(Sol·Sonnet)이 일을 하고, 지휘부(Opus·Astra·Argon)는 방향을 정하고 검증하고 판정한다.
+
+## 2. 파이프라인 (stage)
+
+```
+brief ─▶ 조사 ─▶ 분석 ─▶ 상호 검증 ─▶ 지휘부 검증 ─▶ 토론 ─▶ 판정 ─▶ 위키 반영 ─▶ 저장소 반영 ─┐
+  ▲                                                                                       │
+  └──────────────────────────── 결과가 다음 brief로 되돌아간다 ──────────────────────────┘
+```
+
+| stage | 누가 | 규칙 |
+|---|---|---|
+| `brief` | Opus | `briefs/Bxxx-*.md` 작성: 질문, 범위, 성공 기준, 마감. status: active / waiting / done |
+| `research` 조사 | Sol ∥ Sonnet | 서로 결과를 보지 않고 병렬. 사실마다 출처 URL, 못 찾으면 `unknown` |
+| `analysis` 분석 | Sol ∥ Sonnet | 두 조사 결과를 모두 입력으로 받아 **각자 독립적으로** 분석 |
+| `peer` 상호 검증 | Sol ↔ Sonnet | Sol의 분석은 Sonnet이, Sonnet의 분석은 Sol이 검증(출처·수치·논리). 자기 산출물 승인 금지 |
+| `review` 지휘부 검증 | Astra ∥ Argon | 블라인드 독립 리뷰. Astra=전략·사업성·심사, Argon=기술·구현성. 각 주장에 찬성/반대/보류 |
+| `debate` 토론 | Astra · Argon (+Opus 의장) | **판정이 갈리는 주장만**. 각자 상대 의견을 받아 1회 반박 → Opus가 정리 |
+| `decision` 판정 | Opus | `decisions/Dxxx-*.md`: 결론, 근거 run, 반대 의견, 남은 unknown |
+| `wiki` 위키 반영 | Sonnet · Opus | 노트·링크 갱신, `wiki/log.md` 기록 |
+| `repo` 저장소 반영 | Sonnet · Opus | 코드·문서·제출물 반영 |
+
+작은 과업은 stage를 건너뛸 수 있으나 **peer 또는 review 중 하나는 반드시** 거친다.
+
+## 3. 실행 기록 — 관측소에 실시간으로 보인다
+
+- 외부 모델: `team/bin/ask.sh <astra|argon|sol> <task-id> <prompt-file> <stage>` → 시작·종료가 `runs/events.jsonl`, 완료가 `runs/runs.jsonl`에 기록. 결과 `runs/out/<task-id>.<member>.md`, 진행 로그 `.log`.
+- **Claude Code 세션은 훅이 자동 기록한다** (`.claude/settings.json` → `team/bin/hook.py`):
+  - 사용자가 지시하면 Opus(과제 지시) 실행이 시작되고 지시 문장이 관측소에 뜬다. 응답이 끝나면(Stop) 종료.
+  - Opus·서브에이전트가 쓰는 도구(명령·검색·파일 작성·팀원 호출)가 한 줄씩 진행 로그에 쌓인다.
+  - `Agent` 도구를 `model: sonnet`으로 부르면 Sonnet 실행이 자동 시작되고, 끝나면(SubagentStop) 자동 종료된다.
+    단계는 description의 낱말로 정한다: 조사·벤치→조사, 분석→분석, 검증·상호→상호 검증, 리뷰→지휘부 검증, 토론→토론, 위키→위키 반영.
+    그래서 description은 `Sonnet: <단계 낱말이 들어간 짧은 제목>` 으로 쓴다.
+- 훅이 꺼져 있을 때만 수동으로: `rid=$(team/bin/event.py start <member> <task> <stage> <out>)` → `team/bin/event.py end $rid ok|fail`.
+- 프롬프트는 `team/prompts/`에 남기고 `_context.md`를 앞에 붙인다.
+
+## 4. LLM 위키 규칙 (`wiki/`)
+
+```
+wiki/papers/<stem>.pdf          원문 (가능할 때)
+wiki/sources/<stem>.md          논문 초록·요약 (원문에 충실)
+wiki/notes/<type>/<이름>.md      연결된 지식 노트
+wiki/overviews/<주제>.md         종합 문서
+wiki/index.md, wiki/log.md      목차, 변경 기록
+```
+- stem: `<첫저자성><연도>-<키워드>` (예: `lewis2020-rag`)
+- frontmatter: `type: hub|concept|idea|paper|system|experiment|verdict`, `tags`, `status: draft|verified|confirmed|rejected`, `source`
+- 링크는 `[[노트이름]]`. 관측소 그래프가 이 링크로 그려진다.
+- **4대 규칙**: ① 위키 우선, 웹검색은 조사 stage에서만 ② 불확실하면 원문 확인 ③ 확인 못한 값은 `unknown` ④ 근거가 없으면 자료 추가 요청
+- 논문은 arXiv ID·DOI로 실재를 확인한 경우에만 `status: verified` (`team/bin/ingest_papers.py`)
+
+## 5. AI Platform Build Challenge 관측소 (`observatory/`)
+
+- **실시간**: `python3 observatory/server.py` → http://localhost:8777 (홈 · 시스템 동작 · 지식 그래프 · 실험 기록). 실행 중인 팀원, 진행 시간, 검색어·명령 로그, D-day가 1초 단위로 갱신된다.
+- **정적 스냅샷**: `python3 observatory/build.py` → `observatory/index.html`
+
+## 6. 금지
+
+- 확인하지 않은 통계·논문·데이터셋·경쟁 부재 주장 생성 금지 (경쟁 주장은 실무팀 검증 필수)
+- 개인정보·권한 없는 자료를 저장소에 넣지 않는다
+- 다른 멤버의 산출물(`runs/out/`)을 덮어쓰지 않는다
+---
+id: B008
+title: 이사 지킴이 v0.3 — 조건 입력 → 맞춤 홈, 이삿짐 장면, 1+3×3 에이전트, 근거 온톨로지
+status: active
+stage: research
+created: 2026-10-24T00:00:00+09:00
+---
+# B008 이사 지킴이 v0.3 — 에이전트 관제형 재설계
+
+- **출발점**: 사용자 — "실제 사람들이 이사하는 거 UI로 보여주게. 조건들 입력하면 입력한 거 토대로 홈 화면 만들고, 에이전트 팀 구조로 오케스트라 한 명 + 작업하는 3명 3명 3명, 온톨로지로 근거 그래프, AI 기능 더 늘리기. 조건을 입력하면 에이전트가 실제로 이삿짐을 움직이는 UI를 보여 주면서 서류·문서 산정하는 걸 보여 주고, 선택은 매우 완화, 왼쪽에 에이전트 활성화/비활성화, 어떤 업체를 쓰면 좋을지도 기능으로 — 처음부터 업체를 정해 두지 말고. TRITON 웹사이트를 참고해 디자인하되 이사에 맞는 색감을 고를 것"
+- **해석 (의장)**
+  1. 흐름이 바뀐다: v0.2는 "이미 받은 견적 1건"에서 시작했다 → v0.3은 **조건(집 크기·층·엘리베이터·날짜·주소 구) 입력**에서 시작해 에이전트가 짐·차량·인원·서류를 산정하고, 그 뒤 **업체 비교·선택**까지 돕는다.
+  2. 앱 안의 에이전트: 오케스트레이터 1 + 3팀 × 3명. 왼쪽 레일에서 켜고 끈다. 로컬 Ollama(8GB GPU, qwen3:4b·ax4-light)라 10개 모두 LLM이면 느리다 → 결정적 도구 에이전트와 LLM 에이전트를 정직하게 구분해 표시한다.
+  3. 화면: TRITON(2D 법정 장면 `scene2d/`, 작업실 `AgentsPage`, 온톨로지·근거 그래프 `features/ontology`, 관제 파이프라인 `features/control`) 구조를 이사 도메인으로 옮긴다. 장면 = 출발 집 → 트럭 → 도착 집, 에이전트가 짐을 옮기며 산정 결과가 쌓인다.
+  4. 입력 부담 완화: 집 유형 하나 고르면 기본 짐 목록 자동, 자연어 한 줄("원룸, 3층 엘베 없음, 냉장고·세탁기·침대")을 에이전트가 조건으로 바꾼다. 사용자는 고치기만.
+  5. 업체 추천: 실제 업체 목록·평점을 지어내지 않는다. 공개 자료(허가 확인 방법, 보험, 소비자원 권고)와 사용자가 받은 견적 여러 건 비교로 "고르는 기준"을 준다.
+- **조사 (병렬)**: Sonnet A — TRITON 프론트엔드 화면·코드 구조(장면·작업실·그래프·레일) / Sonnet B — TRITON 구조 위 이사용 팔레트 후보 3안(hex·역할·대비) / Sol — 산정·업체 선택 근거 자료(부피·차량 톤수, 허가 조회, 표준약관 서류 항목, 공개 데이터 여부)
+- **분석 → 검증**: 1+3×3 에이전트 구성·화면 명세 → Argon(구현성)·Astra(심사) 리뷰
+- **보고 후 구현**: 팔레트는 사용자가 고른 뒤 구현, 보고 값과 구현 값을 한 줄씩 대조
+- **제약**: 예선 기획서 PDF 마감 2026-10-25 23:59(참가신청 17:00). 이번 설계는 기획서 내용이 되고, 구현은 본선(11/27)까지 이어진다.
+---
+id: D005
+brief: B007
+title: 이사 지킴이 대시보드·Ollama 에이전트 판정
+decided: 2026-10-24T01:30:00+09:00
+by: opus
+review: 조사(Sonnet 디자인 체계·Sonnet Ollama 실측) ∥ 분석(Sol 정보 구조) → 사용자 결정(색상 A안·입력 방식) → 의장 구현 → 지휘부 기술 검증(Argon, 10건) → 재현 테스트 6개 추가 후 수정
+---
+# D005 이사 지킴이 대시보드·Ollama 에이전트 판정
+
+**결론: 모바일 단계형 화면(D004)을 버리고, 사용자의 기존 공모전 사이트 구조(맛대패스 레일·상단바·KPI)를 따른 대시보드로 전환한다. AI는 로컬 Ollama로 돌린다.**
+
+- **사용자 결정**: 색상 A안 '통과증 티일'(맛대패스 slate+teal, 상태 대비 6.8~9.5), 입력은 붙여넣기·직접 입력(Ollama 모델이 모두 텍스트 전용)
+- **화면**: 한눈에(결론 문장·KPI 4·대조표·근거) + 오른쪽 문의 패널(확인 요청 → 답변 점검 에이전트 → 남은 것만 재문의) / 견적·짐 입력 / 참고 조항·통계 / 에이전트 기록. Pretendard, lucide, 다크 모드
+- **AI**: 견적서 글 → 항목 `ax4-light`(JSON 스키마 출력), 업체 답변 점검 에이전트 `qwen3:4b-instruct`(도구 호출). qwen2.5:7b는 도구 결과 다음 턴에서 3/3 실패해 제외 (`runs/out/b007-ollama.sonnet.md`)
+- **정확도 장치**: 원문에 없는 발췌·숫자·사다리차 언급은 코드가 버림(실측 환각 2건 근거), '명시됨'은 금액·별도·조건·거절 표현이 없을 때만, 이미 명시된 항목은 상충(conflicting)으로만 뒤집기, 후보는 기본 미선택·개별 승인, 입력이 바뀌면 승인과 '답변 반영'이 함께 풀림
+- **검증**: 단위 테스트 22/22, `tsc`, `next build`, 실제 Ollama로 가상 사례 전 흐름 브라우저 완주(읽기 7~13초·점검 9~11초·오류 0), Ollama 꺼짐 시 미리 만든 초안으로 대체 + 화면 표시
+
+## 남은 반대 의견·unknown
+- qwen3:4b는 "짐 많으면 추가 나올 수 있습니다"를 추가비 카드에 연결하지 못함(3회 실측 모두). 확인 안 된 채로 재문의 목록에 남는 안전한 실패지만 재현율은 개선 과제
+- 표본은 가상 사례 1개 — 40개 합성 평가셋(Sol 제안)으로 오판정률을 측정해야 함
+- 사진 입력 없음(비전 모델 미설치), 다중 견적 비교 없음(P2)
+- 요청 스트림 사전 크기 제한, WSL 게이트웨이 실패 시 127.0.0.1 재시도는 미구현(Argon 낮음)
+
+항목별 판정: `D005-이사-지킴이-대시보드.verdict.json`
+---
+type: paper
+tags: [근거, 이사, 통계]
+status: verified
+source: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+---
+# 한국소비자원 피해예방주의보 — 방문 견적 없는 소규모 이사 계약, 추가 비용 요구 등 피해 많아
+
+- 발행: 한국소비자원, 보도 2026-04-21(화) 12:00 · 배포 2026-04-20
+- 게시글: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+- 첨부 PDF(10쪽): https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+- 확인: 2026-10-23 Opus가 첨부 PDF를 내려받아 텍스트를 추출해 아래 수치를 원문과 대조함 (D003 쟁점 D2)
+
+## 원문 수치 (쪽 번호는 첨부 PDF 기준)
+- p1 이사(포장·반포장·일반) 피해구제 신청: 2023년 603건 → 2024년 785건 → 2025년 961건
+- p1 2025년 961건 중 소규모 이사(총계약대금 10만 원 이상 100만 원 이하) **241건** 분석
+- p1 20~30대 **65.1%(157건)**, 그중 20대 **22.8%(55건)** — 전체 이사서비스 이용자의 20대 비율 **11.6%** 대비 2배 가까이
+- p2·p5 소규모 이사 피해 유형(’25년) — **계 281건\***
+
+| 물품 파손·분실 | 추가 비용 요구 | 이사거부/계약불이행 | 과도한 위약금 요구 | 기타 | 계 |
+|---|---|---|---|---|---|
+| 134건 (47.7%) | **70건 (24.9%)** | 39건 (13.9%) | 27건 (9.6%) | 11건 (3.9%) | 281건\* (100.0%) |
+
+\* p2: "피해구제 241건의 유형 분석으로 1개 사건이 2가지 이상 유형 해당 시 각각의 건수로 산정" · p5: "1개 피해구제 사례에 여러 가지 유형이 포함된 경우 중복 건수로 산정"
+
+## 원문 서술 (요지)
+- p5 추가 비용 요구: 이삿짐의 양이나 건물 구조 등을 이유로 화물차·인력·사다리차를 추가로 써야 한다는 사유가 대부분
+- p5 이사 거부: 소비자가 추가 비용 지급을 거부하거나 감액을 요구하면 업체가 계약 이행을 거부하는 '계약불이행' 피해로 이어지는 사례가 많음
+- p5 소규모 이사는 방문 견적 없이 구두 설명이나 온라인 입력을 토대로 비대면 계약을 맺는 경우가 많아 추가비용 요구 등 피해에 더욱 취약
+
+## 소비자원 권고 (p8 붙임3 소비자 주의사항 — 원문 인용)
+- 계약 체결 시: "전화나 홈페이지를 통해 견적을 받을 경우 작업조건(사다리 비용 등) 및 이사화물 내역에 따라 추가 요금이 발생할 수 있으므로, 가급적 방문견적을 통해 화물의 양과 주요 물품을 쌍방이 확인한다."
+- "계약서 작성 시 이사일시, 이사화물 내역, 작업인원 수, 추가서비스 내역 및 비용 등 계약사항을 상세히 기재하여 추가요금 요구 등 향후 분쟁에 대비한다."
+- 계약 체결 전: 허가업체(www.허가이사.org)·이사화물배상책임보험 가입 여부 확인
+- 분쟁 시: 1372소비자상담센터(국번없이 1372, www.ccn.go.kr)
+
+## 쓸 때 주의
+- 24.9%의 분모는 281건(유형별 중복 집계)이다. 241건을 분모로 읽히게 쓰지 않는다.
+- 피해 유형 1위는 추가 비용이 아니라 **물품 파손·분실(47.7%)** 이다.
+- 피해구제 **신청** 통계다. 전체 이사 이용자의 피해 발생률이 아니다.
+// 참고 조항. 모델은 조항을 쓰지 않는다 — 카드가 id로만 가리키고 문구는 여기서 나간다.
+// 기준: 법제처 생활법령정보의 이사화물 표준약관 설명 (공정위 원문 전문 대조 전). 예외 요건을 생략하지 않는다.
+
+const EASYLAW_QUOTE = "https://www.easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666";
+const EASYLAW_TERMS = "https://www.easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629";
+
+export interface Reference { id: string; label: string; text: string; url: string }
+
+export const REFERENCES: Record<string, Reference> = {
+  "art4": {
+    id: "art4",
+    label: "표준약관 제4조 (견적)",
+    text: "견적서에는 이사화물의 내역, 작업 조건, 운임 등을 적도록 되어 있습니다.",
+    url: EASYLAW_QUOTE,
+  },
+  "art5-3": {
+    id: "art5-3",
+    label: "표준약관 제5조 제3항",
+    text: "계약금액은 원칙적으로 견적금액을 넘을 수 없습니다. 다만 고객의 요청으로 산정 사항이 바뀌었고 이를 미리 알린 경우는 예외입니다.",
+    url: EASYLAW_QUOTE,
+  },
+  "art8-2": {
+    id: "art8-2",
+    label: "표준약관 제8조 제2항",
+    text: "사업자는 계약금액을 넘는 금액을 원칙적으로 청구할 수 없습니다. 다만 고객의 책임 있는 사유로 작업 내용이 바뀌었고 이를 미리 알린 경우는 예외입니다.",
+    url: EASYLAW_TERMS,
+  },
+  "art8-3": {
+    id: "art8-3",
+    label: "표준약관 제8조 제3항",
+    text: "정해진 운임과 정당한 초과금 외에 수고비 등의 명목으로 추가 금액을 요구할 수 없습니다.",
+    url: EASYLAW_TERMS,
+  },
+};
+
+export const REFERENCE_NOTICE =
+  "참고 안내입니다 · 법제처 생활법령정보의 표준약관 설명 기준 · 계약서에 따로 정한 내용이 있으면 달라질 수 있으며 법률 자문이 아닙니다.";
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 이사화물 표준약관 제10035호 2025 2024 견적서 계약서 ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.data.go.kr "이사화물" "이용허락" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.data.go.kr/data/ "이사화물" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.24mall.co.kr "1톤" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "python3 - <<'PY'
+import requests,subprocess
+u='https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005'
+r=requests.get(u); print(r.status_code)
+p=subprocess.run(['pdftotext','-layout','-','-'],input=r.content,capture_output=True)
+print(p.stdout.decode()[-17000:])
+PY" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ exited 1 in 204ms:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/socket.py", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 1105, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='www.kca.go.kr', port=443): Failed to resolve 'www.kca.go.kr' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.kca.go.kr', port=443): Max retries exceeded with url: /home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005 (Caused by NameResolutionError("HTTPSConnection(host='www.kca.go.kr', port=443): Failed to resolve 'www.kca.go.kr' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.kca.go.kr', port=443): Max retries exceeded with url: /home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005 (Caused by NameResolutionError("HTTPSConnection(host='www.kca.go.kr', port=443): Failed to resolve 'www.kca.go.kr' ([Errno -2] Name or service not known)"))
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.yes2424.com "톤" "인원" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: "이사" "원룸" "1톤" "영구크린" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc "rg --files wiki | rg '이사|moving|kca|약관'; rg -n '10035|인수증|이사화물.*hwp|제14조' wiki/sources web/src/lib briefs/B008*" in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ exited 1 in 76ms:
+wiki/sources/kca2026-소규모이사-피해.md
+wiki/overviews/이사-지킴이-웹-설계.md
+wiki/overviews/이사-지킴이-제작계획.md
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "2026" "소규모" "허가" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: 경기도 "이사화물업체" "openapi" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.easylaw.go.kr "이사화물" "FileData" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "가급적 방문견적" "보험" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: site.kca.go.kr "이사화물배상책임보험" "서면" ...
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+web search: 
+web search: https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+# B008 조사 — 이사 산정·업체 선택에 사용할 근거
+
+조사 기준일: **2026-10-24**  
+작성: Sol · 조사 단계 산출물 · 후속 peer/review 대상
+
+지정된 네 파일을 읽고 공개 원문을 대조했다. **서류 점검과 업체 선택 기준은 근거를 확보했다. 반면 집 유형만으로 짐 부피·차량·인원·가격을 확정하는 공통 산정표는 확인하지 못했다.** 일부 업체의 공개 서비스 구성과 차종별 제조사 제원은 있으나, 이를 모든 이사에 적용하면 안 된다.
+
+`confirmed`는 해당 출처의 기재 내용을 확인했다는 뜻이다. 업계 전체에 적용되는 기준이라는 뜻은 아니다. `unknown`은 이번 조사에서 확인하지 못했다는 뜻이며, 자료가 존재하지 않는다고 단정하지 않는다.
+
+## 1. 짐 부피 → 차량 → 인원
+
+### 산정 기준과 공개 사례
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 국토부·공정위·한국통합물류협회의 공통적인 ‘짐 ㎥ → 차량 톤수 → 인원’ 산정표 | unknown | 확인한 [생활법령 안내][E666]·[표준약관 게시 목록][FTC-L]에서는 산정표 확인 못 함 | unknown |
+| 영구이사의 원룸이사 공개 서비스 구성 | 이삿짐 **1톤 기준 패커 2명·전용차량 1대**. 인원·차량은 상황에 따라 달라진다고 명시 | [영구이사 원룸이사][YG] | confirmed |
+| 생활법령에 소개된 5톤 포장이사의 통상 구성 | **4명 1조** 사례. 법정 최소인원이나 물량별 산식은 아님 | [생활법령 이사업체 정하기][E666] | confirmed |
+| ‘원룸이면 반드시 1톤’, ‘투룸이면 반드시 2.5톤’이라는 공통 기준 | unknown | [영구이사][YG]는 빌트인 가구·가전으로 옮길 짐이 적은 경우를 별도로 설명 | unknown |
+| 가구·가전 품목별 공인 표준 이사부피 | 침대·냉장고·세탁기 등에 공통 적용할 ㎥ 값 unknown | 확인 가능한 공공·업계 원문 URL unknown | unknown |
+| 포장재·빈 공간·분해 여부를 반영하는 공통 적재 보정계수 | unknown | 검증 가능한 원문 URL unknown | unknown |
+
+**추정: 서비스 적용안.** ‘집 유형 → 기본 짐 후보’까지만 자동 생성하고, 실제 소유 여부·수량·크기는 사용자가 확인해야 한다. 특정 업체의 **1톤·2명** 구성은 출처가 있는 참고 사례로 표시할 수 있지만, 사용자에게 필요한 인원으로 확정할 수는 없다.
+
+### 화물칸 용적
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 기아 봉고Ⅲ 해당 윙바디 사양의 제조사 공개 제원 | 적재함 **3,100×1,700×1,800㎜**, 최대적재량 **1,000㎏** | [기아 공식 사양][KIA] | confirmed |
+| 위 제원의 직육면체 부피 계산 | **3.1×1.7×1.8 = 9.486㎥**. 제조사 공시 용적이 아니라 공개 치수의 곱 | [계산에 사용한 공식 치수][KIA] | 추정 |
+| 현대 마이티 해당 내장탑차의 제조사 공개 제원 | 적재실 내측 **4,330×1,960×1,850㎜**, 적재량 **2,400㎏**인 사양 확인 | [현대 공식 제원 PDF][MIGHTY] | confirmed |
+| 위 마이티 제원의 직육면체 부피 계산 | 약 **15.701㎥**. 해당 사양에만 해당하며 ‘모든 2.5톤 차량’의 값으로 사용할 수 없음 | [계산에 사용한 공식 치수][MIGHTY] | 추정 |
+| 모든 1톤 차량에 공통인 공식 적재 용적 | unknown | [기아 차종별 제원][KIA] | unknown |
+| 모든 2.5톤 차량에 공통인 공식 적재 용적 | unknown | [현대 차종별 제원][MIGHTY] | unknown |
+| 5톤 이삿짐 차량의 공통 공식 적재 용적 | unknown | 이번 조사에서 적용 가능한 제조사 원문 확인 못 함 | unknown |
+
+**추정: 서비스 적용안.**
+
+- 톤수와 부피를 고정 비율로 환산하지 않는다.
+- 차종·탑 종류·내측 치수가 확보되면 해당 차량의 기하학적 부피만 계산한다.
+- 치수의 곱을 실제 적재 가능한 짐 부피로 확정하지 않는다.
+- 산정 근거가 없으면 **“범위: unknown / 근거 없음 / 업체 확인 필요”**로 표시한다. 숫자로 된 범위 자체도 근거 없이 생성하면 안 된다.
+- 사용자가 실제 치수의 최솟값·최댓값을 제공한 경우에만 그 입력으로 계산한 범위를 제시한다.
+
+## 2. 업체 선택 기준·허가·보험·공개 데이터
+
+### 허가와 보험 확인
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 한국소비자원이 안내하는 허가 확인 경로 | 허가이사 사이트 또는 업체 소재지 관할관청 | [한국소비자원 주의보][KCA]·[허가이사][PERMIT] | confirmed |
+| 추가 확인 방법 | 연합회 검색, 시·군·구청 문의, 허가증 사본 요청 | [생활법령 안내][E629] | confirmed |
+| 허가이사 운영 주체 | 전국화물자동차운송주선사업연합회 | [한국소비자원 주의보][KCA] | confirmed |
+| 허가이사 공개 조회 API | 엔드포인트·키·라이선스 unknown. 사이트 직접 접속도 이번 조사에서 시간 초과 | [허가이사][PERMIT] | unknown |
+| 보험은 가입 여부와 보상 범위를 함께 확인해야 함 | 소비자원은 운송과정 피해를 보상하는 적재물배상책임보험과 이사 전반의 피해를 보상하는 이사화물배상책임보험을 구분해 안내 | [한국소비자원 카드뉴스][KCA-C] | confirmed |
+| 업체별 보험가입 상태를 조회하는 공개 API | unknown | 확인 가능한 공개 명세 URL unknown | unknown |
+
+한국소비자원 원문 문구는 다음과 같다.
+
+> “허가업체 및 이사화물배상책임보험 가입 여부를 확인하세요”
+
+> “방문 견적을 받고, 계약서 작성 시 계약사항을 상세히 기재하세요”
+
+두 문구 모두 [2026-04-21 한국소비자원 카드뉴스][KCA-C]에서 확인했다. 해당 자료는 방문견적으로 화물량·주요 물품을 함께 확인하고, 계약서에 이사일시·화물 내역·인원·추가서비스와 비용을 상세히 적도록 안내한다.
+
+**추정: 앱의 보험 확인 항목.** 보험증권·공제가입증명서에서 계약 상대방과 피보험자 일치 여부, 보험기간, 보상한도, 자기부담금, 포장·상하차·운송·정리·보관의 보장 여부를 확인하도록 구성한다. 증빙을 받기 전에는 ‘가입 확인 완료’로 표시하지 않는다.
+
+### 공공데이터포털의 업체 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 성남시 운송주선사업자 목록 존재 | 기준 **2026-04-08**, **연간 갱신**. 인허가일자·영업상태·이사/일반 업종·업체명·주소 등 제공 | [data.go.kr 15080667][D-SN] | confirmed |
+| 성남시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-SN] | confirmed |
+| 김해시 이사업체 목록 존재 | 기준 **2026-07-15**, **연간 갱신**. 화물종류·상호·주소·좌표 제공 | [data.go.kr 15128627][D-GH] | confirmed |
+| 김해시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-GH] | confirmed |
+| 김해시 최신 데이터의 전화번호 | 제공 항목에서 **삭제**했다고 명시 | [데이터 변경 안내][D-GH] | confirmed |
+| 위 파일데이터의 접근 방법 | CSV는 로그인 없이 다운로드 가능. API는 회원가입·활용신청 필요 | [공공데이터포털 안내][D-SN] | confirmed |
+| 위 데이터의 정확한 API 엔드포인트 | 이번 도구에서 Swagger 호출 경로 확인 못 함: **unknown** | [성남시 활용명세][D-SN]·[김해시 활용명세][D-GH] | unknown |
+| API 인증키 | 포털 인증키 사용 안내 확인. 해당 데이터의 성공 호출은 미검증 | [공공데이터포털 인증 안내][D-SN] | confirmed |
+| 경기도 이사화물업체 Open API 안내 페이지 존재 | `KEY`, `Type`, `pIndex`, `pSize` 명세 확인. 요청주소·출력항목은 조회 결과 공란 | [경기데이터드림][GG] | confirmed |
+| 경기도 API의 실제 호출주소·성공 응답·해당 서비스 라이선스 | unknown | [경기데이터드림][GG] | unknown |
+| 서울 전체·전국 전체를 포괄하는 실시간 이사 허가 검증 API | 이번 조사에서 확인 못 함 | 확인된 공개 명세 URL unknown | unknown |
+
+**추정: 구현 판단.** 공개 업체 목록을 확보하는 방법은 있지만, 이번 조사만으로 **“전국 허가·보험 실시간 자동조회 연동 완료”**라고 쓸 수는 없다. 확인된 CSV를 기준일과 함께 가져와 후보 정보를 제공하는 방식이 우선 가능하다. 연간 자료의 미등재를 곧바로 무허가 판정으로 바꾸면 안 된다.
+
+### 앱에서 비교할 기준
+
+**추정: 다음 항목을 동일 조건의 비교표로 제공한다.** 근거는 소비자원의 허가·보험·상세계약 권고와 표준약관의 견적·계약 항목이다. [한국소비자원][KCA-C], [생활법령][E666]
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 허가 확인 증빙을 비교 | 허가증·조회일·계약 업체와의 일치 여부 | [허가 확인 안내][E629] | 추정 |
+| 보험 증빙과 보장 범위를 비교 | 확인됨 / 미확인 / 범위 확인 필요 | [보험 권고][KCA-C] | 추정 |
+| 같은 짐·작업조건으로 견적을 비교 | 차량 종류·대수, 인원, 포장·정리, 장비, 추가작업·비용 | [계약 확인 안내][E666] | 추정 |
+| 업체의 우열 점수·평점 자동 생성 | 검증된 평가 데이터가 없으므로 산정값 unknown | 평가 데이터 URL unknown | unknown |
+
+## 3. 표준약관·서류·조항 검증
+
+### 판본 확인 범위
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 확인된 약관 번호·개정일 | **표준약관 제10035호, 2014-09-19 개정** | [생활법령 판본 안내][E1704]·[업체 공개 전문][TERMS] | confirmed |
+| 공정위 목록의 게시일 | **2014-10-01**. 개정일과 구분해야 함 | [공정위 표준약관 목록][FTC-L] | confirmed |
+| 2026-10-24 현재 ‘최신판’ 여부의 최종 확인 | 공정위 본문·첨부가 403으로 열리지 않아 최종 확인 **unknown** | [공정위 원문 게시 경로][FTC] | unknown |
+| 적용 성격 | 실제 계약·채택 약관을 확인해야 하며 표준약관 내용을 모든 계약에 자동 적용할 수 없음 | [생활법령 설명][E629] | confirmed |
+
+따라서 서비스의 출처 표시는 **“확인 판본: 제10035호, 2014-09-19 개정 / 최신 개정 여부 추가 확인 필요”**가 적절하다.
+
+### 서류와 기재 항목
+
+아래는 확인 판본 기준이다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 요청받은 견적의 견적서 작성·교부 | **제4조** | [생활법령][E666]·[공개 전문][TERMS] | confirmed |
+| 견적서 기재 항목 | ① 사업자 상호·등록번호·대표자·주소·전화·작성자 ② 고객 성명·주소·전화 ③ 인수·인도 일시·장소, 짐 종류·무게·부피·운임단가 ④ 차량 종류·대수·인원·포장·정리·장비 ⑤ 보관 장소·기간·요금 ⑥ 총액·내역 ⑦ 기타 | [제4조 공개 전문][TERMS] | confirmed |
+| 계약서 작성·교부 | **제5조 제2항** | [생활법령 계약 안내][E629] | confirmed |
+| 계약서 기재 항목 | 제4조 제1~6호 사항에서 작성자를 계약 담당자로 변경하고, **계약금·잔액·운송상 주의사항·고객 요청사항·기타 사항** 추가 | [제5조 공개 전문][TERMS] | confirmed |
+| 약관 설명·명시 및 요청 시 사본 교부 | **제5조 제1항**. 계약서에 약관 전문이 있으면 사본 교부 대체 가능 | [생활법령][E666] | confirmed |
+| 별도 인수증의 일반적인 의무 교부·필수 기재 항목 | 확인 전문 **제11조에는 인수·인도 일시와 장소만 규정**. 별도 인수증 의무는 확인 못 함 | [제11조 공개 전문][TERMS] | unknown |
+| 사고증명서 | **제19조**. 운송 중 멸실·훼손·연착 시 고객 요청에 따라 사고일부터 **1년**에 한하여 발행 | [생활법령 사고증명서 안내][E629]·[전문][TERMS] | confirmed |
+| 현장 피해 사실확인서 | 소비자원이 현장 책임자에게 요청하고 사진 등 증빙을 확보하도록 권고. 계약 전 일괄 교부 서류는 아님 | [소비자원 카드뉴스][KCA-C] | confirmed |
+
+**주의할 원문 차이:** 생활법령의 `csmSeq=629` 페이지는 고객 주민등록번호를 기재 항목으로 소개하지만, `csmSeq=666` 및 확인한 2014년 판본 공개 전문에는 **성명·주소·전화번호**로 되어 있다. 서비스의 필수 입력에 주민등록번호를 추가할 근거로 사용하면 안 된다. [629 안내][E629], [666 안내][E666], [공개 전문][TERMS]
+
+**추정: 화면 구성.** ‘계약 전 받을 서류’, ‘계약 체결 때 받을 서류’, ‘사고 시 요청할 서류’를 구분한다. 앱이 작성한 초안은 사업자가 교부한 견적서·계약서로 표시하지 않는다.
+
+### 계약금·취소·손해배상·지연
+
+다음 수치는 **확인 판본의 조문 내용**이다. 공정위 원본 첨부의 최종 대조는 남아 있다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 계약금 | **제6조:** 운임 등 합계액의 **10%** 청구 가능 | [생활법령][E666] | confirmed |
+| 고객 귀책 해제 | **제9조 제1항:** 인수일 전날까지 계약금, 당일 계약금 **2배**. 기지급 계약금 공제 가능 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 해제 | **제9조 제2항:** 2일 전까지 **2배**, 전날 **4배**, 당일 **6배**, 당일 미통지 **10배**. 지급받은 계약금은 별도 반환 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 인수 지연으로 해제 | **제9조 제3항:** **2시간 이상** 지연 시 계약금 반환 및 **6배액** 배상 청구 | [공개 전문][TERMS] | confirmed |
+| 멸실·훼손·연착 책임 | **제14조 제1~3항:** 주의의무 입증, 물품가액·수선, 연착·실손해 등의 기준 | [한국소비자원 결정례][KCA-D]·[공개 전문][TERMS] | confirmed |
+| 물품 손상 없는 인도 연착 | **제14조 제2항 제2호 가목:** 연착 시간×계약금×½, 계약금 **10배 한도**, 1시간 미만 제외 | [공개 전문][TERMS] | confirmed |
+| 고객 귀책 인수 지체 | **제15조:** 시간당 계약금의 ½, **2배 한도**. 2시간 이상이면 사업자 해제·2배 배상 청구 규정 | [공개 전문][TERMS] | confirmed |
+
+**상충 자료:** 생활법령 `629` 안내의 사업자 인수 지연 설명에는 **2배액**이 나오지만, 확인한 표준약관 공개 전문 제9조 제3항은 **6배액**이다. 이 부분은 공정위 원본 확보 전 자동 배상 계산기에 확정값으로 넣지 않는 것이 적절하다. [생활법령][E629], [공개 전문][TERMS]
+
+### `references.ts` 검증
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| `art4`: 견적서에 화물·작업조건·운임 기재 | 조항 번호·요약 취지 일치. 전체 기재 항목은 아님 | [제4조 안내][E666] | confirmed |
+| `art5-3`: 견적 초과 계약금액의 원칙적 금지와 예외 | **제5조 제3항** 일치. 고객 요청에 따른 산정사항 변경과 초과금액 사전 고지가 필요 | [제5조 제3항 안내][E666] | confirmed |
+| `art8-2`: 계약금액 초과 청구의 원칙적 금지와 예외 | **제8조 제2항** 일치. 고객 책임에 따른 산정사항 변경과 변경 시 사전 고지가 필요 | [제8조 제2항 안내][E666] | confirmed |
+| `art8-3`: 정당한 금액 외 수고비 등 추가청구 금지 | **제8조 제3항** 일치 | [공개 전문][TERMS] | confirmed |
+
+기존 네 카드의 조항 번호와 요약 취지에서 오류는 찾지 못했다. 다만 **최신 공정위 원본 전문까지 대조 완료했다는 표시는 아직 할 수 없다.**
+
+## 4. 가격 산정 근거
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 지역·평형·서비스 유형을 함께 구분한 소규모 이사 공개 가격 통계 | unknown | 이번 조사에서 적용 가능한 공공 원자료 URL 확인 못 함 | unknown |
+| 소비자원 조사에서 사용한 소규모 이사 계약금액 범위 | **10만~100만원**, 피해구제 **241건**의 분석 범위. 시장 평균가격이나 추천 예산이 아님 | [한국소비자원 주의보][KCA] | confirmed |
+| 비용에 영향을 주는 조건 | 거리·물량·작업조건·부대서비스·날짜·층수·접근 여건 등 | [생활법령 비용 안내][E666] | confirmed |
+| 현재 입력 조건만으로 개인별 가격을 산정하는 검증된 모델 | 데이터·계수·오차 모두 unknown | 검증 자료 URL unknown | unknown |
+
+**추정: 서비스 판단.** 현재 확보한 근거만으로는 금액을 ‘추정’이라고 붙여 생성하는 것도 부적절하다. 이름만 추정으로 바꿔도 계산 근거는 생기지 않는다.
+
+대신 사용자가 받은 실제 견적을 입력하면 **총액·포함 작업·별도 비용·추가요금 조건**을 비교한다. 향후 가격 예측을 넣으려면 이용 가능한 견적 데이터, 수집 시점·지역·작업조건, 표본 수, 검증 오차를 먼저 확보해야 한다.
+
+## 5. 집 유형별 기본 짐 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 공공·업계 공통 원룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 공공·업계 공통 투룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 원룸의 빌트인 여부가 실제 옮길 짐에 영향을 준다는 업체 설명 | 빌트인 가전·가구가 많아 옮길 짐이 적은 사용자를 별도 안내 | [영구이사 원룸 안내][YG] | confirmed |
+| 집 유형으로 실제 보유 가구·가전과 수량 확정 | 근거 unknown | 표준 목록·분포 자료 URL unknown | unknown |
+
+**추정: 서비스 적용안.** 집 유형별 목록은 **“AI가 만든 확인용 후보 — 표준 목록 근거 없음”**으로 표시한다. 냉장고·세탁기·침대 등 각 후보에 ‘직접 소유 / 빌트인 / 없음’을 확인하고, 확인 전에는 확정 물량에 합산하지 않는다.
+
+## 서비스에서 근거로 쓸 수 있는 것 / 쓰면 안 되는 것
+
+| 구분 | 사용할 수 있는 범위 |
+|---|---|
+| **쓸 수 있는 것** | 표준약관 확인 판본의 서류·기재 항목, 기존 네 참고 조항, 소비자원의 허가·보험·방문견적·상세계약 권고 |
+| **조건부로 쓸 수 있는 것** | 업체가 공개한 차량·인원 구성은 해당 업체 사례로만 사용. 제조사 치수는 해당 차종 계산에만 사용. 공공 업체 목록은 지역·기준일·갱신 주기를 함께 표시 |
+| **쓰면 안 되는 것** | 원룸·투룸만으로 확정한 부피·톤수·인원, 근거 없는 수치 범위·적재계수·가격, 만들어 낸 업체명·평점·순위 |
+| **완료했다고 쓰면 안 되는 것** | 전국 허가·보험 실시간 API 연동, 공정위 최신 원본 전문 대조, 집 유형별 표준 짐 목록 확보 |
+| **남은 확인** | 공정위 원본 첨부와 최신 개정 여부, 지연 배상 상충 내용, 실제 API 엔드포인트·인증·호출 응답, 산정용 실측 자료 |
+
+**추정: 기획서 표현안.**  
+“이사 지킴이는 입력 조건으로 확인용 짐 목록을 만들고, 사용자가 확인한 정보와 공개 근거를 연결해 차량·인원에 대해 업체에 확인할 사항을 제시한다. 견적·계약 서류의 누락과 허가·보험 증빙을 점검하며, 근거가 부족한 수치와 가격은 산정 불가로 표시한다.”
+
+[E666]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+[E629]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+[E1704]: https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=2&cciNo=3&cnpClsNo=1&csmSeq=1704&popMenu=ov
+[FTC-L]: https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all
+[FTC]: https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+[TERMS]: https://ydnara.com/yakgwan.html
+[YG]: https://mcygclean.com/mobile/house/room.jsp
+[KIA]: https://www.kia.com/kr/vehicles/bongo3-frozen/price/bongo3-wingbody-manual-gl
+[MIGHTY]: https://stg-www.hyundai.com/ccontents/carmng/CP00000003/mighty-2025-06-spec.pdf
+[KCA]: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+[KCA-C]: https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+[KCA-D]: https://www.kca.go.kr/odr/bj/br/osBjDecisionExamDetW.do?brdId=00000007&dataStts=Y&seq=1001137357
+[PERMIT]: https://www.xn--o39a150b12ef3p.org/
+[D-SN]: https://www.data.go.kr/data/15080667/fileData.do
+[D-GH]: https://www.data.go.kr/data/15128627/fileData.do
+[GG]: https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=A9X70TR23HP30GDP5872933112&infSeq=3
+hook: Stop
+hook: Stop Completed
+tokens used
+147,197
+# B008 조사 — 이사 산정·업체 선택에 사용할 근거
+
+조사 기준일: **2026-10-24**  
+작성: Sol · 조사 단계 산출물 · 후속 peer/review 대상
+
+지정된 네 파일을 읽고 공개 원문을 대조했다. **서류 점검과 업체 선택 기준은 근거를 확보했다. 반면 집 유형만으로 짐 부피·차량·인원·가격을 확정하는 공통 산정표는 확인하지 못했다.** 일부 업체의 공개 서비스 구성과 차종별 제조사 제원은 있으나, 이를 모든 이사에 적용하면 안 된다.
+
+`confirmed`는 해당 출처의 기재 내용을 확인했다는 뜻이다. 업계 전체에 적용되는 기준이라는 뜻은 아니다. `unknown`은 이번 조사에서 확인하지 못했다는 뜻이며, 자료가 존재하지 않는다고 단정하지 않는다.
+
+## 1. 짐 부피 → 차량 → 인원
+
+### 산정 기준과 공개 사례
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 국토부·공정위·한국통합물류협회의 공통적인 ‘짐 ㎥ → 차량 톤수 → 인원’ 산정표 | unknown | 확인한 [생활법령 안내][E666]·[표준약관 게시 목록][FTC-L]에서는 산정표 확인 못 함 | unknown |
+| 영구이사의 원룸이사 공개 서비스 구성 | 이삿짐 **1톤 기준 패커 2명·전용차량 1대**. 인원·차량은 상황에 따라 달라진다고 명시 | [영구이사 원룸이사][YG] | confirmed |
+| 생활법령에 소개된 5톤 포장이사의 통상 구성 | **4명 1조** 사례. 법정 최소인원이나 물량별 산식은 아님 | [생활법령 이사업체 정하기][E666] | confirmed |
+| ‘원룸이면 반드시 1톤’, ‘투룸이면 반드시 2.5톤’이라는 공통 기준 | unknown | [영구이사][YG]는 빌트인 가구·가전으로 옮길 짐이 적은 경우를 별도로 설명 | unknown |
+| 가구·가전 품목별 공인 표준 이사부피 | 침대·냉장고·세탁기 등에 공통 적용할 ㎥ 값 unknown | 확인 가능한 공공·업계 원문 URL unknown | unknown |
+| 포장재·빈 공간·분해 여부를 반영하는 공통 적재 보정계수 | unknown | 검증 가능한 원문 URL unknown | unknown |
+
+**추정: 서비스 적용안.** ‘집 유형 → 기본 짐 후보’까지만 자동 생성하고, 실제 소유 여부·수량·크기는 사용자가 확인해야 한다. 특정 업체의 **1톤·2명** 구성은 출처가 있는 참고 사례로 표시할 수 있지만, 사용자에게 필요한 인원으로 확정할 수는 없다.
+
+### 화물칸 용적
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 기아 봉고Ⅲ 해당 윙바디 사양의 제조사 공개 제원 | 적재함 **3,100×1,700×1,800㎜**, 최대적재량 **1,000㎏** | [기아 공식 사양][KIA] | confirmed |
+| 위 제원의 직육면체 부피 계산 | **3.1×1.7×1.8 = 9.486㎥**. 제조사 공시 용적이 아니라 공개 치수의 곱 | [계산에 사용한 공식 치수][KIA] | 추정 |
+| 현대 마이티 해당 내장탑차의 제조사 공개 제원 | 적재실 내측 **4,330×1,960×1,850㎜**, 적재량 **2,400㎏**인 사양 확인 | [현대 공식 제원 PDF][MIGHTY] | confirmed |
+| 위 마이티 제원의 직육면체 부피 계산 | 약 **15.701㎥**. 해당 사양에만 해당하며 ‘모든 2.5톤 차량’의 값으로 사용할 수 없음 | [계산에 사용한 공식 치수][MIGHTY] | 추정 |
+| 모든 1톤 차량에 공통인 공식 적재 용적 | unknown | [기아 차종별 제원][KIA] | unknown |
+| 모든 2.5톤 차량에 공통인 공식 적재 용적 | unknown | [현대 차종별 제원][MIGHTY] | unknown |
+| 5톤 이삿짐 차량의 공통 공식 적재 용적 | unknown | 이번 조사에서 적용 가능한 제조사 원문 확인 못 함 | unknown |
+
+**추정: 서비스 적용안.**
+
+- 톤수와 부피를 고정 비율로 환산하지 않는다.
+- 차종·탑 종류·내측 치수가 확보되면 해당 차량의 기하학적 부피만 계산한다.
+- 치수의 곱을 실제 적재 가능한 짐 부피로 확정하지 않는다.
+- 산정 근거가 없으면 **“범위: unknown / 근거 없음 / 업체 확인 필요”**로 표시한다. 숫자로 된 범위 자체도 근거 없이 생성하면 안 된다.
+- 사용자가 실제 치수의 최솟값·최댓값을 제공한 경우에만 그 입력으로 계산한 범위를 제시한다.
+
+## 2. 업체 선택 기준·허가·보험·공개 데이터
+
+### 허가와 보험 확인
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 한국소비자원이 안내하는 허가 확인 경로 | 허가이사 사이트 또는 업체 소재지 관할관청 | [한국소비자원 주의보][KCA]·[허가이사][PERMIT] | confirmed |
+| 추가 확인 방법 | 연합회 검색, 시·군·구청 문의, 허가증 사본 요청 | [생활법령 안내][E629] | confirmed |
+| 허가이사 운영 주체 | 전국화물자동차운송주선사업연합회 | [한국소비자원 주의보][KCA] | confirmed |
+| 허가이사 공개 조회 API | 엔드포인트·키·라이선스 unknown. 사이트 직접 접속도 이번 조사에서 시간 초과 | [허가이사][PERMIT] | unknown |
+| 보험은 가입 여부와 보상 범위를 함께 확인해야 함 | 소비자원은 운송과정 피해를 보상하는 적재물배상책임보험과 이사 전반의 피해를 보상하는 이사화물배상책임보험을 구분해 안내 | [한국소비자원 카드뉴스][KCA-C] | confirmed |
+| 업체별 보험가입 상태를 조회하는 공개 API | unknown | 확인 가능한 공개 명세 URL unknown | unknown |
+
+한국소비자원 원문 문구는 다음과 같다.
+
+> “허가업체 및 이사화물배상책임보험 가입 여부를 확인하세요”
+
+> “방문 견적을 받고, 계약서 작성 시 계약사항을 상세히 기재하세요”
+
+두 문구 모두 [2026-04-21 한국소비자원 카드뉴스][KCA-C]에서 확인했다. 해당 자료는 방문견적으로 화물량·주요 물품을 함께 확인하고, 계약서에 이사일시·화물 내역·인원·추가서비스와 비용을 상세히 적도록 안내한다.
+
+**추정: 앱의 보험 확인 항목.** 보험증권·공제가입증명서에서 계약 상대방과 피보험자 일치 여부, 보험기간, 보상한도, 자기부담금, 포장·상하차·운송·정리·보관의 보장 여부를 확인하도록 구성한다. 증빙을 받기 전에는 ‘가입 확인 완료’로 표시하지 않는다.
+
+### 공공데이터포털의 업체 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 성남시 운송주선사업자 목록 존재 | 기준 **2026-04-08**, **연간 갱신**. 인허가일자·영업상태·이사/일반 업종·업체명·주소 등 제공 | [data.go.kr 15080667][D-SN] | confirmed |
+| 성남시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-SN] | confirmed |
+| 김해시 이사업체 목록 존재 | 기준 **2026-07-15**, **연간 갱신**. 화물종류·상호·주소·좌표 제공 | [data.go.kr 15128627][D-GH] | confirmed |
+| 김해시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-GH] | confirmed |
+| 김해시 최신 데이터의 전화번호 | 제공 항목에서 **삭제**했다고 명시 | [데이터 변경 안내][D-GH] | confirmed |
+| 위 파일데이터의 접근 방법 | CSV는 로그인 없이 다운로드 가능. API는 회원가입·활용신청 필요 | [공공데이터포털 안내][D-SN] | confirmed |
+| 위 데이터의 정확한 API 엔드포인트 | 이번 도구에서 Swagger 호출 경로 확인 못 함: **unknown** | [성남시 활용명세][D-SN]·[김해시 활용명세][D-GH] | unknown |
+| API 인증키 | 포털 인증키 사용 안내 확인. 해당 데이터의 성공 호출은 미검증 | [공공데이터포털 인증 안내][D-SN] | confirmed |
+| 경기도 이사화물업체 Open API 안내 페이지 존재 | `KEY`, `Type`, `pIndex`, `pSize` 명세 확인. 요청주소·출력항목은 조회 결과 공란 | [경기데이터드림][GG] | confirmed |
+| 경기도 API의 실제 호출주소·성공 응답·해당 서비스 라이선스 | unknown | [경기데이터드림][GG] | unknown |
+| 서울 전체·전국 전체를 포괄하는 실시간 이사 허가 검증 API | 이번 조사에서 확인 못 함 | 확인된 공개 명세 URL unknown | unknown |
+
+**추정: 구현 판단.** 공개 업체 목록을 확보하는 방법은 있지만, 이번 조사만으로 **“전국 허가·보험 실시간 자동조회 연동 완료”**라고 쓸 수는 없다. 확인된 CSV를 기준일과 함께 가져와 후보 정보를 제공하는 방식이 우선 가능하다. 연간 자료의 미등재를 곧바로 무허가 판정으로 바꾸면 안 된다.
+
+### 앱에서 비교할 기준
+
+**추정: 다음 항목을 동일 조건의 비교표로 제공한다.** 근거는 소비자원의 허가·보험·상세계약 권고와 표준약관의 견적·계약 항목이다. [한국소비자원][KCA-C], [생활법령][E666]
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 허가 확인 증빙을 비교 | 허가증·조회일·계약 업체와의 일치 여부 | [허가 확인 안내][E629] | 추정 |
+| 보험 증빙과 보장 범위를 비교 | 확인됨 / 미확인 / 범위 확인 필요 | [보험 권고][KCA-C] | 추정 |
+| 같은 짐·작업조건으로 견적을 비교 | 차량 종류·대수, 인원, 포장·정리, 장비, 추가작업·비용 | [계약 확인 안내][E666] | 추정 |
+| 업체의 우열 점수·평점 자동 생성 | 검증된 평가 데이터가 없으므로 산정값 unknown | 평가 데이터 URL unknown | unknown |
+
+## 3. 표준약관·서류·조항 검증
+
+### 판본 확인 범위
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 확인된 약관 번호·개정일 | **표준약관 제10035호, 2014-09-19 개정** | [생활법령 판본 안내][E1704]·[업체 공개 전문][TERMS] | confirmed |
+| 공정위 목록의 게시일 | **2014-10-01**. 개정일과 구분해야 함 | [공정위 표준약관 목록][FTC-L] | confirmed |
+| 2026-10-24 현재 ‘최신판’ 여부의 최종 확인 | 공정위 본문·첨부가 403으로 열리지 않아 최종 확인 **unknown** | [공정위 원문 게시 경로][FTC] | unknown |
+| 적용 성격 | 실제 계약·채택 약관을 확인해야 하며 표준약관 내용을 모든 계약에 자동 적용할 수 없음 | [생활법령 설명][E629] | confirmed |
+
+따라서 서비스의 출처 표시는 **“확인 판본: 제10035호, 2014-09-19 개정 / 최신 개정 여부 추가 확인 필요”**가 적절하다.
+
+### 서류와 기재 항목
+
+아래는 확인 판본 기준이다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 요청받은 견적의 견적서 작성·교부 | **제4조** | [생활법령][E666]·[공개 전문][TERMS] | confirmed |
+| 견적서 기재 항목 | ① 사업자 상호·등록번호·대표자·주소·전화·작성자 ② 고객 성명·주소·전화 ③ 인수·인도 일시·장소, 짐 종류·무게·부피·운임단가 ④ 차량 종류·대수·인원·포장·정리·장비 ⑤ 보관 장소·기간·요금 ⑥ 총액·내역 ⑦ 기타 | [제4조 공개 전문][TERMS] | confirmed |
+| 계약서 작성·교부 | **제5조 제2항** | [생활법령 계약 안내][E629] | confirmed |
+| 계약서 기재 항목 | 제4조 제1~6호 사항에서 작성자를 계약 담당자로 변경하고, **계약금·잔액·운송상 주의사항·고객 요청사항·기타 사항** 추가 | [제5조 공개 전문][TERMS] | confirmed |
+| 약관 설명·명시 및 요청 시 사본 교부 | **제5조 제1항**. 계약서에 약관 전문이 있으면 사본 교부 대체 가능 | [생활법령][E666] | confirmed |
+| 별도 인수증의 일반적인 의무 교부·필수 기재 항목 | 확인 전문 **제11조에는 인수·인도 일시와 장소만 규정**. 별도 인수증 의무는 확인 못 함 | [제11조 공개 전문][TERMS] | unknown |
+| 사고증명서 | **제19조**. 운송 중 멸실·훼손·연착 시 고객 요청에 따라 사고일부터 **1년**에 한하여 발행 | [생활법령 사고증명서 안내][E629]·[전문][TERMS] | confirmed |
+| 현장 피해 사실확인서 | 소비자원이 현장 책임자에게 요청하고 사진 등 증빙을 확보하도록 권고. 계약 전 일괄 교부 서류는 아님 | [소비자원 카드뉴스][KCA-C] | confirmed |
+
+**주의할 원문 차이:** 생활법령의 `csmSeq=629` 페이지는 고객 주민등록번호를 기재 항목으로 소개하지만, `csmSeq=666` 및 확인한 2014년 판본 공개 전문에는 **성명·주소·전화번호**로 되어 있다. 서비스의 필수 입력에 주민등록번호를 추가할 근거로 사용하면 안 된다. [629 안내][E629], [666 안내][E666], [공개 전문][TERMS]
+
+**추정: 화면 구성.** ‘계약 전 받을 서류’, ‘계약 체결 때 받을 서류’, ‘사고 시 요청할 서류’를 구분한다. 앱이 작성한 초안은 사업자가 교부한 견적서·계약서로 표시하지 않는다.
+
+### 계약금·취소·손해배상·지연
+
+다음 수치는 **확인 판본의 조문 내용**이다. 공정위 원본 첨부의 최종 대조는 남아 있다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 계약금 | **제6조:** 운임 등 합계액의 **10%** 청구 가능 | [생활법령][E666] | confirmed |
+| 고객 귀책 해제 | **제9조 제1항:** 인수일 전날까지 계약금, 당일 계약금 **2배**. 기지급 계약금 공제 가능 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 해제 | **제9조 제2항:** 2일 전까지 **2배**, 전날 **4배**, 당일 **6배**, 당일 미통지 **10배**. 지급받은 계약금은 별도 반환 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 인수 지연으로 해제 | **제9조 제3항:** **2시간 이상** 지연 시 계약금 반환 및 **6배액** 배상 청구 | [공개 전문][TERMS] | confirmed |
+| 멸실·훼손·연착 책임 | **제14조 제1~3항:** 주의의무 입증, 물품가액·수선, 연착·실손해 등의 기준 | [한국소비자원 결정례][KCA-D]·[공개 전문][TERMS] | confirmed |
+| 물품 손상 없는 인도 연착 | **제14조 제2항 제2호 가목:** 연착 시간×계약금×½, 계약금 **10배 한도**, 1시간 미만 제외 | [공개 전문][TERMS] | confirmed |
+| 고객 귀책 인수 지체 | **제15조:** 시간당 계약금의 ½, **2배 한도**. 2시간 이상이면 사업자 해제·2배 배상 청구 규정 | [공개 전문][TERMS] | confirmed |
+
+**상충 자료:** 생활법령 `629` 안내의 사업자 인수 지연 설명에는 **2배액**이 나오지만, 확인한 표준약관 공개 전문 제9조 제3항은 **6배액**이다. 이 부분은 공정위 원본 확보 전 자동 배상 계산기에 확정값으로 넣지 않는 것이 적절하다. [생활법령][E629], [공개 전문][TERMS]
+
+### `references.ts` 검증
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| `art4`: 견적서에 화물·작업조건·운임 기재 | 조항 번호·요약 취지 일치. 전체 기재 항목은 아님 | [제4조 안내][E666] | confirmed |
+| `art5-3`: 견적 초과 계약금액의 원칙적 금지와 예외 | **제5조 제3항** 일치. 고객 요청에 따른 산정사항 변경과 초과금액 사전 고지가 필요 | [제5조 제3항 안내][E666] | confirmed |
+| `art8-2`: 계약금액 초과 청구의 원칙적 금지와 예외 | **제8조 제2항** 일치. 고객 책임에 따른 산정사항 변경과 변경 시 사전 고지가 필요 | [제8조 제2항 안내][E666] | confirmed |
+| `art8-3`: 정당한 금액 외 수고비 등 추가청구 금지 | **제8조 제3항** 일치 | [공개 전문][TERMS] | confirmed |
+
+기존 네 카드의 조항 번호와 요약 취지에서 오류는 찾지 못했다. 다만 **최신 공정위 원본 전문까지 대조 완료했다는 표시는 아직 할 수 없다.**
+
+## 4. 가격 산정 근거
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 지역·평형·서비스 유형을 함께 구분한 소규모 이사 공개 가격 통계 | unknown | 이번 조사에서 적용 가능한 공공 원자료 URL 확인 못 함 | unknown |
+| 소비자원 조사에서 사용한 소규모 이사 계약금액 범위 | **10만~100만원**, 피해구제 **241건**의 분석 범위. 시장 평균가격이나 추천 예산이 아님 | [한국소비자원 주의보][KCA] | confirmed |
+| 비용에 영향을 주는 조건 | 거리·물량·작업조건·부대서비스·날짜·층수·접근 여건 등 | [생활법령 비용 안내][E666] | confirmed |
+| 현재 입력 조건만으로 개인별 가격을 산정하는 검증된 모델 | 데이터·계수·오차 모두 unknown | 검증 자료 URL unknown | unknown |
+
+**추정: 서비스 판단.** 현재 확보한 근거만으로는 금액을 ‘추정’이라고 붙여 생성하는 것도 부적절하다. 이름만 추정으로 바꿔도 계산 근거는 생기지 않는다.
+
+대신 사용자가 받은 실제 견적을 입력하면 **총액·포함 작업·별도 비용·추가요금 조건**을 비교한다. 향후 가격 예측을 넣으려면 이용 가능한 견적 데이터, 수집 시점·지역·작업조건, 표본 수, 검증 오차를 먼저 확보해야 한다.
+
+## 5. 집 유형별 기본 짐 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 공공·업계 공통 원룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 공공·업계 공통 투룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 원룸의 빌트인 여부가 실제 옮길 짐에 영향을 준다는 업체 설명 | 빌트인 가전·가구가 많아 옮길 짐이 적은 사용자를 별도 안내 | [영구이사 원룸 안내][YG] | confirmed |
+| 집 유형으로 실제 보유 가구·가전과 수량 확정 | 근거 unknown | 표준 목록·분포 자료 URL unknown | unknown |
+
+**추정: 서비스 적용안.** 집 유형별 목록은 **“AI가 만든 확인용 후보 — 표준 목록 근거 없음”**으로 표시한다. 냉장고·세탁기·침대 등 각 후보에 ‘직접 소유 / 빌트인 / 없음’을 확인하고, 확인 전에는 확정 물량에 합산하지 않는다.
+
+## 서비스에서 근거로 쓸 수 있는 것 / 쓰면 안 되는 것
+
+| 구분 | 사용할 수 있는 범위 |
+|---|---|
+| **쓸 수 있는 것** | 표준약관 확인 판본의 서류·기재 항목, 기존 네 참고 조항, 소비자원의 허가·보험·방문견적·상세계약 권고 |
+| **조건부로 쓸 수 있는 것** | 업체가 공개한 차량·인원 구성은 해당 업체 사례로만 사용. 제조사 치수는 해당 차종 계산에만 사용. 공공 업체 목록은 지역·기준일·갱신 주기를 함께 표시 |
+| **쓰면 안 되는 것** | 원룸·투룸만으로 확정한 부피·톤수·인원, 근거 없는 수치 범위·적재계수·가격, 만들어 낸 업체명·평점·순위 |
+| **완료했다고 쓰면 안 되는 것** | 전국 허가·보험 실시간 API 연동, 공정위 최신 원본 전문 대조, 집 유형별 표준 짐 목록 확보 |
+| **남은 확인** | 공정위 원본 첨부와 최신 개정 여부, 지연 배상 상충 내용, 실제 API 엔드포인트·인증·호출 응답, 산정용 실측 자료 |
+
+**추정: 기획서 표현안.**  
+“이사 지킴이는 입력 조건으로 확인용 짐 목록을 만들고, 사용자가 확인한 정보와 공개 근거를 연결해 차량·인원에 대해 업체에 확인할 사항을 제시한다. 견적·계약 서류의 누락과 허가·보험 증빙을 점검하며, 근거가 부족한 수치와 가격은 산정 불가로 표시한다.”
+
+[E666]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+[E629]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+[E1704]: https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=2&cciNo=3&cnpClsNo=1&csmSeq=1704&popMenu=ov
+[FTC-L]: https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all
+[FTC]: https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+[TERMS]: https://ydnara.com/yakgwan.html
+[YG]: https://mcygclean.com/mobile/house/room.jsp
+[KIA]: https://www.kia.com/kr/vehicles/bongo3-frozen/price/bongo3-wingbody-manual-gl
+[MIGHTY]: https://stg-www.hyundai.com/ccontents/carmng/CP00000003/mighty-2025-06-spec.pdf
+[KCA]: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+[KCA-C]: https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+[KCA-D]: https://www.kca.go.kr/odr/bj/br/osBjDecisionExamDetW.do?brdId=00000007&dataStts=Y&seq=1001137357
+[PERMIT]: https://www.xn--o39a150b12ef3p.org/
+[D-SN]: https://www.data.go.kr/data/15080667/fileData.do
+[D-GH]: https://www.data.go.kr/data/15128627/fileData.do
+[GG]: https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=A9X70TR23HP30GDP5872933112&infSeq=3

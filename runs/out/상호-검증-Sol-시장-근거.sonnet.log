@@ -1,0 +1,35 @@
+💬 Sonnet: 상호 검증 Sol 시장 근거
+📄 읽기 b009-market.sol.md
+⚙ ToolSearch
+🔎 열람 https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+🔎 열람 https://www.korea.kr/briefing/policyBriefingView.do?newsId=156741997
+🔎 열람 https://www.korea.kr/news/policyNewsView.do?newsId=156772432
+🔎 열람 https://www.seoul.go.kr/news/news_report.do?nttNo=464088&srchCtgry=465
+🔎 열람 https://www.seoul.go.kr/news/news_report.do?nttNo=454825
+🔎 열람 https://www.opm.go.kr/opm/news/press1.do?articleNo=158513&attachNo=146406&mode=download
+⚙ cd /tmp; f=$(ls /home/data/.claude/projects/*/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tool-results/webfetch-1792830708663-py9yq3.pdf); pdftotext -layout "$f" /tmp/claude-1000/opm.txt 2>&1 | head -3; gr
+🔎 열람 https://www.seoul.go.kr/news/news_report.do?nttNo=464088&srchCtgry=465
+🔎 열람 https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+⚙ cd /home/data/.claude/projects/*/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tool-results/; python3 -I - <<'E' import importlib for m in ("fitz","pypdf","PyPDF2","pdfminer"):     try: importlib.import_modu
+⚙ cd /tmp/claude-1000; python3 -m venv v >/dev/null 2>&1 && ./v/bin/pip -q install pypdf 2>&1 | tail -2; D=$(ls -d /home/data/.claude/projects/*/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tool-results); ./v
+🔎 열람 https://www.zimssa.com/policy/terms
+🔎 열람 https://join.zimssa.com/
+🔎 열람 https://help.soomgo.com/hc/ko/articles/360045383571--숨고캐시-숨고캐시는-무엇인가요
+🔎 열람 https://magazine.hankyung.com/job-joy/article/202511132159d
+🔎 열람 https://yembo.ai/moving
+🔎 열람 https://www.mt.co.kr/future/2024/09/06/2024090517403958253
+🔎 열람 https://m.tbs.seoul.kr/news/newsView.do?idx_800=3533425&seq_800=20526296&typ_800=
+🔎 열람 https://www.mk.co.kr/news/business/7001256
+🔎 열람 https://www.gwanak.go.kr/site/gwanak/06/10616050000002025051303.jsp
+🔎 열람 https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+🔎 열람 https://business.daangn.com/
+🔎 열람 https://www.housingwire.com/articles/realtorcom-agoyu-moving-quotes/
+🔎 이사 견적서 AI 분석 추가비용 점검 서비스 앱 견적 비교 AI
+🔎 AI 계약서 견적서 검토 이사 사다리차 추가요금 확인 질문 서비스 출시 2026
+🔎 AI moving quote review contract red flags hidden fees checker app consumers upload estimate
+🔎 열람 http://nezipisa.com/
+🔎 열람 https://www.saashub.com/detecthiddenfees
+🔎 열람 https://daker.ai/public/hackathons/ai-platform-build-challenge-prelims?postId=5d568379-2efc-4f2a-b3ba-b553684c7766&section=board
+🔎 열람 https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+📝 작성 b009-market-peer.sonnet.md
+⚙ SubagentHandback

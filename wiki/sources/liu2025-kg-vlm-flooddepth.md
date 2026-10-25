@@ -1,0 +1,7 @@
+# Knowledge-Guided Vision-Language Inference for Image-Based Urban Flood Depth Estimation
+
+- 저자: Zhangding Liu, Neda Mohammadi, John E. Taylor
+- 게시: 2025-09-05 · arXiv:2509.04772 · https://arxiv.org/abs/2509.04772
+
+## 초록 (원문)
+Timely floodwater depth estimates support road accessibility assessment and emergency response during urban flooding. Supervised vision methods often require extensive labeled datasets, while recent foundation vision-language models (VLMs) offer flexible visual reasoning but can inconsistently yield large errors in metric depth estimation. This paper proposes FloodVision, a knowledge-guided framework for estimating flood depth from a single RGB image. FloodVision integrates a general-purpose VLM with FloodKG, a domain knowledge base encoding canonical object dimensions and component landmarks (e.g., wheel arch, curb top) to encourage reasoning at the component level rather than treating objects as wholes. This injects explicit geometric grounding without task-specific training. Evaluated on 654 crowdsourced MyCoast New York flood images with resident-reported depths as proxy labels, FloodVision reduces the mean absolute error from 15.62 cm to 8.75 cm and the median error from 14.35 cm to 7.75 cm, with lower error than the VLM-only baseline in 69.3% of cases. The paper also discusses current limitations and future integration into urban digital twin systems.

@@ -1,0 +1,2311 @@
+OpenAI Codex v0.163.0
+--------
+workdir: /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a16d4e-24f7-78a3-9fb1-927822c6261b
+--------
+user
+# 공통 컨텍스트 (모든 팀원 프롬프트 앞에 붙는다)
+
+오늘은 2026-10-24이다. 우리는 "AI Platform Build Challenge" 예선 기획서를 준비하는 1~3인 대학생 팀이다.
+- 주최: 서울특별시, 관악구, 금천청년꿈터, 서울대학교 앵커사업단 / 운영: 데이콘(DACON)
+- 예선: AI 서비스·플랫폼 기획서 PDF 제출 (마감 2026-10-25 23:59). 평가 기준은 미공개.
+- 본선: 11/02~11/25 온라인 교육, 11/26 오프라인 멘토링, **11/27 09:00~18:00 하루 해커톤에서 실제로 동작하는 AI 서비스를 구현·시연**.
+- 기획서 권장 항목: 문제와 주요 사용자 / 핵심 기능·이용 흐름 / AI 적용 방식·활용 데이터·기술 구성 / 구현 계획·역할 분담·기대 효과 / 외부 자료·오픈소스·AI 도구 출처.
+- 개인정보·권한 없는 데이터는 쓰면 안 되고, 외부 데이터는 출처·접근 방법·이용 조건을 밝혀야 한다.
+
+## 공통 규칙
+- 사실(통계·논문·데이터셋·API·경쟁 서비스)은 반드시 URL/DOI/arXiv ID와 함께 제시한다. 확인하지 못한 값은 "unknown"이라고 쓴다. 지어내지 않는다.
+- 추정과 사실을 구분해 표시한다 ("추정:" 접두어).
+- 한국어로 답한다. 고유명사·논문 제목은 원문 유지.
+- 파일을 수정하지 말고 최종 답변만 출력한다.
+
+# 과제 B009 · 분석 (당신: sol) — 이사 지킴이 '처음 보는' 평가셋(홀드아웃) 작성
+심사위원 지적: 지금 평가셋(`web/eval/dataset.ts`)은 Sonnet이 만들고 실패를 본 뒤 코드를 고쳐 다시 쟀으므로 튜닝셋이다. 그래서 **다른 작성자(당신)**가 새 평가셋을 만든다. 공정성을 위해 다음 파일은 **열지 마라**: `web/eval/dataset.ts`, `web/eval/run.mts`, `web/eval/REPORT*.md`, `web/eval/results*.json`, `web/src/lib/{rules,verify,plain,proposals,agent,intake}.ts`(판정 코드). 읽어도 되는 것: `web/eval/README.md`(라벨 기준), `web/src/lib/types.ts`(QuoteDraft·Item·Conditions 타입), `web/src/lib/fixtures.ts`(SAMPLE_ITEMS·SAMPLE_CONDITIONS), `wiki/sources/kca2026-소규모이사-피해.md`, `runs/out/b008-data.sol.md`(표준약관).
+
+만들 것: 견적 20건 + 업체 답변 20건. 현실적인 한국어 소규모 이사 견적 문자·카톡·앱 문구(줄바꿈, 이모티콘, 축약, 오타 약간, 띄어쓰기 섞임). 상호는 모두 '가상○○익스프레스/용달/이사' 같은 지어낸 이름(실존 업체명 금지). 기존 셋과 겹치지 않게 다양하게: 투룸·쓰리룸, 냉장고 양문형, 에어컨 이전설치, 피아노·안마의자 같은 특수품, '포장이사/반포장/일반', 보관이사, 엘베 사용료, 주차 어려움, 오후 할증, 주말 할증, '견적 외 물품 추가 시 별도', 금액 표기(380,000원 / 38만 / 삼십팔만), 계약금 비율 다양, 일부는 아주 깔끔한 견적(모두 명시). 답변 20건: 명시적 포함 / 조건부 / 제외·별도 / 금액 제시 / 무관 / 얼버무림 / 되묻기 섞기.
+
+라벨 규칙(README 요지): 카드 id는 `item-<대표이름>`(대표이름: 침대·매트리스·책장·책상·식탁·의자·옷장·행거·냉장고·세탁기·전자레인지·소파·텔레비전·모니터·건조기·에어컨·박스·티비선반, 그 외는 이름 그대로 공백 제거·소문자), `stairs-from`/`stairs-to`(2층 이상 또는 지하이고 엘리베이터 없음/모름일 때만 생김), `ladder`(3층 이상·엘베 없음/모름이거나 사다리 언급 시), `carry-from`/`carry-to`(주차 멂=있음일 때), `truck`, `workers`, `fee`(추가비 문구 카드 전부 묶음 — 문구가 없어도 '추가 비용 조건 없음' 카드가 생겨 확인 필요), `total`(총액을 읽을 수 없을 때). explicit = 원문만으로 조건 없이 포함이 분명한 카드, need = 그 외(미기재·뭉뚱그림·협의·별도·당일 결정·수량 불일치 등). 박스·잡화류는 `item-박스` 하나.
+
+출력 형식: 마크다운 문서 안에 **하나의 ```ts 코드 블록**으로 `web/eval/holdout.ts` 전체를 써라. 머리에:
+```
+import { SAMPLE_CONDITIONS, SAMPLE_ITEMS } from "../src/lib/fixtures.ts";
+import type { Conditions, Item, QuoteDraft } from "../src/lib/types.ts";
+import type { QuoteCase, ReplyCase } from "./dataset.ts";
+export const QUOTES: QuoteCase[] = [...];
+export const REPLIES: ReplyCase[] = [...];
+```
+QuoteCase = { id: "H01"…, trait, text, items: Item[], cond: Conditions, gold: QuoteDraft(원문에서 사람이 읽은 값 — totalAmount·deposit 원 단위 정수, workers, truck 원문, ladder "포함"|"별도"|"미기재", stairsNote 원문|null, listedItems [{name, quote(원문 그대로)}], blanketPhrases, extraFeeClauses(원문 그대로), unreadable: [], company, moveDate), explicit: string[], need: string[] }. ReplyCase = { id: "HR01"…, quoteId: "H.."(대응 견적), type: "명시적 포함"|"조건부"|"제외·별도"|"금액 제시"|"무관"|"얼버무림", text, allowed: string[](이 답변으로 '명시됨'으로 바꿔도 되는 카드 id) }. items는 각 견적마다 사용자가 실제로 옮길 짐(Item: {id, name, category: "대형가구"|"가전"|"박스·잡화", count, move: true}), cond는 출발·도착 층/엘베/주차. TS 문법 오류가 없게. 코드 블록 뒤에 라벨을 정한 근거 요약 10줄.
+
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+warning: Codex is ignoring 1 unrecognized configuration setting. Check for typos or deprecated settings.
+  user (/home/data/.local/share/orca/codex-accounts/41245642-2fb9-489b-a66e-16c7b6c8151b/home/config.toml): `features.child_agents_md` is ignored.
+2026-10-24T09:46:41.024938Z ERROR codex_rmcp_client::oauth::refresh_transaction: error=failed to refresh OAuth tokens for server notion: OAuth refresh token was rejected: Server returned error response: invalid_grant: OAuth grant revoked
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+허용된 자료만 확인해 견적 20건과 답변 20건을 작성하겠습니다. 판정 코드와 기존 평가 결과는 열지 않고, 원문 근거와 카드별 라벨의 일관성을 검토하겠습니다.
+
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc pwd in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/bash -lc 'cat web/eval/README.md web/src/lib/types.ts web/src/lib/fixtures.ts wiki/sources/kca2026-소규모이사-피해.md runs/out/b008-data.sol.md' in /mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge
+ succeeded in 0ms:
+# eval — 합성 평가셋과 측정 스크립트
+
+- `dataset.ts` 견적서 20건(Q01~Q20)과 업체 답변 20건(R01~R20). 상호는 모두 '가상○○이사', 개인정보 없음.
+- `run.mts` 측정. `node --import tsx eval/run.mts` (로컬 Ollama 필요, 약 3분). 결과는 `results.json`, `REPORT.md`. `src/lib/*`는 수정하지 않는다.
+
+## 라벨은 누가 어떻게 정했나 (정직하게)
+- **작성자: Sonnet(실무팀)이 이사화물 표준약관 취지와 D006 성공 기준을 보고 작성했다. 사람 검수 전이다.** 실제 소비자 견적이 아니라 합성 문장이다.
+- 카드별 정답은 두 갈래: `explicit`(원문만으로 '명시됨'이어야 함), `need`(확인 필요 = 포함 여부 미확인·조건 모호·판독 불가). 라벨은 `compare()`를 돌려 보고 정하지 않았다.
+- 기준: 품목 이름이 조건 없이 적혀 있으면 명시됨. '짐 일체'만 있거나, 별도·협의·당일 보고·수량 불일치가 붙었거나, 문서에 아예 없으면 확인 필요. 계단·사다리차는 그 항목을 조건 없이 포함으로 적었을 때만 명시됨. 추가비 카드는 '추가 비용 없음'이 적혔을 때만 명시됨(Q17 한 건).
+- 정답 값: 총액·계약금·작업 인원은 원문에 적힌 값, 없으면 null. 계약금 비율 이상(Q11)은 앱 규칙에 없어 값 추출만 본다.
+- 답변 라벨(`allowed`): 그 답변이 조건 없이 포함·없음을 말한 카드만. 금액 제시, 조건부, 제외, 무관, 얼버무림('다 됩니다')은 명시됨으로 바꾸면 오반영.
+- 의도적으로 넣은 함정: 쉼표 금액(Q03), 총액·계약금 한 문장(Q06·Q07), '1인 가구'·'2인용'(Q07·Q12), '2분'(Q02), 품목 줄과 다른 줄의 조건(Q14), 정보 없는 인사말(Q19). 일부는 앱이 틀리도록 설계한 것이라 앱 오류율이 실제보다 높게 나올 수 있다.
+- 한계: 20건·1회 실행, 라벨러와 평가셋 작성자가 같음, 합성 문장이라 실제 견적의 다양성을 대표하지 않음.
+import { z } from "zod";
+
+// ── 견적서 원문(붙여넣은 글)에서 모델이 뽑는 초안. 원문에 없는 글은 코드가 버린다 (extract.ts verifyDraft).
+
+export const quoteDraftSchema = z.object({
+  company: z.string().nullable().describe("업체 이름. 없으면 null"),
+  totalAmount: z.number().int().nullable().describe("총액(원). '35만'은 350000. 없으면 null"),
+  deposit: z.number().int().nullable().describe("계약금(원). 없으면 null"),
+  moveDate: z.string().nullable().describe("이사 날짜 원문. 없으면 null"),
+  truck: z.string().nullable().describe("차량 톤수·대수 원문 그대로. 없으면 null"),
+  workers: z.number().int().nullable().describe("작업 인원 수. 없으면 null"),
+  ladder: z.enum(["포함", "별도", "미기재"]).describe("사다리차 비용이 총액에 포함인지"),
+  stairsNote: z.string().nullable().describe("계단 작업 관련 문장 원문 그대로. 없으면 null"),
+  listedItems: z.array(z.object({ name: z.string(), quote: z.string().describe("원문에 적힌 그대로") })).describe("이름이 적힌 품목"),
+  blanketPhrases: z.array(z.string()).describe("'원룸 짐 일체'처럼 품목을 뭉뚱그린 문구, 원문 그대로"),
+  extraFeeClauses: z.array(z.string()).describe("추가 비용이 생길 수 있다는 문장, 원문 그대로"),
+  unreadable: z.array(z.string()).describe("원문에 있지만 값이 불분명한 항목 이름"),
+});
+export type QuoteDraft = z.infer<typeof quoteDraftSchema>;
+
+// ── 사용자가 직접 확정한 짐. 추정으로 채우지 않는다.
+export type Category = "대형가구" | "가전" | "박스·잡화";
+// count가 null이면 수량 모름 — 그래도 확인 카드는 만든다 (D006 Astra#3)
+// pending은 짐 점검표관이 놓은 후보 — 사용자가 확인하기 전에는 대조하지 않는다
+export interface Item { id: string; name: string; category: Category; count: number | null; move: boolean; pending?: boolean }
+
+// ── 사용자가 직접 알려 주는 현장 조건. 모르면 '모름'.
+export type Tri = "있음" | "없음" | "모름";
+export interface Site { floor: number | null; elevator: Tri; parkingFar: Tri }
+export interface Conditions { from: Site; to: Site; ladderNeeded: Tri }
+
+// ── 규칙이 만드는 확인 카드. 기재 상태(4종)와 비용 처리를 따로 둔다 — '이름이 적힘'과 '총액에 포함'은 다르다.
+export type CardStatus = "명시됨" | "포함 여부 미확인" | "조건 모호" | "판독 불가";
+export type Cost = "총액 포함" | "별도" | "미확인" | "해당 없음";
+export type Rule = "품목" | "작업조건" | "추가비";
+export interface Card {
+  id: string;
+  rule: Rule;
+  title: string;
+  mine: string; // 내가 확인한 내용 (예: '책장 1개 운송', '3층 · 엘리베이터 없음')
+  status: CardStatus;
+  cost: Cost;
+  why: string;
+  evidence: string[]; // 견적서·답변 원문 발췌 (원문에 실제로 있는 글만)
+  ask: string; // 업체에 물을 한 문장 (명시됨이면 빈 문자열)
+  refs: string[]; // 참고 조항 id (references.ts)
+  answered?: { relation: Relation; quote: string };
+}
+
+export type Relation = "explicit_answer" | "conditional_answer" | "unanswered" | "conflicting";
+
+// ── 문의 상태. 복사는 발송이 아니다 — 사용자가 '보냈음'을 눌러야 바뀐다.
+export type Inquiry = "문의 전" | "보냄" | "답변 검토 대기" | "답변 반영" | "미답" | "재문의 필요";
+// 가상 사례 — 시연·테스트용 입력. 결과(초안·판정)는 여기 두지 않는다: 실제로 Ollama와 규칙이 만든다.
+// (QUOTE_DRAFT는 규칙 단위 테스트의 입력으로만 쓴다)
+import type { Conditions, Item, QuoteDraft } from "./types.ts";
+
+export const SAMPLE_QUOTE_TEXT = `[바른용달이사] 견적 안내드립니다 (가상 사례)
+이사일: 11월 14일(토) 오전 9시
+출발: 관악구 ○○동 3층 → 도착: 금천구 ○○동 5층
+차량: 1톤 1대 / 인원 2명
+이사 품목: 원룸 짐 일체 (냉장고, 세탁기, 침대(싱글))
+총 금액 35만원 (계약금 5만원 입금 시 예약 확정)
+※ 현장 상황에 따라 추가 비용이 발생할 수 있음`;
+
+export const SAMPLE_ITEMS: Item[] = [
+  { id: "s1", name: "싱글 침대", category: "대형가구", count: 1, move: true },
+  { id: "s2", name: "책장", category: "대형가구", count: 1, move: true },
+  { id: "s3", name: "책상", category: "대형가구", count: 1, move: true },
+  { id: "s4", name: "의자", category: "대형가구", count: 1, move: true },
+  { id: "s5", name: "냉장고", category: "가전", count: 1, move: true },
+  { id: "s6", name: "세탁기", category: "가전", count: 1, move: true },
+  { id: "s7", name: "전자레인지", category: "가전", count: 1, move: true },
+  { id: "s8", name: "이삿짐 박스", category: "박스·잡화", count: 6, move: true },
+];
+
+export const SAMPLE_CONDITIONS: Conditions = {
+  from: { floor: 3, elevator: "없음", parkingFar: "없음" },
+  to: { floor: 5, elevator: "있음", parkingFar: "없음" },
+  ladderNeeded: "모름",
+};
+
+export const SAMPLE_REPLY =
+  "안녕하세요 바른용달입니다. 책장이랑 책상 의자 다 포함이에요. 3층 계단은 당일 짐 보고 말씀드릴게요. 짐 많으면 추가 나올 수 있습니다.";
+
+/** 자주 옮기는 짐 — 직접 입력을 빠르게 */
+export const COMMON_ITEMS: { name: string; category: Item["category"] }[] = [
+  { name: "침대", category: "대형가구" }, { name: "매트리스", category: "대형가구" }, { name: "책장", category: "대형가구" },
+  { name: "책상", category: "대형가구" }, { name: "의자", category: "대형가구" }, { name: "옷장", category: "대형가구" },
+  { name: "행거", category: "대형가구" }, { name: "소파", category: "대형가구" }, { name: "식탁", category: "대형가구" },
+  { name: "냉장고", category: "가전" }, { name: "세탁기", category: "가전" }, { name: "전자레인지", category: "가전" },
+  { name: "TV", category: "가전" }, { name: "건조기", category: "가전" }, { name: "이삿짐 박스", category: "박스·잡화" },
+];
+
+export const QUOTE_DRAFT: QuoteDraft = {
+  company: "바른용달이사",
+  totalAmount: 350000,
+  deposit: 50000,
+  moveDate: "11월 14일(토) 오전 9시",
+  truck: "1톤 1대",
+  workers: 2,
+  ladder: "미기재",
+  stairsNote: null,
+  listedItems: [
+    { name: "냉장고", quote: "냉장고" },
+    { name: "세탁기", quote: "세탁기" },
+    { name: "침대", quote: "침대(싱글)" },
+  ],
+  blanketPhrases: ["원룸 짐 일체"],
+  extraFeeClauses: ["현장 상황에 따라 추가 비용이 발생할 수 있음"],
+  unreadable: [],
+};
+
+// 두 번째 가상 견적 — 더 자세히 적었지만 사다리차는 별도. 업체 이름은 지어낸 것으로, 실존 업체와 연결하지 않는다.
+export const SAMPLE_QUOTE_TEXT_B = `[가나다이사 · 가상 사례] 원룸 이사 견적
+이사일 11월 14일 오전 / 1톤 1대, 작업 인원 2명
+운송 품목: 침대 1개, 책장 1개, 책상 1개, 의자 1개, 냉장고 1대, 세탁기 1대, 전자레인지 1대, 이삿짐 박스 6개
+출발지 3층 계단 작업 포함
+사다리차 필요 시 별도 7만원
+총액 42만원, 계약금 4만원
+작업 중 추가 요청은 사전 협의 후 진행`;
+
+export const QUOTE_DRAFT_B: QuoteDraft = {
+  company: "가나다이사",
+  totalAmount: 420000,
+  deposit: 40000,
+  moveDate: "11월 14일 오전",
+  truck: "1톤 1대",
+  workers: 2,
+  ladder: "별도",
+  stairsNote: "출발지 3층 계단 작업 포함",
+  listedItems: ["침대 1개", "책장 1개", "책상 1개", "의자 1개", "냉장고 1대", "세탁기 1대", "전자레인지 1대", "이삿짐 박스 6개"].map((q) => ({ name: q.replace(/\s*\d+\s*(개|대)$/, ""), quote: q })),
+  blanketPhrases: [],
+  extraFeeClauses: ["작업 중 추가 요청은 사전 협의 후 진행"],
+  unreadable: [],
+};
+
+/** 견적을 받기 전의 빈 초안 — 이걸로 대조하면 '견적을 받을 때 물을 것'이 나온다 */
+export const NO_QUOTE: QuoteDraft = { company: null, totalAmount: null, deposit: null, moveDate: null, truck: null, workers: null, ladder: "미기재", stairsNote: null, listedItems: [], blanketPhrases: [], extraFeeClauses: [], unreadable: [] };
+---
+type: paper
+tags: [근거, 이사, 통계]
+status: verified
+source: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+---
+# 한국소비자원 피해예방주의보 — 방문 견적 없는 소규모 이사 계약, 추가 비용 요구 등 피해 많아
+
+- 발행: 한국소비자원, 보도 2026-04-21(화) 12:00 · 배포 2026-04-20
+- 게시글: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+- 첨부 PDF(10쪽): https://www.kca.go.kr/home/board/download.do?bid=00000012&did=1004458186&fno=10054204&menukey=4005
+- 확인: 2026-10-23 Opus가 첨부 PDF를 내려받아 텍스트를 추출해 아래 수치를 원문과 대조함 (D003 쟁점 D2)
+
+## 원문 수치 (쪽 번호는 첨부 PDF 기준)
+- p1 이사(포장·반포장·일반) 피해구제 신청: 2023년 603건 → 2024년 785건 → 2025년 961건
+- p1 2025년 961건 중 소규모 이사(총계약대금 10만 원 이상 100만 원 이하) **241건** 분석
+- p1 20~30대 **65.1%(157건)**, 그중 20대 **22.8%(55건)** — 전체 이사서비스 이용자의 20대 비율 **11.6%** 대비 2배 가까이
+- p2·p5 소규모 이사 피해 유형(’25년) — **계 281건\***
+
+| 물품 파손·분실 | 추가 비용 요구 | 이사거부/계약불이행 | 과도한 위약금 요구 | 기타 | 계 |
+|---|---|---|---|---|---|
+| 134건 (47.7%) | **70건 (24.9%)** | 39건 (13.9%) | 27건 (9.6%) | 11건 (3.9%) | 281건\* (100.0%) |
+
+\* p2: "피해구제 241건의 유형 분석으로 1개 사건이 2가지 이상 유형 해당 시 각각의 건수로 산정" · p5: "1개 피해구제 사례에 여러 가지 유형이 포함된 경우 중복 건수로 산정"
+
+## 원문 서술 (요지)
+- p5 추가 비용 요구: 이삿짐의 양이나 건물 구조 등을 이유로 화물차·인력·사다리차를 추가로 써야 한다는 사유가 대부분
+- p5 이사 거부: 소비자가 추가 비용 지급을 거부하거나 감액을 요구하면 업체가 계약 이행을 거부하는 '계약불이행' 피해로 이어지는 사례가 많음
+- p5 소규모 이사는 방문 견적 없이 구두 설명이나 온라인 입력을 토대로 비대면 계약을 맺는 경우가 많아 추가비용 요구 등 피해에 더욱 취약
+
+## 소비자원 권고 (p8 붙임3 소비자 주의사항 — 원문 인용)
+- 계약 체결 시: "전화나 홈페이지를 통해 견적을 받을 경우 작업조건(사다리 비용 등) 및 이사화물 내역에 따라 추가 요금이 발생할 수 있으므로, 가급적 방문견적을 통해 화물의 양과 주요 물품을 쌍방이 확인한다."
+- "계약서 작성 시 이사일시, 이사화물 내역, 작업인원 수, 추가서비스 내역 및 비용 등 계약사항을 상세히 기재하여 추가요금 요구 등 향후 분쟁에 대비한다."
+- 계약 체결 전: 허가업체(www.허가이사.org)·이사화물배상책임보험 가입 여부 확인
+- 분쟁 시: 1372소비자상담센터(국번없이 1372, www.ccn.go.kr)
+
+## 쓸 때 주의
+- 24.9%의 분모는 281건(유형별 중복 집계)이다. 241건을 분모로 읽히게 쓰지 않는다.
+- 피해 유형 1위는 추가 비용이 아니라 **물품 파손·분실(47.7%)** 이다.
+- 피해구제 **신청** 통계다. 전체 이사 이용자의 피해 발생률이 아니다.
+# B008 조사 — 이사 산정·업체 선택에 사용할 근거
+
+조사 기준일: **2026-10-24**  
+작성: Sol · 조사 단계 산출물 · 후속 peer/review 대상
+
+지정된 네 파일을 읽고 공개 원문을 대조했다. **서류 점검과 업체 선택 기준은 근거를 확보했다. 반면 집 유형만으로 짐 부피·차량·인원·가격을 확정하는 공통 산정표는 확인하지 못했다.** 일부 업체의 공개 서비스 구성과 차종별 제조사 제원은 있으나, 이를 모든 이사에 적용하면 안 된다.
+
+`confirmed`는 해당 출처의 기재 내용을 확인했다는 뜻이다. 업계 전체에 적용되는 기준이라는 뜻은 아니다. `unknown`은 이번 조사에서 확인하지 못했다는 뜻이며, 자료가 존재하지 않는다고 단정하지 않는다.
+
+## 1. 짐 부피 → 차량 → 인원
+
+### 산정 기준과 공개 사례
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 국토부·공정위·한국통합물류협회의 공통적인 ‘짐 ㎥ → 차량 톤수 → 인원’ 산정표 | unknown | 확인한 [생활법령 안내][E666]·[표준약관 게시 목록][FTC-L]에서는 산정표 확인 못 함 | unknown |
+| 영구이사의 원룸이사 공개 서비스 구성 | 이삿짐 **1톤 기준 패커 2명·전용차량 1대**. 인원·차량은 상황에 따라 달라진다고 명시 | [영구이사 원룸이사][YG] | confirmed |
+| 생활법령에 소개된 5톤 포장이사의 통상 구성 | **4명 1조** 사례. 법정 최소인원이나 물량별 산식은 아님 | [생활법령 이사업체 정하기][E666] | confirmed |
+| ‘원룸이면 반드시 1톤’, ‘투룸이면 반드시 2.5톤’이라는 공통 기준 | unknown | [영구이사][YG]는 빌트인 가구·가전으로 옮길 짐이 적은 경우를 별도로 설명 | unknown |
+| 가구·가전 품목별 공인 표준 이사부피 | 침대·냉장고·세탁기 등에 공통 적용할 ㎥ 값 unknown | 확인 가능한 공공·업계 원문 URL unknown | unknown |
+| 포장재·빈 공간·분해 여부를 반영하는 공통 적재 보정계수 | unknown | 검증 가능한 원문 URL unknown | unknown |
+
+**추정: 서비스 적용안.** ‘집 유형 → 기본 짐 후보’까지만 자동 생성하고, 실제 소유 여부·수량·크기는 사용자가 확인해야 한다. 특정 업체의 **1톤·2명** 구성은 출처가 있는 참고 사례로 표시할 수 있지만, 사용자에게 필요한 인원으로 확정할 수는 없다.
+
+### 화물칸 용적
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 기아 봉고Ⅲ 해당 윙바디 사양의 제조사 공개 제원 | 적재함 **3,100×1,700×1,800㎜**, 최대적재량 **1,000㎏** | [기아 공식 사양][KIA] | confirmed |
+| 위 제원의 직육면체 부피 계산 | **3.1×1.7×1.8 = 9.486㎥**. 제조사 공시 용적이 아니라 공개 치수의 곱 | [계산에 사용한 공식 치수][KIA] | 추정 |
+| 현대 마이티 해당 내장탑차의 제조사 공개 제원 | 적재실 내측 **4,330×1,960×1,850㎜**, 적재량 **2,400㎏**인 사양 확인 | [현대 공식 제원 PDF][MIGHTY] | confirmed |
+| 위 마이티 제원의 직육면체 부피 계산 | 약 **15.701㎥**. 해당 사양에만 해당하며 ‘모든 2.5톤 차량’의 값으로 사용할 수 없음 | [계산에 사용한 공식 치수][MIGHTY] | 추정 |
+| 모든 1톤 차량에 공통인 공식 적재 용적 | unknown | [기아 차종별 제원][KIA] | unknown |
+| 모든 2.5톤 차량에 공통인 공식 적재 용적 | unknown | [현대 차종별 제원][MIGHTY] | unknown |
+| 5톤 이삿짐 차량의 공통 공식 적재 용적 | unknown | 이번 조사에서 적용 가능한 제조사 원문 확인 못 함 | unknown |
+
+**추정: 서비스 적용안.**
+
+- 톤수와 부피를 고정 비율로 환산하지 않는다.
+- 차종·탑 종류·내측 치수가 확보되면 해당 차량의 기하학적 부피만 계산한다.
+- 치수의 곱을 실제 적재 가능한 짐 부피로 확정하지 않는다.
+- 산정 근거가 없으면 **“범위: unknown / 근거 없음 / 업체 확인 필요”**로 표시한다. 숫자로 된 범위 자체도 근거 없이 생성하면 안 된다.
+- 사용자가 실제 치수의 최솟값·최댓값을 제공한 경우에만 그 입력으로 계산한 범위를 제시한다.
+
+## 2. 업체 선택 기준·허가·보험·공개 데이터
+
+### 허가와 보험 확인
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 한국소비자원이 안내하는 허가 확인 경로 | 허가이사 사이트 또는 업체 소재지 관할관청 | [한국소비자원 주의보][KCA]·[허가이사][PERMIT] | confirmed |
+| 추가 확인 방법 | 연합회 검색, 시·군·구청 문의, 허가증 사본 요청 | [생활법령 안내][E629] | confirmed |
+| 허가이사 운영 주체 | 전국화물자동차운송주선사업연합회 | [한국소비자원 주의보][KCA] | confirmed |
+| 허가이사 공개 조회 API | 엔드포인트·키·라이선스 unknown. 사이트 직접 접속도 이번 조사에서 시간 초과 | [허가이사][PERMIT] | unknown |
+| 보험은 가입 여부와 보상 범위를 함께 확인해야 함 | 소비자원은 운송과정 피해를 보상하는 적재물배상책임보험과 이사 전반의 피해를 보상하는 이사화물배상책임보험을 구분해 안내 | [한국소비자원 카드뉴스][KCA-C] | confirmed |
+| 업체별 보험가입 상태를 조회하는 공개 API | unknown | 확인 가능한 공개 명세 URL unknown | unknown |
+
+한국소비자원 원문 문구는 다음과 같다.
+
+> “허가업체 및 이사화물배상책임보험 가입 여부를 확인하세요”
+
+> “방문 견적을 받고, 계약서 작성 시 계약사항을 상세히 기재하세요”
+
+두 문구 모두 [2026-04-21 한국소비자원 카드뉴스][KCA-C]에서 확인했다. 해당 자료는 방문견적으로 화물량·주요 물품을 함께 확인하고, 계약서에 이사일시·화물 내역·인원·추가서비스와 비용을 상세히 적도록 안내한다.
+
+**추정: 앱의 보험 확인 항목.** 보험증권·공제가입증명서에서 계약 상대방과 피보험자 일치 여부, 보험기간, 보상한도, 자기부담금, 포장·상하차·운송·정리·보관의 보장 여부를 확인하도록 구성한다. 증빙을 받기 전에는 ‘가입 확인 완료’로 표시하지 않는다.
+
+### 공공데이터포털의 업체 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 성남시 운송주선사업자 목록 존재 | 기준 **2026-04-08**, **연간 갱신**. 인허가일자·영업상태·이사/일반 업종·업체명·주소 등 제공 | [data.go.kr 15080667][D-SN] | confirmed |
+| 성남시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-SN] | confirmed |
+| 김해시 이사업체 목록 존재 | 기준 **2026-07-15**, **연간 갱신**. 화물종류·상호·주소·좌표 제공 | [data.go.kr 15128627][D-GH] | confirmed |
+| 김해시 데이터 이용 조건 | 무료, **이용허락범위 제한 없음**. CSV와 JSON/XML API 제공 표시 | [데이터 상세][D-GH] | confirmed |
+| 김해시 최신 데이터의 전화번호 | 제공 항목에서 **삭제**했다고 명시 | [데이터 변경 안내][D-GH] | confirmed |
+| 위 파일데이터의 접근 방법 | CSV는 로그인 없이 다운로드 가능. API는 회원가입·활용신청 필요 | [공공데이터포털 안내][D-SN] | confirmed |
+| 위 데이터의 정확한 API 엔드포인트 | 이번 도구에서 Swagger 호출 경로 확인 못 함: **unknown** | [성남시 활용명세][D-SN]·[김해시 활용명세][D-GH] | unknown |
+| API 인증키 | 포털 인증키 사용 안내 확인. 해당 데이터의 성공 호출은 미검증 | [공공데이터포털 인증 안내][D-SN] | confirmed |
+| 경기도 이사화물업체 Open API 안내 페이지 존재 | `KEY`, `Type`, `pIndex`, `pSize` 명세 확인. 요청주소·출력항목은 조회 결과 공란 | [경기데이터드림][GG] | confirmed |
+| 경기도 API의 실제 호출주소·성공 응답·해당 서비스 라이선스 | unknown | [경기데이터드림][GG] | unknown |
+| 서울 전체·전국 전체를 포괄하는 실시간 이사 허가 검증 API | 이번 조사에서 확인 못 함 | 확인된 공개 명세 URL unknown | unknown |
+
+**추정: 구현 판단.** 공개 업체 목록을 확보하는 방법은 있지만, 이번 조사만으로 **“전국 허가·보험 실시간 자동조회 연동 완료”**라고 쓸 수는 없다. 확인된 CSV를 기준일과 함께 가져와 후보 정보를 제공하는 방식이 우선 가능하다. 연간 자료의 미등재를 곧바로 무허가 판정으로 바꾸면 안 된다.
+
+### 앱에서 비교할 기준
+
+**추정: 다음 항목을 동일 조건의 비교표로 제공한다.** 근거는 소비자원의 허가·보험·상세계약 권고와 표준약관의 견적·계약 항목이다. [한국소비자원][KCA-C], [생활법령][E666]
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 허가 확인 증빙을 비교 | 허가증·조회일·계약 업체와의 일치 여부 | [허가 확인 안내][E629] | 추정 |
+| 보험 증빙과 보장 범위를 비교 | 확인됨 / 미확인 / 범위 확인 필요 | [보험 권고][KCA-C] | 추정 |
+| 같은 짐·작업조건으로 견적을 비교 | 차량 종류·대수, 인원, 포장·정리, 장비, 추가작업·비용 | [계약 확인 안내][E666] | 추정 |
+| 업체의 우열 점수·평점 자동 생성 | 검증된 평가 데이터가 없으므로 산정값 unknown | 평가 데이터 URL unknown | unknown |
+
+## 3. 표준약관·서류·조항 검증
+
+### 판본 확인 범위
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 확인된 약관 번호·개정일 | **표준약관 제10035호, 2014-09-19 개정** | [생활법령 판본 안내][E1704]·[업체 공개 전문][TERMS] | confirmed |
+| 공정위 목록의 게시일 | **2014-10-01**. 개정일과 구분해야 함 | [공정위 표준약관 목록][FTC-L] | confirmed |
+| 2026-10-24 현재 ‘최신판’ 여부의 최종 확인 | 공정위 본문·첨부가 403으로 열리지 않아 최종 확인 **unknown** | [공정위 원문 게시 경로][FTC] | unknown |
+| 적용 성격 | 실제 계약·채택 약관을 확인해야 하며 표준약관 내용을 모든 계약에 자동 적용할 수 없음 | [생활법령 설명][E629] | confirmed |
+
+따라서 서비스의 출처 표시는 **“확인 판본: 제10035호, 2014-09-19 개정 / 최신 개정 여부 추가 확인 필요”**가 적절하다.
+
+### 서류와 기재 항목
+
+아래는 확인 판본 기준이다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 요청받은 견적의 견적서 작성·교부 | **제4조** | [생활법령][E666]·[공개 전문][TERMS] | confirmed |
+| 견적서 기재 항목 | ① 사업자 상호·등록번호·대표자·주소·전화·작성자 ② 고객 성명·주소·전화 ③ 인수·인도 일시·장소, 짐 종류·무게·부피·운임단가 ④ 차량 종류·대수·인원·포장·정리·장비 ⑤ 보관 장소·기간·요금 ⑥ 총액·내역 ⑦ 기타 | [제4조 공개 전문][TERMS] | confirmed |
+| 계약서 작성·교부 | **제5조 제2항** | [생활법령 계약 안내][E629] | confirmed |
+| 계약서 기재 항목 | 제4조 제1~6호 사항에서 작성자를 계약 담당자로 변경하고, **계약금·잔액·운송상 주의사항·고객 요청사항·기타 사항** 추가 | [제5조 공개 전문][TERMS] | confirmed |
+| 약관 설명·명시 및 요청 시 사본 교부 | **제5조 제1항**. 계약서에 약관 전문이 있으면 사본 교부 대체 가능 | [생활법령][E666] | confirmed |
+| 별도 인수증의 일반적인 의무 교부·필수 기재 항목 | 확인 전문 **제11조에는 인수·인도 일시와 장소만 규정**. 별도 인수증 의무는 확인 못 함 | [제11조 공개 전문][TERMS] | unknown |
+| 사고증명서 | **제19조**. 운송 중 멸실·훼손·연착 시 고객 요청에 따라 사고일부터 **1년**에 한하여 발행 | [생활법령 사고증명서 안내][E629]·[전문][TERMS] | confirmed |
+| 현장 피해 사실확인서 | 소비자원이 현장 책임자에게 요청하고 사진 등 증빙을 확보하도록 권고. 계약 전 일괄 교부 서류는 아님 | [소비자원 카드뉴스][KCA-C] | confirmed |
+
+**주의할 원문 차이:** 생활법령의 `csmSeq=629` 페이지는 고객 주민등록번호를 기재 항목으로 소개하지만, `csmSeq=666` 및 확인한 2014년 판본 공개 전문에는 **성명·주소·전화번호**로 되어 있다. 서비스의 필수 입력에 주민등록번호를 추가할 근거로 사용하면 안 된다. [629 안내][E629], [666 안내][E666], [공개 전문][TERMS]
+
+**추정: 화면 구성.** ‘계약 전 받을 서류’, ‘계약 체결 때 받을 서류’, ‘사고 시 요청할 서류’를 구분한다. 앱이 작성한 초안은 사업자가 교부한 견적서·계약서로 표시하지 않는다.
+
+### 계약금·취소·손해배상·지연
+
+다음 수치는 **확인 판본의 조문 내용**이다. 공정위 원본 첨부의 최종 대조는 남아 있다.
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 계약금 | **제6조:** 운임 등 합계액의 **10%** 청구 가능 | [생활법령][E666] | confirmed |
+| 고객 귀책 해제 | **제9조 제1항:** 인수일 전날까지 계약금, 당일 계약금 **2배**. 기지급 계약금 공제 가능 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 해제 | **제9조 제2항:** 2일 전까지 **2배**, 전날 **4배**, 당일 **6배**, 당일 미통지 **10배**. 지급받은 계약금은 별도 반환 | [공개 전문][TERMS] | confirmed |
+| 사업자 귀책 인수 지연으로 해제 | **제9조 제3항:** **2시간 이상** 지연 시 계약금 반환 및 **6배액** 배상 청구 | [공개 전문][TERMS] | confirmed |
+| 멸실·훼손·연착 책임 | **제14조 제1~3항:** 주의의무 입증, 물품가액·수선, 연착·실손해 등의 기준 | [한국소비자원 결정례][KCA-D]·[공개 전문][TERMS] | confirmed |
+| 물품 손상 없는 인도 연착 | **제14조 제2항 제2호 가목:** 연착 시간×계약금×½, 계약금 **10배 한도**, 1시간 미만 제외 | [공개 전문][TERMS] | confirmed |
+| 고객 귀책 인수 지체 | **제15조:** 시간당 계약금의 ½, **2배 한도**. 2시간 이상이면 사업자 해제·2배 배상 청구 규정 | [공개 전문][TERMS] | confirmed |
+
+**상충 자료:** 생활법령 `629` 안내의 사업자 인수 지연 설명에는 **2배액**이 나오지만, 확인한 표준약관 공개 전문 제9조 제3항은 **6배액**이다. 이 부분은 공정위 원본 확보 전 자동 배상 계산기에 확정값으로 넣지 않는 것이 적절하다. [생활법령][E629], [공개 전문][TERMS]
+
+### `references.ts` 검증
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| `art4`: 견적서에 화물·작업조건·운임 기재 | 조항 번호·요약 취지 일치. 전체 기재 항목은 아님 | [제4조 안내][E666] | confirmed |
+| `art5-3`: 견적 초과 계약금액의 원칙적 금지와 예외 | **제5조 제3항** 일치. 고객 요청에 따른 산정사항 변경과 초과금액 사전 고지가 필요 | [제5조 제3항 안내][E666] | confirmed |
+| `art8-2`: 계약금액 초과 청구의 원칙적 금지와 예외 | **제8조 제2항** 일치. 고객 책임에 따른 산정사항 변경과 변경 시 사전 고지가 필요 | [제8조 제2항 안내][E666] | confirmed |
+| `art8-3`: 정당한 금액 외 수고비 등 추가청구 금지 | **제8조 제3항** 일치 | [공개 전문][TERMS] | confirmed |
+
+기존 네 카드의 조항 번호와 요약 취지에서 오류는 찾지 못했다. 다만 **최신 공정위 원본 전문까지 대조 완료했다는 표시는 아직 할 수 없다.**
+
+## 4. 가격 산정 근거
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 지역·평형·서비스 유형을 함께 구분한 소규모 이사 공개 가격 통계 | unknown | 이번 조사에서 적용 가능한 공공 원자료 URL 확인 못 함 | unknown |
+| 소비자원 조사에서 사용한 소규모 이사 계약금액 범위 | **10만~100만원**, 피해구제 **241건**의 분석 범위. 시장 평균가격이나 추천 예산이 아님 | [한국소비자원 주의보][KCA] | confirmed |
+| 비용에 영향을 주는 조건 | 거리·물량·작업조건·부대서비스·날짜·층수·접근 여건 등 | [생활법령 비용 안내][E666] | confirmed |
+| 현재 입력 조건만으로 개인별 가격을 산정하는 검증된 모델 | 데이터·계수·오차 모두 unknown | 검증 자료 URL unknown | unknown |
+
+**추정: 서비스 판단.** 현재 확보한 근거만으로는 금액을 ‘추정’이라고 붙여 생성하는 것도 부적절하다. 이름만 추정으로 바꿔도 계산 근거는 생기지 않는다.
+
+대신 사용자가 받은 실제 견적을 입력하면 **총액·포함 작업·별도 비용·추가요금 조건**을 비교한다. 향후 가격 예측을 넣으려면 이용 가능한 견적 데이터, 수집 시점·지역·작업조건, 표본 수, 검증 오차를 먼저 확보해야 한다.
+
+## 5. 집 유형별 기본 짐 목록
+
+| 사실 | 수치 | URL | 확인 상태 |
+|---|---|---|---|
+| 공공·업계 공통 원룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 공공·업계 공통 투룸 표준 짐 목록 | 품목·수량 unknown | 확인 가능한 원문 URL unknown | unknown |
+| 원룸의 빌트인 여부가 실제 옮길 짐에 영향을 준다는 업체 설명 | 빌트인 가전·가구가 많아 옮길 짐이 적은 사용자를 별도 안내 | [영구이사 원룸 안내][YG] | confirmed |
+| 집 유형으로 실제 보유 가구·가전과 수량 확정 | 근거 unknown | 표준 목록·분포 자료 URL unknown | unknown |
+
+**추정: 서비스 적용안.** 집 유형별 목록은 **“AI가 만든 확인용 후보 — 표준 목록 근거 없음”**으로 표시한다. 냉장고·세탁기·침대 등 각 후보에 ‘직접 소유 / 빌트인 / 없음’을 확인하고, 확인 전에는 확정 물량에 합산하지 않는다.
+
+## 서비스에서 근거로 쓸 수 있는 것 / 쓰면 안 되는 것
+
+| 구분 | 사용할 수 있는 범위 |
+|---|---|
+| **쓸 수 있는 것** | 표준약관 확인 판본의 서류·기재 항목, 기존 네 참고 조항, 소비자원의 허가·보험·방문견적·상세계약 권고 |
+| **조건부로 쓸 수 있는 것** | 업체가 공개한 차량·인원 구성은 해당 업체 사례로만 사용. 제조사 치수는 해당 차종 계산에만 사용. 공공 업체 목록은 지역·기준일·갱신 주기를 함께 표시 |
+| **쓰면 안 되는 것** | 원룸·투룸만으로 확정한 부피·톤수·인원, 근거 없는 수치 범위·적재계수·가격, 만들어 낸 업체명·평점·순위 |
+| **완료했다고 쓰면 안 되는 것** | 전국 허가·보험 실시간 API 연동, 공정위 최신 원본 전문 대조, 집 유형별 표준 짐 목록 확보 |
+| **남은 확인** | 공정위 원본 첨부와 최신 개정 여부, 지연 배상 상충 내용, 실제 API 엔드포인트·인증·호출 응답, 산정용 실측 자료 |
+
+**추정: 기획서 표현안.**  
+“이사 지킴이는 입력 조건으로 확인용 짐 목록을 만들고, 사용자가 확인한 정보와 공개 근거를 연결해 차량·인원에 대해 업체에 확인할 사항을 제시한다. 견적·계약 서류의 누락과 허가·보험 증빙을 점검하며, 근거가 부족한 수치와 가격은 산정 불가로 표시한다.”
+
+[E666]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=2&cnpClsNo=1&csmSeq=666
+[E629]: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=629
+[E1704]: https://easylaw.go.kr/CSP/CnpClsMain.laf?ccfNo=2&cciNo=3&cnpClsNo=1&csmSeq=1704&popMenu=ov
+[FTC-L]: https://www.ftc.go.kr/www/selectBbsNttList.do?bordCd=201&key=202&pageIndex=6&pageUnit=10&searchCnd=all
+[FTC]: https://www.ftc.go.kr/www/selectBbsNttView.do?key=202&bordCd=201&nttSn=11148
+[TERMS]: https://ydnara.com/yakgwan.html
+[YG]: https://mcygclean.com/mobile/house/room.jsp
+[KIA]: https://www.kia.com/kr/vehicles/bongo3-frozen/price/bongo3-wingbody-manual-gl
+[MIGHTY]: https://stg-www.hyundai.com/ccontents/carmng/CP00000003/mighty-2025-06-spec.pdf
+[KCA]: https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1
+[KCA-C]: https://www.kca.go.kr/smartconsumer/sub.do?cate=00000051&menukey=7714&mode=view&no=1004455170
+[KCA-D]: https://www.kca.go.kr/odr/bj/br/osBjDecisionExamDetW.do?brdId=00000007&dataStts=Y&seq=1001137357
+[PERMIT]: https://www.xn--o39a150b12ef3p.org/
+[D-SN]: https://www.data.go.kr/data/15080667/fileData.do
+[D-GH]: https://www.data.go.kr/data/15128627/fileData.do
+[GG]: https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=A9X70TR23HP30GDP5872933112&infSeq=3
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+```ts
+import { SAMPLE_CONDITIONS, SAMPLE_ITEMS } from "../src/lib/fixtures.ts";
+import type { Conditions, Item, QuoteDraft } from "../src/lib/types.ts";
+import type { QuoteCase, ReplyCase } from "./dataset.ts";
+
+// 모든 사례·금액·상호는 평가용 합성 데이터이며 시장가격의 근거가 아니다.
+// 금지된 파일 및 기존 사례는 열지 않았다. 기존 셋과의 실제 중복 여부는 unknown.
+// 독립 작성 초안이며, 별도 작성자의 peer/review 전이다.
+
+const F = "대형가구" as const;
+const A = "가전" as const;
+const B = "박스·잡화" as const;
+
+function I(
+  id: string,
+  name: string,
+  category: Item["category"],
+  count: number,
+): Item {
+  return { ...SAMPLE_ITEMS[0], id, name, category, count, move: true };
+}
+
+function C(
+  fromFloor: number,
+  fromElevator: Conditions["from"]["elevator"],
+  fromParking: Conditions["from"]["parkingFar"],
+  toFloor: number,
+  toElevator: Conditions["to"]["elevator"],
+  toParking: Conditions["to"]["parkingFar"],
+): Conditions {
+  return {
+    ...SAMPLE_CONDITIONS,
+    from: {
+      floor: fromFloor,
+      elevator: fromElevator,
+      parkingFar: fromParking,
+    },
+    to: {
+      floor: toFloor,
+      elevator: toElevator,
+      parkingFar: toParking,
+    },
+    ladderNeeded: "모름",
+  };
+}
+
+function D(patch: Partial<QuoteDraft>): QuoteDraft {
+  return {
+    company: null,
+    totalAmount: null,
+    deposit: null,
+    moveDate: null,
+    truck: null,
+    workers: null,
+    ladder: "미기재",
+    stairsNote: null,
+    listedItems: [],
+    blanketPhrases: [],
+    extraFeeClauses: [],
+    unreadable: [],
+    ...patch,
+  };
+}
+
+export const QUOTES: QuoteCase[] = [
+  {
+    id: "H01",
+    trait: "투룸 일반이사·쉼표 금액·계약금 10%·깔끔한 확정 견적",
+    text: `[가상별조각익스프레스]
+11월 6일 오전 8시 / 투룸 일반이사
+차량 2.5톤 1대, 작업 인원 3명
+침대 1개, 양문형 냉장고 1대, 식탁 1개, 박스 12개 운송 포함
+총액 380,000원
+계약금 10%인 38,000원 / 잔금 342,000원
+추가 비용 없음`,
+    items: [
+      I("h01-1", "침대", F, 1),
+      I("h01-2", "양문형 냉장고", A, 1),
+      I("h01-3", "식탁", F, 1),
+      I("h01-4", "이삿짐 박스", B, 12),
+    ],
+    cond: C(1, "없음", "없음", 6, "있음", "없음"),
+    gold: D({
+      company: "가상별조각익스프레스",
+      totalAmount: 380000,
+      deposit: 38000,
+      moveDate: "11월 6일 오전 8시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "침대", quote: "침대 1개" },
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+        { name: "식탁", quote: "식탁 1개" },
+        { name: "박스", quote: "박스 12개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-침대", "item-냉장고", "item-식탁", "item-박스",
+      "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H02",
+    trait: "반포장·2층 계단·양문형 냉장고 별도·한글 금액",
+    text: `가상달구슬용달 입니다 🙂
+11월 7일 오후 1시 반포장
+1톤 2대 / 작업자 2명
+침대 1개랑 박스 8개 포함이구요
+양문형 냉장고 1대는 문짝 탈거 필요하면 별도예요.
+출발 2층 계단 작업비는 당일 확인
+총 삼십팔만원, 계약금 십만원`,
+    items: [
+      I("h02-1", "침대", F, 1),
+      I("h02-2", "양문형 냉장고", A, 1),
+      I("h02-3", "박스", B, 8),
+    ],
+    cond: C(2, "없음", "없음", 4, "있음", "없음"),
+    gold: D({
+      company: "가상달구슬용달",
+      totalAmount: 380000,
+      deposit: 100000,
+      moveDate: "11월 7일 오후 1시",
+      truck: "1톤 2대",
+      workers: 2,
+      stairsNote: "출발 2층 계단 작업비는 당일 확인",
+      listedItems: [
+        { name: "침대", quote: "침대 1개" },
+        { name: "박스", quote: "박스 8개" },
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+      ],
+      extraFeeClauses: [
+        "양문형 냉장고 1대는 문짝 탈거 필요하면 별도예요.",
+        "출발 2층 계단 작업비는 당일 확인",
+      ],
+    }),
+    explicit: ["item-침대", "item-박스", "truck", "workers"],
+    need: ["item-냉장고", "stairs-from", "fee"],
+  },
+  {
+    id: "H03",
+    trait: "쓰리룸 포장이사·에어컨 이전설치 미확정·사다리 별도",
+    text: `[가상초록자갈이사] 쓰리룸 포장이사
+11/08 오전 9시
+차량 5톤 1대 / 작업 인원 4명
+소파 1개, 옷장 2개 운송·포장 포함.
+벽걸이 에어컨 1대 이전설치는 기사님과 협의
+사다리차 별도 12만원
+총액 88만 / 계약금 22만`,
+    items: [
+      I("h03-1", "소파", F, 1),
+      I("h03-2", "옷장", F, 2),
+      I("h03-3", "벽걸이 에어컨", A, 1),
+    ],
+    cond: C(3, "없음", "없음", 5, "있음", "없음"),
+    gold: D({
+      company: "가상초록자갈이사",
+      totalAmount: 880000,
+      deposit: 220000,
+      moveDate: "11/08 오전 9시",
+      truck: "5톤 1대",
+      workers: 4,
+      ladder: "별도",
+      listedItems: [
+        { name: "소파", quote: "소파 1개" },
+        { name: "옷장", quote: "옷장 2개" },
+        { name: "에어컨", quote: "벽걸이 에어컨 1대" },
+      ],
+      extraFeeClauses: ["사다리차 별도 12만원"],
+    }),
+    explicit: ["item-소파", "item-옷장", "truck", "workers"],
+    need: ["item-에어컨", "stairs-from", "ladder", "fee"],
+  },
+  {
+    id: "H04",
+    trait: "업라이트 피아노·안마의자·특수품 비용 구분",
+    text: `가상노을단추익스프레스 견적서
+이사일 11월 9일 10시
+2.5톤 1대, 작업 인원 3명
+업라이트 피아노 1대 운송 포함
+안마의자 1대는 중량 확인 후 운임 별도
+총액 64만원 / 계약금 0원
+특수품 추가 작업비는 현장에서 안내드려요.`,
+    items: [
+      I("h04-1", "업라이트 피아노", F, 1),
+      I("h04-2", "안마의자", F, 1),
+      I("h04-3", "책장", F, 1),
+    ],
+    cond: C(1, "없음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상노을단추익스프레스",
+      totalAmount: 640000,
+      deposit: 0,
+      moveDate: "11월 9일 10시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "업라이트 피아노", quote: "업라이트 피아노 1대" },
+        { name: "안마의자", quote: "안마의자 1대" },
+      ],
+      extraFeeClauses: [
+        "안마의자 1대는 중량 확인 후 운임 별도",
+        "특수품 추가 작업비는 현장에서 안내드려요.",
+      ],
+    }),
+    explicit: ["item-업라이트피아노", "truck", "workers"],
+    need: ["item-안마의자", "item-책장", "fee"],
+  },
+  {
+    id: "H05",
+    trait: "보관이사·운송과 보관 비용 분리·박스와 잡화 통합",
+    text: `[가상구름바늘이사]
+11월 10일 입고, 11월 13일 출고 보관이사
+운송 총액 57만, 계약금 5만7천원
+차량 2.5톤 1대 / 작업 인원 2명
+세탁기 1대, 건조기 1대, 박스 6개, 잡화 바구니 2개 운송 포함
+보관료는 하루 2만원 별도입니다.`,
+    items: [
+      I("h05-1", "세탁기", A, 1),
+      I("h05-2", "건조기", A, 1),
+      I("h05-3", "박스", B, 6),
+      I("h05-4", "잡화 바구니", B, 2),
+    ],
+    cond: C(8, "있음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상구름바늘이사",
+      totalAmount: 570000,
+      deposit: 57000,
+      moveDate: "11월 10일 입고, 11월 13일 출고",
+      truck: "2.5톤 1대",
+      workers: 2,
+      listedItems: [
+        { name: "세탁기", quote: "세탁기 1대" },
+        { name: "건조기", quote: "건조기 1대" },
+        { name: "박스", quote: "박스 6개" },
+        { name: "잡화 바구니", quote: "잡화 바구니 2개" },
+      ],
+      extraFeeClauses: ["보관료는 하루 2만원 별도입니다."],
+    }),
+    explicit: [
+      "item-세탁기", "item-건조기", "item-박스", "truck", "workers",
+    ],
+    need: ["fee"],
+  },
+  {
+    id: "H06",
+    trait: "엘리베이터 사용료 별도·양쪽 장거리 운반·차량 미기재",
+    text: `가상파도연필용달이에요~
+11월 11일 낮 12시
+책상 2개 / 의자 2개 / 모니터 2대 운송 포함
+작업 인원은 2명입니다
+총 29만원, 계약금 3만원
+엘베 사용료는 관리실에 직접 납부해주세요.
+주차장부터 집까지 운반비는 거리 보고 협의요`,
+    items: [
+      I("h06-1", "책상", F, 2),
+      I("h06-2", "의자", F, 2),
+      I("h06-3", "모니터", A, 2),
+    ],
+    cond: C(7, "있음", "있음", 9, "있음", "있음"),
+    gold: D({
+      company: "가상파도연필용달",
+      totalAmount: 290000,
+      deposit: 30000,
+      moveDate: "11월 11일 낮 12시",
+      workers: 2,
+      listedItems: [
+        { name: "책상", quote: "책상 2개" },
+        { name: "의자", quote: "의자 2개" },
+        { name: "모니터", quote: "모니터 2대" },
+      ],
+      extraFeeClauses: [
+        "엘베 사용료는 관리실에 직접 납부해주세요.",
+        "주차장부터 집까지 운반비는 거리 보고 협의요",
+      ],
+    }),
+    explicit: ["item-책상", "item-의자", "item-모니터", "workers"],
+    need: ["carry-from", "carry-to", "truck", "fee"],
+  },
+  {
+    id: "H07",
+    trait: "오후 할증 포함·도착 계단 포함·포장 범위 명시",
+    text: `[가상햇살종이이사] 반포장 확정
+11월 12일 오후 4시
+1톤 1대 / 작업 인원 2명
+행거 2개, 전자레인지 1대, 박스 9개 포함
+도착 2층 계단 작업 포함
+출발 주차장부터 현관까지 70m 운반 포함
+오후 할증까지 포함한 총액 38만
+계약금 19만
+추가 비용 없음`,
+    items: [
+      I("h07-1", "행거", F, 2),
+      I("h07-2", "전자레인지", A, 1),
+      I("h07-3", "박스", B, 9),
+    ],
+    cond: C(1, "없음", "있음", 2, "없음", "없음"),
+    gold: D({
+      company: "가상햇살종이이사",
+      totalAmount: 380000,
+      deposit: 190000,
+      moveDate: "11월 12일 오후 4시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "도착 2층 계단 작업 포함",
+      listedItems: [
+        { name: "행거", quote: "행거 2개" },
+        { name: "전자레인지", quote: "전자레인지 1대" },
+        { name: "박스", quote: "박스 9개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-행거", "item-전자레인지", "item-박스",
+      "stairs-to", "carry-from", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H08",
+    trait: "주말 할증 미확정·인원 미기재·포괄 문구",
+    text: `가상보라우체통익스프레스
+11월 14일 오전
+투룸 짐 전체 반포장으로 잡았어요.
+차는 2.5톤 1대
+기본 총액 46만원 / 계약금 46,000원
+주말 할증은 배차 후 알려드릴께요 ^^`,
+    items: [
+      I("h08-1", "침대", F, 1),
+      I("h08-2", "냉장고", A, 1),
+      I("h08-3", "옷장", F, 1),
+      I("h08-4", "박스", B, 10),
+    ],
+    cond: C(4, "있음", "없음", 5, "모름", "없음"),
+    gold: D({
+      company: "가상보라우체통익스프레스",
+      totalAmount: 460000,
+      deposit: 46000,
+      moveDate: "11월 14일 오전",
+      truck: "2.5톤 1대",
+      blanketPhrases: ["투룸 짐 전체"],
+      extraFeeClauses: ["주말 할증은 배차 후 알려드릴께요 ^^"],
+    }),
+    explicit: ["truck"],
+    need: [
+      "item-침대", "item-냉장고", "item-옷장", "item-박스",
+      "stairs-to", "ladder", "workers", "fee",
+    ],
+  },
+  {
+    id: "H09",
+    trait: "가구와 박스 수량 불일치·견적 외 물품 추가",
+    text: `[가상모래시계용달] 일반이사
+11/15 09:30
+1톤 1대, 작업 인원 2명
+책장 1개, 책상 1개, 박스 5개 포함
+총액 31만 / 계약금 62,000원
+견적 외 물품 추가 시 별도`,
+    items: [
+      I("h09-1", "책장", F, 2),
+      I("h09-2", "책상", F, 1),
+      I("h09-3", "박스", B, 7),
+    ],
+    cond: C(1, "없음", "없음", 2, "있음", "없음"),
+    gold: D({
+      company: "가상모래시계용달",
+      totalAmount: 310000,
+      deposit: 62000,
+      moveDate: "11/15 09:30",
+      truck: "1톤 1대",
+      workers: 2,
+      listedItems: [
+        { name: "책장", quote: "책장 1개" },
+        { name: "책상", quote: "책상 1개" },
+        { name: "박스", quote: "박스 5개" },
+      ],
+      extraFeeClauses: ["견적 외 물품 추가 시 별도"],
+    }),
+    explicit: ["item-책상", "truck", "workers"],
+    need: ["item-책장", "item-박스", "fee"],
+  },
+  {
+    id: "H10",
+    trait: "완비 견적·TV 정규화·양쪽 계단과 사다리 포함",
+    text: `가상은빛도토리이사 / 포장이사
+11월 16일 오전 8시 30분
+차량 2.5톤 1대, 작업 인원 3명
+매트리스 1개, TV 1대, 티비선반 1개, 박스 10개 포함
+출발 3층과 도착 4층 계단 작업 모두 포함
+사다리차 비용 포함
+도착지 골목 입구부터 90m 운반 포함
+총액 720,000원 / 계약금 72,000원
+추가 비용 없음`,
+    items: [
+      I("h10-1", "매트리스", F, 1),
+      I("h10-2", "TV", A, 1),
+      I("h10-3", "티비선반", F, 1),
+      I("h10-4", "박스", B, 10),
+    ],
+    cond: C(3, "없음", "없음", 4, "없음", "있음"),
+    gold: D({
+      company: "가상은빛도토리이사",
+      totalAmount: 720000,
+      deposit: 72000,
+      moveDate: "11월 16일 오전 8시 30분",
+      truck: "2.5톤 1대",
+      workers: 3,
+      ladder: "포함",
+      stairsNote: "출발 3층과 도착 4층 계단 작업 모두 포함",
+      listedItems: [
+        { name: "매트리스", quote: "매트리스 1개" },
+        { name: "텔레비전", quote: "TV 1대" },
+        { name: "티비선반", quote: "티비선반 1개" },
+        { name: "박스", quote: "박스 10개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-매트리스", "item-텔레비전", "item-티비선반", "item-박스",
+      "stairs-from", "stairs-to", "ladder", "carry-to",
+      "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H11",
+    trait: "지하 출발·주차 곤란·계단만 확정·장거리 운반 미확정",
+    text: `가상물결단풍용달 견적 보내요
+11월 17일 오전 10시
+차량 1톤 1대 / 작업 인원 2명
+소파 1개, 세탁기 1대 포함
+출발 지하 1층 계단 작업 포함
+골목 주차가 안되면 운반비 별도입니다
+총액 34만, 계약금 5만`,
+    items: [
+      I("h11-1", "소파", F, 1),
+      I("h11-2", "세탁기", A, 1),
+      I("h11-3", "박스", B, 4),
+    ],
+    cond: C(-1, "없음", "있음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상물결단풍용달",
+      totalAmount: 340000,
+      deposit: 50000,
+      moveDate: "11월 17일 오전 10시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "출발 지하 1층 계단 작업 포함",
+      listedItems: [
+        { name: "소파", quote: "소파 1개" },
+        { name: "세탁기", quote: "세탁기 1대" },
+      ],
+      extraFeeClauses: ["골목 주차가 안되면 운반비 별도입니다"],
+    }),
+    explicit: [
+      "item-소파", "item-세탁기", "stairs-from", "truck", "workers",
+    ],
+    need: ["item-박스", "carry-from", "fee"],
+  },
+  {
+    id: "H12",
+    trait: "엘리베이터 모름·인력 별도·계약금 없이 예약",
+    text: `[가상자주나침반이사]
+11월 18일 오후 2시 / 일반
+냉장고 1대, 전자레인지 1대 운송 포함
+차량 1톤 1대
+총액 26만 / 계약금 없이 예약
+상하차 인력은 별도 섭외이고 인원수 미정입니다.
+계단 작업은 현장 보고 결정해요.`,
+    items: [
+      I("h12-1", "냉장고", A, 1),
+      I("h12-2", "전자레인지", A, 1),
+    ],
+    cond: C(4, "모름", "없음", 2, "모름", "없음"),
+    gold: D({
+      company: "가상자주나침반이사",
+      totalAmount: 260000,
+      deposit: 0,
+      moveDate: "11월 18일 오후 2시",
+      truck: "1톤 1대",
+      stairsNote: "계단 작업은 현장 보고 결정해요.",
+      listedItems: [
+        { name: "냉장고", quote: "냉장고 1대" },
+        { name: "전자레인지", quote: "전자레인지 1대" },
+      ],
+      extraFeeClauses: ["상하차 인력은 별도 섭외이고 인원수 미정입니다."],
+    }),
+    explicit: ["item-냉장고", "item-전자레인지", "truck"],
+    need: ["stairs-from", "stairs-to", "ladder", "workers", "fee"],
+  },
+  {
+    id: "H13",
+    trait: "총액 누락·계약금만 존재·침대와 매트리스 구분",
+    text: `가상새벽구슬익스프레스 입니다.
+11월 19일 09시, 반포장
+2.5톤 1대 / 작업 인원 3명
+침대 프레임 1개, 책장 1개 포함
+매트리스는 이번 견적에서 제외했어요.
+계약금 50,000원
+총액은 방문 후 다시 보내드릴게요.`,
+    items: [
+      I("h13-1", "침대 프레임", F, 1),
+      I("h13-2", "매트리스", F, 1),
+      I("h13-3", "책장", F, 1),
+    ],
+    cond: C(2, "있음", "없음", 3, "있음", "없음"),
+    gold: D({
+      company: "가상새벽구슬익스프레스",
+      deposit: 50000,
+      moveDate: "11월 19일 09시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "침대", quote: "침대 프레임 1개" },
+        { name: "책장", quote: "책장 1개" },
+        { name: "매트리스", quote: "매트리스" },
+      ],
+    }),
+    explicit: ["item-침대", "item-책장", "truck", "workers"],
+    need: ["item-매트리스", "fee", "total"],
+  },
+  {
+    id: "H14",
+    trait: "보관료·에어컨 이전설치 포함·깔끔한 한글 총액",
+    text: `[가상하늘실타래이사] 보관이사 확정서
+11월 20일 입고, 11월 22일 출고
+차량 2.5톤 1대 / 작업 인원 3명
+옷장 1개, 벽걸이 에어컨 1대, 박스 14개 포함
+에어컨 철거·운송·재설치와 배관 5m 비용 모두 포함
+2일 보관료와 입출고 운송료 포함한 총액 팔십만원
+계약금 이십사만원
+추가 비용 없음`,
+    items: [
+      I("h14-1", "옷장", F, 1),
+      I("h14-2", "벽걸이 에어컨", A, 1),
+      I("h14-3", "박스", B, 14),
+    ],
+    cond: C(6, "있음", "없음", 7, "있음", "없음"),
+    gold: D({
+      company: "가상하늘실타래이사",
+      totalAmount: 800000,
+      deposit: 240000,
+      moveDate: "11월 20일 입고, 11월 22일 출고",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "옷장", quote: "옷장 1개" },
+        { name: "에어컨", quote: "벽걸이 에어컨 1대" },
+        { name: "박스", quote: "박스 14개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-옷장", "item-에어컨", "item-박스", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H15",
+    trait: "품목 다음 줄의 전역 조건·약식 문구·수량은 일치",
+    text: `가상주황돛단배용달
+11/21 오후 3시 일반이사
+1톤 1대 / 작업 인원 2명
+운송 목록: 식탁 1개, 의자 4개, 모니터 1대
+※ 위 물품 전부 고객님이 1층에 내려놓는 조건임니다.
+총액 24만 / 계약금 2만4천
+계단 운반 요청 시 추가요금 협의`,
+    items: [
+      I("h15-1", "식탁", F, 1),
+      I("h15-2", "의자", F, 4),
+      I("h15-3", "모니터", A, 1),
+    ],
+    cond: C(2, "없음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상주황돛단배용달",
+      totalAmount: 240000,
+      deposit: 24000,
+      moveDate: "11/21 오후 3시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "계단 운반 요청 시 추가요금 협의",
+      listedItems: [
+        { name: "식탁", quote: "식탁 1개" },
+        { name: "의자", quote: "의자 4개" },
+        { name: "모니터", quote: "모니터 1대" },
+      ],
+      extraFeeClauses: ["계단 운반 요청 시 추가요금 협의"],
+    }),
+    explicit: ["truck", "workers"],
+    need: [
+      "item-식탁", "item-의자", "item-모니터", "stairs-from", "fee",
+    ],
+  },
+  {
+    id: "H16",
+    trait: "특수품 확정·주말 할증 포함·주차 장거리 운반 포함",
+    text: `[가상민트조약돌익스프레스]
+11월 22일 오전 9시 포장이사
+차량 2.5톤 1대, 작업 인원 3명
+안마의자 1대, 디지털 피아노 1대, 소파 1개 모두 운송 포함
+도착 주차 위치부터 건물까지 120m 운반 포함
+주말 할증 포함 총액 69만원
+계약금 345,000원
+추가 비용 없음`,
+    items: [
+      I("h16-1", "안마의자", F, 1),
+      I("h16-2", "디지털 피아노", F, 1),
+      I("h16-3", "소파", F, 1),
+    ],
+    cond: C(5, "있음", "없음", 8, "있음", "있음"),
+    gold: D({
+      company: "가상민트조약돌익스프레스",
+      totalAmount: 690000,
+      deposit: 345000,
+      moveDate: "11월 22일 오전 9시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "안마의자", quote: "안마의자 1대" },
+        { name: "디지털 피아노", quote: "디지털 피아노 1대" },
+        { name: "소파", quote: "소파 1개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-안마의자", "item-디지털피아노", "item-소파",
+      "carry-to", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H17",
+    trait: "최소 정보 문자·총액만 명시·추가비 문구도 없음",
+    text: `가상밤하늘종이용달 입니다
+보내주신 사진 확인했어요 🙂
+이사는 총 38만이에요. 예약 원하시면 답장주세요!`,
+    items: [
+      I("h17-1", "책상", F, 1),
+      I("h17-2", "행거", F, 1),
+      I("h17-3", "박스", B, 5),
+    ],
+    cond: C(1, "없음", "없음", 2, "있음", "없음"),
+    gold: D({
+      company: "가상밤하늘종이용달",
+      totalAmount: 380000,
+    }),
+    explicit: [],
+    need: [
+      "item-책상", "item-행거", "item-박스", "truck", "workers", "fee",
+    ],
+  },
+  {
+    id: "H18",
+    trait: "사다리 언급만으로 카드 생성·엘리베이터 있음·차량 조건부",
+    text: `[가상분홍나뭇잎이사] 투룸 반포장
+11월 24일 오전 10시
+차량은 1톤 2대 예정, 배차 사정에 따라 변경
+작업 인원 3명
+양문형 냉장고 1대, 건조기 1대, 옷장 1개 포함
+사다리차 필요 시 비용 별도
+총액 53만 / 계약금 159,000원`,
+    items: [
+      I("h18-1", "양문형 냉장고", A, 1),
+      I("h18-2", "건조기", A, 1),
+      I("h18-3", "옷장", F, 1),
+    ],
+    cond: C(10, "있음", "없음", 12, "있음", "없음"),
+    gold: D({
+      company: "가상분홍나뭇잎이사",
+      totalAmount: 530000,
+      deposit: 159000,
+      moveDate: "11월 24일 오전 10시",
+      truck: "1톤 2대",
+      workers: 3,
+      ladder: "별도",
+      listedItems: [
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+        { name: "건조기", quote: "건조기 1대" },
+        { name: "옷장", quote: "옷장 1개" },
+      ],
+      extraFeeClauses: ["사다리차 필요 시 비용 별도"],
+    }),
+    explicit: ["item-냉장고", "item-건조기", "item-옷장", "workers"],
+    need: ["ladder", "truck", "fee"],
+  },
+  {
+    id: "H19",
+    trait: "쓰리룸 포괄 문구와 개별 품목 혼합·오후 할증 별도",
+    text: `가상푸른책갈피익스프레스 견적 알림
+11월 25일 오후 5시 / 쓰리룸 포장이사
+차량 5톤 1대 / 작업 인원 4명
+쓰리룸 가재도구 일체
+세부 확인: 침대 2개, 텔레비전 1대 포함
+총액 92만원, 계약금 92,000원
+오후 작업 할증 8만원은 별도 청구됩니다.`,
+    items: [
+      I("h19-1", "침대", F, 2),
+      I("h19-2", "텔레비전", A, 1),
+      I("h19-3", "식탁", F, 1),
+      I("h19-4", "박스", B, 18),
+    ],
+    cond: C(11, "있음", "없음", 6, "있음", "없음"),
+    gold: D({
+      company: "가상푸른책갈피익스프레스",
+      totalAmount: 920000,
+      deposit: 92000,
+      moveDate: "11월 25일 오후 5시",
+      truck: "5톤 1대",
+      workers: 4,
+      listedItems: [
+        { name: "침대", quote: "침대 2개" },
+        { name: "텔레비전", quote: "텔레비전 1대" },
+      ],
+      blanketPhrases: ["쓰리룸 가재도구 일체"],
+      extraFeeClauses: ["오후 작업 할증 8만원은 별도 청구됩니다."],
+    }),
+    explicit: ["item-침대", "item-텔레비전", "truck", "workers"],
+    need: ["item-식탁", "item-박스", "fee"],
+  },
+  {
+    id: "H20",
+    trait: "도착 지하·계단 제외·짐 수량 차이·주차 운반비 별도",
+    text: `[가상연두풍경용달] 일반이사
+11월 26일 오전 11시
+차량 1톤 1대 / 작업 인원 1명
+세탁기 1대와 박스 3개 운송 포함
+도착 지하 1층 계단 작업은 제외입니다.
+출발지 주차가 멀어 장거리 운반비 3만원 별도
+총액 21만원 / 계약금 7만원`,
+    items: [
+      I("h20-1", "세탁기", A, 1),
+      I("h20-2", "박스", B, 6),
+      I("h20-3", "전자레인지", A, 1),
+    ],
+    cond: C(1, "없음", "있음", -1, "없음", "없음"),
+    gold: D({
+      company: "가상연두풍경용달",
+      totalAmount: 210000,
+      deposit: 70000,
+      moveDate: "11월 26일 오전 11시",
+      truck: "1톤 1대",
+      workers: 1,
+      stairsNote: "도착 지하 1층 계단 작업은 제외입니다.",
+      listedItems: [
+        { name: "세탁기", quote: "세탁기 1대" },
+        { name: "박스", quote: "박스 3개" },
+      ],
+      extraFeeClauses: [
+        "출발지 주차가 멀어 장거리 운반비 3만원 별도",
+      ],
+    }),
+    explicit: ["item-세탁기", "truck", "workers"],
+    need: [
+      "item-박스", "item-전자레인지", "stairs-to", "carry-from", "fee",
+    ],
+  },
+];
+
+export const REPLIES: ReplyCase[] = [
+  {
+    id: "HR01",
+    quoteId: "H01",
+    type: "무관",
+    text: "예약하시면 전날 기사님 연락처 보내드릴게요 🙂",
+    allowed: [],
+  },
+  {
+    id: "HR02",
+    quoteId: "H02",
+    type: "명시적 포함",
+    text: "양문형 냉장고 1대는 문짝 탈거가 필요해도 총액에 포함입니다. 출발 2층 계단 작업도 총액에 포함이에요.",
+    allowed: ["item-냉장고", "stairs-from"],
+  },
+  {
+    id: "HR03",
+    quoteId: "H03",
+    type: "조건부",
+    text: "에어컨 1대는 기존 배관 그대로 쓸 수 있을 때만 철거랑 재설치까지 포함됩니다.",
+    allowed: [],
+  },
+  {
+    id: "HR04",
+    quoteId: "H04",
+    type: "금액 제시",
+    text: "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+    allowed: [],
+  },
+  {
+    id: "HR05",
+    quoteId: "H05",
+    type: "제외·별도",
+    text: "57만원에 보관료는 안 들어가요. 입고일부터 출고일까지 보관료 따로 받습니다.",
+    allowed: [],
+  },
+  {
+    id: "HR06",
+    quoteId: "H06",
+    type: "명시적 포함",
+    text: "차량은 1톤 2대로 확정이고 총액에 포함입니다. 출발 주차장에서 집까지 운반, 도착 주차장에서 집까지 운반도 거리와 관계없이 둘 다 총액에 포함합니다. 엘베 사용료는 안내드린 대로 별도예요.",
+    allowed: ["truck", "carry-from", "carry-to"],
+  },
+  {
+    id: "HR07",
+    quoteId: "H07",
+    type: "무관",
+    text: "계약금 보내신 뒤 입금자 성함만 알려주세용.",
+    allowed: [],
+  },
+  {
+    id: "HR08",
+    quoteId: "H08",
+    type: "얼버무림",
+    text: "저희 투룸 많이 해봐서 다 알아서 해드려요 ㅎㅎ 걱정마세요.",
+    allowed: [],
+  },
+  {
+    id: "HR09",
+    quoteId: "H09",
+    type: "명시적 포함",
+    text: "확인했습니다. 책장 2개와 박스 7개 모두 기존 총액 31만원에 포함으로 정정합니다. 그 밖의 물품을 추가하면 별도인 조건은 그대로예요.",
+    allowed: ["item-책장", "item-박스"],
+  },
+  {
+    id: "HR10",
+    quoteId: "H10",
+    type: "무관",
+    text: "도착 아파트 동 번호가 몇 동인가요?",
+    allowed: [],
+  },
+  {
+    id: "HR11",
+    quoteId: "H11",
+    type: "조건부",
+    text: "박스 4개는 가로세로높이 합 120cm 이하일 때만 포함이고, 출발지 운반은 차를 골목 안에 댈 수 있으면 포함입니다.",
+    allowed: [],
+  },
+  {
+    id: "HR12",
+    quoteId: "H12",
+    type: "얼버무림",
+    text: "출발 4층에 엘베가 있다는 말씀이실까요? 도착 2층은 계단 몇 칸인지 먼저 알려주세요.",
+    allowed: [],
+  },
+  {
+    id: "HR13",
+    quoteId: "H13",
+    type: "명시적 포함",
+    text: "제외라고 쓴 건 제가 잘못 적었습니다. 매트리스 1개도 운송 총액에 포함합니다. 최종 총액은 방문 후 안내드릴게요.",
+    allowed: ["item-매트리스"],
+  },
+  {
+    id: "HR14",
+    quoteId: "H14",
+    type: "무관",
+    text: "보관 창고 입고 사진은 입고 완료되면 보내드려요.",
+    allowed: [],
+  },
+  {
+    id: "HR15",
+    quoteId: "H15",
+    type: "명시적 포함",
+    text: "고객님이 1층에 내려놓는 조건은 삭제하겠습니다. 식탁 1개, 의자 4개, 모니터 1대 운송과 출발 2층 계단 작업 모두 기존 총액에 포함합니다. 추가 비용 없음으로 확정합니다.",
+    allowed: [
+      "item-식탁", "item-의자", "item-모니터", "stairs-from", "fee",
+    ],
+  },
+  {
+    id: "HR16",
+    quoteId: "H16",
+    type: "무관",
+    text: "안마의자 리모컨은 분실되지 않게 따로 챙겨주세요.",
+    allowed: [],
+  },
+  {
+    id: "HR17",
+    quoteId: "H17",
+    type: "명시적 포함",
+    text: "책상 1개, 행거 1개, 박스 5개 운송 포함입니다. 차량 1톤 1대와 작업 인원 2명도 총액 38만원에 포함이에요. 추가 비용 없음입니다.",
+    allowed: [
+      "item-책상", "item-행거", "item-박스", "truck", "workers", "fee",
+    ],
+  },
+  {
+    id: "HR18",
+    quoteId: "H18",
+    type: "제외·별도",
+    text: "사다리차는 53만원에 포함 안 됩니다. 필요하시면 장비 업체 비용 따로 내셔야 해요.",
+    allowed: [],
+  },
+  {
+    id: "HR19",
+    quoteId: "H19",
+    type: "얼버무림",
+    text: "식탁 크기가 어떻게 되죠? 박스는 직접 포장하시는 건가요? 확인하고 말씀드릴게요.",
+    allowed: [],
+  },
+  {
+    id: "HR20",
+    quoteId: "H20",
+    type: "금액 제시",
+    text: "박스 3개 더는 2만원, 전자레인지는 1만원, 지하 계단은 4만원입니다. 출발지 장거리 운반비는 말씀드린 3만원이에요.",
+    allowed: [],
+  },
+];
+```
+
+1. 전부 합성 사례이며 금액은 시장가격 추정치가 아니다. 기존 셋과의 실제 중복 여부는 **unknown**이다.
+2. `gold`는 원문 값만 기록했다. 명확한 계약금 없음은 `0`, 미기재는 `null`이며 별도 비용을 총액에 더하지 않았다.
+3. 품목의 조건 없는 기재와 수량 일치를 `explicit`으로, 제외·조건부·수량 불일치·누락을 `need`로 분류했다.
+4. 대표 품목명을 정규화하고, 박스와 잡화는 `item-박스`로 합쳤으며 특수품은 공백을 제거했다.
+5. 계단 카드는 2층 이상 또는 지하이면서 엘리베이터가 없거나 모를 때만 부여했다.
+6. 사다리 카드는 3층 이상에서 엘리베이터가 없거나 모르는 경우 또는 원문에 사다리가 언급된 경우 부여했다.
+7. 장거리 운반 카드는 해당 방향의 `parkingFar`가 `있음`인 경우에만 부여했다.
+8. 추가비 관련 문구는 `fee` 하나로 묶었다. 문구가 없어도 `need`이며, 조건 없는 추가 비용 없음만 `explicit`이다.
+9. 답변의 금액 제시·조건부·제외·되묻기에는 승격을 허용하지 않았다. 되묻기는 지정된 유형 중 `얼버무림` 또는 내용에 따라 `무관`으로 분류했다.
+10. 상세 품목·작업조건·비용 확인 취지는 [한국소비자원 자료](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1)를 참고했다. 독립 peer/review와 TypeScript 실행 검증은 미실시다.
+hook: Stop
+hook: Stop Completed
+tokens used
+28,874
+```ts
+import { SAMPLE_CONDITIONS, SAMPLE_ITEMS } from "../src/lib/fixtures.ts";
+import type { Conditions, Item, QuoteDraft } from "../src/lib/types.ts";
+import type { QuoteCase, ReplyCase } from "./dataset.ts";
+
+// 모든 사례·금액·상호는 평가용 합성 데이터이며 시장가격의 근거가 아니다.
+// 금지된 파일 및 기존 사례는 열지 않았다. 기존 셋과의 실제 중복 여부는 unknown.
+// 독립 작성 초안이며, 별도 작성자의 peer/review 전이다.
+
+const F = "대형가구" as const;
+const A = "가전" as const;
+const B = "박스·잡화" as const;
+
+function I(
+  id: string,
+  name: string,
+  category: Item["category"],
+  count: number,
+): Item {
+  return { ...SAMPLE_ITEMS[0], id, name, category, count, move: true };
+}
+
+function C(
+  fromFloor: number,
+  fromElevator: Conditions["from"]["elevator"],
+  fromParking: Conditions["from"]["parkingFar"],
+  toFloor: number,
+  toElevator: Conditions["to"]["elevator"],
+  toParking: Conditions["to"]["parkingFar"],
+): Conditions {
+  return {
+    ...SAMPLE_CONDITIONS,
+    from: {
+      floor: fromFloor,
+      elevator: fromElevator,
+      parkingFar: fromParking,
+    },
+    to: {
+      floor: toFloor,
+      elevator: toElevator,
+      parkingFar: toParking,
+    },
+    ladderNeeded: "모름",
+  };
+}
+
+function D(patch: Partial<QuoteDraft>): QuoteDraft {
+  return {
+    company: null,
+    totalAmount: null,
+    deposit: null,
+    moveDate: null,
+    truck: null,
+    workers: null,
+    ladder: "미기재",
+    stairsNote: null,
+    listedItems: [],
+    blanketPhrases: [],
+    extraFeeClauses: [],
+    unreadable: [],
+    ...patch,
+  };
+}
+
+export const QUOTES: QuoteCase[] = [
+  {
+    id: "H01",
+    trait: "투룸 일반이사·쉼표 금액·계약금 10%·깔끔한 확정 견적",
+    text: `[가상별조각익스프레스]
+11월 6일 오전 8시 / 투룸 일반이사
+차량 2.5톤 1대, 작업 인원 3명
+침대 1개, 양문형 냉장고 1대, 식탁 1개, 박스 12개 운송 포함
+총액 380,000원
+계약금 10%인 38,000원 / 잔금 342,000원
+추가 비용 없음`,
+    items: [
+      I("h01-1", "침대", F, 1),
+      I("h01-2", "양문형 냉장고", A, 1),
+      I("h01-3", "식탁", F, 1),
+      I("h01-4", "이삿짐 박스", B, 12),
+    ],
+    cond: C(1, "없음", "없음", 6, "있음", "없음"),
+    gold: D({
+      company: "가상별조각익스프레스",
+      totalAmount: 380000,
+      deposit: 38000,
+      moveDate: "11월 6일 오전 8시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "침대", quote: "침대 1개" },
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+        { name: "식탁", quote: "식탁 1개" },
+        { name: "박스", quote: "박스 12개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-침대", "item-냉장고", "item-식탁", "item-박스",
+      "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H02",
+    trait: "반포장·2층 계단·양문형 냉장고 별도·한글 금액",
+    text: `가상달구슬용달 입니다 🙂
+11월 7일 오후 1시 반포장
+1톤 2대 / 작업자 2명
+침대 1개랑 박스 8개 포함이구요
+양문형 냉장고 1대는 문짝 탈거 필요하면 별도예요.
+출발 2층 계단 작업비는 당일 확인
+총 삼십팔만원, 계약금 십만원`,
+    items: [
+      I("h02-1", "침대", F, 1),
+      I("h02-2", "양문형 냉장고", A, 1),
+      I("h02-3", "박스", B, 8),
+    ],
+    cond: C(2, "없음", "없음", 4, "있음", "없음"),
+    gold: D({
+      company: "가상달구슬용달",
+      totalAmount: 380000,
+      deposit: 100000,
+      moveDate: "11월 7일 오후 1시",
+      truck: "1톤 2대",
+      workers: 2,
+      stairsNote: "출발 2층 계단 작업비는 당일 확인",
+      listedItems: [
+        { name: "침대", quote: "침대 1개" },
+        { name: "박스", quote: "박스 8개" },
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+      ],
+      extraFeeClauses: [
+        "양문형 냉장고 1대는 문짝 탈거 필요하면 별도예요.",
+        "출발 2층 계단 작업비는 당일 확인",
+      ],
+    }),
+    explicit: ["item-침대", "item-박스", "truck", "workers"],
+    need: ["item-냉장고", "stairs-from", "fee"],
+  },
+  {
+    id: "H03",
+    trait: "쓰리룸 포장이사·에어컨 이전설치 미확정·사다리 별도",
+    text: `[가상초록자갈이사] 쓰리룸 포장이사
+11/08 오전 9시
+차량 5톤 1대 / 작업 인원 4명
+소파 1개, 옷장 2개 운송·포장 포함.
+벽걸이 에어컨 1대 이전설치는 기사님과 협의
+사다리차 별도 12만원
+총액 88만 / 계약금 22만`,
+    items: [
+      I("h03-1", "소파", F, 1),
+      I("h03-2", "옷장", F, 2),
+      I("h03-3", "벽걸이 에어컨", A, 1),
+    ],
+    cond: C(3, "없음", "없음", 5, "있음", "없음"),
+    gold: D({
+      company: "가상초록자갈이사",
+      totalAmount: 880000,
+      deposit: 220000,
+      moveDate: "11/08 오전 9시",
+      truck: "5톤 1대",
+      workers: 4,
+      ladder: "별도",
+      listedItems: [
+        { name: "소파", quote: "소파 1개" },
+        { name: "옷장", quote: "옷장 2개" },
+        { name: "에어컨", quote: "벽걸이 에어컨 1대" },
+      ],
+      extraFeeClauses: ["사다리차 별도 12만원"],
+    }),
+    explicit: ["item-소파", "item-옷장", "truck", "workers"],
+    need: ["item-에어컨", "stairs-from", "ladder", "fee"],
+  },
+  {
+    id: "H04",
+    trait: "업라이트 피아노·안마의자·특수품 비용 구분",
+    text: `가상노을단추익스프레스 견적서
+이사일 11월 9일 10시
+2.5톤 1대, 작업 인원 3명
+업라이트 피아노 1대 운송 포함
+안마의자 1대는 중량 확인 후 운임 별도
+총액 64만원 / 계약금 0원
+특수품 추가 작업비는 현장에서 안내드려요.`,
+    items: [
+      I("h04-1", "업라이트 피아노", F, 1),
+      I("h04-2", "안마의자", F, 1),
+      I("h04-3", "책장", F, 1),
+    ],
+    cond: C(1, "없음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상노을단추익스프레스",
+      totalAmount: 640000,
+      deposit: 0,
+      moveDate: "11월 9일 10시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "업라이트 피아노", quote: "업라이트 피아노 1대" },
+        { name: "안마의자", quote: "안마의자 1대" },
+      ],
+      extraFeeClauses: [
+        "안마의자 1대는 중량 확인 후 운임 별도",
+        "특수품 추가 작업비는 현장에서 안내드려요.",
+      ],
+    }),
+    explicit: ["item-업라이트피아노", "truck", "workers"],
+    need: ["item-안마의자", "item-책장", "fee"],
+  },
+  {
+    id: "H05",
+    trait: "보관이사·운송과 보관 비용 분리·박스와 잡화 통합",
+    text: `[가상구름바늘이사]
+11월 10일 입고, 11월 13일 출고 보관이사
+운송 총액 57만, 계약금 5만7천원
+차량 2.5톤 1대 / 작업 인원 2명
+세탁기 1대, 건조기 1대, 박스 6개, 잡화 바구니 2개 운송 포함
+보관료는 하루 2만원 별도입니다.`,
+    items: [
+      I("h05-1", "세탁기", A, 1),
+      I("h05-2", "건조기", A, 1),
+      I("h05-3", "박스", B, 6),
+      I("h05-4", "잡화 바구니", B, 2),
+    ],
+    cond: C(8, "있음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상구름바늘이사",
+      totalAmount: 570000,
+      deposit: 57000,
+      moveDate: "11월 10일 입고, 11월 13일 출고",
+      truck: "2.5톤 1대",
+      workers: 2,
+      listedItems: [
+        { name: "세탁기", quote: "세탁기 1대" },
+        { name: "건조기", quote: "건조기 1대" },
+        { name: "박스", quote: "박스 6개" },
+        { name: "잡화 바구니", quote: "잡화 바구니 2개" },
+      ],
+      extraFeeClauses: ["보관료는 하루 2만원 별도입니다."],
+    }),
+    explicit: [
+      "item-세탁기", "item-건조기", "item-박스", "truck", "workers",
+    ],
+    need: ["fee"],
+  },
+  {
+    id: "H06",
+    trait: "엘리베이터 사용료 별도·양쪽 장거리 운반·차량 미기재",
+    text: `가상파도연필용달이에요~
+11월 11일 낮 12시
+책상 2개 / 의자 2개 / 모니터 2대 운송 포함
+작업 인원은 2명입니다
+총 29만원, 계약금 3만원
+엘베 사용료는 관리실에 직접 납부해주세요.
+주차장부터 집까지 운반비는 거리 보고 협의요`,
+    items: [
+      I("h06-1", "책상", F, 2),
+      I("h06-2", "의자", F, 2),
+      I("h06-3", "모니터", A, 2),
+    ],
+    cond: C(7, "있음", "있음", 9, "있음", "있음"),
+    gold: D({
+      company: "가상파도연필용달",
+      totalAmount: 290000,
+      deposit: 30000,
+      moveDate: "11월 11일 낮 12시",
+      workers: 2,
+      listedItems: [
+        { name: "책상", quote: "책상 2개" },
+        { name: "의자", quote: "의자 2개" },
+        { name: "모니터", quote: "모니터 2대" },
+      ],
+      extraFeeClauses: [
+        "엘베 사용료는 관리실에 직접 납부해주세요.",
+        "주차장부터 집까지 운반비는 거리 보고 협의요",
+      ],
+    }),
+    explicit: ["item-책상", "item-의자", "item-모니터", "workers"],
+    need: ["carry-from", "carry-to", "truck", "fee"],
+  },
+  {
+    id: "H07",
+    trait: "오후 할증 포함·도착 계단 포함·포장 범위 명시",
+    text: `[가상햇살종이이사] 반포장 확정
+11월 12일 오후 4시
+1톤 1대 / 작업 인원 2명
+행거 2개, 전자레인지 1대, 박스 9개 포함
+도착 2층 계단 작업 포함
+출발 주차장부터 현관까지 70m 운반 포함
+오후 할증까지 포함한 총액 38만
+계약금 19만
+추가 비용 없음`,
+    items: [
+      I("h07-1", "행거", F, 2),
+      I("h07-2", "전자레인지", A, 1),
+      I("h07-3", "박스", B, 9),
+    ],
+    cond: C(1, "없음", "있음", 2, "없음", "없음"),
+    gold: D({
+      company: "가상햇살종이이사",
+      totalAmount: 380000,
+      deposit: 190000,
+      moveDate: "11월 12일 오후 4시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "도착 2층 계단 작업 포함",
+      listedItems: [
+        { name: "행거", quote: "행거 2개" },
+        { name: "전자레인지", quote: "전자레인지 1대" },
+        { name: "박스", quote: "박스 9개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-행거", "item-전자레인지", "item-박스",
+      "stairs-to", "carry-from", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H08",
+    trait: "주말 할증 미확정·인원 미기재·포괄 문구",
+    text: `가상보라우체통익스프레스
+11월 14일 오전
+투룸 짐 전체 반포장으로 잡았어요.
+차는 2.5톤 1대
+기본 총액 46만원 / 계약금 46,000원
+주말 할증은 배차 후 알려드릴께요 ^^`,
+    items: [
+      I("h08-1", "침대", F, 1),
+      I("h08-2", "냉장고", A, 1),
+      I("h08-3", "옷장", F, 1),
+      I("h08-4", "박스", B, 10),
+    ],
+    cond: C(4, "있음", "없음", 5, "모름", "없음"),
+    gold: D({
+      company: "가상보라우체통익스프레스",
+      totalAmount: 460000,
+      deposit: 46000,
+      moveDate: "11월 14일 오전",
+      truck: "2.5톤 1대",
+      blanketPhrases: ["투룸 짐 전체"],
+      extraFeeClauses: ["주말 할증은 배차 후 알려드릴께요 ^^"],
+    }),
+    explicit: ["truck"],
+    need: [
+      "item-침대", "item-냉장고", "item-옷장", "item-박스",
+      "stairs-to", "ladder", "workers", "fee",
+    ],
+  },
+  {
+    id: "H09",
+    trait: "가구와 박스 수량 불일치·견적 외 물품 추가",
+    text: `[가상모래시계용달] 일반이사
+11/15 09:30
+1톤 1대, 작업 인원 2명
+책장 1개, 책상 1개, 박스 5개 포함
+총액 31만 / 계약금 62,000원
+견적 외 물품 추가 시 별도`,
+    items: [
+      I("h09-1", "책장", F, 2),
+      I("h09-2", "책상", F, 1),
+      I("h09-3", "박스", B, 7),
+    ],
+    cond: C(1, "없음", "없음", 2, "있음", "없음"),
+    gold: D({
+      company: "가상모래시계용달",
+      totalAmount: 310000,
+      deposit: 62000,
+      moveDate: "11/15 09:30",
+      truck: "1톤 1대",
+      workers: 2,
+      listedItems: [
+        { name: "책장", quote: "책장 1개" },
+        { name: "책상", quote: "책상 1개" },
+        { name: "박스", quote: "박스 5개" },
+      ],
+      extraFeeClauses: ["견적 외 물품 추가 시 별도"],
+    }),
+    explicit: ["item-책상", "truck", "workers"],
+    need: ["item-책장", "item-박스", "fee"],
+  },
+  {
+    id: "H10",
+    trait: "완비 견적·TV 정규화·양쪽 계단과 사다리 포함",
+    text: `가상은빛도토리이사 / 포장이사
+11월 16일 오전 8시 30분
+차량 2.5톤 1대, 작업 인원 3명
+매트리스 1개, TV 1대, 티비선반 1개, 박스 10개 포함
+출발 3층과 도착 4층 계단 작업 모두 포함
+사다리차 비용 포함
+도착지 골목 입구부터 90m 운반 포함
+총액 720,000원 / 계약금 72,000원
+추가 비용 없음`,
+    items: [
+      I("h10-1", "매트리스", F, 1),
+      I("h10-2", "TV", A, 1),
+      I("h10-3", "티비선반", F, 1),
+      I("h10-4", "박스", B, 10),
+    ],
+    cond: C(3, "없음", "없음", 4, "없음", "있음"),
+    gold: D({
+      company: "가상은빛도토리이사",
+      totalAmount: 720000,
+      deposit: 72000,
+      moveDate: "11월 16일 오전 8시 30분",
+      truck: "2.5톤 1대",
+      workers: 3,
+      ladder: "포함",
+      stairsNote: "출발 3층과 도착 4층 계단 작업 모두 포함",
+      listedItems: [
+        { name: "매트리스", quote: "매트리스 1개" },
+        { name: "텔레비전", quote: "TV 1대" },
+        { name: "티비선반", quote: "티비선반 1개" },
+        { name: "박스", quote: "박스 10개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-매트리스", "item-텔레비전", "item-티비선반", "item-박스",
+      "stairs-from", "stairs-to", "ladder", "carry-to",
+      "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H11",
+    trait: "지하 출발·주차 곤란·계단만 확정·장거리 운반 미확정",
+    text: `가상물결단풍용달 견적 보내요
+11월 17일 오전 10시
+차량 1톤 1대 / 작업 인원 2명
+소파 1개, 세탁기 1대 포함
+출발 지하 1층 계단 작업 포함
+골목 주차가 안되면 운반비 별도입니다
+총액 34만, 계약금 5만`,
+    items: [
+      I("h11-1", "소파", F, 1),
+      I("h11-2", "세탁기", A, 1),
+      I("h11-3", "박스", B, 4),
+    ],
+    cond: C(-1, "없음", "있음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상물결단풍용달",
+      totalAmount: 340000,
+      deposit: 50000,
+      moveDate: "11월 17일 오전 10시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "출발 지하 1층 계단 작업 포함",
+      listedItems: [
+        { name: "소파", quote: "소파 1개" },
+        { name: "세탁기", quote: "세탁기 1대" },
+      ],
+      extraFeeClauses: ["골목 주차가 안되면 운반비 별도입니다"],
+    }),
+    explicit: [
+      "item-소파", "item-세탁기", "stairs-from", "truck", "workers",
+    ],
+    need: ["item-박스", "carry-from", "fee"],
+  },
+  {
+    id: "H12",
+    trait: "엘리베이터 모름·인력 별도·계약금 없이 예약",
+    text: `[가상자주나침반이사]
+11월 18일 오후 2시 / 일반
+냉장고 1대, 전자레인지 1대 운송 포함
+차량 1톤 1대
+총액 26만 / 계약금 없이 예약
+상하차 인력은 별도 섭외이고 인원수 미정입니다.
+계단 작업은 현장 보고 결정해요.`,
+    items: [
+      I("h12-1", "냉장고", A, 1),
+      I("h12-2", "전자레인지", A, 1),
+    ],
+    cond: C(4, "모름", "없음", 2, "모름", "없음"),
+    gold: D({
+      company: "가상자주나침반이사",
+      totalAmount: 260000,
+      deposit: 0,
+      moveDate: "11월 18일 오후 2시",
+      truck: "1톤 1대",
+      stairsNote: "계단 작업은 현장 보고 결정해요.",
+      listedItems: [
+        { name: "냉장고", quote: "냉장고 1대" },
+        { name: "전자레인지", quote: "전자레인지 1대" },
+      ],
+      extraFeeClauses: ["상하차 인력은 별도 섭외이고 인원수 미정입니다."],
+    }),
+    explicit: ["item-냉장고", "item-전자레인지", "truck"],
+    need: ["stairs-from", "stairs-to", "ladder", "workers", "fee"],
+  },
+  {
+    id: "H13",
+    trait: "총액 누락·계약금만 존재·침대와 매트리스 구분",
+    text: `가상새벽구슬익스프레스 입니다.
+11월 19일 09시, 반포장
+2.5톤 1대 / 작업 인원 3명
+침대 프레임 1개, 책장 1개 포함
+매트리스는 이번 견적에서 제외했어요.
+계약금 50,000원
+총액은 방문 후 다시 보내드릴게요.`,
+    items: [
+      I("h13-1", "침대 프레임", F, 1),
+      I("h13-2", "매트리스", F, 1),
+      I("h13-3", "책장", F, 1),
+    ],
+    cond: C(2, "있음", "없음", 3, "있음", "없음"),
+    gold: D({
+      company: "가상새벽구슬익스프레스",
+      deposit: 50000,
+      moveDate: "11월 19일 09시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "침대", quote: "침대 프레임 1개" },
+        { name: "책장", quote: "책장 1개" },
+        { name: "매트리스", quote: "매트리스" },
+      ],
+    }),
+    explicit: ["item-침대", "item-책장", "truck", "workers"],
+    need: ["item-매트리스", "fee", "total"],
+  },
+  {
+    id: "H14",
+    trait: "보관료·에어컨 이전설치 포함·깔끔한 한글 총액",
+    text: `[가상하늘실타래이사] 보관이사 확정서
+11월 20일 입고, 11월 22일 출고
+차량 2.5톤 1대 / 작업 인원 3명
+옷장 1개, 벽걸이 에어컨 1대, 박스 14개 포함
+에어컨 철거·운송·재설치와 배관 5m 비용 모두 포함
+2일 보관료와 입출고 운송료 포함한 총액 팔십만원
+계약금 이십사만원
+추가 비용 없음`,
+    items: [
+      I("h14-1", "옷장", F, 1),
+      I("h14-2", "벽걸이 에어컨", A, 1),
+      I("h14-3", "박스", B, 14),
+    ],
+    cond: C(6, "있음", "없음", 7, "있음", "없음"),
+    gold: D({
+      company: "가상하늘실타래이사",
+      totalAmount: 800000,
+      deposit: 240000,
+      moveDate: "11월 20일 입고, 11월 22일 출고",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "옷장", quote: "옷장 1개" },
+        { name: "에어컨", quote: "벽걸이 에어컨 1대" },
+        { name: "박스", quote: "박스 14개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-옷장", "item-에어컨", "item-박스", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H15",
+    trait: "품목 다음 줄의 전역 조건·약식 문구·수량은 일치",
+    text: `가상주황돛단배용달
+11/21 오후 3시 일반이사
+1톤 1대 / 작업 인원 2명
+운송 목록: 식탁 1개, 의자 4개, 모니터 1대
+※ 위 물품 전부 고객님이 1층에 내려놓는 조건임니다.
+총액 24만 / 계약금 2만4천
+계단 운반 요청 시 추가요금 협의`,
+    items: [
+      I("h15-1", "식탁", F, 1),
+      I("h15-2", "의자", F, 4),
+      I("h15-3", "모니터", A, 1),
+    ],
+    cond: C(2, "없음", "없음", 1, "없음", "없음"),
+    gold: D({
+      company: "가상주황돛단배용달",
+      totalAmount: 240000,
+      deposit: 24000,
+      moveDate: "11/21 오후 3시",
+      truck: "1톤 1대",
+      workers: 2,
+      stairsNote: "계단 운반 요청 시 추가요금 협의",
+      listedItems: [
+        { name: "식탁", quote: "식탁 1개" },
+        { name: "의자", quote: "의자 4개" },
+        { name: "모니터", quote: "모니터 1대" },
+      ],
+      extraFeeClauses: ["계단 운반 요청 시 추가요금 협의"],
+    }),
+    explicit: ["truck", "workers"],
+    need: [
+      "item-식탁", "item-의자", "item-모니터", "stairs-from", "fee",
+    ],
+  },
+  {
+    id: "H16",
+    trait: "특수품 확정·주말 할증 포함·주차 장거리 운반 포함",
+    text: `[가상민트조약돌익스프레스]
+11월 22일 오전 9시 포장이사
+차량 2.5톤 1대, 작업 인원 3명
+안마의자 1대, 디지털 피아노 1대, 소파 1개 모두 운송 포함
+도착 주차 위치부터 건물까지 120m 운반 포함
+주말 할증 포함 총액 69만원
+계약금 345,000원
+추가 비용 없음`,
+    items: [
+      I("h16-1", "안마의자", F, 1),
+      I("h16-2", "디지털 피아노", F, 1),
+      I("h16-3", "소파", F, 1),
+    ],
+    cond: C(5, "있음", "없음", 8, "있음", "있음"),
+    gold: D({
+      company: "가상민트조약돌익스프레스",
+      totalAmount: 690000,
+      deposit: 345000,
+      moveDate: "11월 22일 오전 9시",
+      truck: "2.5톤 1대",
+      workers: 3,
+      listedItems: [
+        { name: "안마의자", quote: "안마의자 1대" },
+        { name: "디지털 피아노", quote: "디지털 피아노 1대" },
+        { name: "소파", quote: "소파 1개" },
+      ],
+      extraFeeClauses: ["추가 비용 없음"],
+    }),
+    explicit: [
+      "item-안마의자", "item-디지털피아노", "item-소파",
+      "carry-to", "truck", "workers", "fee",
+    ],
+    need: [],
+  },
+  {
+    id: "H17",
+    trait: "최소 정보 문자·총액만 명시·추가비 문구도 없음",
+    text: `가상밤하늘종이용달 입니다
+보내주신 사진 확인했어요 🙂
+이사는 총 38만이에요. 예약 원하시면 답장주세요!`,
+    items: [
+      I("h17-1", "책상", F, 1),
+      I("h17-2", "행거", F, 1),
+      I("h17-3", "박스", B, 5),
+    ],
+    cond: C(1, "없음", "없음", 2, "있음", "없음"),
+    gold: D({
+      company: "가상밤하늘종이용달",
+      totalAmount: 380000,
+    }),
+    explicit: [],
+    need: [
+      "item-책상", "item-행거", "item-박스", "truck", "workers", "fee",
+    ],
+  },
+  {
+    id: "H18",
+    trait: "사다리 언급만으로 카드 생성·엘리베이터 있음·차량 조건부",
+    text: `[가상분홍나뭇잎이사] 투룸 반포장
+11월 24일 오전 10시
+차량은 1톤 2대 예정, 배차 사정에 따라 변경
+작업 인원 3명
+양문형 냉장고 1대, 건조기 1대, 옷장 1개 포함
+사다리차 필요 시 비용 별도
+총액 53만 / 계약금 159,000원`,
+    items: [
+      I("h18-1", "양문형 냉장고", A, 1),
+      I("h18-2", "건조기", A, 1),
+      I("h18-3", "옷장", F, 1),
+    ],
+    cond: C(10, "있음", "없음", 12, "있음", "없음"),
+    gold: D({
+      company: "가상분홍나뭇잎이사",
+      totalAmount: 530000,
+      deposit: 159000,
+      moveDate: "11월 24일 오전 10시",
+      truck: "1톤 2대",
+      workers: 3,
+      ladder: "별도",
+      listedItems: [
+        { name: "냉장고", quote: "양문형 냉장고 1대" },
+        { name: "건조기", quote: "건조기 1대" },
+        { name: "옷장", quote: "옷장 1개" },
+      ],
+      extraFeeClauses: ["사다리차 필요 시 비용 별도"],
+    }),
+    explicit: ["item-냉장고", "item-건조기", "item-옷장", "workers"],
+    need: ["ladder", "truck", "fee"],
+  },
+  {
+    id: "H19",
+    trait: "쓰리룸 포괄 문구와 개별 품목 혼합·오후 할증 별도",
+    text: `가상푸른책갈피익스프레스 견적 알림
+11월 25일 오후 5시 / 쓰리룸 포장이사
+차량 5톤 1대 / 작업 인원 4명
+쓰리룸 가재도구 일체
+세부 확인: 침대 2개, 텔레비전 1대 포함
+총액 92만원, 계약금 92,000원
+오후 작업 할증 8만원은 별도 청구됩니다.`,
+    items: [
+      I("h19-1", "침대", F, 2),
+      I("h19-2", "텔레비전", A, 1),
+      I("h19-3", "식탁", F, 1),
+      I("h19-4", "박스", B, 18),
+    ],
+    cond: C(11, "있음", "없음", 6, "있음", "없음"),
+    gold: D({
+      company: "가상푸른책갈피익스프레스",
+      totalAmount: 920000,
+      deposit: 92000,
+      moveDate: "11월 25일 오후 5시",
+      truck: "5톤 1대",
+      workers: 4,
+      listedItems: [
+        { name: "침대", quote: "침대 2개" },
+        { name: "텔레비전", quote: "텔레비전 1대" },
+      ],
+      blanketPhrases: ["쓰리룸 가재도구 일체"],
+      extraFeeClauses: ["오후 작업 할증 8만원은 별도 청구됩니다."],
+    }),
+    explicit: ["item-침대", "item-텔레비전", "truck", "workers"],
+    need: ["item-식탁", "item-박스", "fee"],
+  },
+  {
+    id: "H20",
+    trait: "도착 지하·계단 제외·짐 수량 차이·주차 운반비 별도",
+    text: `[가상연두풍경용달] 일반이사
+11월 26일 오전 11시
+차량 1톤 1대 / 작업 인원 1명
+세탁기 1대와 박스 3개 운송 포함
+도착 지하 1층 계단 작업은 제외입니다.
+출발지 주차가 멀어 장거리 운반비 3만원 별도
+총액 21만원 / 계약금 7만원`,
+    items: [
+      I("h20-1", "세탁기", A, 1),
+      I("h20-2", "박스", B, 6),
+      I("h20-3", "전자레인지", A, 1),
+    ],
+    cond: C(1, "없음", "있음", -1, "없음", "없음"),
+    gold: D({
+      company: "가상연두풍경용달",
+      totalAmount: 210000,
+      deposit: 70000,
+      moveDate: "11월 26일 오전 11시",
+      truck: "1톤 1대",
+      workers: 1,
+      stairsNote: "도착 지하 1층 계단 작업은 제외입니다.",
+      listedItems: [
+        { name: "세탁기", quote: "세탁기 1대" },
+        { name: "박스", quote: "박스 3개" },
+      ],
+      extraFeeClauses: [
+        "출발지 주차가 멀어 장거리 운반비 3만원 별도",
+      ],
+    }),
+    explicit: ["item-세탁기", "truck", "workers"],
+    need: [
+      "item-박스", "item-전자레인지", "stairs-to", "carry-from", "fee",
+    ],
+  },
+];
+
+export const REPLIES: ReplyCase[] = [
+  {
+    id: "HR01",
+    quoteId: "H01",
+    type: "무관",
+    text: "예약하시면 전날 기사님 연락처 보내드릴게요 🙂",
+    allowed: [],
+  },
+  {
+    id: "HR02",
+    quoteId: "H02",
+    type: "명시적 포함",
+    text: "양문형 냉장고 1대는 문짝 탈거가 필요해도 총액에 포함입니다. 출발 2층 계단 작업도 총액에 포함이에요.",
+    allowed: ["item-냉장고", "stairs-from"],
+  },
+  {
+    id: "HR03",
+    quoteId: "H03",
+    type: "조건부",
+    text: "에어컨 1대는 기존 배관 그대로 쓸 수 있을 때만 철거랑 재설치까지 포함됩니다.",
+    allowed: [],
+  },
+  {
+    id: "HR04",
+    quoteId: "H04",
+    type: "금액 제시",
+    text: "안마의자는 7만원, 책장은 2만원으로 잡으시면 돼요.",
+    allowed: [],
+  },
+  {
+    id: "HR05",
+    quoteId: "H05",
+    type: "제외·별도",
+    text: "57만원에 보관료는 안 들어가요. 입고일부터 출고일까지 보관료 따로 받습니다.",
+    allowed: [],
+  },
+  {
+    id: "HR06",
+    quoteId: "H06",
+    type: "명시적 포함",
+    text: "차량은 1톤 2대로 확정이고 총액에 포함입니다. 출발 주차장에서 집까지 운반, 도착 주차장에서 집까지 운반도 거리와 관계없이 둘 다 총액에 포함합니다. 엘베 사용료는 안내드린 대로 별도예요.",
+    allowed: ["truck", "carry-from", "carry-to"],
+  },
+  {
+    id: "HR07",
+    quoteId: "H07",
+    type: "무관",
+    text: "계약금 보내신 뒤 입금자 성함만 알려주세용.",
+    allowed: [],
+  },
+  {
+    id: "HR08",
+    quoteId: "H08",
+    type: "얼버무림",
+    text: "저희 투룸 많이 해봐서 다 알아서 해드려요 ㅎㅎ 걱정마세요.",
+    allowed: [],
+  },
+  {
+    id: "HR09",
+    quoteId: "H09",
+    type: "명시적 포함",
+    text: "확인했습니다. 책장 2개와 박스 7개 모두 기존 총액 31만원에 포함으로 정정합니다. 그 밖의 물품을 추가하면 별도인 조건은 그대로예요.",
+    allowed: ["item-책장", "item-박스"],
+  },
+  {
+    id: "HR10",
+    quoteId: "H10",
+    type: "무관",
+    text: "도착 아파트 동 번호가 몇 동인가요?",
+    allowed: [],
+  },
+  {
+    id: "HR11",
+    quoteId: "H11",
+    type: "조건부",
+    text: "박스 4개는 가로세로높이 합 120cm 이하일 때만 포함이고, 출발지 운반은 차를 골목 안에 댈 수 있으면 포함입니다.",
+    allowed: [],
+  },
+  {
+    id: "HR12",
+    quoteId: "H12",
+    type: "얼버무림",
+    text: "출발 4층에 엘베가 있다는 말씀이실까요? 도착 2층은 계단 몇 칸인지 먼저 알려주세요.",
+    allowed: [],
+  },
+  {
+    id: "HR13",
+    quoteId: "H13",
+    type: "명시적 포함",
+    text: "제외라고 쓴 건 제가 잘못 적었습니다. 매트리스 1개도 운송 총액에 포함합니다. 최종 총액은 방문 후 안내드릴게요.",
+    allowed: ["item-매트리스"],
+  },
+  {
+    id: "HR14",
+    quoteId: "H14",
+    type: "무관",
+    text: "보관 창고 입고 사진은 입고 완료되면 보내드려요.",
+    allowed: [],
+  },
+  {
+    id: "HR15",
+    quoteId: "H15",
+    type: "명시적 포함",
+    text: "고객님이 1층에 내려놓는 조건은 삭제하겠습니다. 식탁 1개, 의자 4개, 모니터 1대 운송과 출발 2층 계단 작업 모두 기존 총액에 포함합니다. 추가 비용 없음으로 확정합니다.",
+    allowed: [
+      "item-식탁", "item-의자", "item-모니터", "stairs-from", "fee",
+    ],
+  },
+  {
+    id: "HR16",
+    quoteId: "H16",
+    type: "무관",
+    text: "안마의자 리모컨은 분실되지 않게 따로 챙겨주세요.",
+    allowed: [],
+  },
+  {
+    id: "HR17",
+    quoteId: "H17",
+    type: "명시적 포함",
+    text: "책상 1개, 행거 1개, 박스 5개 운송 포함입니다. 차량 1톤 1대와 작업 인원 2명도 총액 38만원에 포함이에요. 추가 비용 없음입니다.",
+    allowed: [
+      "item-책상", "item-행거", "item-박스", "truck", "workers", "fee",
+    ],
+  },
+  {
+    id: "HR18",
+    quoteId: "H18",
+    type: "제외·별도",
+    text: "사다리차는 53만원에 포함 안 됩니다. 필요하시면 장비 업체 비용 따로 내셔야 해요.",
+    allowed: [],
+  },
+  {
+    id: "HR19",
+    quoteId: "H19",
+    type: "얼버무림",
+    text: "식탁 크기가 어떻게 되죠? 박스는 직접 포장하시는 건가요? 확인하고 말씀드릴게요.",
+    allowed: [],
+  },
+  {
+    id: "HR20",
+    quoteId: "H20",
+    type: "금액 제시",
+    text: "박스 3개 더는 2만원, 전자레인지는 1만원, 지하 계단은 4만원입니다. 출발지 장거리 운반비는 말씀드린 3만원이에요.",
+    allowed: [],
+  },
+];
+```
+
+1. 전부 합성 사례이며 금액은 시장가격 추정치가 아니다. 기존 셋과의 실제 중복 여부는 **unknown**이다.
+2. `gold`는 원문 값만 기록했다. 명확한 계약금 없음은 `0`, 미기재는 `null`이며 별도 비용을 총액에 더하지 않았다.
+3. 품목의 조건 없는 기재와 수량 일치를 `explicit`으로, 제외·조건부·수량 불일치·누락을 `need`로 분류했다.
+4. 대표 품목명을 정규화하고, 박스와 잡화는 `item-박스`로 합쳤으며 특수품은 공백을 제거했다.
+5. 계단 카드는 2층 이상 또는 지하이면서 엘리베이터가 없거나 모를 때만 부여했다.
+6. 사다리 카드는 3층 이상에서 엘리베이터가 없거나 모르는 경우 또는 원문에 사다리가 언급된 경우 부여했다.
+7. 장거리 운반 카드는 해당 방향의 `parkingFar`가 `있음`인 경우에만 부여했다.
+8. 추가비 관련 문구는 `fee` 하나로 묶었다. 문구가 없어도 `need`이며, 조건 없는 추가 비용 없음만 `explicit`이다.
+9. 답변의 금액 제시·조건부·제외·되묻기에는 승격을 허용하지 않았다. 되묻기는 지정된 유형 중 `얼버무림` 또는 내용에 따라 `무관`으로 분류했다.
+10. 상세 품목·작업조건·비용 확인 취지는 [한국소비자원 자료](https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1004458186&page=1)를 참고했다. 독립 peer/review와 TypeScript 실행 검증은 미실시다.

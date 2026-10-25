@@ -1,0 +1,644 @@
+{
+ "agg": {
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "set": "holdout",
+  "quotes": 20,
+  "date": "2026-10-24T16:34:50.270Z",
+  "finished": 20,
+  "avgSec": 11,
+  "tools": 87,
+  "rejected": 40,
+  "need": 59,
+  "explicit": 88,
+  "rule": {
+   "hit": 54,
+   "mis": 4,
+   "over": 9,
+   "personal": 27,
+   "asks": 67
+  },
+  "agent": {
+   "hit": 54,
+   "mis": 4,
+   "over": 9,
+   "personal": 43,
+   "asks": 83
+  },
+  "newRisks": 16
+ },
+ "rows": [
+  {
+   "id": "H01",
+   "trait": "투룸 일반이사·쉼표 금액·계약금 10%·깔끔한 확정 견적",
+   "stopped": "finished",
+   "ms": 10267,
+   "tools": 4,
+   "rejected": 3,
+   "rule": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "fee"
+    ],
+    "explicit": 7
+   },
+   "agent": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "fee"
+    ],
+    "explicit": 7
+   },
+   "newRisks": [],
+   "personalRule": 0,
+   "personalAgent": 0,
+   "asksAgent": 1,
+   "asksRule": 1
+  },
+  {
+   "id": "H02",
+   "trait": "반포장·2층 계단·양문형 냉장고 별도·한글 금액",
+   "stopped": "finished",
+   "ms": 11109,
+   "tools": 4,
+   "rejected": 1,
+   "rule": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [
+    "냉장고 계단 운반 — 냉장고를 계단으로 운반할 때, 인력과 방법이 추가로 필요할 수 있나요? 그리고 이 경우 추가 비용이 발생할 수 있나요?",
+    "2층 계단 운반 — 출발지 2층 계단 운반을 위한 인력과 방법이 추가로 필요할 수 있나요? 그리고 이 비용이 총액에 포함되어 있나요?"
+   ],
+   "personalRule": 2,
+   "personalAgent": 3,
+   "asksAgent": 6,
+   "asksRule": 4
+  },
+  {
+   "id": "H03",
+   "trait": "쓰리룸 포장이사·에어컨 이전설치 미확정·사다리 별도",
+   "stopped": "finished",
+   "ms": 11084,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 4,
+    "hit": 4,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 4,
+    "hit": 4,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [
+    "옷장 분해·조립 — 옷장이 분해·조립이 필요한가요? 분해·조립이 필요하면 포함 여부를 알려주세요."
+   ],
+   "personalRule": 2,
+   "personalAgent": 3,
+   "asksAgent": 5,
+   "asksRule": 4
+  },
+  {
+   "id": "H04",
+   "trait": "업라이트 피아노·안마의자·특수품 비용 구분",
+   "stopped": "finished",
+   "ms": 10454,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 3,
+    "hit": 2,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "agent": {
+    "need": 3,
+    "hit": 2,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "newRisks": [
+    "책장 분해·조립 — 책장 1개가 분해·조립이 필요할 경우, 분해·조립 작업이 포함되어 있는지 알려주십시오."
+   ],
+   "personalRule": 2,
+   "personalAgent": 3,
+   "asksAgent": 5,
+   "asksRule": 4
+  },
+  {
+   "id": "H05",
+   "trait": "보관이사·운송과 보관 비용 분리·박스와 잡화 통합",
+   "stopped": "finished",
+   "ms": 11074,
+   "tools": 5,
+   "rejected": 2,
+   "rule": {
+    "need": 1,
+    "hit": 1,
+    "mis": [],
+    "over": [
+     "item-박스"
+    ],
+    "explicit": 5
+   },
+   "agent": {
+    "need": 1,
+    "hit": 1,
+    "mis": [],
+    "over": [
+     "item-박스"
+    ],
+    "explicit": 5
+   },
+   "newRisks": [
+    "박스 분해·조립 포함 — 박스 8개를 옮기는데, 분해·조립이 필요하지 않으며, 박스는 일반 물건이므로 분해·조립 포함 여부는 어떻게 되는지 알려주십시오."
+   ],
+   "personalRule": 1,
+   "personalAgent": 2,
+   "asksAgent": 3,
+   "asksRule": 2
+  },
+  {
+   "id": "H06",
+   "trait": "엘리베이터 사용료 별도·양쪽 장거리 운반·차량 미기재",
+   "stopped": "finished",
+   "ms": 15612,
+   "tools": 5,
+   "rejected": 4,
+   "rule": {
+    "need": 4,
+    "hit": 4,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 4,
+    "hit": 4,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [],
+   "personalRule": 0,
+   "personalAgent": 0,
+   "asksAgent": 5,
+   "asksRule": 5
+  },
+  {
+   "id": "H07",
+   "trait": "오후 할증 포함·도착 계단 포함·포장 범위 명시",
+   "stopped": "finished",
+   "ms": 9415,
+   "tools": 4,
+   "rejected": 1,
+   "rule": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-from",
+     "fee"
+    ],
+    "explicit": 8
+   },
+   "agent": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-from",
+     "fee"
+    ],
+    "explicit": 8
+   },
+   "newRisks": [
+    "행거 분해·조립 — 행거나 전자레인지 등 가구가 분해·조립이 필요한 경우, 이 작업이 포함되어 있나요?"
+   ],
+   "personalRule": 0,
+   "personalAgent": 1,
+   "asksAgent": 3,
+   "asksRule": 2
+  },
+  {
+   "id": "H08",
+   "trait": "주말 할증 미확정·인원 미기재·포괄 문구",
+   "stopped": "finished",
+   "ms": 14055,
+   "tools": 5,
+   "rejected": 2,
+   "rule": {
+    "need": 8,
+    "hit": 8,
+    "mis": [],
+    "over": [],
+    "explicit": 1
+   },
+   "agent": {
+    "need": 8,
+    "hit": 8,
+    "mis": [],
+    "over": [],
+    "explicit": 1
+   },
+   "newRisks": [
+    "침대·옷장 분해·조립 — 침대와 옷장의 분해·조립이 포함되는지, 그리고 그 작업에 필요한 인력과 방법을 알려주십시오."
+   ],
+   "personalRule": 5,
+   "personalAgent": 7,
+   "asksAgent": 9,
+   "asksRule": 8
+  },
+  {
+   "id": "H09",
+   "trait": "가구와 박스 수량 불일치·견적 외 물품 추가",
+   "stopped": "finished",
+   "ms": 9094,
+   "tools": 5,
+   "rejected": 3,
+   "rule": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "agent": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "newRisks": [],
+   "personalRule": 2,
+   "personalAgent": 2,
+   "asksAgent": 3,
+   "asksRule": 3
+  },
+  {
+   "id": "H10",
+   "trait": "완비 견적·TV 정규화·양쪽 계단과 사다리 포함",
+   "stopped": "finished",
+   "ms": 13672,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-to",
+     "fee"
+    ],
+    "explicit": 11
+   },
+   "agent": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-to",
+     "fee"
+    ],
+    "explicit": 11
+   },
+   "newRisks": [],
+   "personalRule": 0,
+   "personalAgent": 0,
+   "asksAgent": 2,
+   "asksRule": 2
+  },
+  {
+   "id": "H11",
+   "trait": "지하 출발·주차 곤란·계단만 확정·장거리 운반 미확정",
+   "stopped": "finished",
+   "ms": 10665,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 5
+   },
+   "agent": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 5
+   },
+   "newRisks": [
+    "지하 1층 계단 사다리차 필요 — 출발지 지하 1층에서 1층으로 운반할 때, 계단을 이용하는 경우 사다리차가 필요할 수 있습니다. 사다리차가 필요할 경우, 업체는 어떻게 준비하시나요?"
+   ],
+   "personalRule": 1,
+   "personalAgent": 2,
+   "asksAgent": 4,
+   "asksRule": 3
+  },
+  {
+   "id": "H12",
+   "trait": "엘리베이터 모름·인력 별도·계약금 없이 예약",
+   "stopped": "finished",
+   "ms": 11780,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 5,
+    "hit": 5,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "agent": {
+    "need": 5,
+    "hit": 5,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "newRisks": [
+    "냉장고 계단 운반 — 냉장고와 전자레인지 같은 큰 짐을 계단으로 운반할 때, 인력과 방법은 어떻게 되며, 추가 비용이 발생할 수 있는지 알려주세요."
+   ],
+   "personalRule": 2,
+   "personalAgent": 3,
+   "asksAgent": 6,
+   "asksRule": 5
+  },
+  {
+   "id": "H13",
+   "trait": "총액 누락·계약금만 존재·침대와 매트리스 구분",
+   "stopped": "finished",
+   "ms": 9168,
+   "tools": 4,
+   "rejected": 3,
+   "rule": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [
+    "침대 프레임 및 책장 분해·조립 — 침대 프레임과 책장이 분해·조립이 필요할 경우, 분해·조립 작업이 포함되어 있는지 알려주실 수 있나요?"
+   ],
+   "personalRule": 1,
+   "personalAgent": 2,
+   "asksAgent": 4,
+   "asksRule": 3
+  },
+  {
+   "id": "H14",
+   "trait": "보관료·에어컨 이전설치 포함·깔끔한 한글 총액",
+   "stopped": "finished",
+   "ms": 8588,
+   "tools": 4,
+   "rejected": 1,
+   "rule": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "fee"
+    ],
+    "explicit": 6
+   },
+   "agent": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "fee"
+    ],
+    "explicit": 6
+   },
+   "newRisks": [
+    "옷장 분해·조립 — 옷장이 분해·조립이 필요한 경우, 분해·조립 비용은 포함되어 있나요?"
+   ],
+   "personalRule": 0,
+   "personalAgent": 1,
+   "asksAgent": 2,
+   "asksRule": 1
+  },
+  {
+   "id": "H15",
+   "trait": "품목 다음 줄의 전역 조건·약식 문구·수량은 일치",
+   "stopped": "finished",
+   "ms": 10048,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 5,
+    "hit": 2,
+    "mis": [
+     "item-식탁",
+     "item-의자",
+     "item-모니터"
+    ],
+    "over": [],
+    "explicit": 2
+   },
+   "agent": {
+    "need": 5,
+    "hit": 2,
+    "mis": [
+     "item-식탁",
+     "item-의자",
+     "item-모니터"
+    ],
+    "over": [],
+    "explicit": 2
+   },
+   "newRisks": [],
+   "personalRule": 1,
+   "personalAgent": 1,
+   "asksAgent": 2,
+   "asksRule": 2
+  },
+  {
+   "id": "H16",
+   "trait": "특수품 확정·주말 할증 포함·주차 장거리 운반 포함",
+   "stopped": "finished",
+   "ms": 10433,
+   "tools": 4,
+   "rejected": 1,
+   "rule": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-to",
+     "fee"
+    ],
+    "explicit": 7
+   },
+   "agent": {
+    "need": 0,
+    "hit": 0,
+    "mis": [],
+    "over": [
+     "carry-to",
+     "fee"
+    ],
+    "explicit": 7
+   },
+   "newRisks": [
+    "분해·조립 작업 포함 — 안마의자와 소파는 분해·조립이 필요할 수 있습니다. 분해·조립 작업이 포함되어 있는지 알려주세요."
+   ],
+   "personalRule": 0,
+   "personalAgent": 1,
+   "asksAgent": 3,
+   "asksRule": 2
+  },
+  {
+   "id": "H17",
+   "trait": "최소 정보 문자·총액만 명시·추가비 문구도 없음",
+   "stopped": "finished",
+   "ms": 10360,
+   "tools": 5,
+   "rejected": 2,
+   "rule": {
+    "need": 6,
+    "hit": 6,
+    "mis": [],
+    "over": [],
+    "explicit": 0
+   },
+   "agent": {
+    "need": 6,
+    "hit": 6,
+    "mis": [],
+    "over": [],
+    "explicit": 0
+   },
+   "newRisks": [
+    "분해·조립 가구 — 책상이나 행거 같은 가구가 분해·조립이 필요한가요? 만약 그렇다면 분해·조립이 포함되어 있는지 알려주십시오."
+   ],
+   "personalRule": 3,
+   "personalAgent": 4,
+   "asksAgent": 7,
+   "asksRule": 6
+  },
+  {
+   "id": "H18",
+   "trait": "사다리 언급만으로 카드 생성·엘리베이터 있음·차량 조건부",
+   "stopped": "finished",
+   "ms": 10638,
+   "tools": 5,
+   "rejected": 2,
+   "rule": {
+    "need": 3,
+    "hit": 2,
+    "mis": [
+     "truck"
+    ],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 3,
+    "hit": 2,
+    "mis": [
+     "truck"
+    ],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [
+    "옷장 분해·조립 — 옷장이 분해·조립이 필요한 경우, 이사 업체에서 분해·조립을 포함하는지 여부를 알려주세요."
+   ],
+   "personalRule": 0,
+   "personalAgent": 1,
+   "asksAgent": 3,
+   "asksRule": 2
+  },
+  {
+   "id": "H19",
+   "trait": "쓰리룸 포괄 문구와 개별 품목 혼합·오후 할증 별도",
+   "stopped": "finished",
+   "ms": 10845,
+   "tools": 5,
+   "rejected": 1,
+   "rule": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "agent": {
+    "need": 3,
+    "hit": 3,
+    "mis": [],
+    "over": [],
+    "explicit": 4
+   },
+   "newRisks": [
+    "침대 분해·조립 — 침대 2개가 분해·조립이 필요한 가구이므로, 분해·조립 작업이 포함되는지 알려주십시오."
+   ],
+   "personalRule": 2,
+   "personalAgent": 3,
+   "asksAgent": 4,
+   "asksRule": 3
+  },
+  {
+   "id": "H20",
+   "trait": "도착 지하·계단 제외·짐 수량 차이·주차 운반비 별도",
+   "stopped": "finished",
+   "ms": 12385,
+   "tools": 4,
+   "rejected": 2,
+   "rule": {
+    "need": 5,
+    "hit": 5,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "agent": {
+    "need": 5,
+    "hit": 5,
+    "mis": [],
+    "over": [],
+    "explicit": 3
+   },
+   "newRisks": [
+    "세탁기·전자레인지 분해·조립 — 세탁기와 전자레인지가 분해·조립이 필요한가요? 분해·조립이 필요하면 포함 여부를 알려주세요."
+   ],
+   "personalRule": 3,
+   "personalAgent": 4,
+   "asksAgent": 6,
+   "asksRule": 5
+  }
+ ]
+}

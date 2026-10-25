@@ -1,0 +1,7 @@
+# Language Models and Logic Programs for Trustworthy Tax Reasoning
+
+- 저자: William Jurayj, Nils Holzenberger, Benjamin Van Durme
+- 게시: 2025-08-28 · arXiv:2508.21051 · https://arxiv.org/abs/2508.21051
+
+## 초록 (원문)
+According to the United States Internal Revenue Service, ``the average American spends $\$270$ and 13 hours filing their taxes''. Even beyond the U.S., tax filing requires complex reasoning, combining application of overlapping rules with numerical calculations. Because errors can incur costly penalties, any automated system must deliver high accuracy and auditability, making modern large language models (LLMs) poorly suited for this task. We propose an approach that integrates LLMs with a symbolic solver to calculate tax obligations. We evaluate variants of this system on the challenging StAtutory Reasoning Assessment (SARA) dataset, and include a novel method for estimating the cost of deploying such a system based on real-world penalties for tax errors. We further show how combining up-front translation of plain-text rules into formal logic programs, combined with intelligently retrieved exemplars for formal case representations, can dramatically improve performance on this task and reduce costs to well below real-world averages. Our results demonstrate the effectiveness of applying semantic parsing methods to statutory reasoning, and show promising economic feasibility of neuro-symbolic architectures for increasing access to reliable tax assistance.

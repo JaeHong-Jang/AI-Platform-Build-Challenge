@@ -1,0 +1,37 @@
+💬 Sonnet: 상호 검증 — Sol 분석 검증
+📄 읽기 b003-peer-sonnet.md
+⚙ ToolSearch
+📄 읽기 b003-analysis.sol.md
+🔎 열람 https://jinjung24.com/
+🔎 열람 https://housing.seoul.go.kr/site/main/content/sh01_060513
+🔎 열람 https://www.kca.go.kr/home/sub.do?menukey=4005&mode=view&no=1003802911&page=3
+🔎 근무시간 급여명세서 대조 알바 임금체불 AI 서비스 앱 근무기록 증거 정리
+🔎 청년월세지원 신청 서류 AI 자동 점검 서류 검토 서비스
+🔎 헬스장 환불 해지 계산기 앱 소비자 증거 정리 AI
+🔎 열람 https://labor.moel.go.kr/arrstat/arrstat_list.do?edScleYear=2024&edToidYear=2024&edYrYear=2024&stScleYear=2022&stToidYear=2020&stYrYear=2020&tabArea=tab04
+🔎 열람 https://shiftee.io/ko
+🔎 알바 급여 계산기 앱 근무 기록 임금체불 증거 알바체크 OR 알바장부 OR 급여톡 OR 페이체크
+🔎 고용노동부 AI 임금체불 상담 챗봇 노동청 온라인 진정 근로시간 계산기 청년 알바 노동권 앱
+🔎 열람 https://safehomes.kr/
+🔎 열람 https://apps.apple.com/kr/app/id1537391479
+🔎 세이프홈즈 계약서 특약 분석 AI 임대차계약서 업로드 등기부등본 대조
+🔎 고용노동부 AI 노동법 상담 전면 개편 2026 진정서 접수 안내
+🔎 PowerPoint live captions slide content real-time "deictic" OR "this equation" lecture captions linked to slide pointer accessibility
+🔎 열람 https://www.tkita.ai/ko/product/caption
+🔎 열람 https://www.getrentcheck.com/
+🔎 열람 https://www.kcue.or.kr/_upload/pds/2024/12/12/application_cb03d61cc734939d604082224c7e9f43.pdf
+🔎 열람 https://www.etoday.co.kr/news/view/2547796
+🔎 노동부 AI 노동법 상담 근로계약서 임금명세서 업로드 위반 여부 자동 진단 하반기
+⚙ cd /tmp && pdftotext -layout "/home/data/.claude/projects/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tool-results/webfetch-1792740513515-homic
+🔎 상가 임대차 원상회복 분쟁 입점 사진 기록 앱 OR 서비스 소상공인 퇴거 증거
+🔎 전월세 계약서 AI 분석 특약 검토 앱 등기부등본 대조 청년 (직방 OR 다방 OR 리걸 OR 법무 OR 계약서 AI 검토)
+🔎 열람 https://mediahub.seoul.go.kr/archives/2016793
+🔎 열람 https://mediahub.seoul.go.kr/archives/2016793
+🔎 열람 https://newsseoul.co.kr/news/view/1065609618712182
+⚙ cd /tmp && python3 -I -c " import zlib,re,sys d=open('/home/data/.claude/projects/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tool-results/webf
+🔎 청각장애 대학생 수업 자막 지시어 "이것" "여기" 화면 슬라이드 연결 실시간 자막 연구 deaf students lecture captions split attention pointing
+🔎 Otter.ai OR Verbit OR Microsoft Teams live captions slides screen content OCR "slide" caption context lecture AI captions visual
+🔎 한국소비자원 AI 상담 챗봇 소비자24 피해구제 신청 증빙자료 자동 정리 2026
+🔎 HUG 안심전세 앱 계약서 등기부등본 건축물대장 비교 기능 임대인 정보 불일치 확인
+📝 작성 b003-peer-on-sol.sonnet.md
+⚙ SubagentHandback

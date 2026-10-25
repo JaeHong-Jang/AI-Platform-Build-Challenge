@@ -1,0 +1,34 @@
+💬 Sonnet: Ollama 에이전트 조사·실측
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib" && wc -l agent.ts provider.ts extract.ts && cat agent.ts provider.ts | head -400
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/" && grep -rnE "OLLAMA_|/api/chat|/api/generate|format:|num_ctx|timeout|AbortSignal|keep_alive" "AI Innovation 공모전/masdae-pass/backend/src" --include=*.ts | hea
+⚙ curl -s -m 5 http://172.20.32.1:11434/api/tags | head -c 1500
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/" && cat -n "AI Innovation 공모전/masdae-pass/backend/src/harness/llm/ollama.ts" | head -80; grep -rn "ollama\|readerModel\|timeoutMs\|fallbackModel" "AI Innovatio
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/" && grep -rniE "ollama|11434" TRITON -l 2>/dev/null | grep -v node_modules | head -20
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/창업[전세사기 및 부동산]/-Future-Value-Level-up-Challenge-/api" && wc -l agent_ollama.py eval_agent_ollama.py && cat -n agent_ollama.py | head -260
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/" && grep -nE "timeoutMs|readerModel|fallbackModel|model:|url:" -r "AI Innovation 공모전/masdae-pass" --include=*.json --include=*.ts --include=*.md -s 2>/dev/null
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/" && grep -rn "timeoutMs\|readerModel\|fallbackModel" "AI Innovation 공모전/masdae-pass" --include=harness.config.json --include=*.json -s | grep -v node_modules |
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Innovation 공모전/masdae-pass" && find . -name harness.config.json -not -path "*/node_modules/*" | head -3; f=$(find . -name harness.config.json -not -path "*/n
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/TRITON" && grep -n "OLLAMA_HOST\|ollama" apps/backend/court/instances.py | head -5; nvidia-smi.exe --query-gpu=name,memory.total --format=csv 2>&1 | head -3; fr
+⚙ mkdir -p /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama && cd $_ && cat > t1.py <<'EOF' import json, sys, time,
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; cut -c1-700 t1.out; curl -s -m 5 http://172.20.32.1:11434/ap
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; until [ $(wc -l < t1.out) -ge 9 ]; do sleep 5; done; tail -n
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; cat > t2.py <<'EOF' # 실제 agent.ts 루프를 파이썬으로 이식: get_open_car
+⚙ ToolSearch
+🔎 열람 https://ollama.com/library/qwen2.5vl
+🔎 열람 https://github.com/naptha/tesseract.js
+⚙ cat /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama/t2.out | cut -c1-600
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; grep -n "quoteDraftSchema" -r "/mnt/c/Users/User/Desktop/대학교
+⚙ cd "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/web/src/lib"; sed -n 1,40p types.ts; cat extract.ts | head -44
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; python3 - <<'EOF' s=open('t3.py').read() a=s.index('SCHEMA='
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; until [ $(wc -l < t2.out) -ge 3 ]; do sleep 5; done; cut -c1
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; until [ $(wc -l < t2.out) -ge 6 ]; do sleep 5; done; tail -n
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; until [ $(wc -l < t2.out) -ge 9 ]; do sleep 5; done; tail -n
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; sed -i 's/if not calls: status="no_tool_end"; break/if not c
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; python3 - <<'EOF' import json from t1 import * import t2 # 재
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; python3 - <<'EOF' import json from t1 import * msgs=[{"role"
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; python3 t3.py qwen3:4b-instruct-2507-q4_K_M qwen2.5:7b ax4-l
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; python3 - <<'EOF' import json from t3 import * EOF python3 -
+⚙ sleep 1; until [ -s /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/tasks/b3zqar7pe.output ] && [ $(wc -l < /tmp/claude-1000/-mnt-
+⚙ cd /tmp/claude-1000/-mnt-c-Users-User-Desktop-----3---AI-Platform-Build-Challenge/cc77c7df-cb0d-4ed6-8837-054ab0cd0f16/scratchpad/ollama; timeout 280 python3 t2.py qwen3:4b-instruct-2507-q4_K_M 2>&1
+⚙ cat > "/mnt/c/Users/User/Desktop/대학교/3학년/AI Platform Build Challenge/runs/out/b007-ollama.sonnet.md" <<'EOF' # B007 조사: 이사 지킴이 에이전트를 로컬 Ollama로 (Sonnet, 조사 단계)  실측 스크립트: `/tmp/claude-1000/-mnt-c-Use
+⚙ SubagentHandback
